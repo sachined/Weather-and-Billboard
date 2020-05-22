@@ -28,6 +28,7 @@ export default function Post({ postData })  {
 // This function will return a list of possible values for 'id'
 export async function getStaticPaths()  {
   // Return a list of possible value for id
+  // fallback: false -> any paths not returned by 'getStaticPaths' will result in a 404 page
   const paths = getAllPostIds()
   return {
     paths,

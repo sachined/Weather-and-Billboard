@@ -10,8 +10,8 @@ export default function Music_Search() {
       </Head>
       <h1>Where Music can be Found!</h1>
       <h2>
-        <Link href="/posts/first-post">
-          <a>Go to the First Post</a>
+        <Link href="/posts/weather-seek">
+          <a>Looking for the weather somewhere?</a>
         </Link>
       </h2>
       <img src="/musicbrain.jpg" alt="music" />

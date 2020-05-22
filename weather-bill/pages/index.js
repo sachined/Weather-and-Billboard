@@ -3,6 +3,7 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import { getSortedPostsData } from '../lib/posts'
+import Date from '../components/date'
 
 export default function Home({ allPostsData }) {
   return (
@@ -19,8 +20,8 @@ export default function Home({ allPostsData }) {
           </Link>
         </h2>
         <h2>
-          <Link href="/posts/first-post">
-            <a>Go to the First Post</a>
+          <Link href="/posts/weather-seek">
+            <a>Want to know the weather?</a>
           </Link>
         </h2>
       </section>
@@ -30,11 +31,13 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              <Link href="/posts/[id]" as={`/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>

@@ -1,5 +1,5 @@
 /* This file can be removed, but kept in order to keep
-*  some continuity 
+*  some continuity
 */
 
 import Head from 'next/head'
@@ -10,9 +10,9 @@ export default function FirstPost() {
   return (
     <Layout>
       <Head>
-        <title>First Post</title>
+        <title>Weather Search</title>
       </Head>
-      <h1>First Post</h1>
+      <h1>Weather Seeker</h1>
       <h2>
         <Link href="/music-search">
           <a>Go to the Music Search</a>
