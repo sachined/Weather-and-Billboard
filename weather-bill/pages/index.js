@@ -14,6 +14,9 @@ export default function Home({ allPostsData }) {
       <section className={utilStyles.headingMd}>
         <p>Hi, I am Sachin. I am a web developer and a trilingual (English/Malayalam/Spanish).
         You can contact me on <a href="https://twitter.com/nediyanchath" target="_blank">Twitter</a>.</p>
+        <h1>
+          <a href="https://warm-springs-80612.herokuapp.com/">Shopify-spoofed site</a>
+        </h1>
         <h2>
           <Link href="/music-search">
             <a>Go here to search for music</a>
