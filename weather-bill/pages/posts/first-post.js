@@ -1,3 +1,7 @@
+/* This file can be removed, but kept in order to keep
+*  some continuity 
+*/
+
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '../../components/layout'
