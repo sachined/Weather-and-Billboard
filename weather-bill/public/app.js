@@ -26,7 +26,7 @@ if('geolocation' in navigator){
 
 // SET USER'S POSITION
 function setPosition(position){
-  
+
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
 
@@ -43,7 +43,7 @@ function showError(error){
 // GET WEATHER FROM API PROVIDER
 function getWeather(latitude, longitude){
 
-    let api = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
+    let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
 
     fetch(api)
         .then(function(response){
