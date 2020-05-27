@@ -23,7 +23,7 @@ export default function Home({ allPostsData }) {
           </Link>
         </h2>
         <h2>
-          <Link href="/posts/weather-seek">
+          <Link href="/weather-seek">
             <a>Want to know the weather?</a>
           </Link>
         </h2>

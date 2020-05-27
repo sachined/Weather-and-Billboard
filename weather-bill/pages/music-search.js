@@ -10,17 +10,12 @@ export default function Music_Search() {
       </Head>
       <h1>Where Music can be Found!</h1>
       <form>
-        <label for="artist">Artist: </label>
-        <input type="text" id="artist" name="artist"></input><br /><br />
+        <label htmlFor="artist">Artist: </label>
+        <input type="text" id="artist" className="artist" placeholder="Eminem"></input><br /><br />
         <input type="submit" value="Submit"></input>
       </form>
-      <div class="display">
-        <h1 class="artist"></h1>
-        <p class="song"></p>
-        <p class="album"></p>
-      </div>
       <h2>
-        <Link href="/posts/weather-seek">
+        <Link href="/weather-seek">
           <a>Looking for the weather somewhere?</a>
         </Link>
       </h2>
