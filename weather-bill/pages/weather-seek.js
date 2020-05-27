@@ -23,7 +23,7 @@ export default function Weather_Search () {
               <div className="location"><p>-</p></div>
           </div>
         </div>
-        <script type="text/javascript" src="/app.js"></script>
+        <script src="/app.js"></script>
       <h2>
         <Link href="/music-search">
           <a>Go to the Music Search</a>
