@@ -13,7 +13,6 @@ export default function Weather_Search () {
         <title>Weather Search</title>
       </Head>
       <div class="world_map">
-        <img src="/worldMap.jpg" alt="world" />
         <h1>Weather Seeker</h1>
           <div className="container">
             <div className="app-title"><p>Weather</p></div>
