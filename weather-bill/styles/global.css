@@ -6,14 +6,9 @@ body {
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   font-size: 18px;
-  background-image: url("../public/worldMap.jpg");
-  background-color: #ccdddccc;
-  height: 500px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
 }
+
+weather
 
 * {
   box-sizing: border-box;
