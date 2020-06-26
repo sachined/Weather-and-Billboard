@@ -57,6 +57,15 @@ input[type="submit"]  {
 /*
 Weather Styling
 */
+.world_map{
+    background-image: url("worldMap.jpg");
+    background-color: #ccdddccc;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
 
 .container{
     width: 300px;
