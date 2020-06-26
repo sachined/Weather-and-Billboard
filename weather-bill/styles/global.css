@@ -8,7 +8,7 @@ body {
   font-size: 18px;
 }
 
-weather-seek.body {
+body.weather-seek {
   background-image: url("../public/worldMap.jpg");
   background-color: #ccdddccc;
   height: 500px;
