@@ -11,8 +11,7 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: 'https://weather-and-billboard.now.sh/'
 });
 
-spotifyApi.setAccessToken('BQDaEG4EmN40S5S2ubENuUpg2CWEgEH6Fh_hbNzSQgjHrcrCjTgJP89FNyHAqrqQBF6zuGP-zH2xne7K6hmmJrTGpnCcGof0eUG38yzBuADgW9LeVLmx99iykNND89yyti92K1SiZjXFfhlzRVAXP_mi06RrNm8
-');
+spotifyApi.setAccessToken('BQDaEG4EmN40S5S2ubENuUpg2CWEgEH6Fh_hbNzSQgjHrcrCjTgJP89FNyHAqrqQBF6zuGP-zH2xne7K6hmmJrTGpnCcGof0eUG38yzBuADgW9LeVLmx99iykNND89yyti92K1SiZjXFfhlzRVAXP_mi06RrNm8');
 
 // Do search using the access token
 spotifyApi.searchTracks('artist:Eminem').then(
