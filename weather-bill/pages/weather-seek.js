@@ -12,7 +12,6 @@ export default function Weather_Search () {
       <Head>
         <title>Weather Search</title>
       </Head>
-        <div className="world_map">
           <h1>Weather Seeker</h1>
             <div className="container">
               <div className="app-title"><p>Weather</p></div>
@@ -31,7 +30,6 @@ export default function Weather_Search () {
             </Link>
           </h2>
           <img src="/weather_board.jpg" alt="weather" />
-        </div>
     </Layout>
   )
 }

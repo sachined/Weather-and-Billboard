@@ -8,7 +8,15 @@ body {
   font-size: 25px;
 }
 
-weather
+weather-seek.body {
+  background-image: url("../public/worldMap.jpg");
+  background-color: #ccdddccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
 
 * {
   box-sizing: border-box;
@@ -59,16 +67,6 @@ input[type="submit"]  {
 /*
 Weather Styling
 */
-.world_map{
-    background-image: url("../public/worldMap.jpg");
-    background-color: #ccdddccc;
-    height: 500px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
 .container{
     width: 300px;
     background-color: #FFF;
