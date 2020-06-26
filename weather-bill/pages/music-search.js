@@ -8,18 +8,16 @@ export default function Music_Search() {
       <Head>
         <title>Music Search</title>
       </Head>
-      <h1>Where Music can be Found!</h1>
-      <form>
-        <label htmlFor="artist">Artist: </label>
-        <input type="text" id="artist" className="artist" placeholder="Eminem"></input><br /><br />
-        <input type="submit" value="Submit"></input>
-      </form>
-      <h2>
-        <Link href="/weather-seek">
-          <a>Looking for the weather somewhere?</a>
-        </Link>
-      </h2>
-      <img src="/musicbrain.jpg" alt="music" />
+      <div class="music_looking">
+        <h1>Where Music can be Found!</h1>
+        <script src="/spotifysearch.js"></script>
+          <h2>
+            <Link href="/weather-seek">
+              <a>Looking for the weather somewhere?</a>
+            </Link>
+          </h2>
+        <img src="/musicbrain.jpg" alt="music" />
+      </div>
     </Layout>
   )
 }
