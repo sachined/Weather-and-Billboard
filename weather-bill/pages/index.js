@@ -18,15 +18,16 @@ export default function Home({ allPostsData }) {
           <a href="https://warm-springs-80612.herokuapp.com/">Shopify-spoofed site</a>
         </h1>
         <h2>
-          <Link href="/music-search">
-            <a>Go here to search for music</a>
-          </Link>
-        </h2>
-        <h2>
           <Link href="/weather-seek">
             <a>Want to know the weather?</a>
           </Link>
         </h2>
+        <h2>
+          <Link href="/music-search">
+            <a>Go here to search for music</a>
+          </Link>
+        </h2>
+        <button class="btn btn-danger">Submit</button>
       </section>
       <section className={utilStyles.headingMd}>…</section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
