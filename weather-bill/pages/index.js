@@ -27,10 +27,8 @@ export default function Home({ allPostsData }) {
             <a>Go here to search for music</a>
           </Link>
         </h2>
-        <form action="/submitted">
           <input type="text" placeholder="email" required>
           <button class="btn">Submit</button>
-        </form>
       </section>
       <section className={utilStyles.headingMd}>…</section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
