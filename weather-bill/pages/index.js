@@ -8,6 +8,7 @@ import Date from '../components/date'
 export default function Home({ allPostsData }) {
   return (
     <Layout home>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -28,7 +29,7 @@ export default function Home({ allPostsData }) {
           </Link>
         </h2>
           <input type="text" placeholder="email" required>
-          <button class="btn">Submit</button>
+          <button class="btn"><i class="fa fa-paper-plane">Submit</i></button>
       </section>
       <section className={utilStyles.headingMd}>…</section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
