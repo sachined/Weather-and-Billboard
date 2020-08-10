@@ -23,11 +23,6 @@ export default function Home({ allPostsData }) {
             <a>Want to know the weather?</a>
           </Link>
         </h2>
-        <h2>
-          <Link href="/music-search">
-            <a>Go here to search for music</a>
-          </Link>
-        </h2>
           <input type="text" placeholder="email" required>
           <button class="btn"><i class="fa fa-paper-plane">Submit</i></button>
       </section>
