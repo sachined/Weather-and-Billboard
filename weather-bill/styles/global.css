@@ -1,5 +1,6 @@
 html,
 body {
+  display: 0 auto;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
@@ -36,14 +37,19 @@ img {
   display: block;
 }
 
+.btn  {
+  display: flex;
+  margin: 0 150px;
+}
+
 .input  {
-  text-align: center;
+  display: 0 auto;
   margin: 100px 0;
 }
 
 input[type="text"]  {
   height: 50px;
-  width: 600px;
+  width: 400px;
   background: #e7e7e7;
   font-family: "Nunito", sans-serif;
   font-weight: bold;
@@ -64,6 +70,14 @@ input[type="submit"]  {
   border-radius: 2px;
 }
 
+.linking  {
+  background-color: #33fd87;
+}
+
+.blogger  {
+  background-color: #aa93ff;
+  background-blend-mode: hard-light;
+}
 /*
 Weather Styling
 */
