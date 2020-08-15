@@ -26,6 +26,20 @@ export default function Home({ allPostsData }) {
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
+
+        <?php
+          $fileWrite = '';
+          $myFile = "testFile.txt";
+            if(isset($_POST['fileWrite']) && !empty($_POST['fileWrite'])) {
+              $fileWrite = $_POST['fileWrite'].PHP_EOL;
+            }
+            if($fileWrite) {
+              $fh = fopen($myFile, 'a') or die("can't open file"); //Make sure you have permission
+              fwrite($fh, $fileWrite);
+              fclose($fh);
+            }
+        ?>
+
       </Head>
       <section className={utilStyles.headingMd}>
         <p>Hi, I am Sachin. I am a web developer and a trilingual (English/Malayalam/Spanish) living in California.<br/><br/>
@@ -38,11 +52,11 @@ export default function Home({ allPostsData }) {
             <a>Want to know the weather?</a>
           </Link>
         </h2>
-          <form action="/submitted">
+          <form action="/submitted" method="post">
             <h3 className={utilStyles.contact}>Interested in having a conversation?</h3>
             <div className="row">
               <div className="col-xs-7">
-                <input type="text" placeholder="email" required />
+                <input type="text" placeholder="email" name="fileWrite" required />
               </div>
               <div className="col-xs-5">
                 <button className="btn"><FontAwesomeIcon icon={faGlobe} />Submit</button>
