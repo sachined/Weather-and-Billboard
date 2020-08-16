@@ -44,12 +44,12 @@ img {
 
 .input  {
   display: 0 auto;
-  margin: 100px 0;
+  margin: 0 150px;
 }
 
 input[type="text"]  {
   height: 50px;
-  width: 400px;
+  width: 350px;
   background: #e7e7e7;
   font-family: "Nunito", sans-serif;
   font-weight: bold;
@@ -72,11 +72,17 @@ input[type="submit"]  {
 
 .linking  {
   background-color: #33fd87;
+  border-style: solid;
 }
 
 .blogger  {
   background-color: #aa93ff;
-  background-blend-mode: hard-light;
+  border-style: groove;
+}
+
+.formContainer  {
+  background-color: #BC8524;
+  border-style: dotted;
 }
 /*
 Weather Styling

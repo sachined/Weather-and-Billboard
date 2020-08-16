@@ -33,6 +33,7 @@ export default function Home({ allPostsData }) {
             You can check out my <a href="https://www.linkedin.com/in/nediyanchath/" target="_blank"> career <FontAwesomeIcon icon={faLinkedin} style={{width: '25px'}} /></a>,
             where you can contact me, or direct message <a href="https://twitter.com/nediyanchath" target="_blank"> here <FontAwesomeIcon icon={faTwitter} style={{width: '25px'}} /></a>.</p>
             <div className="linking">
+              <h2 className={utilStyles.headingLg}><center>personal projects</center></h2>
               <h2>
                 <a href="https://warm-springs-80612.herokuapp.com/">Shopify-spoofed site</a>
               </h2>
@@ -42,14 +43,16 @@ export default function Home({ allPostsData }) {
                 </Link>
               </h2>
             </div>
+            <div className="formContainer">
               <form action="/submitted">
-                <h3 className={utilStyles.contact}>Interested in having a conversation?</h3>
-                <label>Leave your email below!</label>
+                <h2 className={utilStyles.contact}><center>Interested?</center></h2>
+                <label><center>Leave your email below!</center></label>
                 <div className="row">
                     <input type="text" placeholder="email" required />
                     <button className="btn"><FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} /> <strong>Submit</strong> </button>
                 </div>
               </form>
+            </div>
           </section>
           <section className={utilStyles.headingMd}><center>…</center></section>
           <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
