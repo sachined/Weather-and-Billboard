@@ -31,13 +31,13 @@ export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
-        <title>{siteTitle}</title> 
+        <title>{siteTitle}</title>
       </Head>
         <div className={utilStyles.bodyCr}>
           <section className={utilStyles.headingMd}>
             <p>Hi, I am Sachin. I am a web developer and a trilingual <strong>(English/ Malayalam/ Spanish)</strong>, currently residing in Bay Area of California.<br/><br/>
-            You can check out my <a href="https://www.linkedin.com/in/nediyanchath/" target="_blank"> career <FontAwesomeIcon icon={faLinkedin} style={{width: '25px'}} /></a>,
-            where you can contact me, or direct message <a href="https://twitter.com/nediyanchath" target="_blank"> here <FontAwesomeIcon icon={faTwitter} style={{width: '25px'}} /></a>.</p>
+            You can check out my <a href="https://www.linkedin.com/in/nediyanchath/" rel="noopener" target="_blank"> career <FontAwesomeIcon icon={faLinkedin} style={{width: '25px'}} /></a>,
+            where you can contact me, or direct message <a href="https://twitter.com/nediyanchath" rel="noopener" target="_blank"> me on Twitter <FontAwesomeIcon icon={faTwitter} style={{width: '25px'}} /></a>.</p>
             <div className="linking">
               <h2 className={utilStyles.headingLg}><center>personal projects</center></h2>
               <h2>
@@ -63,7 +63,7 @@ export default function Home({ allPostsData }) {
           <section className={utilStyles.headingMd}><center>…</center></section>
           <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
             <div className="blogger">
-              <h2 className={utilStyles.headingLg}><center>Blog</center></h2>
+              <h3 className={utilStyles.headingLg}><center>Blog</center></h3>
               <ul className={utilStyles.list}>
                 {allPostsData.map(({ id, date, title }) => (
                   <li className={utilStyles.listItem} key={id}>

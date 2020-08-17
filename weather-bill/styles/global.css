@@ -39,7 +39,7 @@ img {
 
 .btn  {
   display: flex;
-  margin: 0 175px;
+  margin: 2px 175px;
 }
 
 input[type="text"]  {
