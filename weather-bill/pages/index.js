@@ -1,15 +1,23 @@
-// Im
+// Importing from next library to enable head element and linkage
 import Head from 'next/head'
 import Link from 'next/link'
 
+// These three import statements are for registration form using React and server-side 
+import { useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import ReCAPTCHA from 'react-google-recaptcha'
+
+// Import from components folder
 import Date from '../components/date'
 import Layout, { siteTitle } from '../components/layout'
+
+// Import from styles folder
 import utilStyles from '../styles/utils.module.css'
 
+// Import from lib folder
 import { getSortedPostsData } from '../lib/posts'
 
-
-// import the library
+// import the library for icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import your icons
@@ -19,7 +27,6 @@ import {
   faTwitter,
   faLinkedin
 } from '@fortawesome/free-brands-svg-icons'
-
 // adding icons to a library that can be used for rest
 library.add(
   faGithub,
