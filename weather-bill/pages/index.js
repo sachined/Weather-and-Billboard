@@ -52,7 +52,6 @@ export default function Home({ allPostsData }) {
             <div className="formContainer">
               <form action="/submitted">
                 <h2 className={utilStyles.contact}><center>Interested?</center></h2>
-                <label><center>Leave your email below!</center></label>
                 <div className="row">
                   <label><center>Leave your email below!</center>
                     <input type="text" placeholder="email" required />
