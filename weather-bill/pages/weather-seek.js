@@ -24,11 +24,7 @@ export default function Weather_Search () {
               </div>
             </div>
             <script src="/app.js"></script>
-          <h2>
-            <Link href="/music-search">
-              <a>Go to the Music Search</a>
-            </Link>
-          </h2>
+            <br/>
           <img src="/weather_board.jpg" alt="weather" />
     </Layout>
   )

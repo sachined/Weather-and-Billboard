@@ -39,17 +39,13 @@ img {
 
 .btn  {
   display: flex;
-  margin: 0 150px;
-}
-
-.input  {
-  display: 0 auto;
-  margin: 0 150px;
+  margin: 0 175px;
 }
 
 input[type="text"]  {
   height: 50px;
-  width: 350px;
+  width: 400px;
+  margin: 0 50px;
   background: #e7e7e7;
   font-family: "Nunito", sans-serif;
   font-weight: bold;
@@ -59,16 +55,49 @@ input[type="text"]  {
   padding: 10px 10px;
 }
 
-input[type="submit"]  {
-  height: 50px;
-  width: 100px;
-  background: #e7e7e7;
-  font-family: "Nunito", sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  border: none;
-  border-radius: 2px;
+/* Mobile optimize */
+@media only screen and (max-width: 425px) {
+  body  {
+    background-color: #fd693a;
+  }
+  .btn  {
+    display: flex;
+    margin: 0 135px;
+  }
+
+  input[type="text"]  {
+    height: 30px;
+    width: 250px;
+    margin: 0 60px;
+    background: #e7e7e7;
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 5px;
+  }
 }
+
+@media only screen and (max-width: 375px) {
+  .btn {
+    margin: 0 120px;
+  }
+  input[type="text"]{
+    margin: 0 35px;
+  }
+}
+
+
+@media only screen and (max-width: 320px) {
+  .btn {
+    margin: 0 100px;
+  }
+  input[type="text"]{
+    margin: 0 15px;
+  }
+}
+
 
 .linking  {
   background-color: #33fd87;

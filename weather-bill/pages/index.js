@@ -1,9 +1,13 @@
+// Im
 import Head from 'next/head'
+import Link from 'next/link'
+
+import Date from '../components/date'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
+
 import { getSortedPostsData } from '../lib/posts'
-import Date from '../components/date'
+
 
 // import the library
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -15,6 +19,8 @@ import {
   faTwitter,
   faLinkedin
 } from '@fortawesome/free-brands-svg-icons'
+
+// adding icons to a library that can be used for rest
 library.add(
   faGithub,
   faTwitter,
@@ -25,7 +31,7 @@ export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{siteTitle}</title> 
       </Head>
         <div className={utilStyles.bodyCr}>
           <section className={utilStyles.headingMd}>
