@@ -80,7 +80,7 @@ export default function Home({ allPostsData }) {
               </ul>
             </div>
           </section>
-          <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" target="_blank"> Github </a>
+          <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" rel="noopener" target="_blank"> Github </a>
           <FontAwesomeIcon icon={faGithub} style={{width: '30px'}} />, using Git as a medium for Heroku and Vercel. </h4>
         </div>
     </Layout>
