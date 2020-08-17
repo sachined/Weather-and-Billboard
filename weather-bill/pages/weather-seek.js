@@ -17,7 +17,7 @@ export default function Weather_Search () {
               <div className="app-title"><p>Weather</p></div>
               <div className="notification"></div>
               <div className="weather-container">
-                  <div className="weather-icon"><img src="/icons/unknown.png"/></div>
+                  <div className="weather-icon"><img src="/icons/unknown.png" alt="current weather icon"/></div>
                   <div className="temperature-value"><p>- °<span>C</span></p></div>
                   <div className="temperature-description"><p> - </p></div>
                   <div className="location"><p>-</p></div>
