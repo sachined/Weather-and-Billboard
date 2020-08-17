@@ -54,8 +54,10 @@ export default function Home({ allPostsData }) {
                 <h2 className={utilStyles.contact}><center>Interested?</center></h2>
                 <label><center>Leave your email below!</center></label>
                 <div className="row">
+                  <label><center>Leave your email below!</center>
                     <input type="text" placeholder="email" required />
                     <button className="btn"><FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} /> <strong>Submit</strong> </button>
+                  </label>
                 </div>
               </form>
             </div>
