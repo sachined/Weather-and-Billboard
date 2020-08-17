@@ -62,7 +62,7 @@ input[type="text"]  {
   }
   .btn  {
     display: flex;
-    margin: 0 135px;
+    margin: 5px 135px;
   }
 
   input[type="text"]  {
@@ -81,7 +81,7 @@ input[type="text"]  {
 
 @media only screen and (max-width: 375px) {
   .btn {
-    margin: 0 120px;
+    margin: 3px 120px;
   }
   input[type="text"]{
     margin: 0 35px;
@@ -91,7 +91,7 @@ input[type="text"]  {
 
 @media only screen and (max-width: 320px) {
   .btn {
-    margin: 0 100px;
+    margin: 2px 100px;
   }
   input[type="text"]{
     margin: 0 15px;
