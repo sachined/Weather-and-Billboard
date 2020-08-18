@@ -56,10 +56,11 @@
 }
 
 .lightText {
-  color: #950;
+  color: green;
+  background: orange;
 }
 
 .contact  {
-  color: green;
+  color: #1F1F1F;
   text-align: center;
 }
