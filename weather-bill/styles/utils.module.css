@@ -24,11 +24,13 @@
   line-height: 1.4;
   margin: 1rem 0;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .headingMd {
   font-size: 1.2rem;
   line-height: 1.5;
+  text-align: center;
 }
 
 .borderCircle {
@@ -59,4 +61,5 @@
 
 .contact  {
   color: green;
+  text-align: center;
 }

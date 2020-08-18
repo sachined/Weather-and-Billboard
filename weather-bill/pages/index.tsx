@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-// These three import statements are for registration form using React and server-side 
+// These three import statements are for registration form using React and server-side
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -34,7 +34,23 @@ library.add(
   faLinkedin
 )
 
+import fetch  from 'node-fetch'
+
+interface FormData  {
+  name: string;
+  email: string;
+}
+
 export default function Home({ allPostsData }) {
+
+  const { register, handleSubmit, errors } = useForm<FormData>({
+    defaultValues:  {
+      name: "Sachin Headchayn",
+      email: "sachin@email.com",
+    },
+  });
+  const [submitting, setSubmitting] = useState<boolean>(false);
+
   return (
     <Layout home>
       <Head>
@@ -46,32 +62,52 @@ export default function Home({ allPostsData }) {
             You can check out my <a href="https://www.linkedin.com/in/nediyanchath/" rel="noopener" target="_blank"> career <FontAwesomeIcon icon={faLinkedin} style={{width: '25px'}} /></a>,
             where you can contact me, or direct message <a href="https://twitter.com/nediyanchath" rel="noopener" target="_blank"> me on Twitter <FontAwesomeIcon icon={faTwitter} style={{width: '25px'}} /></a>.</p>
             <div className="linking">
-              <h2 className={utilStyles.headingLg}><center>personal projects</center></h2>
-              <h2>
+              <h2 className={utilStyles.headingLg}>personal projects</h2>
+              <h3>
                 <a href="https://warm-springs-80612.herokuapp.com/">Shopify-spoofed site</a>
-              </h2>
-              <h2>
+              </h3>
+              <h3>
                 <Link href="/weather-seek">
                   <a>Want to know the weather?</a>
                 </Link>
-              </h2>
+              </h3>
+              <h3>
+                <a href="https://codepen.io/Kokoshka-Cowboy/">
+                  Portfolio of self-designed web pages
+                </a>
+              </h3>
             </div>
             <div className="formContainer">
               <form action="/submitted">
-                <h2 className={utilStyles.contact}><center>Interested?</center></h2>
-                <div className="row">
-                  <label><center>Leave your email below!</center>
-                    <input type="text" placeholder="email" required />
-                    <button className="btn"><FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} /> <strong>Submit</strong> </button>
-                  </label>
+                <h2 className={utilStyles.contact}>Interested?</h2>
+                <div>
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    ref={register( { required: "required" })}
+                  />
+                  {errors.name ? <div>{errors.name.message}</div> : null}
                 </div>
+                <div>
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    ref={register( {required: "required" })}
+                  />
+                  {errors.email ? <div>{errors.email.message}</div> : null}
+                </div>
+                <button type="submit"><FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} />Submit</button>
               </form>
             </div>
           </section>
-          <section className={utilStyles.headingMd}><center>…</center></section>
+          <section className={utilStyles.headingMd}>…</section>
           <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
             <div className="blogger">
-              <h3 className={utilStyles.headingLg}><center>Blog</center></h3>
+              <h3 className={utilStyles.headingLg}>Blog</h3>
               <ul className={utilStyles.list}>
                 {allPostsData.map(({ id, date, title }) => (
                   <li className={utilStyles.listItem} key={id}>

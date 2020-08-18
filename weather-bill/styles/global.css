@@ -37,67 +37,45 @@ img {
   display: block;
 }
 
-.btn  {
-  display: flex;
-  margin: 2px 175px;
-}
-
-input[type="text"]  {
-  height: 50px;
-  width: 400px;
-  margin: 0 50px;
-  background: #e7e7e7;
-  font-family: "Nunito", sans-serif;
+input {
+  border-style: groove;
+  box-shadow: 5px -3px;
   font-weight: bold;
-  font-size: 20px;
-  border: none;
-  border-radius: 2px;
-  padding: 10px 10px;
 }
 
-/* Mobile optimize */
+input:hover {
+  background-color: yellow;
+}
+
+input:focus {
+  background-color: blue;
+  color: orange;
+}
+
+/* ======================
+  Start Mobile optimize */
 @media only screen and (max-width: 425px) {
   body  {
     background-color: #fd693a;
   }
-  .btn  {
-    display: flex;
-    margin: 5px 135px;
-  }
-
-  input[type="text"]  {
-    height: 30px;
-    width: 250px;
-    margin: 0 60px;
-    background: #e7e7e7;
-    font-family: "Nunito", sans-serif;
-    font-weight: bold;
-    font-size: 15px;
-    border: none;
-    border-radius: 2px;
-    padding: 5px 5px;
-  }
 }
 
 @media only screen and (max-width: 375px) {
-  .btn {
-    margin: 3px 120px;
-  }
-  input[type="text"]{
-    margin: 0 35px;
-  }
+
 }
 
 
 @media only screen and (max-width: 320px) {
-  .btn {
-    margin: 2px 100px;
-  }
-  input[type="text"]{
-    margin: 0 15px;
-  }
+
 }
 
+.blue_text  {
+  color: blue;
+  font-style: oblique;
+}
+
+/* End mobile optimize
+========================*/
 
 .linking  {
   background-color: #33fd87;
