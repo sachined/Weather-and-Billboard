@@ -62,11 +62,11 @@ export default function Home({ allPostsData }) {
             <div className="linking">
               <h2 className={utilStyles.headingLg}>personal projects</h2>
               <h3>
-                <a href="https://warm-springs-80612.herokuapp.com/">Shopify-spoofed site</a>
+                <a href="https://warm-springs-80612.herokuapp.com/">ChinShoppingCart</a>
               </h3>
               <h3>
                 <Link href="/weather-seek">
-                  <a>Want to know the weather?</a>
+                  <a>Want to know the weather where you are?</a>
                 </Link>
               </h3>
               <h3>
