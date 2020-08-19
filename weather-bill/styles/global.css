@@ -12,7 +12,7 @@ body {
 .weather_body {
   background-image: url("../public/worldMap.jpg");
   background-color: #ccdddccc;
-  height: 1000px;
+  height: 1200px;
   background-position: right;
   background-repeat: repeat-y;
   background-size: contain;
@@ -57,6 +57,16 @@ input:focus {
 @media only screen and (max-width: 425px) {
   body  {
     background-color: #fd693a;
+  }
+  .weather_body {
+    height: 1000px;
+  }
+  a {
+    color: #262626;
+    text-decoration: underline;
+  }
+  a:hover {
+    text-decoration: line-through;
   }
 }
 
