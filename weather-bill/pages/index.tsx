@@ -34,8 +34,6 @@ library.add(
   faLinkedin
 )
 
-import fetch  from 'node-fetch'
-
 interface FormData  {
   name: string;
   email: string;
