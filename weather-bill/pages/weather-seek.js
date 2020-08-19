@@ -8,11 +8,11 @@ import Layout from '../components/layout'
 
 export default function Weather_Search () {
   return (
+  <div className="weather_body">
     <Layout>
       <Head>
         <title>Weather Search</title>
       </Head>
-          <h1>Weather Seeker</h1>
             <div className="container">
               <div className="app-title"><p>Weather</p></div>
               <div className="notification"></div>
@@ -27,5 +27,6 @@ export default function Weather_Search () {
             <br/>
           <img src="/weather_board.jpg" alt="weather" />
     </Layout>
+  </div>
   )
 }
