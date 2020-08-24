@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', ()=>  {
   document.getElementById('btn').addEventListener('click', addUser);
 
 });*/
-var express = require('express');
-var path = require('path');
-const dotenv = require('dotenv');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
+import express from 'express'
+import path from 'path'
+import dotenv from 'dotenv'
+import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
 
 // Enables usage of environmental variables
 dotenv.config();
