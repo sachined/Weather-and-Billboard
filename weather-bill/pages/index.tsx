@@ -37,6 +37,7 @@ library.add(
 interface FormData  {
   name: string;
   email: string;
+  comment: string;
 }
 
 export default function Home({ allPostsData }) {
@@ -45,6 +46,7 @@ export default function Home({ allPostsData }) {
     defaultValues:  {
       name: "Sachin Headchayn",
       email: "sachin@email.com",
+      comment: "Please leave a message",
     },
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -76,10 +78,10 @@ export default function Home({ allPostsData }) {
               </h3>
             </div>
             <div className="formContainer">
-              <form action="/submitted">
+              <form method="POST" action="/submitted">
                 <h2 className={utilStyles.contact}>Interested?</h2>
                 <div>
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="name">Name:</label>
                   <input
                     type="text"
                     name="name"
@@ -89,7 +91,7 @@ export default function Home({ allPostsData }) {
                   {errors.name ? <div>{errors.name.message}</div> : null}
                 </div>
                 <div>
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Email:</label>
                   <input
                     type="email"
                     name="email"
@@ -98,7 +100,14 @@ export default function Home({ allPostsData }) {
                   />
                   {errors.email ? <div>{errors.email.message}</div> : null}
                 </div>
-                <button type="submit"><FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} />Submit</button>
+                <div>
+                  <label htmlFor="comment">Comment:</label>
+                  <textarea
+                    name="comment"
+                    id="comment"
+                  />
+                </div>
+                <button type="submit" id="btn"><FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} />Submit</button>
               </form>
             </div>
           </section>
@@ -124,6 +133,7 @@ export default function Home({ allPostsData }) {
           <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" rel="noopener" target="_blank"> Github </a>
           <FontAwesomeIcon icon={faGithub} style={{width: '30px'}} />, using Git as a medium for Heroku and Vercel. </h4>
         </div>
+        <script src="/submitform.js"></script>
     </Layout>
   )
 }
