@@ -78,7 +78,7 @@ export default function Home({ allPostsData }) {
               </h3>
             </div>
             <div className="formContainer">
-              <form method="POST" action="/submitted">
+              <form action="/submitted">
                 <h2 className={utilStyles.contact}>Interested?</h2>
                 <div>
                   <label htmlFor="name">Name:</label>
@@ -133,7 +133,6 @@ export default function Home({ allPostsData }) {
           <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" rel="noopener" target="_blank"> Github </a>
           <FontAwesomeIcon icon={faGithub} style={{width: '30px'}} />, using Git as a medium for Heroku and Vercel. </h4>
         </div>
-        <script src="/submitform.js"></script>
     </Layout>
   )
 }
