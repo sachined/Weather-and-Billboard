@@ -80,34 +80,41 @@ export default function Home({ allPostsData }) {
             <div className="formContainer">
               <form action="/submitted">
                 <h2 className={utilStyles.contact}>Interested?</h2>
-                <div>
-                  <label htmlFor="name">Name:</label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    ref={register( { required: "required" })}
-                  />
-                  {errors.name ? <div>{errors.name.message}</div> : null}
+                <div className="row">
+                  <div className="col-xs-7">
+                    <label htmlFor="name">Name:</label>
+                      <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        ref={register( { required: "required" })}
+                      />
+                      {errors.name ? <div>{errors.name.message}</div> : null}
+                  </div>
+                  <div className="col-xs-7">
+                    <label htmlFor="email">Email:</label>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        ref={register( {required: "required" })}
+                      />
+                      {errors.email ? <div>{errors.email.message}</div> : null}
+                  </div>
+                  <div className="col-xs-7">
+                    <label htmlFor="comment">Comment:</label>
+                      <textarea
+                        name="comment"
+                        id="comment"
+                      />
+                  </div>
+                  <div className="col-xs-5">
+                    <button type="submit" id="btn">
+                      <FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} />
+                      Submit
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="email">Email:</label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    ref={register( {required: "required" })}
-                  />
-                  {errors.email ? <div>{errors.email.message}</div> : null}
-                </div>
-                <div>
-                  <label htmlFor="comment">Comment:</label>
-                  <textarea
-                    name="comment"
-                    id="comment"
-                  />
-                </div>
-                <button type="submit" id="btn"><FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} />Submit</button>
               </form>
             </div>
           </section>
