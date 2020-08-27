@@ -52,6 +52,12 @@ input:focus, textarea:focus {
   color: orange;
 }
 
+button {
+  animation: bounce;
+  animation-duration: 900ms;
+  animation-direction: alternate-reverse;
+}
+
 /* ======================
   Start Mobile optimize */
 @media only screen and (max-width: 425px) {
