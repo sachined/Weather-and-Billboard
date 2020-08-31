@@ -58,7 +58,7 @@ export default function Home({ allPostsData }) {
       </Head>
         <div className={utilStyles.bodyCr}>
           <section className={utilStyles.headingMd}>
-            <p>Hi, I am Sachin. I am a web developer and a trilingual <strong>(English/ Malayalam/ Spanish)</strong>, currently residing in Bay Area of California.<br/><br/>
+            <p>Hi, I am Sachin. I am a software/web developer and a trilingual <strong>(English/ Malayalam/ Spanish)</strong>, currently residing in Bay Area of California.<br/><br/>
             You can check out my <a href="https://www.linkedin.com/in/nediyanchath/" rel="noopener" target="_blank"> career <FontAwesomeIcon icon={faLinkedin} style={{width: '25px'}} /></a>,
             where you can contact me, or direct message <a href="https://twitter.com/nediyanchath" rel="noopener" target="_blank"> me on Twitter <FontAwesomeIcon icon={faTwitter} style={{width: '25px'}} /></a>.</p>
             <div className="linking">
