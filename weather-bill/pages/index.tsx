@@ -85,7 +85,7 @@ export default function Home({ allPostsData }) {
           </section>
           <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" rel="noopener" target="_blank"> Github </a>
           <FontAwesomeIcon icon={faGithub} style={{width: '30px'}} />, using Git as a medium for Heroku and Vercel. </h4>
-          <p style={{fontWeight: "bold"}}>If you prefer email, here you can email me @ <span style={{color: "blue"}}>sachin.nediyanchath@gmail.com</span> !</p>
+          <p style={{fontWeight: "bold"}}>If you prefer email, you can email me @ <span style={{color: "blue"}}>sachin.nediyanchath@gmail.com</span> !</p>
         </div>
 
     </Layout>
