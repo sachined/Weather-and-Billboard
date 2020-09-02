@@ -46,7 +46,7 @@ export default function Home({ allPostsData }) {
             <p>Hi, I am Sachin. I am a software/web developer and a trilingual <strong>(English/ Malayalam/ Spanish)</strong>, currently residing in Bay Area of California.<br/><br/>
             You can check out my <a href="https://www.linkedin.com/in/nediyanchath/" rel="noopener" target="_blank"> career <FontAwesomeIcon icon={faLinkedin} style={{width: '25px'}} /></a>,
             where you can contact me, or direct message <a href="https://twitter.com/nediyanchath" rel="noopener" target="_blank"> me on Twitter <FontAwesomeIcon icon={faTwitter} style={{width: '25px'}} /></a>.</p>
-            <hr>
+            <hr />
             <div className="linking">
               <h2 className={utilStyles.headingLg}>personal projects</h2>
               <h3>
@@ -64,7 +64,6 @@ export default function Home({ allPostsData }) {
               </h3>
             </div>
           </section>
-          <hr>
           <section className={utilStyles.headingMd}>…</section>
           <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
             <div className="blogger">
@@ -86,8 +85,9 @@ export default function Home({ allPostsData }) {
           </section>
           <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" rel="noopener" target="_blank"> Github </a>
           <FontAwesomeIcon icon={faGithub} style={{width: '30px'}} />, using Git as a medium for Heroku and Vercel. </h4>
+          <p style={{fontWeight: "bold"}}>If you prefer email, here you can email me @ <span style={{color: "blue"}}>sachin.nediyanchath@gmail.com</span> !</p>
         </div>
-        <p>If you prefer email, here you can reach me by <a href="sachin.nediyanchath@gmail.com">e-mail</a>!
+
     </Layout>
   )
 }
