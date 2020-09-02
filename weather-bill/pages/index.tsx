@@ -34,22 +34,7 @@ library.add(
   faLinkedin
 )
 
-interface FormData  {
-  name: string;
-  email: string;
-  comment: string;
-}
-
 export default function Home({ allPostsData }) {
-
-  const { register, handleSubmit, errors } = useForm<FormData>({
-    defaultValues:  {
-      name: "Sachin Headchayn",
-      email: "sachin@email.com",
-      comment: "Please leave a message",
-    },
-  });
-  const [submitting, setSubmitting] = useState<boolean>(false);
 
   return (
     <Layout home>
@@ -61,6 +46,7 @@ export default function Home({ allPostsData }) {
             <p>Hi, I am Sachin. I am a software/web developer and a trilingual <strong>(English/ Malayalam/ Spanish)</strong>, currently residing in Bay Area of California.<br/><br/>
             You can check out my <a href="https://www.linkedin.com/in/nediyanchath/" rel="noopener" target="_blank"> career <FontAwesomeIcon icon={faLinkedin} style={{width: '25px'}} /></a>,
             where you can contact me, or direct message <a href="https://twitter.com/nediyanchath" rel="noopener" target="_blank"> me on Twitter <FontAwesomeIcon icon={faTwitter} style={{width: '25px'}} /></a>.</p>
+            <hr>
             <div className="linking">
               <h2 className={utilStyles.headingLg}>personal projects</h2>
               <h3>
@@ -77,47 +63,8 @@ export default function Home({ allPostsData }) {
                 </a>
               </h3>
             </div>
-            <div className="formContainer">
-              <form action="/submitted">
-                <h2 className={utilStyles.contact}>Interested?</h2>
-                <div className="row">
-                  <div className="col-xs-7">
-                    <label htmlFor="name">Name:</label>
-                      <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        ref={register( { required: "required" })}
-                      />
-                      {errors.name ? <div>{errors.name.message}</div> : null}
-                  </div>
-                  <div className="col-xs-7">
-                    <label htmlFor="email">Email:</label>
-                      <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        ref={register( {required: "required" })}
-                      />
-                      {errors.email ? <div>{errors.email.message}</div> : null}
-                  </div>
-                  <div className="col-xs-7">
-                    <label htmlFor="comment">Comment:</label>
-                      <textarea
-                        name="comment"
-                        id="comment"
-                      />
-                  </div>
-                  <div className="col-xs-5">
-                    <button type="submit" id="btn">
-                      <FontAwesomeIcon icon={faGlobe} style={{width: '15px' }} />
-                      Submit
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
           </section>
+          <hr>
           <section className={utilStyles.headingMd}>…</section>
           <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
             <div className="blogger">
