@@ -82,15 +82,17 @@ export default function Home({ allPostsData }) {
           <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" rel="noopener" target="_blank"> Github </a>
           <FontAwesomeIcon icon={faGithub} style={{width: '30px'}} />, using Git as a medium for Heroku and Vercel. </h4>
           <p style={{fontWeight: "bold"}}>If you prefer email, you can email me @ <span style={{color: "blue"}}>sachin.nediyanchath@gmail.com</span> !</p>
-          <p>If you are interested in video games, especially PS4 and PC, come to my <a href="https://www.twitch.tv/mauldysach">Twitch!</a></p>
-          <form action="https://www.paypal.com/donate" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_donations" />
-            <input type="hidden" name="business" value="2N7C9MK5EQN6J" />
-            <input type="hidden" name="item_name" value="Charity" />
-            <input type="hidden" name="currency_code" value="USD" />
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-            <img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-          </form>
+          <div className={utilStyles.twitcher}>
+            <p>If you are interested in video games, especially PS4 and PC, come to my <a href="https://www.twitch.tv/mauldysach">Twitch!</a></p>
+              <form action="https://www.paypal.com/donate" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_donations" />
+                <input type="hidden" name="business" value="2N7C9MK5EQN6J" />
+                <input type="hidden" name="item_name" value="Charity" />
+                <input type="hidden" name="currency_code" value="USD" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                <img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+              </form>
+          </div>
 
         </div>
 
