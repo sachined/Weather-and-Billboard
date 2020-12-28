@@ -3,9 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 // These three import statements are for registration form using React and server-side
-import { useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 // Import from components folder
 import Date from '../components/date'
@@ -21,7 +18,6 @@ import { getSortedPostsData } from '../lib/posts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import your icons
-import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import {
   faGithub,
   faTwitter,
