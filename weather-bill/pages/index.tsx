@@ -46,7 +46,7 @@ export default function Home({ allPostsData }) {
             <div className="linking">
               <h2 className={utilStyles.headingLg}>personal projects</h2>
               <h3>
-                <a href="https://warm-springs-80612.herokuapp.com/">ChinShoppingCart</a>
+                <a href="https://warm-springs-80612.herokuapp.com/" target="_blank">ChinShoppingCart</a>
               </h3>
               <h3>
                 <Link href="/weather-seek">
@@ -54,7 +54,7 @@ export default function Home({ allPostsData }) {
                 </Link>
               </h3>
               <h3>
-                <a href="https://codepen.io/Kokoshka-Cowboy/">
+                <a href="https://codepen.io/Kokoshka-Cowboy/" target="_blank">
                   Portfolio of self-designed web pages
                 </a>
               </h3>
