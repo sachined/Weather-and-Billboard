@@ -3,9 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 // These three import statements are for registration form using React and server-side
-import { useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 // Import from components folder
 import Date from '../components/date'
@@ -21,7 +18,6 @@ import { getSortedPostsData } from '../lib/posts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import your icons
-import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import {
   faGithub,
   faTwitter,
@@ -86,7 +82,18 @@ export default function Home({ allPostsData }) {
           <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" rel="noopener" target="_blank"> Github </a>
           <FontAwesomeIcon icon={faGithub} style={{width: '30px'}} />, using Git as a medium for Heroku and Vercel. </h4>
           <p style={{fontWeight: "bold"}}>If you prefer email, you can email me @ <a href="mailto:sachin.nediyanchath@gmail.com">sachin.nediyanchath@gmail.com</a> !</p>
+          <p style={{fontStyle: "oblique"}}>Donations are appreciated, if you enjoy <a href="https://www.twitch.tv/mauldysach">gaming content</a></p>
+          <form action="https://www.paypal.com/donate" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_donations" />
+            <input type="hidden" name="business" value="2N7C9MK5EQN6J" />
+            <input type="hidden" name="item_name" value="Charity" />
+            <input type="hidden" name="currency_code" value="USD" />
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+            <img alt=""  src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+          </form>
+
         </div>
+
 
     </Layout>
   )
