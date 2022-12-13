@@ -18,7 +18,7 @@
     "caniuse-lite": "^1.0.30001114",
     "classnames": "^2.2.6",
     "date-fns": "^2.15.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fs": "0.0.1-security",
     "gray-matter": "^4.0.2",
     "isomorphic-unfetch": "^3.0.0",
