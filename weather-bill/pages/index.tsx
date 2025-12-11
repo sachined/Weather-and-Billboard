@@ -40,7 +40,8 @@ export default function Home({ allPostsData }) {
       </Head>
         <div className={utilStyles.bodyCr}>
           <section className={utilStyles.headingMd}>
-            <p>Hi, I am Sachin. I am a software/web developer and a trilingual <strong>(English/ Malayalam/ Spanish)</strong>, currently residing in Bay Area of California.<br/><br/>
+            <p>Hi, I am Sachin. I am a software/web developer and a trilingual <strong>(English/ Malayalam/ Spanish)</strong>, currently residing in Bay Area of California.<br/>
+              I enjoy studying languages and finance. Currently, I am working on Irish Gaelic, Indonesian, agus German. Guten Tag! Saya tidak punya jeruk. <br/>
             You can check out my <a href="https://www.linkedin.com/in/nediyanchath/" rel="noopener" target="_blank"> career <FontAwesomeIcon icon={faLinkedin} style={{width: '25px'}} /></a>,
             where you can contact me, or direct message <a href="https://twitter.com/nediyanchath" rel="noopener" target="_blank"> me on Twitter <FontAwesomeIcon icon={faTwitter} style={{width: '25px'}} /></a>.</p>
             <hr />
@@ -82,19 +83,7 @@ export default function Home({ allPostsData }) {
           </section>
           <h4>All the apps were coded from these repositories from this <a href="https://github.com/sachined" rel="noopener" target="_blank"> Github </a>
           <FontAwesomeIcon icon={faGithub} style={{width: '30px'}} />, using Git as a medium for Heroku and Vercel. </h4>
-          <p style={{fontWeight: "bold"}}>If you prefer email, you can email me @ <span style={{color: "blue"}}>sachin.nediyanchath@gmail.com</span> !</p>
-            <p style={{color:"gold", fontWeight:"bolder", backgroundColor:"green"}}>If you are interested in video games, especially PS4 and PC, come to my <a style={{color: "red"}} href="https://www.twitch.tv/mauldysach" target="_blank" rel="noopener">Twitch!</a></p>
-              <div className={utilStyles.twitcher}>
-                <h3>You can donate here!!</h3>
-                <form action="https://www.paypal.com/donate" method="post" target="_top">
-                  <input type="hidden" name="cmd" value="_donations" />
-                  <input type="hidden" name="business" value="2N7C9MK5EQN6J" />
-                  <input type="hidden" name="item_name" value="Charity" />
-                  <input type="hidden" name="currency_code" value="USD" />
-                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-                  <img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-                </form>
-              </div>
+          <p style={{fontWeight: "bold"}}>If you prefer email, you can email me @ <span style={{color: "blue"}}>sachin.nediyanchath@gmail.com</span> !</p>    
         </div>
 
 
