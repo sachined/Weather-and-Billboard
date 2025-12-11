@@ -48,7 +48,10 @@ export default function Home({ allPostsData }) {
             <div className="linking">
               <h2 className={utilStyles.headingLg}>personal projects</h2>
               <h3>
-                <a href="https://warm-springs-80612.herokuapp.com/" target="_blank" rel="noopener">ChinShoppingCart</a>
+                <!-- <a href="https://warm-springs-80612.herokuapp.com/" target="_blank" rel="noopener">ChinShoppingCart</a> -->
+                  <Link href="/job-gap">
+                  <a>How things are going since 2024...</a>
+                  </Link>
               </h3>
               <h3>
                 <Link href="/weather-seek">
