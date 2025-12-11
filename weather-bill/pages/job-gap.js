@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+    import Head from 'next/head'
+    import Link from 'next/link'
+    import Layout from '../components/layout'
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -182,7 +185,7 @@
                     <h3 class="text-lg font-bold text-teal-700 mb-2">1. Acknowledge</h3>
                     <p class="text-stone-600 mb-4 text-sm">Briefly state the timeline. Do not apologize. Be factual.</p>
                     <div class="bg-stone-100 p-4 rounded italic text-stone-800">
-                        "After a successful tenure at eGain that ended in mid-2023, I made the strategic decision to take time for professional re-evaluation and focused skill enhancement."
+                        "After a successful tenure at eGain that ended in early-2024, I made the strategic decision to take time for professional re-evaluation and focused skill enhancement."
                     </div>
                 </div>
 
