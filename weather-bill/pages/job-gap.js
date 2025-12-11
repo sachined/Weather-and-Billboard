@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-    import Head from 'next/head'
-    import Link from 'next/link'
-    import Layout from '../components/layout'
 <html lang="en">
 <head>
     <meta charset="UTF-8">
