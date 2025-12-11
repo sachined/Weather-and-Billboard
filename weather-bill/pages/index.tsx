@@ -50,8 +50,13 @@ export default function Home({ allPostsData }) {
               <h3>
                 <!-- <a href="https://warm-springs-80612.herokuapp.com/" target="_blank" rel="noopener">ChinShoppingCart</a> -->
                   <Link href="/job-gap">
-                  <a>How things are going since 2024...</a>
+                  <a>How things are going since March 2024...</a>
                   </Link>
+              </h3>
+                 <h3>
+                <Link href="/music-search">
+                  <a>Music Search (under construction circa 12/2025</a>
+                </Link>
               </h3>
               <h3>
                 <Link href="/weather-seek">
