@@ -48,20 +48,14 @@ export default function Home({ allPostsData }) {
             <div className="linking">
               <h2 className={utilStyles.headingLg}>personal projects</h2>
               <h3>
-                <!-- <a href="https://warm-springs-80612.herokuapp.com/" target="_blank" rel="noopener">ChinShoppingCart</a> -->
-                  <Link href="/job-gap">
-                  <a>How things are going since March 2024...</a>
-                  </Link>
+                {/* <a href="https://warm-springs-80612.herokuapp.com/" target="_blank" rel="noopener">ChinShoppingCart</a> */}
+                  <Link href="/job-gap">How things are going since March 2024...</Link>
               </h3>
                  <h3>
-                <Link href="/music-search">
-                  <a>Music Search (under construction circa 12/2025</a>
-                </Link>
+                <Link href="/music-search">Music Search (under construction circa 12/2025</Link>
               </h3>
               <h3>
-                <Link href="/weather-seek">
-                  <a>Want to know the weather where you are?</a>
-                </Link>
+                <Link href="/weather-seek">Want to know the weather where you are?</Link>
               </h3>
               <h3>
                 <a href="https://codepen.io/Kokoshka-Cowboy/" target="_blank" rel="noopener">
@@ -77,9 +71,7 @@ export default function Home({ allPostsData }) {
               <ul className={utilStyles.list}>
                 {allPostsData.map(({ id, date, title }) => (
                   <li className={utilStyles.listItem} key={id}>
-                    <Link href="/posts/[id]" as={`/posts/${id}`}>
-                      <a>{title}</a>
-                    </Link>
+                    <Link href={`/posts/${id}`}>{title}</Link>
                     <br />
                     <small className={utilStyles.lightText}>
                       <Date dateString={date} />
