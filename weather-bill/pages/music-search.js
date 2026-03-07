@@ -1,23 +1,39 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import Layout from '../components/layout'
+import { useState } from 'react';
 
-export default function Music_Search() {
+export default function MusicSearch() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    const res = await fetch(`/api/spotify-search?query=${query}`);
+    const data = await res.json();
+    
+    setResults(data.tracks?.items || []);
+    setLoading(false);
+  };
+
   return (
-    <Layout>
-      <Head>
-        <title>Music Search</title>
-      </Head>
-      <div class="music_looking">
-        <h1>Where Music can be Found!</h1>
-        <script src="/spotifysearch.js"></script>
-          <h2>
-            <Link href="/weather-seek">
-              <a>Looking for the weather somewhere?</a>
-            </Link>
-          </h2>
-        <img src="/musicbrain.jpg" alt="music" />
-      </div>
-    </Layout>
-  )
+    <div>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search for a track..."
+        />
+        <button type="submit">Search</button>
+      </form>
+      
+      {loading && <p>Searching...</p>}
+      {results.map((track) => (
+        <div key={track.id}>
+          <p>{track.name} - {track.artists[0]?.name}</p>
+        </div>
+      ))}
+    </div>
+  );
 }
