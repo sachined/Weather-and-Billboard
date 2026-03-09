@@ -1,0 +1,8 @@
+export const SITE_NAME = 'Sachin Nediyanchath';
+export const SITE_TITLE = 'Weather & Career';
+export const CONTACT_EMAIL = 'sachin.nediyanchath@gmail.com';
+export const SOCIAL_LINKS = {
+  linkedin: 'https://www.linkedin.com/in/nediyanchath/',
+  github: 'https://github.com/sachined',
+};
+export const FORMSPREE_ID = 'xvgzlowb';

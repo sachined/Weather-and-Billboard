@@ -32,3 +32,6 @@ yarn-debug.log*
 
 # Optional files
 .cache
+
+# Private files
+private/

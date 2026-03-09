@@ -11,13 +11,16 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
-    "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "chart.js": "^4.4.0",
+    "gray-matter": "^4.0.3",
     "next": "^16.1.6",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "yahoo-finance2": "^3.13.2"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

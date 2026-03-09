@@ -1,0 +1,136 @@
+/* styles/globals.css */
+
+/* 🌸 Main: Spring Theme (New Default) */
+:root {
+  /* Surface / Backgrounds */
+  --bg-page: #f0fdf4; /* Emerald 50 */
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #dcfce7; /* Green 100 */
+  --bg-glass: rgba(240, 253, 244, 0.7);
+  
+  /* Borders */
+  --border-subtle: rgba(22, 101, 52, 0.1);
+  --border-main: rgba(22, 101, 52, 0.2);
+
+  /* Text */
+  --text-main: #166534; /* Green 800 */
+  --text-muted: #15803d; /* Green 700 */
+  
+  /* Accents */
+  --accent-primary: #10b981; /* Emerald 500 */
+  --accent-secondary: #f43f5e; /* Rose 500 */
+  --brand-gradient: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  
+  /* Indicators */
+  --color-success: #15803d; /* Green 700 */
+  --color-error: #b91c1c; /* Red 700 */
+  
+  /* Layout Defaults */
+  --nav-bg: rgba(240, 253, 244, 0.8);
+}
+
+/* 🌌 Alternative: Midnight Slate Theme */
+[data-theme='dark'] {
+  /* Surface / Backgrounds */
+  --bg-page: #0f172a; /* Deep Slate 900 */
+  --bg-surface: #1e293b; /* Slate 800 */
+  --bg-surface-hover: #334155; /* Slate 700 */
+  --bg-glass: rgba(15, 23, 42, 0.7);
+  
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-main: rgba(255, 255, 255, 0.2);
+
+  /* Text */
+  --text-main: #ffffff; /* Pure White */
+  --text-muted: rgba(255, 255, 255, 0.85); /* Slightly muted white */
+  
+  /* Accents */
+  --accent-primary: #38bdf8; /* Sky 400 */
+  --accent-secondary: #818cf8; /* Indigo 400 */
+  --brand-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  
+  /* Indicators */
+  --color-success: #4ade80; /* Green 400 */
+  --color-error: #f87171; /* Red 400 */
+  
+  /* Layout Defaults */
+  --nav-bg: rgba(30, 41, 59, 0.8);
+}
+
+/* ⚪ Alternative: Modern Minimalist Theme */
+[data-theme='light'] {
+  /* Surface / Backgrounds */
+  --bg-page: #f8fafc; /* Slate 50 */
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9; /* Slate 100 */
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  
+  /* Borders */
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --border-main: rgba(0, 0, 0, 0.1);
+
+  /* Text */
+  --text-main: #0f172a; /* Slate 900 */
+  --text-muted: #475569; /* Slate 600 */
+  
+  /* Accents */
+  --accent-primary: #0284c7; /* Sky 600 */
+  --accent-secondary: #4f46e5; /* Indigo 600 */
+  
+  /* Indicators */
+  --color-success: #15803d; /* Green 700 */
+  --color-error: #b91c1c; /* Red 700 */
+  
+  --nav-bg: rgba(255, 255, 255, 0.8);
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  color: var(--text-muted);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Accessibility: Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--accent-primary);
+  color: white;
+  padding: 8px;
+  z-index: 1000;
+  transition: top 0.3s;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Accessibility: Improved Focus Visibility */
+:focus-visible {
+  outline: 3px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
+/* Common Interactive Targets */
+button, a {
+  min-height: 44px;
+  min-width: 44px;
+}
