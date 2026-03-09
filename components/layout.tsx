@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
@@ -35,22 +36,25 @@ export default function Layout({ children, home }: LayoutProps) {
         </div>
         {home ? (
           <>
-            <img
+            <Image
               src="/images/profile.jpg"
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
               alt={name}
-              style={{ width: '8rem', height: '8rem' }}
+              width={128}
+              height={128}
+              priority
             />
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
           </>
         ) : (
           <>
             <Link href="/">
-              <img
+              <Image
                 src="/images/profile.jpg"
                 className={`${styles.headerImage} ${utilStyles.borderCircle}`}
                 alt={name}
-                style={{ width: '6rem', height: '6rem' }}
+                width={96}
+                height={96}
               />
             </Link>
             <h2 className={utilStyles.headingLg}>

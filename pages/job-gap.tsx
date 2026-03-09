@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Layout from '../components/layout';
 import { ROLES_DATA, ROLE_ORDER, CHECKLIST_ITEMS, CHART_LABELS } from '../lib/roles';
-import { SITE_NAME } from '../lib/constants';
+import { SITE_NAME, SITE_TITLE } from '../lib/constants';
 import RoleSelection from '../components/CareerRoadmap/RoleSelection';
 import RoleDetails from '../components/CareerRoadmap/RoleDetails';
 import TechnicalNarrative from '../components/CareerRoadmap/TechnicalNarrative';
@@ -24,7 +24,7 @@ export default function JobGap() {
   return (
     <Layout>
       <Head>
-        <title>Technical Roadmap & Growth</title>
+        <title>{`Technical Roadmap & Growth - ${SITE_NAME}`}</title>
       </Head>
 
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>

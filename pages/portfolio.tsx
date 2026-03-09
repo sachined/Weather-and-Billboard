@@ -6,6 +6,7 @@ import styles from '../styles/Portfolio.module.css';
 import { StrategySummary } from '../components/Portfolio/StrategySummary';
 import { StockRow } from '../components/Portfolio/StockRow';
 import { getTickerLayer, PortfolioLayer, UserPosition, CORE_POSITIONS, LAYER_TARGETS } from '../lib/portfolio-logic';
+import { SITE_NAME } from '../lib/constants';
 import PortfolioHistoryChart from '../components/Portfolio/PortfolioHistoryChart';
 import ArchitectureModal from '../components/Portfolio/ArchitectureModal';
 import { usePortfolio } from '../hooks/usePortfolio';
@@ -81,7 +82,7 @@ export default function PortfolioPage() {
   return (
     <Layout>
       <Head>
-        <title>Portfolio Strategy | Sachin Nediyanchath</title>
+        <title>{`Portfolio Strategy - ${SITE_NAME}`}</title>
       </Head>
       <div className={styles.container}>
         <div className={styles.topBar}>

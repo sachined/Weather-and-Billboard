@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Layout from '../components/layout';
 import { useWeather } from '../hooks/useWeather';
+import { SITE_NAME } from '../lib/constants';
 import WeatherCard from '../components/Weather/WeatherCard';
 
 export default function WeatherSearch() {
@@ -16,7 +17,7 @@ export default function WeatherSearch() {
   return (
     <Layout>
       <Head>
-        <title>Weather Lookup | Sachin Nediyanchath</title>
+        <title>{`Weather Lookup - ${SITE_NAME}`}</title>
       </Head>
         
         <div style={{

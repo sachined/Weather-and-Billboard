@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import { SITE_NAME } from '../lib/constants';
 import { getSortedPostsData, PostData } from '../lib/posts';
 import utilStyles from '../styles/utils.module.css';
 import { GetStaticProps } from 'next';
@@ -18,7 +19,7 @@ export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
   return (
     <Layout>
       <Head>
-        <title>Insights & Articles - Sachin Nediyanchath</title>
+        <title>{`Insights & Articles - ${SITE_NAME}`}</title>
       </Head>
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>Insights & Articles</h1>

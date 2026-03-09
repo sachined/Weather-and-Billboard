@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { WeatherData } from '../../hooks/useWeather';
 
 interface WeatherCardProps {
@@ -24,10 +25,12 @@ export default function WeatherCard({
         <p style={{ ...messageStyle, color: '#dc2626' }} role="alert">{error}</p>
       ) : weather ? (
         <div style={{ textAlign: 'center' }} aria-live="polite">
-          <img 
+          <Image 
             src={`/icons/${weather.iconId}.png`} 
             alt={weather.description} 
-            style={{ width: '80px', height: '80px' }} 
+            width={80}
+            height={80}
+            priority
           />
           <button 
             onClick={toggleUnit}

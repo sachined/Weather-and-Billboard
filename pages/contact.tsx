@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/layout';
 import ContactForm from '../components/Contact/ContactForm';
-import { CONTACT_EMAIL } from '../lib/constants';
+import { CONTACT_EMAIL, SITE_NAME } from '../lib/constants';
 
 export default function Contact() {
   const email = CONTACT_EMAIL;
@@ -9,7 +9,7 @@ export default function Contact() {
   return (
     <Layout>
       <Head>
-        <title>Contact Sachin Nediyanchath</title>
+        <title>{`Contact - ${SITE_NAME}`}</title>
       </Head>
 
       <div style={{ maxWidth: '600px', width: '100%', margin: '0 auto' }}>

@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import Layout from '../components/layout';
 import FeatureCard from '../components/FeatureCard';
-import { SITE_NAME } from '../lib/constants';
+import { SITE_NAME, SITE_TITLE } from '../lib/constants';
 
 export default function Home() {
   return (
     <Layout home>
       <Head>
-        <title>{`Weather & Career - ${SITE_NAME}`}</title>
+        <title>{`${SITE_TITLE} - ${SITE_NAME}`}</title>
         <meta name="description" content="Explore weather and career growth tools" />
       </Head>
       
