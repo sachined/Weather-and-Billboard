@@ -9,7 +9,7 @@ export interface WeatherData {
   unit: 'celsius' | 'fahrenheit';
 }
 
-const API_KEY = "3c89aa25e1ffe7033918798686e4e89a";
+const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY || "";
 const KELVIN = 273;
 
 export function useWeather() {

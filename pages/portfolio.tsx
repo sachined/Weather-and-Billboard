@@ -83,7 +83,6 @@ export default function PortfolioPage() {
       <Head>
         <title>Portfolio Strategy | Sachin Nediyanchath</title>
       </Head>
-      <p style={{ color: 'var(--text-muted)' }}>NOTE: SELECT THEME BUTTON AT THE TOP-RIGHT CORNER TO MAKE THE CHARTS EASIER TO SEE. WORKING ON FIXING THIS ISSUE SOON!</p>
       <div className={styles.container}>
         <div className={styles.topBar}>
           <button

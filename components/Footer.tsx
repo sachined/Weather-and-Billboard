@@ -6,7 +6,7 @@ interface FooterProps {
   opacity?: number;
 }
 
-export default function Footer({ color, borderColor = '#eaeaea', opacity = 0.8 }: FooterProps) {
+export default function Footer({ color, borderColor = 'var(--border-subtle)', opacity = 0.8 }: FooterProps) {
   return (
     <footer style={{
       marginTop: '3rem',

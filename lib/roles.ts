@@ -63,13 +63,13 @@ export const CHECKLIST_ITEMS = [
     id: 1,
     title: 'Optimize LinkedIn Headline',
     description:
-      'Change to: "Technical Account Manager | Customer Success Engineer | Data-Driven Solutions Consultant"',
+      'Change to: "Senior AI Solutions Engineer | Bridging the \"Last Mile\" of Enterprise AI | Ex-Apple, eGain, NeuroLeap | Next.js • Python • SQL"',
   },
   {
     id: 2,
     title: 'Update LinkedIn "About"',
     description:
-      'Add paragraph explicitly mentioning recent self-study and full-stack projects.',
+      'Refine to highlight the "Last Mile" of AI, your pedigree at Apple/eGain, and your hands-on work with Finsurf.net.',
   },
   {
     id: 3,
