@@ -1,58 +1,74 @@
 # 🌸 Weather & Career Strategy Dashboard (Spring Edition)
 
-A modern, high-performance web application built with **Next.js**, **TypeScript**, and **Chart.js**. Featuring a fresh **Spring Theme** as the main interface with easy toggling between display modes.
+A high-performance, professional portfolio and utility hub built with **Next.js**, **TypeScript**, and **Chart.js**. This project serves as a centralized dashboard for career roadmapping, financial growth tracking, and real-time data visualization.
 
-## 🚀 Key Features
-
-### 🎨 Thematic Design System
-- **Spring Theme (Default):** A fresh, green-accented aesthetic for a modern and approachable user experience.
-- **Easy Toggling:** Smooth transitions between Spring, Midnight Slate, and Modern Minimalist modes via the global navigation.
-- **Midnight Slate:** A deep, tech-oriented dark mode for low-light environments.
-- **Modern Minimalist:** A clean, high-contrast light mode for maximum readability.
+## 🚀 Core Features
 
 ### 1. 📈 Technical Career Roadmap
-- **Interactive Role Analysis:** Dynamic Radar Chart comparing core competencies across different technical roles (TAM, CSE, SE, Data Analyst).
-- **Professional Pivot Narrative:** A detailed technical journey highlighting skills evolution and project impact (e.g., [Finsurf.net](https://finsurf.net)).
-- **Private Action Checklist:** A secure, locally-persisted task tracker for professional development and networking.
+- **Interactive Role Analysis**: A dynamic **Radar Chart** comparing core competencies across high-impact roles (AI Solutions Engineer, TAM, CSE, Data Analyst).
+- **Professional Pivot Narrative**: A structured technical journey focusing on the "Last Mile of AI" and recent engineering evolutions (e.g., [Finsurf.net](https://finsurf.net)).
+- **Action Checklist**: A private, locally-persisted task tracker for professional development, hidden behind a "Soft Privacy" layer.
 
-### 2. 💼 Financial Growth Dashboard
-- **Production-Grade Analytics:** Real-time market data fetching via `yahoo-finance2` with batched requests for performance.
-- **Investment Philosophy:** A structured "Three-Layer" strategy (Anchor, Growth, Income) visualized through a minimalistic, glassmorphism UI.
-- **Historical Appreciation:** 1-year performance tracking with capital appreciation metrics and "Smart History" data points.
-- **Strategy Triggers:** Coded "Dip-Buy" logic based on specific retracement thresholds.
+### 2. ✍️ Professional Blog & Insights
+- **Markdown-Driven Articles**: A technical blog system leveraging `gray-matter` and `remark` for high-performance Static Site Generation (SSG).
+- **In-Depth Case Studies**: Detailed narratives on AI agent development, including the evolution of **WikiSurf**, **FinSurf**, and the challenges of token management and telemetry.
 
-### 3. 🌤️ Weather Lookup
-- **Global Search:** Fetch real-time weather conditions for any location worldwide via the OpenWeatherMap API.
-- **Smart Geolocation:** Automatically attempts to load local weather on mount using the browser's Geolocation API.
-- **Responsive UI:** Clean, theme-aware weather cards with temperature unit toggling.
+### 3. 💼 Financial Growth Dashboard
+- **Real-Time Market Data**: Batched stock price fetching via the `yahoo-finance2` API for high-density performance tracking.
+- **Smart History Algorithm**: A custom data-filtering system for the performance chart that prevents new stock additions from retroactively altering historical capital growth.
+- **Speculative Filtering**: An "Exclude Research" toggle to separate high-risk research stocks from core portfolio metrics and visualizations.
+- **Investment Architecture**: A minimalistic, "glassmorphism" UI categorizing holdings into Anchor, Growth, Income, and Research layers.
 
-## 🛠️ Tech Stack
-- **Framework:** Next.js (Pages Router)
-- **Language:** TypeScript
-- **Styling:** CSS Modules + Global CSS Variables
-- **Charts:** Chart.js
-- **Icons:** FontAwesome
-- **Deployment:** Optimized for Vercel
+### 4. 🌤️ Weather Intelligence
+- **Global Search & Geolocation**: Instant weather lookup for any location worldwide with silent geolocation fallback.
+- **Theme-Aware UI**: Responsive weather cards that adapt their contrast and styling to the current theme mode.
+
+## 🎨 Professional Design System
+
+The project features a **Three-Mode Theme System** that is easily togglable via the global navigation:
+- **Spring (Default)**: A fresh, emerald-accented aesthetic for a modern first impression.
+- **Midnight Slate**: A sophisticated, deep-tech dark mode optimized for low-light legibility.
+- **Modern Minimalist**: A clean, off-white theme focused on maximum text contrast and readability.
+- **Theme-Reactive Charts**: All visualizations (Radar and Line charts) dynamically adjust their axis, grid, and label colors using a custom `MutationObserver` hook.
+
+## 🛠️ Tech Stack & Methodology
+
+- **Frontend**: Next.js (Pages Router), TypeScript, CSS Modules.
+- **Data Visualization**: Chart.js 4.x with high-contrast, multi-line label support.
+- **Content Management**: Markdown-based articles with `gray-matter` and `remark-html`.
+- **API Integration**: `yahoo-finance2` for financial data, OpenWeatherMap for real-time weather.
+- **Accessibility**: Full WCAG compliance, including ARIA tab patterns, keyboard-accessible navigation, and "Skip to Content" links.
+- **Privacy**: "Soft Privacy" architecture that reveals administrative tools (checklists, portfolio management) only when accessed via `localhost`.
 
 ## 📁 Project Structure
-- `/pages` - Next.js routes and API endpoints
-- `/components` - Feature-based modular components
-- `/hooks` - Custom hooks for business logic (Weather, Portfolio, Checklist)
-- `/lib` - Centralized constants and professional data models
-- `/private` - Secure storage for resumes and career notes (ignored by Git)
-- `/styles` - Multi-theme design system with Spring, Midnight Slate, and Minimalist modes
 
-## ⚙️ Setup
-```bash
-npm install
-cp .env.example .env.local
-npm run dev
-```
+- `/pages` - Next.js routes, dynamic blog paths, and batched API endpoints.
+- `/components` - Modular, feature-based UI components (CareerRoadmap, Portfolio, Weather).
+- `/posts` - Markdown source files for technical articles and insights.
+- `/hooks` - Custom business logic hooks (useTheme, usePortfolio, useWeather, useChecklist).
+- `/lib` - Centralized roles, constants, and investment logic models.
+- `/private` - Secure storage for resumes and career notes (excluded from version control).
+- `/styles` - Global design system variables and component-level CSS modules.
 
-## 🔐 Privacy & Security
-- **Local Persistence:** Sensitive data like portfolio positions and career checklists are stored in `localStorage` rather than a remote database.
-- **Serverless API:** Next.js API routes are used to secure external API keys and handle data aggregation.
-- **Soft Privacy:** Administrative tools and checklists are only visible when running the site on `localhost`.
+## ⚙️ Setup & Development
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+2. **Environment Configuration**:
+   ```bash
+   cp .env.example .env.local
+   ```
+   *Add your OpenWeatherMap API key to `.env.local`.*
+3. **Launch Development Server**:
+   ```bash
+   npm run dev
+   ```
+4. **Build for Production**:
+   ```bash
+   npm run build
+   ```
 
 ---
-*Created by Sachin Nediyanchath*
+*Created and maintained by [Sachin Nediyanchath](https://www.linkedin.com/in/nediyanchath/)*
