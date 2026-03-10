@@ -5,4 +5,3 @@ export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/in/nediyanchath/',
   github: 'https://github.com/sachined',
 };
-export const FORMSPREE_ID = 'xvgzlowb';

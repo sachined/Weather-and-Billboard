@@ -1,34 +1,39 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { FORMSPREE_ID } from '../../lib/constants';
+import {error} from "next/dist/build/output/log";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<'IDLE' | 'SUBMITTING' | 'SUCCESS' | 'ERROR'>('IDLE');
+  // Moved to top level
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('SUBMITTING');
-    
+    setErrorMessage(null); // Clear previous errors
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-          'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
       });
+      const result = await response.json();
 
       if (response.ok) {
         setStatus('SUCCESS');
       } else {
+        setErrorMessage(result.error || 'Something went wrong. Please try again later.');
         setStatus('ERROR');
       }
     } catch (error) {
+      setErrorMessage('A network error occurred. Please try again.');
       setStatus('ERROR');
     }
   };
@@ -39,7 +44,7 @@ export default function ContactForm() {
         <div style={{ fontSize: '3rem', marginBottom: '1rem' }} role="img" aria-label="Success checkmark">✅</div>
         <h2 style={{ color: 'var(--text-main)', margin: '0 0 0.5rem 0' }}>Message Sent!</h2>
         <p style={{ color: 'var(--text-muted)' }}>Thank you for reaching out. I'll get back to you as soon as possible.</p>
-        <button 
+        <button
           onClick={() => setStatus('IDLE')}
           style={anotherButtonStyle}
         >
@@ -52,6 +57,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div>
+        <input type="text" name="_gotcha" style={{ display: 'none' }} />
         <label htmlFor="full-name" style={labelStyle}>Full Name</label>
         <input
           type="text"
@@ -59,6 +65,7 @@ export default function ContactForm() {
           id="full-name"
           required
           placeholder="John Doe"
+          autoComplete="name"  // Added autoComplete
           style={inputStyle}
         />
       </div>
@@ -71,6 +78,7 @@ export default function ContactForm() {
           id="email"
           required
           placeholder="john@example.com"
+          autoComplete="email" // Added autoComplete
           style={inputStyle}
         />
       </div>
@@ -88,8 +96,11 @@ export default function ContactForm() {
       </div>
 
       {status === 'ERROR' && (
-        <p style={{ color: '#ef4444', fontSize: '0.9rem', margin: 0, fontWeight: '600' }}>
-          Something went wrong. Please try again or use direct email.
+        <p
+          role="alert" // Added role="alert" for screen readers
+          style={{ color: '#ef4444', fontSize: '0.9rem', margin: 0, fontWeight: '600' }}
+        >
+          {errorMessage}
         </p>
       )}
 
