@@ -16,10 +16,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       name: string;
       email: string;
       message: string;
-      _gotcha: string;
+      _gotcha?: string;
   }
 
-  const { name, email, message }: ContactFormData = req.body;
+  const { name, email, message, _gotcha }: ContactFormData = req.body;
 
   // 2. Honeypot check: if filled, silently succeed (don't call Formspree)
   if (_gotcha) {
