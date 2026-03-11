@@ -3,7 +3,6 @@ import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import Footer from './Footer';
 import { SITE_NAME, SITE_TITLE } from '../lib/constants';
 import ThemeToggle from './ThemeToggle';
@@ -39,6 +38,7 @@ export default function Layout({ children, home }: LayoutProps) {
             <Image
               src="/images/profile.jpg"
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
+              style={{ border: '1px solid var(--border-subtle)' }}
               alt={name}
               width={128}
               height={128}
@@ -55,6 +55,7 @@ export default function Layout({ children, home }: LayoutProps) {
                 alt={name}
                 width={96}
                 height={96}
+                priority
               />
             </Link>
             <h2 className={utilStyles.headingLg}>

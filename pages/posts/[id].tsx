@@ -22,7 +22,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export default function Post({ postData }: { postData: { title: string; date: string; contentHtml: string } }) {
-  return (
+  // noinspection SpellCheckingInspection
+    return (
     <Layout>
       <Head>
         <title>{postData.title} - Sachin Nediyanchath</title>

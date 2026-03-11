@@ -1,11 +1,11 @@
 // pages/portfolio.tsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Layout from '../components/layout';
 import styles from '../styles/Portfolio.module.css';
 import { StrategySummary } from '../components/Portfolio/StrategySummary';
 import { StockRow } from '../components/Portfolio/StockRow';
-import { getTickerLayer, PortfolioLayer, UserPosition, CORE_POSITIONS, LAYER_TARGETS } from '../lib/portfolio-logic';
+import { getTickerLayer, PortfolioLayer, LAYER_TARGETS } from '../lib/portfolio-logic';
 import { SITE_NAME } from '../lib/constants';
 import PortfolioHistoryChart from '../components/Portfolio/PortfolioHistoryChart';
 import ArchitectureModal from '../components/Portfolio/ArchitectureModal';

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/layout';
 import FeatureCard from '../components/FeatureCard';
+import { CloudSun, TrendingUp, Bot, Briefcase, PenTool, Mail } from 'lucide-react';
 import { SITE_NAME, SITE_TITLE } from '../lib/constants';
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
         alignItems: 'center',
         marginTop: '2rem'
       }}>
-        {/* Hero Section - Text already handled by Layout but we can add more if needed */}
+        {/* Hero Section - Text already handled by Layout, but we can add more if needed */}
         <div style={{
           textAlign: 'center',
           color: 'var(--text-main)',
@@ -31,7 +32,6 @@ export default function Home() {
             color: 'var(--accent-primary)',
             marginBottom: '0.5rem'
           }}>
-            🌸 Welcome to the Spring Edition
           </p>
           <p style={{
             fontSize: '1.1rem',
@@ -46,25 +46,24 @@ export default function Home() {
         {/* Cards Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
           gap: '2rem',
           maxWidth: '900px',
           width: '100%',
           alignItems: 'stretch'
         }}>
-          <FeatureCard 
-            href="/weather-seek"
-            emoji="🌤️"
-            emojiLabel="Weather icon"
-            title="Weather Lookup"
-            description="Check real-time weather conditions for any location worldwide"
-            cta="Explore"
-          />
+
+        <FeatureCard
+          href="/weather-seek"
+          Icon={CloudSun}
+          title="Weather Lookup"
+          description="Check real-time weather conditions for any location worldwide"
+          cta="Explore"
+        />
 
           <FeatureCard 
             href="/job-gap"
-            emoji="📈"
-            emojiLabel="Growth chart"
+            Icon={TrendingUp}
             title="Technical Growth"
             description="A roadmap of my technical evolution, core expertise, and strategic pivot into AI-driven solutions."
             cta="View Roadmap"
@@ -73,8 +72,7 @@ export default function Home() {
           <FeatureCard 
             href="https://finsurf.net"
             external
-            emoji="🤖"
-            emojiLabel="Robot"
+            Icon={Bot}
             title="Finsurf AI"
             description="Explore my latest AI-powered project for financial insights and automated analysis."
             cta="Visit Website"
@@ -82,8 +80,7 @@ export default function Home() {
 
           <FeatureCard 
             href="/portfolio"
-            emoji="💼"
-            emojiLabel="Briefcase"
+            Icon={Briefcase}
             title="Growth Strategy"
             description="Track my 10-year consolidated growth and income investment strategy with real-time analytics."
             cta="View Strategy"
@@ -91,8 +88,7 @@ export default function Home() {
 
           <FeatureCard
             href="/blog"
-            emoji="✍️"
-            emojiLabel="Writing hand"
+            Icon={PenTool}
             title="Insights & Articles"
             description="Read my latest thoughts on AI Solutions, Technical Strategy, and the evolution of Enterprise Software."
             cta="Read Blog"
@@ -100,8 +96,7 @@ export default function Home() {
 
           <FeatureCard 
             href="/contact"
-            emoji="📬"
-            emojiLabel="Mailbox"
+            Icon={Mail}
             title="Connect & Inquire"
             description="Interested in collaborating or discussing technical strategy? Let's connect through a reliable channel."
             cta="Contact Me"

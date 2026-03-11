@@ -1,22 +1,24 @@
 import Link from 'next/link';
+import { LucideIcon } from 'lucide-react';
 
 interface FeatureCardProps {
   href: string;
   external?: boolean;
-  emoji: string;
-  emojiLabel: string;
   title: string;
   description: string;
   cta: string;
+  Icon: LucideIcon;
+  emoji?: string;
+  emojiLabel?: string;
 }
 
-export default function FeatureCard({ href, external, emoji, emojiLabel, title, description, cta }: FeatureCardProps) {
+export default function FeatureCard({ href, external, title, description, cta, Icon }: FeatureCardProps) {
   const CardContent = (
     <div 
       style={{
         backgroundColor: 'var(--bg-surface)',
         borderRadius: '16px',
-        padding: '2.5rem 2rem',
+        padding: '1.5rem 1.25rem',
         border: '1px solid var(--border-subtle)',
         boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
@@ -42,8 +44,10 @@ export default function FeatureCard({ href, external, emoji, emojiLabel, title, 
       }}
     >
       <div>
-        <div style={{ fontSize: '3.5rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.1))' }} role="img" aria-label={emojiLabel}>{emoji}</div>
-        <h2 style={{ margin: '0 0 0.75rem 0', color: 'var(--text-main)', fontSize: '1.75rem', fontWeight: '700' }}>
+        <div style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--accent-primary)'}}>
+            <Icon size={40} strokeWidth={1.5}  />
+        </div>
+        <h2 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-main)', fontSize: '1.4rem', fontWeight: '700' }}>
           {title}
         </h2>
         <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.6' }}>

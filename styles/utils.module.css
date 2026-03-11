@@ -20,16 +20,6 @@
   color: inherit;
 }
 
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.listItem {
-  margin: 0 0 1.25rem;
-}
-
 .lightText {
   color: var(--text-muted);
 }
@@ -51,7 +41,3 @@
   margin: 1rem 0;
 }
 
-.postContent {
-  color: var(--text-main);
-  line-height: 1.7;
-}

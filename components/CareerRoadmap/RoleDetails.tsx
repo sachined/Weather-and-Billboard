@@ -1,28 +1,45 @@
 import React from 'react';
 import { RoleInfo, CHART_LABELS } from '../../lib/roles';
 import RadarChart from './RadarChart';
+import { useTheme } from '../../hooks/useTheme';
 
 export default function RoleDetails({ role }: { role: RoleInfo }) {
+  const theme = useTheme();
+  const isSpring = theme === 'spring';
+  const isMinimalist = theme === 'light';
+
   return (
     <div style={containerStyle}>
       <h2 style={{ color: 'var(--accent-primary)', marginTop: 0 }}>{role.title}</h2>
       <div style={{ marginBottom: '1.5rem' }}>
         <h4 style={{ color: 'var(--text-main)', marginBottom: '0.5rem' }}>Core Skills Match:</h4>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-          {role.skills.map((skill) => (
-            <span key={skill} style={tagStyle}>
+          {role.skills.map((skill, index) => (
+            <span key={skill} style={{
+                ...tagStyle,
+                backgroundColor: isSpring
+                  ? (index % 2 === 0 ? 'var(--pastel-pink)' : 'var(--pastel-yellow)')
+                  : (isMinimalist ? '#FFFFFF' : 'var(--bg-surface-hover)'),
+                color: 'var(--text-main)',
+                border: isSpring ? 'none' : '1px solid var(--border-subtle)',
+                boxShadow: isMinimalist ? '0 1px 2px rgba(0,0,0,0.05)' : 'none',
+                fontWeight: isMinimalist ? '500' : (isSpring ? '600' : 'normal')
+              }}
+            >
               {skill}
             </span>
           ))}
         </div>
       </div>
       <RadarChart role={role} labels={CHART_LABELS} />
+
       <div style={insightStyle}>
         <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.9rem', color: 'var(--text-main)' }}>Chart Insights:</h4>
         <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
           {role.chartDescription}
         </p>
       </div>
+
       <div style={legendGridStyle}>
         <div style={legendItemStyle}>
           <strong style={{ color: 'var(--text-main)' }}>Technical Proficiency:</strong> Python, SQL, Next.js

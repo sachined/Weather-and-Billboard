@@ -30,7 +30,7 @@ Each provider has a different way of reporting usage. Gemini uses `usageMetadata
 Our current system uses a simple module-level list to accumulate usages. We chose this because, in our deployment model, a fresh process is spawned for each graph run. It’s zero-overhead and thread-safe by design. An AI refactor might suggest a "more advanced" thread-safe queue or a shared-state manager. While "cleaner" on paper, it would add unnecessary complexity and potential locking issues to a performance-critical path.
 
 ### 3. The Need for Measurement
-The most important lesson we’ve learned is to **take measured steps.** Before we changed how tokens were persisted, we measured the latency impact of SQLite writes. We found that without WAL mode, concurrent runs could lock the database. An automated tool might have implemented the "Save to DB" logic perfectly but missed the "Database is Locked" error that only appears under real-world load.
+The most important lesson we’ve learned is to **take measured steps.** Before we changed how tokens were persisted, we measured the latency impact of SQLite writes. We found that without WAL mode, concurrent runs could lock the database. An automated tool might have implemented the "Save to DB" logic perfectly but missed the "Database is Locked" error that only appears under real-world conditions.
 
 ## Conclusion: Measure Twice, Cut Once
 
@@ -38,4 +38,4 @@ As we continue to scale FinSurf, our approach to token management remains delibe
 
 In the "Last Mile" of AI, knowing your numbers is just as important as knowing your code.
 
-*Interested in seeing how we manage these agents? Check out the [Career Roadmap](/job-gap) to see how we’ve mapped out the technical journey of building FinSurf.*
+*Interested in seeing how we manage these agents? Check out the [Career Roadmap](../pages/job-gap.tsx) to see how we’ve mapped out the technical journey of building FinSurf.*

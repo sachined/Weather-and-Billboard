@@ -1,35 +1,40 @@
 /* styles/globals.css */
 
-/* 🌸 Main: Spring Theme (New Default) */
+/* ?? Main: Spring Theme (Deep Forest) */
 :root {
   /* Surface / Backgrounds */
-  --bg-page: #f0fdf4; /* Emerald 50 */
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #dcfce7; /* Green 100 */
-  --bg-glass: rgba(240, 253, 244, 0.7);
-  
+  --bg-page: #F9F9F9; /* Soft, warm white */
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #F1F5F2; /* Very light sage tint */
+  --bg-glass: rgba(249, 249, 249, 0.85);
+
   /* Borders */
-  --border-subtle: rgba(22, 101, 52, 0.1);
-  --border-main: rgba(22, 101, 52, 0.2);
+  --border-subtle: #E8EEE9;
+  --border-main: #C8E6D1;
 
   /* Text */
-  --text-main: #166534; /* Green 800 */
-  --text-muted: #15803d; /* Green 700 */
-  
+  --text-main: #333333; /* Dark, legible gray */
+  --text-muted: #5A6A5E; /* Muted sage-gray */
+  --text-heading: #55705E; /* Deeper sage green */
+
   /* Accents */
-  --accent-primary: #10b981; /* Emerald 500 */
-  --accent-secondary: #f43f5e; /* Rose 500 */
-  --brand-gradient: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  
+  --accent-primary: #98D8A3; /* Calming pastel green */
+  --accent-secondary: #55705E; /* Deeper sage green */
+  --brand-gradient: linear-gradient(135deg, #F9F9F9 0%, #E8F5E9 100%);
+
   /* Indicators */
-  --color-success: #15803d; /* Green 700 */
-  --color-error: #b91c1c; /* Red 700 */
-  
+  --color-success: #98D8A3;
+  --color-error: #E57373;
+
   /* Layout Defaults */
-  --nav-bg: rgba(240, 253, 244, 0.8);
+  --nav-bg: rgba(255, 255, 255, 0.8);
+
+  /* Pastels for Skills/Badges */
+  --pastel-pink: #FFD1DC;
+  --pastel-yellow: #FFF9C4;
 }
 
-/* 🌌 Alternative: Midnight Slate Theme */
+/* ?? Alternative: Midnight Slate Theme */
 [data-theme='dark'] {
   /* Surface / Backgrounds */
   --bg-page: #0f172a; /* Deep Slate 900 */
@@ -44,7 +49,8 @@
   /* Text */
   --text-main: #ffffff; /* Pure White */
   --text-muted: rgba(255, 255, 255, 0.85); /* Slightly muted white */
-  
+  --text-heading: #ffffff;
+
   /* Accents */
   --accent-primary: #38bdf8; /* Sky 400 */
   --accent-secondary: #818cf8; /* Indigo 400 */
@@ -58,31 +64,34 @@
   --nav-bg: rgba(30, 41, 59, 0.8);
 }
 
-/* ⚪ Alternative: Modern Minimalist Theme */
+/* ? Alternative: Modern Minimalist Theme */
 [data-theme='light'] {
   /* Surface / Backgrounds */
-  --bg-page: #f8fafc; /* Slate 50 */
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #f1f5f9; /* Slate 100 */
-  --bg-glass: rgba(255, 255, 255, 0.8);
+  --bg-page: #FAFAFA; /* Deep Slate 900 */
+  --bg-surface: #FFFFFF; /* Keep it uniform for the Deep Slate look */
+  --bg-surface-hover: #F8FAFC; /* Slate 800 */
+  --bg-glass: rgba(250, 250, 250, 0.8);
   
-  /* Borders */
-  --border-subtle: rgba(0, 0, 0, 0.05);
-  --border-main: rgba(0, 0, 0, 0.1);
+  /* Borders & Shadows */
+  --border-subtle: #E2E8F0; /* Thin, light gray */
+  --border-main: #CBD5E1;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 
   /* Text */
-  --text-main: #0f172a; /* Slate 900 */
-  --text-muted: #475569; /* Slate 600 */
-  
+  --text-main: #1A202C; /* Soft charcoal black */
+  --text-muted: #4A5568;
+  --text-heading: #1A202C;
+
   /* Accents */
-  --accent-primary: #0284c7; /* Sky 600 */
-  --accent-secondary: #4f46e5; /* Indigo 600 */
-  
+  --accent-primary: #2563EB; /* Vibrant Blue */
+  --accent-secondary: #3B82F6;
+  --brand-gradient: linear-gradient(135deg, #FAFAFA 0%, #F1F5F9 100%);
+
   /* Indicators */
-  --color-success: #15803d; /* Green 700 */
-  --color-error: #b91c1c; /* Red 700 */
-  
-  --nav-bg: rgba(255, 255, 255, 0.8);
+  --color-success: #10B981;
+  --color-error: #EF4444;
+
+  --nav-bg: rgba(255, 255, 255, 0.9);
 }
 
 body {
@@ -90,10 +99,8 @@ body {
   color: var(--text-main);
   transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 p {
@@ -133,4 +140,53 @@ img {
 button, a {
   min-height: 44px;
   min-width: 44px;
+}
+
+/* ?? Clear Weather Theme: Warm Amber & Gold */
+[data-weather-theme='clear'] {
+  --bg-page: #fffbeb; /* Amber 50 */
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #fef3c7; /* Amber 100 */
+  --bg-glass: rgba(255, 251, 235, 0.7);
+
+  --border-subtle: rgba(146, 64, 14, 0.1);
+  --border-main: rgba(146, 64, 14, 0.2);
+
+  --text-main: #92400e; /* Amber 800 */
+  --text-muted: #b45309; /* Amber 700 */
+
+  --accent-primary: #f59e0b; /* Amber 500 */
+  --accent-secondary: #fbbf24; /* Amber 400 */
+  --brand-gradient: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+
+  --nav-bg: rgba(255, 251, 235, 0.8);
+}
+
+/* ??? Rain Weather Theme: Blue & Slate */
+[data-weather-theme='rain'] {
+  --bg-page: #f1f5f9; /* Slate 50 */
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #e2e8f0; /* Slate 200 */
+  --bg-glass: rgba(241, 245, 249, 0.7);
+
+  --border-subtle: rgba(30, 41, 59, 0.1);
+  --border-main: rgba(30, 41, 59, 0.2);
+
+  --text-main: #1e293b; /* Slate 800 */
+  --text-muted: #475569; /* Slate 600 */
+
+  --accent-primary: #3b82f6; /* Blue 500 */
+  --accent-secondary: #60a5fa; /* Blue 400 */
+  --brand-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+
+  --nav-bg: rgba(241, 245, 249, 0.8);
+}
+
+/* Reduce heading weights for Minimalist theme */
+[data-theme='light'] h1,
+[data-theme='light'] h2,
+[data-theme='light'] h3,
+[data-theme='light'] h4 {
+  font-weight: 500; /* Refined, less heavy appearance */
+  letter-spacing: -0.01em;
 }

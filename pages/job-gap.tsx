@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Layout from '../components/layout';
-import { ROLES_DATA, ROLE_ORDER, CHECKLIST_ITEMS, CHART_LABELS } from '../lib/roles';
-import { SITE_NAME, SITE_TITLE } from '../lib/constants';
+import { ROLES_DATA, ROLE_ORDER, CHECKLIST_ITEMS } from '../lib/roles';
+import { SITE_NAME } from '../lib/constants';
 import RoleSelection from '../components/CareerRoadmap/RoleSelection';
 import RoleDetails from '../components/CareerRoadmap/RoleDetails';
 import TechnicalNarrative from '../components/CareerRoadmap/TechnicalNarrative';

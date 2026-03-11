@@ -1,0 +1,218 @@
+.card {
+  background-color: var(--bg-surface);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-subtle);
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.message {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.header {
+  text-align: center;
+}
+
+.headerButton {
+  background: none;
+  border: none;
+  margin: 1rem 0; 
+  font-size: 3rem; 
+  font-weight: 800; 
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-main);
+  display: block;
+  width: 100%;
+  transition: transform 0.2s;
+}
+
+.description {
+  margin: 0.5rem 0; 
+  font-size: 1.2rem; 
+  color: var(--text-main); 
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.location {
+  margin: 0.5rem 0; 
+  font-size: 1rem; 
+  color: var(--text-muted);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background-color: var(--bg-surface-hover);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.detailLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.detailValue {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.detailValueSmall {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.forecastContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  gap: 0.5rem;
+}
+
+.forecastItem {
+  text-align: center;
+  min-width: 60px;
+}
+
+.forecastDate {
+  font-size: 0.75rem;
+  margin: 0 0 0.25rem 0;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.forecastIcon {
+  display: flex;
+  justify-content: center;
+  margin: 0.25rem 0;
+}
+
+.forecastTemp {
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0 0;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.minTemp {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+.searchForm {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: var(--accent-primary);
+}
+
+.searchButton {
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--accent-primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.searchButton:hover {
+  opacity: 0.9;
+}
+
+.locationButton {
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--accent-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 44px;
+}
+
+.historyWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.historyLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.chipsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface-hover);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  min-height: auto;
+  min-width: auto;
+}
+
+.chip:hover {
+  background-color: var(--bg-surface);
+  border-color: var(--accent-primary);
+}

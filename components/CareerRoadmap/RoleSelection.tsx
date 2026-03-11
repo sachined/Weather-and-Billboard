@@ -1,5 +1,6 @@
 import React from 'react';
 import { RolesData } from '../../lib/roles';
+import {useTheme} from "../../hooks/useTheme";
 
 interface RoleSelectionProps {
   roles: RolesData;
@@ -14,11 +15,15 @@ export default function RoleSelection({
   selectedRole, 
   onSelectRole 
 }: RoleSelectionProps) {
+  const theme = useTheme();
+  const isMinimalist = theme === 'light';
+  const isSpring = theme === 'spring';
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {roleOrder.map((key) => {
         const role = roles[key];
         const isSelected = selectedRole === key;
+
         return (
           <button
             key={key}
@@ -29,22 +34,27 @@ export default function RoleSelection({
               backgroundColor: isSelected ? 'var(--bg-surface-hover)' : 'var(--bg-surface)',
               padding: '1.2rem',
               borderRadius: '12px',
-              border: isSelected ? '2px solid var(--accent-primary)' : '1px solid var(--border-subtle)',
+              border: isMinimalist
+              ? '1px solid var(--border-subtle)' : (isSelected ? '2px solid var(--accent-primary)'
+                      : '1px solid var(--border-subtle)'),
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               width: '100%',
-              boxShadow: isSelected ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : 'none'
+              boxShadow: (isSelected && isMinimalist)
+              ? 'var(--card-shadow)'
+                  :(isSelected ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : 'none')
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
               <h3 style={{ margin: 0, color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: '700' }}>{role.title}</h3>
               <span style={{ 
-                fontSize: '0.75rem', 
-                backgroundColor: isSelected ? 'var(--accent-primary)' : 'var(--bg-surface-hover)', 
-                color: isSelected ? '#fff' : 'var(--accent-primary)', 
-                padding: '0.2rem 0.6rem', 
-                borderRadius: '6px', 
-                fontWeight: '700' 
+                fontSize: '0.75rem',
+                backgroundColor: isSpring ? 'var(--pastel-yellow)' : (isSelected ? 'var(--accent-primary)' : 'var(--bg-surface-hover)'),
+                color: isSpring ? '#333333' : (isSelected ? '#fff' : 'var(--accent-primary)'),
+                padding: '0.2rem 0.6rem',
+                borderRadius: '6px',
+                fontWeight: '700',
+                border: isSpring ? 'none' : 'inherit'
               }}>
                 {role.badge}
               </span>
