@@ -5,8 +5,13 @@ import { useTheme } from '../../hooks/useTheme';
 
 export default function RoleDetails({ role }: { role: RoleInfo }) {
   const theme = useTheme();
-  const isSpring = theme === 'spring';
   const isMinimalist = theme === 'light';
+  const MINIMALIST_LABELS = [
+  ['Tech', 'Skills'],
+  ['Client', 'Strategy'],
+  ['Data', 'Impact'],
+  ['Ops', 'Flow']
+];
 
   return (
     <div style={containerStyle}>
@@ -17,13 +22,9 @@ export default function RoleDetails({ role }: { role: RoleInfo }) {
           {role.skills.map((skill, index) => (
             <span key={skill} style={{
                 ...tagStyle,
-                backgroundColor: isSpring
-                  ? (index % 2 === 0 ? 'var(--pastel-pink)' : 'var(--pastel-yellow)')
-                  : (isMinimalist ? '#FFFFFF' : 'var(--bg-surface-hover)'),
-                color: 'var(--text-main)',
-                border: isSpring ? 'none' : '1px solid var(--border-subtle)',
-                boxShadow: isMinimalist ? '0 1px 2px rgba(0,0,0,0.05)' : 'none',
-                fontWeight: isMinimalist ? '500' : (isSpring ? '600' : 'normal')
+                backgroundColor: (index % 2 === 0 ? 'var(--tag-bg-1)' : 'var(--tag-bg-2)'),
+                border: 'none',
+                fontWeight: '600'
               }}
             >
               {skill}
@@ -31,7 +32,8 @@ export default function RoleDetails({ role }: { role: RoleInfo }) {
           ))}
         </div>
       </div>
-      <RadarChart role={role} labels={CHART_LABELS} />
+      <RadarChart role={role} labels={isMinimalist ? MINIMALIST_LABELS : CHART_LABELS}
+ />
 
       <div style={insightStyle}>
         <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.9rem', color: 'var(--text-main)' }}>Chart Insights:</h4>
@@ -42,16 +44,24 @@ export default function RoleDetails({ role }: { role: RoleInfo }) {
 
       <div style={legendGridStyle}>
         <div style={legendItemStyle}>
-          <strong style={{ color: 'var(--text-main)' }}>Technical Proficiency:</strong> Python, SQL, Next.js
+          <strong style={{ color: 'var(--text-heading)' }}>
+            {isMinimalist ? 'Tech Skills' : 'Technical Proficiency:'}
+          </strong> Python, SQL, Next.js
         </div>
         <div style={legendItemStyle}>
-          <strong style={{ color: 'var(--text-main)' }}>Stakeholder Strategy:</strong> Cross-functional communication
+          <strong style={{ color: 'var(--text-heading)' }}>
+            {isMinimalist ? 'Client Strategy' : 'Stakeholder Strategy:'}
+          </strong> Cross-functional communication
         </div>
         <div style={legendItemStyle}>
-          <strong style={{ color: 'var(--text-main)' }}>Analytical Impact:</strong> Data-driven ROI tracking
+          <strong style={{ color: 'var(--text-heading)' }}>
+            {isMinimalist ? 'Data Impact' : 'Analytical Impact:'}
+          </strong> Data-driven ROI tracking
         </div>
         <div style={legendItemStyle}>
-          <strong style={{ color: 'var(--text-main)' }}>Operational Excellence:</strong> Project lifecycle management
+          <strong style={{ color: 'var(--text-heading)' }}>
+            {isMinimalist ? 'Project Management' : 'Operational Excellence:'}
+          </strong> Project lifecycle management
         </div>
       </div>
     </div>

@@ -28,17 +28,14 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
 
     const isDark = theme === 'dark';
     const isSpring = theme === 'spring';
-    const isMinimalist = theme === 'light';
 
     const accentColor = isDark ? '#38bdf8' : 
                         isSpring ? '#98D8A3' : '#2563EB';
-    const gridColor = isDark ? 'rgba(255, 255, 255, 0.4)' :
-                      isSpring ? 'rgba(0,0,0,0.05)' :
-                      isMinimalist ? '#F1F5F9' : 'rgba(0, 0, 0, 0.25)';
+
     const rootStyle = getComputedStyle(document.documentElement);
-    const textColor = rootStyle.getPropertyValue('--text-main').trim() ||
-        (isDark ? '#ffffff' : isSpring ? '#55705E' : '#0f172a');
-    const baseColor = isDark ? 'rgba(255, 255, 255, 0.55)' : 
+    const textColor = rootStyle.getPropertyValue('--chart-label').trim() || '#000000';
+    const gridColor = rootStyle.getPropertyValue('--chart-grid').trim() || 'rgba(0, 0, 0, 0.1)';
+    const baseColor = isDark ? 'rgba(255, 255, 255, 0.55)' :
                       isSpring ? 'rgba(152, 216, 163, 0.4)' : 'rgba(215,221,232,0.55)';
 
     const mainData = totalData || data || [];
@@ -68,7 +65,7 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
       }
     ];
 
-    // Only add base dataset if it's different from main data
+    // Only add base dataset if it's different from the main data
     const showBase = secondaryData.length > 0 && 
                     secondaryData.some((v, i) => v !== mainData[i]);
 

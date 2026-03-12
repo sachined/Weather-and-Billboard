@@ -31,15 +31,13 @@ export default function RadarChart({ role, labels }: RadarChartProps) {
     const rootStyle = getComputedStyle(document.documentElement);
 
     // Inside useEffect in RadarChart.tsx
-    const accentColor = isMinimalist ? '#2563EB' : (rootStyle.getPropertyValue('--accent-primary').trim() || '#38bdf8');
+    const accentColor = rootStyle.getPropertyValue('--accent-primary').trim() || '#38bdf8';
+    const gridColor = rootStyle.getPropertyValue('--chart-grid').trim() || 'rgba(0,0,0,0.1)';
+    const fillBG = rootStyle.getPropertyValue('--chart-fill').trim() || 'rgba(81,179,223,0.25)';
 
     // Update grid and axis for high contrast on light background
-    const gridColor = isMinimalist ? '#F1F5F9' : (isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(100, 250, 200, 0.15)');
-    const axisColor = isMinimalist ? '#E2E8F0' : (isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(150, 200, 100, 0.1)');
-    const labelColor = rootStyle.getPropertyValue('--text-heading').trim() ||
-        (isDark ? '#ffffff' : isSpring ? '#55705E' : '#020617');
-
-    const fillBG = isMinimalist ? 'rgba(37, 99, 235, 0.1)' : (isDark ? 'rgba(56, 189, 248, 0.25)' : 'rgba(152, 216, 163, 0.4)');
+    const axisColor = rootStyle.getPropertyValue('--chart-axis').trim() || 'rgba(0, 0, 0, 0.1)';
+    const labelColor = rootStyle.getPropertyValue('--text-heading').trim() || '#020617';
 
     chartInstance.current = new Chart(ctx, {
       type: 'radar',
@@ -80,11 +78,9 @@ export default function RadarChart({ role, labels }: RadarChartProps) {
             pointLabels: {
               font: {
                 size: 18,
-                weight: isDark ? 500 : 'bold'
+                weight: 'bold'
               },
               color: labelColor,
-              //backdropColor: labelGlow,
-              backdropPadding: 4,
               padding: 22 // Distance from the chart area
             }
           },
@@ -95,14 +91,10 @@ export default function RadarChart({ role, labels }: RadarChartProps) {
           },
         // Update Tooltip colors
           tooltip: {
-            backgroundColor: isDark ? '#1e293b' :
-                             isSpring ? '#FFFFFF' : '#ffffff',
-            titleColor: isDark ? '#fff' :
-                        isSpring ? '#55705E' : '#0f172a',
-            bodyColor: isDark ? '#fff' :
-                       isSpring ? '#333333' : '#0f172a',
-            borderColor: isDark ? 'transparent' :
-                         isSpring ? '#98D8A3' : '#e2e8f0',
+            backgroundColor: rootStyle.getPropertyValue('--bg-surface').trim(),
+            titleColor: rootStyle.getPropertyValue('--text-heading').trim(),
+            bodyColor: rootStyle.getPropertyValue('--text-main').trim(),
+            borderColor: rootStyle.getPropertyValue('--border-main').trim(),
             borderWidth: 1,
             titleFont: { size: 14, weight: isDark ? 500 : 'bold' },
             bodyFont: { size: 13 },

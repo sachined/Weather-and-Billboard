@@ -15,7 +15,7 @@
   /* Text */
   --text-main: #333333; /* Dark, legible gray */
   --text-muted: #5A6A5E; /* Muted sage-gray */
-  --text-heading: #55705E; /* Deeper sage green */
+  --text-heading: #e4b336; /* Deeper sage green */
 
   /* Accents */
   --accent-primary: #98D8A3; /* Calming pastel green */
@@ -32,6 +32,13 @@
   /* Pastels for Skills/Badges */
   --pastel-pink: #FFD1DC;
   --pastel-yellow: #FFF9C4;
+  --chart-grid: rgba(100, 250, 200, 0.15);
+  --chart-axis: rgba(150, 200, 100, 0.1);
+  --chart-fill: rgba(152, 216, 163, 0.4);
+  --chart-label: #55705E;
+
+  --tag-bg-1: #FFD1DC;
+  --tag-bg-2: #FFF9C4;
 }
 
 /* ?? Alternative: Midnight Slate Theme */
@@ -62,6 +69,14 @@
   
   /* Layout Defaults */
   --nav-bg: rgba(30, 41, 59, 0.8);
+  --chart-grid: rgba(255, 255, 255, 0.15);
+  --chart-axis: rgba(255, 255, 255, 0.3);
+  --chart-fill: rgba(56, 189, 248, 0.25);
+  --chart-label: #ffffff;
+
+  --tag-bg-1: rgba(251, 113, 133, 0.15); /* Translucent Rose */
+  --tag-bg-2: rgba(250, 204, 21, 0.15);  /* Translucent Gold */
+
 }
 
 /* ? Alternative: Modern Minimalist Theme */
@@ -80,7 +95,7 @@
   /* Text */
   --text-main: #1A202C; /* Soft charcoal black */
   --text-muted: #4A5568;
-  --text-heading: #1A202C;
+  --text-heading: #0264ff;
 
   /* Accents */
   --accent-primary: #2563EB; /* Vibrant Blue */
@@ -92,6 +107,13 @@
   --color-error: #EF4444;
 
   --nav-bg: rgba(255, 255, 255, 0.9);
+  --chart-grid: rgba(35, 95, 245, 0.15);
+  --chart-axis: rgba(39, 97, 235, 0.3);
+  --chart-fill: rgba(37, 99, 235, 0.2);
+  --chart-label: #0264ff;
+
+  --tag-bg-1: #FFF1F2; /* Soft Rose */
+  --tag-bg-2: #FFFBEB; /* Soft Amber */
 }
 
 body {
