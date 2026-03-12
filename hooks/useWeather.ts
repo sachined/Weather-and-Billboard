@@ -27,33 +27,46 @@ export interface WeatherData {
   theme: string | null;
 }
 
-export function useWeather() {
+export function useWeather(options: { autoLocation?: boolean} = {autoLocation: true}) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
   const [unit, setUnit] = useState<'celsius' | 'fahrenheit'>('celsius');
-
   const [isUnitLoaded, setIsUnitLoaded] = useState(false);
 
   useEffect(() => {
-    // Load unit preference
-    const savedUnit = localStorage.getItem('weatherUnit');
-    if (savedUnit === 'celsius' || savedUnit === 'fahrenheit') {
-      setUnit(savedUnit);
-    }
-    
-    // Load history
-    const saved = localStorage.getItem('weatherSearchHistory');
-    if (saved) {
-      try {
-        setHistory(JSON.parse(saved));
-      } catch (e) {
-        console.error("Failed to parse history:", e);
+    const initWeather = async () => {
+      // Load unit preference
+      const savedUnit = localStorage.getItem('weatherUnit');
+      if (savedUnit === 'celsius' || savedUnit === 'fahrenheit') {
+        setUnit(savedUnit);
       }
-    }
 
-    setIsUnitLoaded(true);
+      // Load history
+      try {
+        const res = await fetch('/api/weather/history');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setHistory(data);
+          } else {
+            // Fallback to localStorage if DB is empty
+            const saved = localStorage.getItem('weatherSearchHistory');
+            if (saved) setHistory(JSON.parse(saved));
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch weather history from MongoDB:", e);
+        // Fallback to localStorage on error
+        const saved = localStorage.getItem('weatherSearchHistory');
+        if (saved) setHistory(JSON.parse(saved));
+      }
+
+      setIsUnitLoaded(true);
+    };
+
+    initWeather();
   }, []);
 
 
@@ -135,14 +148,23 @@ export function useWeather() {
       ]);
       updateWeatherData(currData, foreData);
 
-      // Update History
+      // 2. Update History in MongoDB
       const cityName = currData.name;
-      setHistory(prev => {
-        const filtered = prev.filter(c => c.toLowerCase() !== cityName.toLowerCase());
-        const updated = [cityName, ...filtered].slice(0, 5);
-        localStorage.setItem('weatherSearchHistory', JSON.stringify(updated));
-        return updated;
+      const res = await fetch('/api/weather/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ city: cityName })
       });
+
+      if (res.ok) {
+        setHistory(prev => {
+          const filtered = prev.filter(c => c.toLowerCase() !== cityName.toLowerCase());
+          const updated = [cityName, ...filtered].slice(0, 5);
+          // Optional: Keep localStorage in sync as a backup
+          localStorage.setItem('weatherSearchHistory', JSON.stringify(updated));
+          return updated;
+        });
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -192,11 +214,33 @@ export function useWeather() {
   }, [weather]);
 
   useEffect(() => {
-    if (isUnitLoaded) {
+    // Only trigger auto-location if explicitly enabled (default: true)
+    if (isUnitLoaded && options.autoLocation) {
       // Attempt geolocation on mount after unit is loaded
       fetchWeatherByLocation(false);
     }
-  }, [isUnitLoaded, fetchWeatherByLocation]);
+  }, [isUnitLoaded, fetchWeatherByLocation, options.autoLocation]);
+
+  const removeHistoryItem = useCallback(async (city: string) => {
+    try {
+      // 1. Call the API to remove from MongoDB
+      const res = await fetch(`/api/weather/history?city=${encodeURIComponent(city)}`, {
+        method: 'DELETE'
+      });
+
+      if (res.ok) {
+        // 2. Update local state if successful
+        setHistory(prev => {
+          const updated = prev.filter(c => c.toLowerCase() !== city.toLowerCase());
+          // 3. Keep localStorage synced as a local backup
+          localStorage.setItem('weatherSearchHistory', JSON.stringify(updated));
+          return updated;
+        });
+      }
+    } catch (e) {
+      console.error("Error removing city from history:", e);
+    }
+  }, []);
 
   return {
     weather,
@@ -206,6 +250,7 @@ export function useWeather() {
     getDisplayTemp,
     fetchWeatherByCity,
     history,
+    removeHistoryItem,
     fetchWeatherByLocation
   };
 }

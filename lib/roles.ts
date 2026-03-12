@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 export interface RoleInfo {
   title: string;
   fit: string;

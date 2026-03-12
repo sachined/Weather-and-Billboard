@@ -1,0 +1,57 @@
+{
+  "corePositions": [
+    { "symbol": "RKLB", "shares": 115 },
+    { "symbol": "GOOGL", "shares": 10 },
+    { "symbol": "AVGO", "shares": 6 },
+    { "symbol": "MSFT", "shares": 2 },
+    { "symbol": "NFLX", "shares": 5 },
+    { "symbol": "KO", "shares": 10 },
+    { "symbol": "ABBV", "shares": 3 },
+    { "symbol": "IBM", "shares": 3 },
+    { "symbol": "MAIN", "shares": 12 },
+    { "symbol": "VTI", "shares": 2 },
+    { "symbol": "ARCC", "shares": 12 }
+  ],
+  "strategy": {
+    "layers": {
+      "RKLB": { "layer": "Anchor", "thesis": "10-year conviction on space infrastructure." },
+      "GOOGL": { "layer": "Growth", "thesis": "AI infrastructure & Search dominance." },
+      "AVGO": { "layer": "Growth", "thesis": "Semiconductor consolidation & AI networking." },
+      "MSFT": { "layer": "Growth", "thesis": "Cloud & Enterprise AI leader." },
+      "NFLX": { "layer": "Growth", "thesis": "Entertainment Leader with high-quality AI." },
+      "MAIN": { "layer": "Income", "thesis": "Monthly dividend BDC." },
+      "ARCC": { "layer": "Income", "thesis": "Leading BDC with high-quality loan portfolio." },
+      "KO": { "layer": "Income", "thesis": "Consumer staple stability." },
+      "ABBV": { "layer": "Income", "thesis": "Healthcare/Biotech cash flow." },
+      "IBM": { "layer": "Income", "thesis": "Quantum computing & Hybrid cloud." },
+      "VTI": { "layer": "Income", "thesis": "Broad market dividend growth." }
+    },
+    "triggers": {
+      "RKLB": {
+        "referencePrice": 75,
+        "dipTrigger": 0.40,
+        "message": "🔥 STRATEGIC ACCUMULATION TRIGGER"
+      }
+    }
+  },
+  "layerTargets": {
+    "Anchor": "38%",
+    "Growth": "35-40%",
+    "Income": "20-25%",
+    "Research": "N/A"
+  },
+  "metrics": {
+    "philosophy": "Growth + Income Consolidation",
+    "objective": "10-Year capital appreciation with dividend-funded opportunistic buys.",
+    "allocations": [
+      { "name": "Anchor", "target": "38%", "focus": "Core Conviction" },
+      { "name": "Growth", "target": "35-40%", "focus": "Capital Appreciation" },
+      { "name": "Income", "target": "20-25%", "focus": "Yield & Stability" }
+    ],
+    "rules": [
+      "Trim non-RKLB positions if they exceed 15% weight.",
+      "Execute RKLB 'Dip-Buy' at 40% retracement from $75.",
+      "Reinvest dividends into highest-conviction or RKLB during triggers."
+    ]
+  }
+}

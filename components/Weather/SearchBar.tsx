@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { SubmitEventHandler } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import styles from './Weather.module.css';
@@ -11,7 +12,7 @@ interface SearchBarProps {
 export default function SearchBar({ onSearch, onLocationClick }: SearchBarProps) {
   const [city, setCity] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (city.trim()) {
       onSearch(city);

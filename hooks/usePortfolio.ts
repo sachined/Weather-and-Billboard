@@ -1,4 +1,6 @@
 // hooks/usePortfolio.ts
+// noinspection ExceptionCaughtLocallyJS
+
 import { useState, useEffect, useCallback } from 'react';
 import { UserPosition, CORE_POSITIONS, getTickerLayer } from '../lib/portfolio-logic';
 
@@ -13,36 +15,46 @@ export function usePortfolio() {
   const [error, setError] = useState<string | null>(null);
   const [showResearch, setShowResearch] = useState(true);
 
-  // 1. Initial Load & Detection
+  // 1. Initial Load from MongoDB & Local UI Preferences
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isLoc = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      setIsLocal(isLoc);
+    const initPortfolio = async () => {
+      // Detection for UI features
+      if (typeof window !== 'undefined') {
+        const isLoc = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        setIsLocal(isLoc);
 
-      const savedShowResearch = localStorage.getItem('portfolio-show-research');
-      if (savedShowResearch !== null) {
-        setShowResearch(savedShowResearch === 'true');
+        // UI preferences like 'showResearch' can stay in localStorage
+        const savedShowResearch = localStorage.getItem('portfolio-show-research');
+        if (savedShowResearch !== null) {
+          setShowResearch(savedShowResearch === 'true');
+        }
       }
 
-      if (isLoc) {
-        const saved = localStorage.getItem('portfolio-v1');
-        if (saved) {
-          try {
-            setMyPositions(JSON.parse(saved));
-          } catch (e) {
-            setMyPositions(CORE_POSITIONS);
-          }
+      try {
+        const res = await fetch('/api/portfolio');
+        if (!res.ok) throw new Error('Failed to fetch from MongoDB');
+
+        const data = await res.json();
+
+        // Use database positions if they exist, otherwise fallback to core defaults
+        if (Array.isArray(data) && data.length > 0) {
+          setMyPositions(data);
         } else {
           setMyPositions(CORE_POSITIONS);
         }
-      } else {
+      } catch (err) {
+        console.error("MongoDB Load Error, falling back to CORE_POSITIONS:", err);
         setMyPositions(CORE_POSITIONS);
+        setError("Note: Using local fallback data. Check MongoDB connection.");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    }
+    };
+
+    initPortfolio();
   }, []);
 
-  // 2. Fetch Prices (Batched)
+  // 2. Fetch Prices (Batched) - Automatically triggers when myPositions changes
   useEffect(() => {
     const fetchAll = async () => {
       if (myPositions.length === 0) {
@@ -77,10 +89,10 @@ export function usePortfolio() {
     const fetchHistory = async () => {
       if (myPositions.length === 0) return;
       try {
-        const filteredPositions = showResearch 
-          ? myPositions 
+        const filteredPositions = showResearch
+          ? myPositions
           : myPositions.filter(p => getTickerLayer(p.symbol) !== 'Research');
-        
+
         if (filteredPositions.length === 0) {
           setHistoryData({ labels: [], totalData: [], data: [], baseData: [] });
           setAppreciation({ value: 0, percent: 0 });
@@ -90,7 +102,7 @@ export function usePortfolio() {
         const posParam = encodeURIComponent(JSON.stringify(filteredPositions));
         const res = await fetch(`/api/portfolio-history?positions=${posParam}`);
         const data = await res.json();
-        
+
         if (data.labels && (data.totalData || data.data)) {
           setHistoryData(data);
           const performanceData = data.totalData || data.data;
@@ -117,29 +129,69 @@ export function usePortfolio() {
     setTotalValue(total);
   }, [stockData, showResearch]);
 
-  // Actions
-  const updatePosition = useCallback((symbol: string, shares: number) => {
+  // --- ACTIONS (MongoDB Integrated) ---
+
+  const updatePosition = useCallback(async (symbol: string, shares: number) => {
     const ticker = symbol.toUpperCase().trim();
     const existing = myPositions.find(p => p.symbol === ticker);
-    const newPos: UserPosition = { 
-      symbol: ticker, 
-      shares,
-      addedAt: existing?.addedAt || new Date().toISOString().split('T')[0]
-    };
-    const updated = [...myPositions.filter(p => p.symbol !== ticker), newPos];
-    setMyPositions(updated);
-    localStorage.setItem('portfolio-v1', JSON.stringify(updated));
+    const addedAt = existing?.addedAt || new Date().toISOString().split('T')[0];
+
+    try {
+      const res = await fetch('/api/portfolio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol: ticker, shares, addedAt })
+      });
+
+      if (res.ok) {
+        const newPos: UserPosition = { symbol: ticker, shares, addedAt };
+        setMyPositions(prev => {
+          const filtered = prev.filter(p => p.symbol !== ticker);
+          return [...filtered, newPos];
+        });
+      } else {
+        setError("Failed to sync update with MongoDB.");
+      }
+    } catch (e) {
+      console.error("Update Position Error:", e);
+      setError("Network error updating position.");
+    }
   }, [myPositions]);
 
-  const removePosition = useCallback((symbol: string) => {
-    const updated = myPositions.filter(p => p.symbol !== symbol);
-    setMyPositions(updated);
-    localStorage.setItem('portfolio-v1', JSON.stringify(updated));
-  }, [myPositions]);
+  const removePosition = useCallback(async (symbol: string) => {
+    const ticker = symbol.toUpperCase();
+    try {
+      const res = await fetch(`/api/portfolio?symbol=${ticker}`, {
+        method: 'DELETE'
+      });
 
-  const clearPortfolio = useCallback(() => {
-    setMyPositions([]);
-    localStorage.removeItem('portfolio-v1');
+      if (res.ok) {
+        setMyPositions(prev => prev.filter(p => p.symbol !== ticker));
+      } else {
+        setError("Failed to remove position from MongoDB.");
+      }
+    } catch (e) {
+      console.error("Remove Position Error:", e);
+      setError("Network error removing position.");
+    }
+  }, []);
+
+  const clearPortfolio = useCallback(async () => {
+    try {
+      const res = await fetch('/api/portfolio', {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setMyPositions([]);
+        setStockData([]);
+        setError(null);
+      } else {
+        setError("Failed to clear portfolio from MongoDB.");
+      }
+    } catch (e) {
+      console.error("Clear Portfolio Error:", e);
+      setError("Network error clearing portfolio.");
+    }
   }, []);
 
   const toggleResearch = useCallback(() => {

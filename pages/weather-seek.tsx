@@ -15,7 +15,8 @@ export default function WeatherSearch() {
     toggleUnit, 
     getDisplayTemp, 
     fetchWeatherByCity, 
-    history, 
+    history,
+    removeHistoryItem,
     fetchWeatherByLocation 
   } = useWeather();
 
@@ -55,7 +56,8 @@ export default function WeatherSearch() {
           />
           <SearchHistory 
             history={history} 
-            onCityClick={fetchWeatherByCity} 
+            onCityClick={fetchWeatherByCity}
+            onRemove={removeHistoryItem}
           />
         </div>
       </div>

@@ -1,6 +1,8 @@
 // noinspection SpellCheckingInspection
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+import dbConnect from '../../lib/dbConnect';
+import Message from '../../models/Message';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -40,6 +42,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
+    // 5. Connect to MongoDB and Log the Submission
+    await dbConnect();
+    await Message.create({ name, email, message });
+
     const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
       method: 'POST',
       body: JSON.stringify(req.body),

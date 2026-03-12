@@ -1,5 +1,6 @@
 // pages/portfolio.tsx
 import { useState } from 'react';
+import type { SubmitEventHandler } from 'react';
 import Head from 'next/head';
 import Layout from '../components/layout';
 import styles from '../styles/Portfolio.module.css';
@@ -32,16 +33,17 @@ export default function PortfolioPage() {
     appreciation,
     totalValue,
     loading,
+    error,
     showResearch,
     updatePosition,
     clearPortfolio,
     toggleResearch
   } = usePortfolio();
 
-  const addOrUpdatePosition = (e: React.FormEvent) => {
+  const addOrUpdatePosition: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (!query) return;
-    updatePosition(query, quantity);
+    updatePosition(query, Number(quantity));
     setQuery('');
     setQuantity(0);
   };
@@ -115,6 +117,20 @@ export default function PortfolioPage() {
 
         <StrategySummary />
 
+        {error && (
+          <div style={{ 
+            padding: '1rem', 
+            background: 'rgba(239, 68, 68, 0.1)', 
+            border: '1px solid #ef4444', 
+            borderRadius: '12px', 
+            marginBottom: '1.5rem', 
+            color: '#ef4444', 
+            fontSize: '0.9rem' 
+          }}>
+            <strong>Error:</strong> {error}
+          </div>
+        )}
+
         <div className={styles.searchSection}>
           {isLocal && (
             <form onSubmit={addOrUpdatePosition} style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -176,7 +192,7 @@ export default function PortfolioPage() {
           {renderLayer('Anchor')}
           {renderLayer('Growth')}
           {renderLayer('Income')}
-          {stockData.some(s => getTickerLayer(s.symbol) === 'Research') && renderLayer('Research')}
+          {renderLayer('Research')}
         </main>
         <ArchitectureModal
       isOpen={isModalOpen}

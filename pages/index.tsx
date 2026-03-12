@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/layout';
 import FeatureCard from '../components/FeatureCard';
+import GlobalDashboard from '../components/Dashboard/GlobalDashboard';
 import { CloudSun, TrendingUp, Bot, Briefcase, PenTool, Mail } from 'lucide-react';
 import { SITE_NAME, SITE_TITLE } from '../lib/constants';
 
@@ -42,6 +43,9 @@ export default function Home() {
             Discover tools for weather insights and career growth. Explore our new fresh theme or toggle between Midnight and Minimalist modes easily in the top navigation.
           </p>
         </div>
+
+        {/* New Dashboard Snapshot */}
+        <GlobalDashboard />
 
         {/* Cards Grid */}
         <div style={{
