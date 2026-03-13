@@ -1,4 +1,4 @@
-// Develop API Routes for Portfolio, to handle GET (fetch from DB) and POST (save to DB)
+// Develop API Routes for Portfolio to handle GET (fetch from DB) and POST (save to DB)
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Position from '@/models/Position';
 import dbConnect from "@/lib/dbConnect";
@@ -17,6 +17,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         error: 'Unauthorized: Modification is only allowed in development or with a valid admin-key header.'
       });
     }
+  }
+
+  // 2. Wrap the connection attempt specifically
+  try {
+    await dbConnect();
+  } catch (e: any) {
+    return res.status(500).json({
+      error: 'Database Connection Error',
+      details: e.message
+    });
   }
 
   await dbConnect();
@@ -41,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         // Use Mongoose to find and update, or create if not found (upsert)
-        // This leverages the schema validation (uppercase, trim, min:0)
+        // This leverages the schema validation (uppercase, trim, min: 0)
         const result = await Position.findOneAndUpdate(
           { symbol: symbol.toUpperCase().trim() },
           {

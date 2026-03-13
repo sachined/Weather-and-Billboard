@@ -75,9 +75,9 @@ export function usePortfolio() {
 
       try {
         const res = await fetch('/api/portfolio');
-        if (!res.ok) throw new Error('Failed to fetch from MongoDB');
-
         const data = await res.json();
+
+        if (!res.ok) throw new Error(data.details || data.error ||'Failed to fetch from MongoDB');
 
         // Use database positions if they exist, otherwise fallback to core defaults
         if (Array.isArray(data) && data.length > 0) {
@@ -86,7 +86,7 @@ export function usePortfolio() {
           setMyPositions(CORE_POSITIONS);
         }
       } catch (err) {
-        console.error("MongoDB Load Error, falling back to CORE_POSITIONS:", err);
+        console.error("Detailed MongoDB Error:", err);
         setMyPositions(CORE_POSITIONS);
         setError("Note: Using local fallback data. Check MongoDB connection.");
       } finally {
