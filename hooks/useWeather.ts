@@ -51,22 +51,18 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
           const data = await res.json();
           if (Array.isArray(data) && data.length > 0) {
             setHistory(data);
-          } else {
-            // Fallback to localStorage if DB is empty
-            const saved = localStorage.getItem('weatherSearchHistory');
-            if (saved) setHistory(JSON.parse(saved));
+            return;
           }
         }
+        throw new Error('Fetch unsuccessful');
       } catch (e) {
-        console.error("Failed to fetch weather history from MongoDB:", e);
+        console.warn("Using local weather history fallback:", e);
         // Fallback to localStorage on error
         const saved = localStorage.getItem('weatherSearchHistory');
         if (saved) setHistory(JSON.parse(saved));
       }
-
       setIsUnitLoaded(true);
     };
-
     initWeather();
   }, []);
 

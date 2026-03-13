@@ -82,11 +82,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           if (shouldIgnoreDates || !r.addedAt || dateStr >= r.addedAt.slice(0,7)) {
             totalVal += price * r.shares;
           }
-          
-          // Contribution to total: if dateStr >= addedAt
-          if (!r.addedAt || dateStr >= r.addedAt.slice(0, 7)) {
-            totalVal += price * r.shares;
-          }
         }
       });
 
