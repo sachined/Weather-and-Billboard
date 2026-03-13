@@ -5,21 +5,22 @@ import WeatherHistory from '@/models/WeatherHistory';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // 1. Authorization Check for write operations (POST, DELETE)
-  if (req.method === 'DELETE' && !req.query.city) {
-    const isDev = process.env.NODE_ENV === 'development';
-    const adminKey = process.env.ADMIN_KEY;
-    const providedKey = req.headers['admin-key'] || (req.headers['authorization']?.startsWith('Bearer ') ? req.headers['authorization'].split(' ')[1] : null);
+    if (req.method === 'DELETE' && !req.query.city) {
+        const isDev = process.env.NODE_ENV === 'development';
+        const adminKey = process.env.ADMIN_KEY;
+        const providedKey = req.headers['admin-key'] || (req.headers['authorization']?.startsWith('Bearer ') ? req.headers['authorization'].split(' ')[1] : null);
 
-    // Only allow clearing ALL history in development or with a valid admin key.
-    if (!isDev && (!adminKey || providedKey !== adminKey)) {
-      return res.status(403).json({
-        error: 'Unauthorized: Clearing entire history is only allowed in development or with a valid admin-key header.'
-      });
+        // Only allow clearing ALL history in development or with a valid admin key.
+        if (!isDev && (!adminKey || providedKey !== adminKey)) {
+            return res.status(403).json({
+                error: 'Unauthorized: Clearing entire history is only allowed in development or with a valid admin-key header.'
+            });
+        }
     }
-  }
-
-    await dbConnect();
-
+        try {
+            await dbConnect();
+        } catch (e: any) { return res.status(500).json({ error:'Database Connection Error', details: e.message });
+            }
     switch (req.method) {
         case 'GET':
             try {

@@ -29,8 +29,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 
-  await dbConnect();
-
   switch (req.method) {
     case 'GET':
       try {
