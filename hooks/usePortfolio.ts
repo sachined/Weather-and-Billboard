@@ -1,10 +1,11 @@
 // hooks/usePortfolio.ts
 // noinspection ExceptionCaughtLocallyJS
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { UserPosition, CORE_POSITIONS, getTickerLayer } from '@/lib/portfolio-logic';
 
 export function usePortfolio() {
+  const [timeRange, setTimeRange] = useState<'all' | '1y'>('all');
   const [showAccumulation, setShowAccumulation] = useState(true);
   const [isLocal, setIsLocal] = useState(false);
   const [adminKey, setAdminKey] = useState<string | null>(null);
@@ -12,19 +13,44 @@ export function usePortfolio() {
 
   const [myPositions, setMyPositions] = useState<UserPosition[]>([]);
   const [stockData, setStockData] = useState<any[]>([]);
-  const [historyData, setHistoryData] = useState<{ 
-    labels: string[], 
-    baseData?: number[], 
-    totalData?: number[], 
-    data?: number[] 
-  }>({ labels: [], data: [] });
+  const [historyData, setHistoryData] = useState<{
+    labels: string[],
+    baseData?: number[],
+    totalData?: number[],
+    data?: number[]
+  }>({labels: [], data: []});
 
   const [totalValue, setTotalValue] = useState(0);
-  const [appreciation, setAppreciation] = useState<{ value: number, percent: number }>({ value: 0, percent: 0 });
+  const [appreciation, setAppreciation] = useState<{ value: number, percent: number }>({value: 0, percent: 0});
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const isAdmin = isLocal || !!adminKey;
+
+  const displayHistoryData = useMemo(() => {
+    if (timeRange === 'all' || !historyData.labels.length) return historyData;
+
+  const startIdx = Math.max(0, historyData.labels.length - 12);
+  return {
+    labels: historyData.labels.slice(startIdx),
+    baseData: historyData.baseData?.slice(startIdx),
+    totalData: historyData.totalData?.slice(startIdx),
+    data: historyData.data?.slice(startIdx)
+  };
+}, [historyData, timeRange]);
+
+  // Recalculate appreciation for the selected period
+  const displayAppreciation = useMemo(() => {
+    const performanceData = displayHistoryData.totalData || displayHistoryData.data;
+    if (performanceData && performanceData.length >= 2) {
+      const startValue = performanceData[0];
+      const endValue = performanceData[performanceData.length - 1];
+      const diff = endValue - startValue;
+      const percent = startValue !== 0 ? (diff / startValue) * 100 : 0;
+      return { value: diff, percent };
+    }
+    return { value: 0, percent: 0 };
+  }, [displayHistoryData]);
 
   // 1. Initial Load from MongoDB & Local UI Preferences
   useEffect(() => {
@@ -253,8 +279,8 @@ export function usePortfolio() {
     isAdmin,
     myPositions,
     stockData,
-    historyData,
-    appreciation,
+    historyData: displayHistoryData,
+    appreciation: displayAppreciation,
     totalValue,
     loading,
     error,
@@ -264,6 +290,8 @@ export function usePortfolio() {
     clearPortfolio,
     toggleResearch,
     showAccumulation,
-    toggleAccumulation: () => setShowAccumulation(!showAccumulation)
+    toggleAccumulation: () => setShowAccumulation(!showAccumulation),
+    timeRange,
+    toggleTimeRange: () => setTimeRange(prev => prev === 'all' ? '1y' : 'all'),
   };
 }

@@ -66,6 +66,11 @@
   opacity: 0.85;
 }
 
+.chartToggles {
+  display: flex;
+  gap: 0.75rem;
+}
+
 @media (max-width: 768px) {
   .portfolioStats {
     margin-left: 0;

@@ -44,7 +44,9 @@ export default function PortfolioPage() {
     clearPortfolio,
     toggleResearch,
     showAccumulation,
-    toggleAccumulation
+    toggleAccumulation,
+    timeRange,
+    toggleTimeRange,
   } = usePortfolio();
 
   const addOrUpdatePosition: SubmitEventHandler<HTMLFormElement> = (e) => {
@@ -225,6 +227,9 @@ export default function PortfolioPage() {
           <div className={styles.chartSection}>
             <div className={styles.chartHeader}>
               <h3>Portfolio Performance</h3>
+              <button onClick={toggleTimeRange} className={styles.toggleButton}>
+                {timeRange === 'all' ? 'View Last Year' : 'View All Time'}
+              </button>
               <button onClick={toggleAccumulation} className={styles.toggleButton}>
                 {showAccumulation ? 'View as Fixed Holdings' : 'View Real Growth'}
               </button>
