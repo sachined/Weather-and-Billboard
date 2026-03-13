@@ -1,7 +1,7 @@
 // Develop API Routes for Portfolio, to handle GET (fetch from DB) and POST (save to DB)
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Position from '../../../models/Position';
-import dbConnect from "../../../lib/dbConnect";
+import Position from '@/models/Position';
+import dbConnect from "@/lib/dbConnect";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 

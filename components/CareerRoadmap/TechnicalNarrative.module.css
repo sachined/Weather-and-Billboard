@@ -1,0 +1,130 @@
+.container {
+  background-color: var(--bg-surface);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+}
+
+.title {
+  margin-top: 0;
+  color: var(--text-main);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 2rem;
+  marginTop: 1.5rem;
+  align-items: stretch;
+}
+
+.card {
+  background-color: var(--bg-surface-hover);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.pivotTitle {
+  color: var(--accent-primary);
+  margin-top: 0;
+}
+
+.competenciesTitle {
+  color: var(--accent-secondary);
+  margin-top: 0;
+}
+
+.focusText {
+  color: var(--text-main);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.accent {
+  color: var(--accent-primary);
+}
+
+.quoteContainer {
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+
+.quote {
+  font-style: italic;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.link {
+  color: var(--accent-primary);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.expandedContent {
+  margin-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: var(--accent-primary);
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.skillContainer {
+  margin-bottom: 1.2rem;
+}
+
+.skillHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.skillLabel {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.skillScore {
+  color: var(--accent-secondary);
+  font-weight: bold;
+}
+
+.progressBar {
+  width: 100%;
+  height: 10px;
+  background-color: var(--bg-surface);
+  border-radius: 5px;
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--accent-secondary);
+  border-radius: 5px;
+}
+
+.skillDescription {
+  margin: 0.6rem 0 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.descriptionList {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+}

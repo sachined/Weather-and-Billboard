@@ -1,8 +1,8 @@
 // noinspection SpellCheckingInspection
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import dbConnect from '../../lib/dbConnect';
-import Message from '../../models/Message';
+import dbConnect from '@/lib/dbConnect';
+import Message from '@/models/Message';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {

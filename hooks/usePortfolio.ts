@@ -2,18 +2,29 @@
 // noinspection ExceptionCaughtLocallyJS
 
 import { useState, useEffect, useCallback } from 'react';
-import { UserPosition, CORE_POSITIONS, getTickerLayer } from '../lib/portfolio-logic';
+import { UserPosition, CORE_POSITIONS, getTickerLayer } from '@/lib/portfolio-logic';
 
 export function usePortfolio() {
+  const [showAccumulation, setShowAccumulation] = useState(true);
   const [isLocal, setIsLocal] = useState(false);
+  const [adminKey, setAdminKey] = useState<string | null>(null);
+  const [showResearch, setShowResearch] = useState(false);
+
   const [myPositions, setMyPositions] = useState<UserPosition[]>([]);
   const [stockData, setStockData] = useState<any[]>([]);
-  const [historyData, setHistoryData] = useState<{ labels: string[], baseData?: number[], totalData?: number[], data?: number[] }>({ labels: [], data: [] });
+  const [historyData, setHistoryData] = useState<{ 
+    labels: string[], 
+    baseData?: number[], 
+    totalData?: number[], 
+    data?: number[] 
+  }>({ labels: [], data: [] });
+
+  const [totalValue, setTotalValue] = useState(0);
   const [appreciation, setAppreciation] = useState<{ value: number, percent: number }>({ value: 0, percent: 0 });
   const [loading, setLoading] = useState<boolean>(true);
-  const [totalValue, setTotalValue] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [showResearch, setShowResearch] = useState(true);
+
+  const isAdmin = isLocal || !!adminKey;
 
   // 1. Initial Load from MongoDB & Local UI Preferences
   useEffect(() => {
@@ -22,6 +33,12 @@ export function usePortfolio() {
       if (typeof window !== 'undefined') {
         const isLoc = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         setIsLocal(isLoc);
+
+        // Admin session persistence
+        const savedKey = sessionStorage.getItem('portfolio-admin-key');
+        if (savedKey) {
+          setAdminKey(savedKey);
+        }
 
         // UI preferences like 'showResearch' can stay in localStorage
         const savedShowResearch = localStorage.getItem('portfolio-show-research');
@@ -54,16 +71,27 @@ export function usePortfolio() {
     initPortfolio();
   }, []);
 
+  // Admin key persistence
+  useEffect(() => {
+    if (adminKey && typeof window !== 'undefined') {
+      sessionStorage.setItem('portfolio-admin-key', adminKey);
+    }
+  }, [adminKey]);
+
   // 2. Fetch Prices (Batched) - Automatically triggers when myPositions changes
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const fetchAll = async () => {
       if (myPositions.length === 0) {
         setStockData([]);
+        setLoading(false);
         return;
       }
       try {
         const tickers = myPositions.map(p => p.symbol).join(',');
-        const res = await fetch(`/api/stock?ticker=${tickers}`);
+        const res = await fetch(`/api/stock?ticker=${tickers}`, { signal });
         const data = await res.json();
 
         if (Array.isArray(data)) {
@@ -76,16 +104,22 @@ export function usePortfolio() {
           const pos = myPositions.find(p => p.symbol.toUpperCase() === data.symbol.toUpperCase());
           setStockData([{ ...data, shares: pos ? pos.shares : 0 }]);
         }
-      } catch (e) {
+      } catch (e: any) {
+        if (e.name === 'AbortError') return;
         console.error("Fetch All Error:", e);
         setError("Failed to fetch market data.");
       }
     };
     fetchAll();
+
+    return () => controller.abort();
   }, [myPositions]);
 
   // 3. Fetch History & Appreciation
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const fetchHistory = async () => {
       if (myPositions.length === 0) return;
       try {
@@ -100,7 +134,7 @@ export function usePortfolio() {
         }
 
         const posParam = encodeURIComponent(JSON.stringify(filteredPositions));
-        const res = await fetch(`/api/portfolio-history?positions=${posParam}`);
+        const res = await fetch(`/api/portfolio-history?positions=${posParam}&ignoreDates=${!showAccumulation}`, { signal });
         const data = await res.json();
 
         if (data.labels && (data.totalData || data.data)) {
@@ -114,12 +148,15 @@ export function usePortfolio() {
             setAppreciation({ value: diff, percent });
           }
         }
-      } catch (e) {
+      } catch (e: any) {
+        if (e.name === 'AbortError') return;
         console.error("Error fetching history:", e);
       }
     };
     fetchHistory();
-  }, [myPositions, showResearch]);
+
+    return () => controller.abort();
+  }, [myPositions, showResearch, showAccumulation]);
 
   // 4. Calculate Total Value
   useEffect(() => {
@@ -139,7 +176,10 @@ export function usePortfolio() {
     try {
       const res = await fetch('/api/portfolio', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'admin-key': adminKey || ''
+        },
         body: JSON.stringify({ symbol: ticker, shares, addedAt })
       });
 
@@ -156,13 +196,16 @@ export function usePortfolio() {
       console.error("Update Position Error:", e);
       setError("Network error updating position.");
     }
-  }, [myPositions]);
+  }, [myPositions, adminKey]);
 
   const removePosition = useCallback(async (symbol: string) => {
     const ticker = symbol.toUpperCase();
     try {
       const res = await fetch(`/api/portfolio?symbol=${ticker}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'admin-key': adminKey || ''
+        }
       });
 
       if (res.ok) {
@@ -174,12 +217,15 @@ export function usePortfolio() {
       console.error("Remove Position Error:", e);
       setError("Network error removing position.");
     }
-  }, []);
+  }, [adminKey]);
 
   const clearPortfolio = useCallback(async () => {
     try {
       const res = await fetch('/api/portfolio', {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'admin-key': adminKey || ''
+        }
       });
       if (res.ok) {
         setMyPositions([]);
@@ -192,7 +238,7 @@ export function usePortfolio() {
       console.error("Clear Portfolio Error:", e);
       setError("Network error clearing portfolio.");
     }
-  }, []);
+  }, [adminKey]);
 
   const toggleResearch = useCallback(() => {
     const newVal = !showResearch;
@@ -202,6 +248,9 @@ export function usePortfolio() {
 
   return {
     isLocal,
+    adminKey,
+    setAdminKey,
+    isAdmin,
     myPositions,
     stockData,
     historyData,
@@ -213,6 +262,8 @@ export function usePortfolio() {
     updatePosition,
     removePosition,
     clearPortfolio,
-    toggleResearch
+    toggleResearch,
+    showAccumulation,
+    toggleAccumulation: () => setShowAccumulation(!showAccumulation)
   };
 }

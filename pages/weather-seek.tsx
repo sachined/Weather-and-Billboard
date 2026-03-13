@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
-import Layout from '../components/layout';
-import { useWeather } from '../hooks/useWeather';
-import { SITE_NAME } from '../lib/constants';
-import WeatherCard from '../components/Weather/WeatherCard';
-import SearchBar from '../components/Weather/SearchBar';
-import SearchHistory from '../components/Weather/SearchHistory';
+import Layout from '@/components/layout';
+import { useWeather } from '@/hooks/useWeather';
+import { SITE_NAME } from '@/lib/constants';
+import WeatherCard from '@/components/Weather/WeatherCard';
+import SearchBar from '@/components/Weather/SearchBar';
+import SearchHistory from '@/components/Weather/SearchHistory';
+import styles from '@/styles/WeatherSeek.module.css';
 
 export default function WeatherSearch() {
   const { 
@@ -38,18 +39,12 @@ export default function WeatherSearch() {
         <title>{`Weather Lookup - ${SITE_NAME}`}</title>
       </Head>
         
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginBottom: '2rem',
-        gap: '1.5rem'
-      }}>
-        <h3 style={{ margin: 0, color: 'var(--text-main)', fontSize: '1.5rem', textAlign: 'center' }}>
+      <div className={styles.container}>
+        <h3 className={styles.title}>
           <span role="img" aria-label="Sun and Cloud">🌤️</span> Weather Lookup
         </h3>
 
-        <div style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className={styles.searchWrapper}>
           <SearchBar 
             onSearch={fetchWeatherByCity} 
             onLocationClick={() => fetchWeatherByLocation(true)} 

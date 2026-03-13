@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import React from 'react';
-import { RoleInfo } from '../../lib/roles';
-import { useTheme } from '../../hooks/useTheme';
+import { RoleInfo } from '@/lib/roles';
+import { useTheme } from '@/hooks/useTheme';
+import styles from './RadarChart.module.css';
 
 interface RadarChartProps {
   role: RoleInfo;
@@ -25,8 +26,8 @@ export default function RadarChart({ role, labels }: RadarChartProps) {
     if (!ctx) return;
 
     const isDark = theme === 'dark';
-    const isSpring = theme === 'spring';
-    const isMinimalist = theme === 'light';
+//    const isSpring = theme === 'spring';
+//    const isMinimalist = theme === 'light';
 
     const rootStyle = getComputedStyle(document.documentElement);
 
@@ -35,7 +36,7 @@ export default function RadarChart({ role, labels }: RadarChartProps) {
     const gridColor = rootStyle.getPropertyValue('--chart-grid').trim() || 'rgba(0,0,0,0.1)';
     const fillBG = rootStyle.getPropertyValue('--chart-fill').trim() || 'rgba(81,179,223,0.25)';
 
-    // Update grid and axis for high contrast on light background
+    // Update grid and axis for high contrast on a light background
     const axisColor = rootStyle.getPropertyValue('--chart-axis').trim() || 'rgba(0, 0, 0, 0.1)';
     const labelColor = rootStyle.getPropertyValue('--text-heading').trim() || '#020617';
 
@@ -73,15 +74,15 @@ export default function RadarChart({ role, labels }: RadarChartProps) {
             beginAtZero: true,
             max: 10,
             ticks: { display: false, stepSize: 2 },
-            grid: { color: gridColor, lineWidth: isDark ? 1 : 2},
-            angleLines: { color: axisColor, lineWidth: isDark ? 1.5 : 2, borderDash: isDark ? [5, 5] : [] },
+            grid: { color: gridColor, lineWidth: isDark ? 1 : 1.5},
+            angleLines: { color: axisColor, lineWidth: isDark ? 1.5 : 3, borderDash: isDark ? [5, 5] : [] },
             pointLabels: {
               font: {
                 size: 18,
                 weight: 'bold'
               },
               color: labelColor,
-              padding: 22 // Distance from the chart area
+              padding: 10 // Distance from the chart area
             }
           },
         },
@@ -113,7 +114,7 @@ export default function RadarChart({ role, labels }: RadarChartProps) {
   }, [role, labels, theme]);
 
   return (
-    <div style={{ width: '100%', height: '450px', margin: '0 auto', position: 'relative' }}>
+    <div className={styles.chartContainer}>
       <canvas ref={chartRef} aria-label={`Radar chart showing technical and strategic scores for ${role.title}`} role="img">
       </canvas>
     </div>

@@ -14,6 +14,11 @@
   color: var(--text-muted);
 }
 
+.errorMessage {
+  text-align: center;
+  color: #dc2626;
+}
+
 .header {
   text-align: center;
 }

@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.roleButton {
+  text-align: left;
+  background-color: var(--bg-surface);
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-shadow: none;
+}
+
+.roleButton:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+.selected {
+  background-color: var(--bg-surface-hover);
+  border: 2px solid var(--accent-primary);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.minimalist.selected {
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--card-shadow);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.badge {
+  font-size: 0.75rem;
+  background-color: var(--bg-surface-hover);
+  color: var(--accent-primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.badgeSelected {
+  background-color: var(--accent-primary);
+  color: #fff;
+}
+
+.badgeSpring {
+  background-color: var(--pastel-yellow);
+  color: #333333;
+  border: none;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}

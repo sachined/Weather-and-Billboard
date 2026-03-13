@@ -1,8 +1,6 @@
 // pages/api/stock.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
-import YahooFinance from 'yahoo-finance2';
-
-const yahooFinance = new YahooFinance({ suppressNotices: ['yahooSurvey'] });
+import yahooFinance from '@/lib/yahoo-finance';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { ticker } = req.query;

@@ -1,9 +1,10 @@
 import Head from 'next/head';
-import Layout from '../components/layout';
-import FeatureCard from '../components/FeatureCard';
-import GlobalDashboard from '../components/Dashboard/GlobalDashboard';
 import { CloudSun, TrendingUp, Bot, Briefcase, PenTool, Mail } from 'lucide-react';
-import { SITE_NAME, SITE_TITLE } from '../lib/constants';
+import Layout from '@/components/layout';
+import FeatureCard from '@/components/FeatureCard';
+import GlobalDashboard from '@/components/Dashboard/GlobalDashboard';
+import { SITE_NAME, SITE_TITLE } from '@/lib/constants';
+import styles from '@/styles/Home.module.css';
 
 export default function Home() {
   return (
@@ -13,33 +14,12 @@ export default function Home() {
         <meta name="description" content="Explore weather and career growth tools" />
       </Head>
       
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '2rem'
-      }}>
+      <div className={styles.heroContainer}>
         {/* Hero Section - Text already handled by Layout, but we can add more if needed */}
-        <div style={{
-          textAlign: 'center',
-          color: 'var(--text-main)',
-          marginBottom: '3rem',
-          maxWidth: '600px'
-        }}>
-          <p style={{
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            color: 'var(--accent-primary)',
-            marginBottom: '0.5rem'
-          }}>
+        <div className={styles.heroContent}>
+          <p className={styles.heroAccent}>
           </p>
-          <p style={{
-            fontSize: '1.1rem',
-            opacity: 0.85,
-            lineHeight: '1.6',
-            color: 'var(--text-muted)'
-          }}>
+          <p className={styles.heroDescription}>
             Discover tools for weather insights and career growth. Explore our new fresh theme or toggle between Midnight and Minimalist modes easily in the top navigation.
           </p>
         </div>
@@ -48,22 +28,14 @@ export default function Home() {
         <GlobalDashboard />
 
         {/* Cards Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
-          gap: '2rem',
-          maxWidth: '900px',
-          width: '100%',
-          alignItems: 'stretch'
-        }}>
-
-        <FeatureCard
-          href="/weather-seek"
-          Icon={CloudSun}
-          title="Weather Lookup"
-          description="Check real-time weather conditions for any location worldwide"
-          cta="Explore"
-        />
+        <div className={styles.cardsGrid}>
+          <FeatureCard
+            href="/weather-seek"
+            Icon={CloudSun}
+            title="Weather Lookup"
+            description="Check real-time weather conditions for any location worldwide"
+            cta="Explore"
+          />
 
           <FeatureCard 
             href="/job-gap"
@@ -80,6 +52,7 @@ export default function Home() {
             title="Finsurf AI"
             description="Explore my latest AI-powered project for financial insights and automated analysis."
             cta="Visit Website"
+            isFeatured
           />
 
           <FeatureCard 

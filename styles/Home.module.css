@@ -1,0 +1,37 @@
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.heroContent {
+  text-align: center;
+  color: var(--text-main);
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.heroAccent {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+.heroDescription {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  width: 100%;
+  align-items: stretch;
+}

@@ -1,6 +1,6 @@
 // components/Portfolio/StrategySummary.tsx
-import styles from '../../styles/Portfolio.module.css';
-import { STRATEGY_METRICS } from '../../lib/portfolio-logic';
+import styles from '@/styles/Portfolio.module.css';
+import { STRATEGY_METRICS } from '@/lib/portfolio-logic';
 import { useState } from 'react';
 
 export const StrategySummary = () => {

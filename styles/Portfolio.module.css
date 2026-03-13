@@ -220,6 +220,19 @@
   text-decoration: underline;
 }
 
+.clearButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0 0 1rem;
+  color: var(--accent-primary);
+  font-size: 0.9rem;
+}
+
+.clearButton:hover {
+  text-decoration: underline;
+}
+
 .glassInputShort {
   background: var(--bg-surface-hover);
   backdrop-filter: blur(10px);
@@ -464,6 +477,30 @@
   padding-bottom: 0.5rem;
 }
 
+.ratioGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actualBadge {
+  font-size: 1rem;
+  background: var(--bg-surface-hover);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.actualBadgeSuccess {
+  color: var(--color-success);
+}
+
+.actualBadgeWarning {
+  color: var(--color-warning);
+}
+
 .targetBadge {
   font-size: 0.75rem;
   background: var(--bg-surface-hover);
@@ -473,5 +510,50 @@
   border: 1px solid var(--border-subtle);
   font-weight: 600;
   letter-spacing: 1px;
+}
+
+.noTickers {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.errorBox {
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  color: #ef4444;
+  font-size: 0.9rem;
+}
+
+.emptyState {
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--text-muted);
+}
+
+.searchForm {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.infoButton {
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--border-subtle);
+  color: var(--accent-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.infoButton:hover {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: #60a5fa;
 }
 

@@ -1,6 +1,6 @@
 // components/Portfolio/StockRow.tsx
-import styles from '../../styles/Portfolio.module.css';
-import { getTickerThesis, getTickerTrigger } from '../../lib/portfolio-logic';
+import styles from '@/styles/Portfolio.module.css';
+import { getTickerThesis, getTickerTrigger } from '@/lib/portfolio-logic';
 import { useState } from 'react';
 
 interface StockRowProps {

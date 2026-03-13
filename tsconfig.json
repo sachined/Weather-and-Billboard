@@ -16,7 +16,15 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/styles/*": ["styles/*"],
+      "@/models/*": ["models/*"]
+    }
   },
   "include": [
     "next-env.d.ts",

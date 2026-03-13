@@ -1,7 +1,8 @@
 import React from 'react';
-import { RoleInfo, CHART_LABELS } from '../../lib/roles';
+import { RoleInfo, CHART_LABELS } from '@/lib/roles';
 import RadarChart from './RadarChart';
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme } from '@/hooks/useTheme';
+import styles from './RoleDetails.module.css'
 
 export default function RoleDetails({ role }: { role: RoleInfo }) {
   const theme = useTheme();
@@ -14,93 +15,69 @@ export default function RoleDetails({ role }: { role: RoleInfo }) {
 ];
 
   return (
-    <div style={containerStyle}>
-      <h2 style={{ color: 'var(--accent-primary)', marginTop: 0 }}>{role.title}</h2>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h4 style={{ color: 'var(--text-main)', marginBottom: '0.5rem' }}>Core Skills Match:</h4>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+    <div className={styles.container}>
+      <h2 className={styles.title}>{role.title}</h2>
+      <div className={styles.skillsMatchContainer}>
+        <h4 className={styles.skillsMatchTitle}>Core Skills Match:</h4>
+        <div className={styles.skillsList}>
           {role.skills.map((skill, index) => (
-            <span key={skill} style={{
-                ...tagStyle,
+            <span key={skill.name} className={styles.skillTag} title={skill.description} style={{
                 backgroundColor: (index % 2 === 0 ? 'var(--tag-bg-1)' : 'var(--tag-bg-2)'),
-                border: 'none',
-                fontWeight: '600'
+                cursor: 'help',
               }}
             >
-              {skill}
+              {skill.name}
             </span>
           ))}
         </div>
+          <div style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+            {
+                role.skills.map((skill) => (
+                    <div key={skill.name} style={{ marginBottom: '0.4rem' }}>
+                    <strong>{skill.name}:</strong> {skill.description}
+                    </div>
+                    )
+                )
+            }
+          </div>
+
       </div>
       <RadarChart role={role} labels={isMinimalist ? MINIMALIST_LABELS : CHART_LABELS}
  />
 
-      <div style={insightStyle}>
-        <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.9rem', color: 'var(--text-main)' }}>Chart Insights:</h4>
-        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
-          {role.chartDescription}
-        </p>
+      <div className={styles.insight}>
+        <h4 className={styles.takeawaysTitle}>Key Takeaways:</h4>
+        <ul className={styles.takeawaysList}>
+          {role.chartDescription.split('. ').map((sentence, i) => (
+              <li key={i} className={styles.takeawaysItem}>{sentence}</li>
+          ))}
+        </ul>
       </div>
 
-      <div style={legendGridStyle}>
-        <div style={legendItemStyle}>
-          <strong style={{ color: 'var(--text-heading)' }}>
+      <div className={styles.legendGrid}>
+        <div className={styles.legendItem}>
+          <strong className={styles.legendLabel}>
             {isMinimalist ? 'Tech Skills' : 'Technical Proficiency:'}
-          </strong> Python, SQL, Next.js
+          </strong> {role.legendDetails.technical}
         </div>
-        <div style={legendItemStyle}>
-          <strong style={{ color: 'var(--text-heading)' }}>
+        <div className={styles.legendItem}>
+          <strong className={styles.legendLabel}>
             {isMinimalist ? 'Client Strategy' : 'Stakeholder Strategy:'}
-          </strong> Cross-functional communication
+          </strong> {role.legendDetails.stakeholder}
         </div>
-        <div style={legendItemStyle}>
-          <strong style={{ color: 'var(--text-heading)' }}>
+        <div className={styles.legendItem}>
+          <strong className={styles.legendLabel}>
             {isMinimalist ? 'Data Impact' : 'Analytical Impact:'}
-          </strong> Data-driven ROI tracking
+          </strong> {role.legendDetails.analytical}
         </div>
-        <div style={legendItemStyle}>
-          <strong style={{ color: 'var(--text-heading)' }}>
+        <div className={styles.legendItem}>
+          <strong className={styles.legendLabel}>
             {isMinimalist ? 'Project Management' : 'Operational Excellence:'}
-          </strong> Project lifecycle management
+          </strong> {role.legendDetails.operational}
         </div>
       </div>
     </div>
   );
 }
 
-const containerStyle: React.CSSProperties = {
-  backgroundColor: 'var(--bg-surface)',
-  padding: '2rem',
-  borderRadius: '16px',
-  border: '1px solid var(--border-subtle)',
-  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-};
-
-const tagStyle: React.CSSProperties = {
-  backgroundColor: 'var(--bg-surface-hover)',
-  color: 'var(--text-main)',
-  padding: '0.4rem 0.8rem',
-  borderRadius: '20px',
-  fontSize: '0.85rem',
-  border: '1px solid var(--border-subtle)'
-};
-
-const insightStyle: React.CSSProperties = {
-  marginTop: '1.5rem',
-  padding: '1rem',
-  backgroundColor: 'var(--bg-surface-hover)',
-  borderRadius: '12px',
-  border: '1px solid var(--border-subtle)'
-};
-
-const legendGridStyle: React.CSSProperties = {
-  marginTop: '1rem',
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
-  gap: '1rem'
-};
-
-const legendItemStyle: React.CSSProperties = {
-  fontSize: '0.75rem',
-  color: 'var(--text-muted)'
-};
+// Styles have been moved to RoleDetails.module.css

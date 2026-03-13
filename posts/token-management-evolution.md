@@ -38,4 +38,4 @@ As we continue to scale FinSurf, our approach to token management remains delibe
 
 In the "Last Mile" of AI, knowing your numbers is just as important as knowing your code.
 
-*Interested in seeing how we manage these agents? Check out the [Career Roadmap](../pages/job-gap.tsx) to see how we’ve mapped out the technical journey of building FinSurf.*
+*Interested in seeing how we manage these agents? Check out the [Career Roadmap](/job-gap) to see how we’ve mapped out the technical journey of building FinSurf.*

@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
-import { fetchWeather } from '../lib/weather-api';
-import { kelvinToCelsius, getThemeFromIcon } from '../lib/weather-utils';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { fetchWeather } from '@/lib/weather-api';
+import { kelvinToCelsius, getThemeFromIcon } from '@/lib/weather-utils';
 
 export interface ForecastItem {
   date: string;
@@ -34,6 +34,7 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
   const [history, setHistory] = useState<string[]>([]);
   const [unit, setUnit] = useState<'celsius' | 'fahrenheit'>('celsius');
   const [isUnitLoaded, setIsUnitLoaded] = useState(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     const initWeather = async () => {
@@ -120,31 +121,51 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
   }, [unit]);
 
   const fetchWeatherByCoords = useCallback(async (lat: number, lon: number) => {
+    // Abort previous request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+    const { signal } = controller;
+
     setLoading(true);
     setError(null);
     try {
       const params = `lat=${lat}&lon=${lon}`;
       const [currData, foreData] = await Promise.all([
-        fetchWeather('weather', params),
-        fetchWeather('forecast', params)
+        fetchWeather('weather', params, signal),
+        fetchWeather('forecast', params, signal)
       ]);
       updateWeatherData(currData, foreData);
     } catch (err: any) {
+      if (err.name === 'AbortError') return;
       setError(`Error fetching weather: ${err.message}`);
     } finally {
-      setLoading(false);
+      if (!signal.aborted) {
+        setLoading(false);
+      }
     }
   }, [updateWeatherData]);
 
   const fetchWeatherByCity = useCallback(async (city: string) => {
     if (!city.trim()) return;
+
+    // Abort previous request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+    const { signal } = controller;
+
     setLoading(true);
     setError(null);
     try {
       const params = `q=${encodeURIComponent(city)}`;
       const [currData, foreData] = await Promise.all([
-        fetchWeather('weather', params),
-        fetchWeather('forecast', params)
+        fetchWeather('weather', params, signal),
+        fetchWeather('forecast', params, signal)
       ]);
       updateWeatherData(currData, foreData);
 
@@ -153,7 +174,8 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
       const res = await fetch('/api/weather/history', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ city: cityName })
+        body: JSON.stringify({ city: cityName }),
+        signal
       });
 
       if (res.ok) {
@@ -166,9 +188,12 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
         });
       }
     } catch (err: any) {
+      if (err.name === 'AbortError') return;
       setError(err.message);
     } finally {
-      setLoading(false);
+      if (!signal.aborted) {
+        setLoading(false);
+      }
     }
   }, [updateWeatherData]);
 

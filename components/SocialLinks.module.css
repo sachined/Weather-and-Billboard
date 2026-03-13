@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.iconLink {
+  color: var(--icon-color, inherit);
+  font-size: var(--icon-size, 1.5rem);
+  opacity: var(--icon-opacity, 1);
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.iconLink:hover {
+  transform: scale(1.1);
+}

@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import React from 'react';
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme } from '@/hooks/useTheme';
 
 interface PortfolioHistoryChartProps {
   labels: string[];

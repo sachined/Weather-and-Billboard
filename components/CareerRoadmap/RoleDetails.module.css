@@ -1,0 +1,82 @@
+.container {
+  background-color: var(--bg-surface);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  color: var(--accent-primary);
+  margin-top: 0;
+}
+
+.skillsMatchContainer {
+  margin-bottom: 1.5rem;
+}
+
+.skillsMatchTitle {
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skillTag {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: help;
+}
+
+.skillTag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  filter: brightness(1.05);
+}
+.insight {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--bg-surface-hover);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.takeawaysTitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.takeawaysList {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.takeawaysItem {
+  margin-bottom: 0.4rem;
+}
+
+.legendGrid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.legendItem {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.legendLabel {
+  color: var(--text-heading);
+}

@@ -1,7 +1,7 @@
 // pages/api/weather/history.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
-import dbConnect from '../../../lib/dbConnect';
-import WeatherHistory from '../../../models/WeatherHistory';
+import dbConnect from '@/lib/dbConnect';
+import WeatherHistory from '@/models/WeatherHistory';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // 1. Authorization Check for write operations (POST, DELETE)

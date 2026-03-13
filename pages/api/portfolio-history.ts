@@ -1,13 +1,12 @@
 // pages/api/portfolio-history.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
-import YahooFinance from 'yahoo-finance2';
-import { CORE_POSITIONS, UserPosition } from '../../lib/portfolio-logic';
-
-const yahooFinance = new YahooFinance({ suppressNotices: ['yahooSurvey', 'ripHistorical'] });
+import yahooFinance from '@/lib/yahoo-finance';
+import { CORE_POSITIONS, UserPosition } from '@/lib/portfolio-logic';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   let positions: UserPosition[] = CORE_POSITIONS;
-  const { positions: posQuery } = req.query;
+  const { positions: posQuery, ignoreDates } = req.query;
+  const shouldIgnoreDates = ignoreDates === 'true';
 
   if (posQuery && typeof posQuery === 'string') {
     try {
@@ -22,10 +21,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    // Last 1 year
-    const endDate = new Date();
-    const startDate = new Date();
-    startDate.setFullYear(endDate.getFullYear() - 1);
+
+    const startDate = new Date('2022-01-01');
 
     const promises = positions.map(async (p) => {
       try {
@@ -78,10 +75,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           
           // Contribution to base: if no addedAt or it was added on or before the start of our chart
           const startYM = startDate.toISOString().slice(0, 7);
-          const isBase = !r.addedAt || r.addedAt.slice(0, 7) <= startYM;
+          const isBase = shouldIgnoreDates || !r.addedAt || r.addedAt.slice(0, 7) <= startYM;
 
-          if (isBase) {
-            baseVal += price * r.shares;
+          if (isBase) baseVal += price * r.shares;
+
+          if (shouldIgnoreDates || !r.addedAt || dateStr >= r.addedAt.slice(0,7)) {
+            totalVal += price * r.shares;
           }
           
           // Contribution to total: if dateStr >= addedAt

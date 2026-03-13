@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
+import styles from './ThemeToggle.module.css';
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState('spring');
@@ -29,24 +30,13 @@ export default function ThemeToggle() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
-      <button onClick={toggleTheme} style={buttonStyle} title="Click to toggle between Spring, Midnight, and Minimalist themes">
+    <div className={styles.container}>
+      <button onClick={toggleTheme} className={styles.button} title="Click to toggle between Spring, Midnight, and Minimalist themes">
         {getThemeLabel()}
       </button>
-      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 'normal' }}>
+      <span className={styles.label}>
         Easy Theme Toggle
       </span>
     </div>
   );
 }
-
-const buttonStyle = {
-  padding: '10px 20px',
-  borderRadius: '20px',
-  border: 'none',
-  cursor: 'pointer',
-  fontWeight: 'bold' as const,
-  backgroundColor: 'var(--nav-bg)',
-  color: 'var(--text-main)',
-  backdropFilter: 'blur(5px)'
-};

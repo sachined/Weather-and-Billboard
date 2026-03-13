@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './Weather.module.css';
-import { ForecastItem } from '../../hooks/useWeather';
+import { ForecastItem } from '@/hooks/useWeather';
 
 interface ForecastProps {
   forecast: ForecastItem[];

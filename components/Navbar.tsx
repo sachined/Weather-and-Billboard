@@ -24,22 +24,16 @@ export default function Navbar() {
           return (
             <li key={link.href} className={styles.navItem}>
               <Link href={link.href}
-                className={`${styles.navLink} ${isActive ? styles.activeNavLink : ''}`}
-                style={isMinimalist && isActive ? { borderBottom: 'none', color: 'var(--accent-primary)' } : {}}
+                className={`
+                  ${styles.navLink} 
+                  ${isActive ? styles.activeNavLink : ''} 
+                  ${isMinimalist && isActive ? styles.minimalistActiveNavLink : ''}
+                `}
                 aria-current={isActive ? 'page' : undefined}
               >
                 {link.label}
                 {isMinimalist && isActive && (
-                    <span style={
-                      {
-                        position: 'absolute',
-                        bottom: '2px',
-                        width: '4px',
-                        height: '4px',
-                        borderRadius: '50%',
-                        backgroundColor: 'var(--accent-primary)'
-                      }
-                    } />
+                    <span className={styles.minimalistDot} />
                 )}
               </Link>
             </li>

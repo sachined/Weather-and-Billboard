@@ -56,9 +56,16 @@ export function getAllPostIds() {
 }
 
 export async function getPostData(id: string) {
+
+  const allPosts = getSortedPostsData();
+  const currentPost = allPosts.findIndex(post => post.id === id);
+
+  // In a descending list, the newer post in index - 1, older is index + 1
+  const nextPost = currentPost > 0 ? allPosts[currentPost - 1] : null;
+  const prevPost = currentPost < allPosts.length - 1 ? allPosts[currentPost + 1] : null;
+
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
-
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
 
@@ -68,10 +75,11 @@ export async function getPostData(id: string) {
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
-  // Combine the data with the id and contentHtml
   return {
     id,
     contentHtml,
+    nextPost: nextPost ? { id: nextPost.id, title: nextPost.title } : null,
+    prevPost: prevPost ? { id: prevPost.id, title: prevPost.title } : null,
     ...(matterResult.data as { date: string; title: string; excerpt: string }),
   };
 }

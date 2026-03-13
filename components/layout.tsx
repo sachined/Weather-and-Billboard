@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from './layout.module.css';
-import utilStyles from '../styles/utils.module.css';
+import utilStyles from '@/styles/utils.module.css';
 import Link from 'next/link';
 import Footer from './Footer';
-import { SITE_NAME, SITE_TITLE } from '../lib/constants';
+import { SITE_NAME, SITE_TITLE } from '@/lib/constants';
 import ThemeToggle from './ThemeToggle';
 import Navbar from './Navbar';
 
@@ -30,7 +30,7 @@ export default function Layout({ children, home }: LayoutProps) {
       </Head>
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <header className={styles.header}>
-        <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+        <div className={styles.themeToggleContainer}>
           <ThemeToggle />
         </div>
         {home ? (
@@ -38,7 +38,6 @@ export default function Layout({ children, home }: LayoutProps) {
             <Image
               src="/images/profile.jpg"
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-              style={{ border: '1px solid var(--border-subtle)' }}
               alt={name}
               width={128}
               height={128}

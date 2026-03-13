@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './Dashboard.module.css';
-import { usePortfolio } from '../../hooks/usePortfolio';
-import { useWeather } from '../../hooks/useWeather';
+import { usePortfolio } from '@/hooks/usePortfolio';
+import { useWeather } from '@/hooks/useWeather';
 import { TrendingUp, CloudSun, MapPin, ArrowUpRight, ArrowDownRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 

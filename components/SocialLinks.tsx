@@ -1,8 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Linkedin, Github, Mail } from 'lucide-react';
 import Link from 'next/link';
-import { SOCIAL_LINKS } from '../lib/constants';
+import { SOCIAL_LINKS } from '@/lib/constants';
+import styles from './SocialLinks.module.css';
 
 interface SocialLinksProps {
   color?: string;
@@ -11,32 +10,38 @@ interface SocialLinksProps {
 }
 
 export default function SocialLinks({ color, fontSize = '1.5rem', opacity = 1 }: SocialLinksProps) {
-  const iconStyle = { color, fontSize, opacity };
+  const customStyles = { 
+    '--icon-color': color, 
+    '--icon-size': fontSize, 
+    '--icon-opacity': opacity 
+  } as React.CSSProperties;
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '1rem' }}>
+    <div className={styles.container}>
       <a 
         href={SOCIAL_LINKS.linkedin} 
         target="_blank" 
         rel="noopener noreferrer" 
-        style={iconStyle} 
+        style={customStyles} 
+        className={styles.iconLink}
         title="LinkedIn" 
         aria-label="LinkedIn profile"
       >
-        <FontAwesomeIcon icon={faLinkedin} />
+        <Linkedin size={fontSize} />
       </a>
       <a 
         href={SOCIAL_LINKS.github} 
         target="_blank" 
         rel="noopener noreferrer" 
-        style={iconStyle} 
+        style={customStyles} 
+        className={styles.iconLink}
         title="GitHub" 
         aria-label="GitHub profile"
       >
-        <FontAwesomeIcon icon={faGithub} />
+        <Github size={fontSize} />
       </a>
-      <Link href="/contact" style={iconStyle} title="Contact Form" aria-label="Contact form">
-        <FontAwesomeIcon icon={faEnvelope} />
+      <Link href="/contact" style={customStyles} className={styles.iconLink} title="Contact Form" aria-label="Contact form">
+        <Mail size={fontSize} />
       </Link>
     </div>
   );

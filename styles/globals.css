@@ -25,6 +25,7 @@
   /* Indicators */
   --color-success: #98D8A3;
   --color-error: #E57373;
+  --color-warning: #F6E05E;
 
   /* Layout Defaults */
   --nav-bg: rgba(255, 255, 255, 0.8);
@@ -33,9 +34,9 @@
   --pastel-pink: #FFD1DC;
   --pastel-yellow: #FFF9C4;
   --chart-grid: rgba(100, 250, 200, 0.15);
-  --chart-axis: rgba(150, 200, 100, 0.1);
-  --chart-fill: rgba(152, 216, 163, 0.4);
-  --chart-label: #55705E;
+  --chart-axis: rgba(90, 8, 232, 0.49);
+  --chart-fill: rgba(79, 8, 198, 0.48);
+  --chart-label: #28d863;
 
   --tag-bg-1: #FFD1DC;
   --tag-bg-2: #FFF9C4;
@@ -66,6 +67,7 @@
   /* Indicators */
   --color-success: #4ade80; /* Green 400 */
   --color-error: #f87171; /* Red 400 */
+  --color-warning: #fbbf24;
   
   /* Layout Defaults */
   --nav-bg: rgba(30, 41, 59, 0.8);
@@ -105,12 +107,13 @@
   /* Indicators */
   --color-success: #10B981;
   --color-error: #EF4444;
+  --color-warning: #F59E0B;
 
   --nav-bg: rgba(255, 255, 255, 0.9);
-  --chart-grid: rgba(35, 95, 245, 0.15);
-  --chart-axis: rgba(39, 97, 235, 0.3);
-  --chart-fill: rgba(37, 99, 235, 0.2);
-  --chart-label: #0264ff;
+  --chart-grid: rgba(245, 154, 35, 0.15);
+  --chart-axis: rgba(243, 144, 9, 0.42);
+  --chart-fill: rgba(232, 136, 26, 0.57);
+  --chart-label: rgba(224, 167, 24, 0.75);
 
   --tag-bg-1: #FFF1F2; /* Soft Rose */
   --tag-bg-2: #FFFBEB; /* Soft Amber */

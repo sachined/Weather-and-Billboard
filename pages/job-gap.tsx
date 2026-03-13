@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Head from 'next/head';
-import Layout from '../components/layout';
-import { ROLES_DATA, ROLE_ORDER, CHECKLIST_ITEMS } from '../lib/roles';
-import { SITE_NAME } from '../lib/constants';
-import RoleSelection from '../components/CareerRoadmap/RoleSelection';
-import RoleDetails from '../components/CareerRoadmap/RoleDetails';
-import TechnicalNarrative from '../components/CareerRoadmap/TechnicalNarrative';
-import ImplementationChecklist from '../components/CareerRoadmap/ImplementationChecklist';
-import { useChecklist } from '../hooks/useChecklist';
+import Layout from '@/components/layout';
+import { ROLES_DATA, ROLE_ORDER, CHECKLIST_ITEMS } from '@/lib/roles';
+import { SITE_NAME } from '@/lib/constants';
+import RoleSelection from '@/components/CareerRoadmap/RoleSelection';
+import RoleDetails from '@/components/CareerRoadmap/RoleDetails';
+import TechnicalNarrative from '@/components/CareerRoadmap/TechnicalNarrative';
+import ImplementationChecklist from '@/components/CareerRoadmap/ImplementationChecklist';
+import { useChecklist } from '@/hooks/useChecklist';
+import styles from '@/styles/JobGap.module.css';
 
 export default function JobGap() {
   const [isLocal, setIsLocal] = useState(false);
   const [activeTab, setActiveTab] = useState('roles');
   const [selectedRole, setSelectedRole] = useState('AISolutionsEngineer');
+  const detailsRef = useRef<HTMLDivElement>(null);
+
   const { checkedItems, progress, toggleItem } = useChecklist(CHECKLIST_ITEMS.length);
 
   useEffect(() => {
@@ -21,23 +24,30 @@ export default function JobGap() {
     }
   }, []);
 
+  const handleRoleSelect = (key: string) => {
+    setSelectedRole(key);
+    if (window.innerWidth < 1024 && detailsRef.current) {
+      detailsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <Layout>
       <Head>
         <title>{`Technical Roadmap & Growth - ${SITE_NAME}`}</title>
       </Head>
 
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <header style={{ marginBottom: '2rem' }}>
-          <h1 style={{ color: 'var(--text-main)', margin: 0, fontSize: '1.8rem' }}>Technical Roadmap & Growth</h1>
-          <p style={{ color: 'var(--text-muted)', margin: '0.2rem 0 0 0' }}>{SITE_NAME} | Technical Strategy</p>
+      <div className={styles.container}>
+        <header className={styles.header}>
+          <h1 className={styles.pageTitle}>Technical Roadmap & Growth</h1>
+          <p className={styles.pageSubtitle}>{SITE_NAME} | Technical Strategy</p>
         </header>
 
         {/* Tab Navigation */}
         <div 
           role="tablist"
           aria-label="Technical Roadmap Sections"
-          style={{ display: 'flex', borderBottom: '1px solid var(--border-subtle)', marginBottom: '2.5rem', overflowX: 'auto', gap: '1rem' }}
+          className={styles.tabList}
         >
           {[
             { id: 'roles', label: 'Core Expertise' },
@@ -53,17 +63,7 @@ export default function JobGap() {
               aria-selected={activeTab === tab.id}
               aria-controls={`panel-${tab.id}`}
               onClick={() => setActiveTab(tab.id)}
-              style={{
-                padding: '0.8rem 1.5rem',
-                backgroundColor: 'transparent',
-                border: 'none',
-                borderBottom: activeTab === tab.id ? '2px solid var(--accent-primary)' : '2px solid transparent',
-                color: activeTab === tab.id ? 'var(--accent-primary)' : 'var(--text-muted)',
-                fontWeight: activeTab === tab.id ? '700' : '500',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                fontSize: '1rem'
-              }}
+              className={`${styles.tabButton} ${activeTab === tab.id ? styles.tabButtonActive : ''}`}
             >
               {tab.label}
             </button>
@@ -77,21 +77,18 @@ export default function JobGap() {
           hidden={activeTab !== 'roles'}
         >
           {activeTab === 'roles' && (
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', 
-              gap: '2rem',
-              alignItems: 'stretch'
-            }}>
+            <div className={styles.grid}>
               <RoleSelection 
                 roles={ROLES_DATA}
                 roleOrder={ROLE_ORDER}
                 selectedRole={selectedRole}
-                onSelectRole={setSelectedRole}
+                onSelectRole={handleRoleSelect}
               />
-              <RoleDetails 
-                role={ROLES_DATA[selectedRole]}
-              />
+              <div ref={detailsRef}>
+                <RoleDetails 
+                  role={ROLES_DATA[selectedRole]}
+                />
+              </div>
             </div>
           )}
         </div>

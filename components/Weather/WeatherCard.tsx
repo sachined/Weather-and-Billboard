@@ -1,5 +1,5 @@
 import React from 'react';
-import { WeatherData } from '../../hooks/useWeather';
+import { WeatherData } from '@/hooks/useWeather';
 import styles from './Weather.module.css';
 import WeatherHeader from './WeatherHeader';
 import WeatherDetails from './WeatherDetails';
@@ -19,7 +19,7 @@ export default function WeatherCard({ weather, error, loading, toggleUnit, getDi
       {loading ? (
         <p className={styles.message}>Loading weather...</p>
       ) : error ? (
-        <p className={styles.message} style={{ color: '#dc2626' }} role="alert">{error}</p>
+        <p className={styles.errorMessage} role="alert">{error}</p>
       ) : weather ? (
         <>
           <WeatherHeader

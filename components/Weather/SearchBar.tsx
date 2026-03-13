@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { SubmitEventHandler } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { MapPin } from 'lucide-react';
 import styles from './Weather.module.css';
 
 interface SearchBarProps {
@@ -39,7 +38,7 @@ export default function SearchBar({ onSearch, onLocationClick }: SearchBarProps)
         aria-label="Use current location"
         title="Use current location"
       >
-        <FontAwesomeIcon icon={faLocationDot} />
+        <MapPin size={20} />
       </button>
     </form>
   );
