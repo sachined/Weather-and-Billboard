@@ -2,6 +2,7 @@
 title: 'The "Arithmetic" of AI: Navigating the Evolution of Token Management'
 date: '2026-03-09'
 excerpt: 'Managing LLM tokens is more than just counting numbers—it is about visibility, cost control, and knowing when NOT to let the AI take the wheel.'
+tags: ['AI', 'Engineering', 'FinSurf']
 ---
 
 In the early days of building **FinSurf**, token management was an afterthought. We were focused on the "magic" of the agents—getting them to research stocks, analyze tax implications, and summarize sentiment. But as the project evolved from a prototype into a multi-agent system, the "magic" started to get expensive.

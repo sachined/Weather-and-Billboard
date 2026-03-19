@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 
 export function useTheme() {
-  const [theme, setTheme] = useState('spring');
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     // Initial sync
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'spring';
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
     setTheme(currentTheme);
 
     // Observe changes
     const observer = new MutationObserver(() => {
-      const updatedTheme = document.documentElement.getAttribute('data-theme') || 'spring';
+      const updatedTheme = document.documentElement.getAttribute('data-theme') || 'light';
       setTheme(updatedTheme);
     });
 

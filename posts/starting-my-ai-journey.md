@@ -1,20 +1,39 @@
 ---
 title: 'The "Last Mile" of AI: Bridging the Gap Between Concept and Deployment'
-date: '2026-03-09'
-excerpt: 'Deploying AI models in enterprise environments requires more than just good code—it requires a focus on integration, UX, and ROI.'
+date: '2026-03-10'
+excerpt: "Deploying AI in enterprise environments requires more than good code. It requires understanding where the real friction lives — and it's rarely in the model."
+tags: ['AI', 'Enterprise']
 ---
 
-In the world of Enterprise AI, there is a lot of focus on training models and achieving high accuracy. But for Fortune 500 companies, the real challenge is the "Last Mile"—the process of taking a successful prototype and turning it into a reliable, scalable, and user-friendly tool that employees actually use.
+There's a conversation I had repeatedly at eGain that I didn't fully appreciate at the time.
 
-In this article, I discuss the three key pillars of successful AI deployment:
+A Fortune 500 client would come in excited about AI. They had the budget, the executive sponsorship, the vendor pitch deck. What they didn't have was a clear path from the demo to the desk. The model worked. The integration didn't. The UX confused the agents who were supposed to use it. Six months of procurement led to something that sat mostly unused because it didn't slot into how people actually worked.
 
-## 1. Seamless Integration
-How to bridge legacy systems with modern AI backends. Many enterprises have complex, siloed data structures that weren't designed for real-time AI inference. Bridging this gap requires deep understanding of both the legacy infrastructure and the new AI capabilities.
+That gap — between a technically successful AI system and one that employees actually use — is what I started calling the Last Mile.
 
-## 2. User-Centric UX
-Using tools like **Chrome DevTools** to optimize the frontend experience. AI can be powerful, but if the interface is clunky or unintuitive, adoption will suffer. I focus on creating seamless experiences where the AI works in the background to empower the user.
+### Why the Last Mile is harder than the model
 
-## 3. Measurable ROI
-Ensuring that technical achievements translate into business value. At the end of the day, an AI solution must solve a problem more efficiently than before. I help companies identify the metrics that matter and build systems that deliver on those targets.
+The AI field has a bias toward the hard, glamorous problems: accuracy, latency, hallucination rates. These matter. But in enterprise environments, I watched projects fail for much more mundane reasons. A chatbot that required agents to switch between five windows. A reporting tool that produced correct outputs in a format nobody had time to parse. An AI assistant that was faster than the old system but required a login process that added 90 seconds to every use.
 
-Read more about my journey at [finsurf.net](https://finsurf.net).
+These aren't engineering failures in the traditional sense. They're integration failures. The model did its job. Everything around it didn't.
+
+My role as an Implementation Engineer meant I lived in this gap. I managed five concurrent enterprise accounts — clients like Worldpay and Fidelity Investments — with zero escalations. That record wasn't built by having the cleanest API integrations. It was built by sitting with the actual end users, watching where they got stuck, and fixing the friction before it became a ticket.
+
+### What actually works
+
+**Integration first, features second.** Every enterprise has legacy infrastructure that wasn't built for real-time AI inference. Trying to retrofit a modern AI system on top of siloed data structures without a clear integration plan is how you get six-month pilots that go nowhere. The first question I ask is never "what can the AI do?" — it's "what does the existing system produce, and where does it flow?"
+
+**The UX is part of the product.** This sounds obvious until you've watched a technically excellent AI tool lose adoption because the interface required three extra clicks per interaction. At scale, three clicks times a thousand agents times fifty interactions a day is a real number. I learned to treat the frontend as a first-class engineering concern, not a finishing step.
+
+**ROI has to be visible and fast.** Enterprise buyers have short patience for investments that take two years to show returns. The wins that drove renewal weren't the ones with the most impressive benchmarks — they were the ones where I could point to a workflow that now takes fifteen minutes instead of an hour. At eGain, I built AI-generated reporting scripts that cut a weekly process from 60 minutes to 15. That 75% reduction was something a VP could put in a slide. The underlying technology was interesting. The time saved was what got the contract renewed.
+
+### Where I'm taking this
+
+I left enterprise implementation to build things instead of configure them. FinSurf is the clearest expression of that shift: an AI assistant for financial research that's trying to close its own version of the Last Mile. The hard part isn't connecting to a data source or prompting a language model. It's making the output feel like something a real investor would actually use — structured, specific, and honest about what it doesn't know.
+
+The Last Mile problem doesn't go away when you're the one building the product. If anything, it gets harder. You can't blame the integration team.
+
+But that's what makes it interesting.
+
+---
+*The technical side of this — how I structured the multi-agent architecture in FinSurf — is covered in a separate post. The short version: LangGraph, parallel fan-out, and a deterministic Python math layer so the numbers are always right even when the narrative isn't.*

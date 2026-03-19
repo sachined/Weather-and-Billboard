@@ -86,6 +86,14 @@ export default function PortfolioPage() {
     .filter(s => getTickerLayer(s.symbol) === 'Research')
     .reduce((acc, s) => acc + (s.regularMarketPrice * s.shares), 0);
 
+  const LAYER_CLASS: Record<PortfolioLayer, string> = {
+    Anchor:     styles.columnAnchor,
+    Growth:     styles.columnGrowth,
+    Income:     styles.columnIncome,
+    Asymmetric: styles.columnAsymmetric,
+    Research:   styles.columnResearch,
+  };
+
   const renderLayer = (layer: PortfolioLayer) => {
 
     if (layer === 'Research' && !showResearch) return null;
@@ -111,7 +119,7 @@ export default function PortfolioPage() {
       : '0.0';
 
     return (
-      <div className={styles.column} key={layer}>
+      <div className={`${styles.column} ${LAYER_CLASS[layer]}`} key={layer}>
         <div className={styles.columnHeader}>
           <h2>{layer}</h2>
           <div className={styles.ratioBadges}>
@@ -155,12 +163,41 @@ export default function PortfolioPage() {
         <title>{`Portfolio Strategy - ${SITE_NAME}`}</title>
       </Head>
       <div className={styles.container}>
+        <header className={styles.header}>
+          <p className={styles.pageEyebrow}>Growth Strategy</p>
+          <h1 className={styles.heroStatement}>Long-horizon. Conviction-driven.</h1>
+          <p className={styles.heroSupport}>
+            A layered portfolio tracker built around patient investing principles — real positions, live prices, and allocation targets in one place.
+          </p>
+          {!loading && totalValue > 0 && (
+            <div className={styles.heroStats}>
+              <div className={styles.heroStatItem}>
+                <span className={styles.heroStatLabel}>Portfolio Value</span>
+                <span className={styles.heroStatValue}>
+                  ${totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </span>
+              </div>
+              {appreciation.value !== 0 && (
+                <div className={styles.heroStatItem}>
+                  <span className={styles.heroStatLabel}>{timeRange === 'all' ? 'Overall' : 'Annual'} Return</span>
+                  <span className={`${styles.heroStatReturn} ${appreciation.value >= 0 ? styles.heroStatPositive : styles.heroStatNegative}`}>
+                    {appreciation.value >= 0 ? '+' : ''}${Math.abs(appreciation.value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    <span className={styles.heroStatPercent}>
+                      ({appreciation.percent >= 0 ? '+' : ''}{appreciation.percent.toFixed(2)}%)
+                    </span>
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+        </header>
+
         <div className={styles.topBar}>
           <button
             onClick={() => setIsModalOpen(true)}
             className={styles.infoButton}
           >
-            ℹ️ System Architecture
+            How it&apos;s built
           </button>
           <div className={styles.topBarRight}>
             {hasResearchPositions && (
@@ -172,10 +209,7 @@ export default function PortfolioPage() {
                 {showResearch ? 'Hide Simulation' : 'Show Simulation'}
               </button>
             )}
-            <div className={styles.techTooltip}>
-              <span role="img" aria-label="info">ℹ️</span> <span>Real-time market data.</span>
-            </div>
-            {isAdmin && (
+{isAdmin && (
               <button onClick={handleClear} className={styles.clearButton}>
                 Clear All
               </button>
@@ -184,7 +218,7 @@ export default function PortfolioPage() {
         </div>
 
         {!isAdmin && (
-          <div style={{ textAlign: 'right', marginBottom: '1rem' }}>
+          <div className={styles.adminLoginSection}>
             <button onClick={() => setShowLogin(!showLogin)} className={styles.infoButton}>
               {showLogin ? 'Cancel' : 'Admin Login'}
             </button>
@@ -211,8 +245,8 @@ export default function PortfolioPage() {
           </div>
         )}
 
-        <div className={styles.searchSection}>
-          {isAdmin && (
+        {isAdmin && (
+          <div className={styles.searchSection}>
             <form onSubmit={addOrUpdatePosition} className={styles.searchForm}>
               <input
                 className={styles.glassInput}
@@ -241,27 +275,8 @@ export default function PortfolioPage() {
               />
               <button type="submit" className={styles.addButton}>Update Portfolio</button>
             </form>
-          )}
-          <div className={styles.portfolioStats}>
-            <div className={styles.statGroup}>
-              <span className={styles.totalValueLabel}>Total Portfolio Value</span>
-              <span className={styles.totalValueAmount}>
-                ${totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </span>
-            </div>
-            {appreciation.value !== 0 && (
-              <div className={styles.statGroup}>
-                <span className={styles.totalValueLabel}>{timeRange === 'all' ? 'Overall Appreciation' : 'Annual Appreciation'}</span>
-                <span className={`${styles.appreciationValue} ${appreciation.value >= 0 ? styles.positive : styles.negative}`}>
-                  {appreciation.value >= 0 ? '+' : ''}${Math.abs(appreciation.value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  <span className={styles.appreciationPercent}>
-                    ({appreciation.percent >= 0 ? '+' : ''}{appreciation.percent.toFixed(2)}%)
-                  </span>
-                </span>
-              </div>
-            )}
           </div>
-        </div>
+        )}
 
         {estimatedAnnualIncome > 0 && (
           <div className={styles.dividendCard}>
@@ -320,7 +335,7 @@ export default function PortfolioPage() {
         )}
 
         <details className={styles.legendBox}>
-          <summary className={styles.legendSummary}>How this works — layers & badges</summary>
+          <summary className={styles.legendSummary}>Layer guide</summary>
           <div className={styles.legendBody}>
             <div className={styles.legendSection}>
               <h4>Portfolio Layers</h4>
@@ -365,6 +380,15 @@ export default function PortfolioPage() {
             <p>No tickers added yet. Start by adding a ticker above.</p>
           </div>
         )}
+
+        <figure className={styles.pageCloser}>
+          <blockquote className={styles.pageCloserText}>
+            &ldquo;Everything is worth it if the soul is not small.&rdquo;
+          </blockquote>
+          <figcaption className={styles.pageCloserAttribution}>
+            — Fernando Pessoa, <em>Mar Português</em>
+          </figcaption>
+        </figure>
       </div>
     </Layout>
   );

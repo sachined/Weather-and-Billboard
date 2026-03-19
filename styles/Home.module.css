@@ -13,16 +13,6 @@
   max-width: 600px;
 }
 
-.heroRole {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-  opacity: 0.75;
-}
-
 .heroAccent {
   font-size: 1.15rem;
   font-weight: 700;
@@ -53,28 +43,44 @@
   font-style: italic;
   font-weight: 600;
   color: var(--text-heading);
-  margin: 0 0 0.75rem;
-  line-height: 1.5;
-}
-
-.originText {
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  line-height: 1.75;
   margin: 0;
+  line-height: 1.5;
 }
 
 /* FinSurf — its own full-width section */
 .featuredSection {
   width: 100%;
   max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 2.5rem;
+}
+
+/* Technical Growth — solo recruiter card */
+.recruiterSection {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5rem;
+}
+
+.recruiterEyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-career);
+  margin: 0 0 0.75rem;
+  opacity: 0.85;
 }
 
 /* Divider between FinSurf and secondary cards */
 .sectionDivider {
   width: 100%;
   max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -99,20 +105,17 @@
   white-space: nowrap;
 }
 
-/* Secondary cards grid */
+/* Secondary cards — 2-column grid, equal height */
 .cardsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
   max-width: 900px;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5rem;
   align-items: stretch;
-}
-
-@media (max-width: 720px) {
-  .cardsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 480px) {
@@ -120,3 +123,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* GlobalDashboard wrapper */
+.dashboardWrapper {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5rem;
+}
+

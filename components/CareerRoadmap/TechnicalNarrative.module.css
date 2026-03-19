@@ -7,124 +7,305 @@
 
 .title {
   margin-top: 0;
-  color: var(--text-main);
+  color: var(--text-heading);
+  margin-bottom: 0.4rem;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: 2rem;
-  marginTop: 1.5rem;
-  align-items: stretch;
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0 0 2rem;
 }
 
-.card {
-  background-color: var(--bg-surface-hover);
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-subtle);
+/* ── Timeline ── */
+
+.timeline {
+  position: relative;
+  padding-left: 1.75rem; /* 28px — space for the dot + gap */
 }
 
-.pivotTitle {
+/* Vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px; /* center of the 10px dot */
+  top: 10px;
+  bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent-primary), var(--border-subtle));
+}
+
+/* ── Milestone ── */
+
+.milestone {
+  position: relative;
+  padding-bottom: 2.25rem;
+}
+
+.milestone:last-child {
+  padding-bottom: 0;
+}
+
+/* Dot on the line — centered on left: 5px of .timeline */
+.milestone::before {
+  content: '';
+  position: absolute;
+  left: -1.75rem; /* undo the timeline padding → x=0 of timeline */
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  border: 2px solid var(--bg-surface);
+  box-shadow: 0 0 0 2px var(--accent-primary);
+}
+
+.date {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   color: var(--accent-primary);
-  margin-top: 0;
+  margin-bottom: 0.25rem;
 }
 
-.competenciesTitle {
-  color: var(--accent-secondary);
-  margin-top: 0;
+.milestoneTitle {
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin: 0 0 0.5rem;
 }
 
-.focusText {
+.metric {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-success);
+  background: rgba(5, 150, 105, 0.08);
+  border-left: 3px solid var(--color-success);
+  padding: 0.35rem 0.75rem;
+  border-radius: 0 6px 6px 0;
+  margin: 0 0 0.6rem;
+}
+
+.description {
+  font-size: 0.865rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 0.75rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.6rem;
+}
+
+.tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.18rem 0.5rem;
+  border-radius: 10px;
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+/* ── Inline quote (Frost, Bogart) ── */
+
+.quote {
+  margin: 0 0 0.85rem;
+  padding: 0.65rem 1rem;
+  border-left: 2px solid var(--accent-secondary);
+  background: var(--bg-surface-hover);
+  border-radius: 0 6px 6px 0;
+}
+
+.quoteText {
+  margin: 0 0 0.25rem;
+  font-size: 0.83rem;
+  font-style: italic;
   color: var(--text-main);
-  font-size: 0.95rem;
   line-height: 1.6;
 }
 
-.accent {
+.quoteAttribution {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ── Now / CTA milestone ── */
+
+.milestoneCta::before {
+  background: var(--color-success);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+}
+
+.milestoneCta .date {
+  color: var(--color-success);
+}
+
+.calloutList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.calloutItem {
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.calloutAudience {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   color: var(--accent-primary);
+  margin-bottom: 0.3rem;
 }
 
-.quoteContainer {
-  border-left: 3px solid var(--accent-primary);
-  padding-left: 1rem;
-  margin-top: 1rem;
-}
-
-.quote {
-  font-style: italic;
-  color: var(--text-main);
+.calloutText {
   margin: 0;
+  font-size: 0.865rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.bookList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+  border-left: 2px solid var(--border-main);
+  padding-left: 0.85rem;
+}
+
+.bookItem {
+  font-size: 0.83rem;
+}
+
+.bookTitle {
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.bookAuthor {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.bookTakeaway {
+  margin: 0.2rem 0 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+  font-size: 0.8rem;
+}
+
+.links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .link {
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--accent-primary);
-  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.link:hover {
   text-decoration: underline;
 }
 
-.expandedContent {
-  margin-top: 1rem;
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 1rem;
-}
+/* ── Legend ── */
 
-.toggleButton {
-  background: none;
-  border: none;
-  color: var(--accent-primary);
-  cursor: pointer;
-  padding: 0;
-  margin-top: 0.5rem;
-  font-weight: bold;
-}
-
-.skillContainer {
-  margin-bottom: 1.2rem;
-}
-
-.skillHeader {
+.legend {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
-.skillLabel {
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: var(--text-main);
-}
-
-.skillScore {
-  color: var(--accent-secondary);
-  font-weight: bold;
-}
-
-.progressBar {
-  width: 100%;
-  height: 10px;
-  background-color: var(--bg-surface);
-  border-radius: 5px;
-  border: 1px solid var(--border-subtle);
-  overflow: hidden;
-}
-
-.progressFill {
-  height: 100%;
-  background-color: var(--accent-secondary);
-  border-radius: 5px;
-}
-
-.skillDescription {
-  margin: 0.6rem 0 0 0;
-  font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.descriptionList {
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Type-specific dot and date colors ── */
+
+.milestone[data-type="education"]::before {
+  background: #D97706;
+  box-shadow: 0 0 0 2px #D97706;
+}
+
+.milestone[data-type="education"] .date {
+  color: #D97706;
+}
+
+.milestone[data-type="work"]::before {
+  background: #2563EB;
+  box-shadow: 0 0 0 2px #2563EB;
+}
+
+.milestone[data-type="work"] .date {
+  color: #2563EB;
+}
+
+.milestone[data-type="pause"]::before {
+  background: #9CA3AF;
+  box-shadow: 0 0 0 2px #9CA3AF;
+}
+
+.milestone[data-type="pause"] .date {
+  color: #9CA3AF;
+}
+
+/* ── Role label ── */
+
+.role {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
   color: var(--text-muted);
-  font-size: 0.85rem;
-  padding-left: 1.2rem;
-  margin-top: 0.5rem;
+  font-style: italic;
+  margin: -0.25rem 0 0.5rem;
+}
+
+/* ── Highlighted callout (hiring manager) ── */
+
+.calloutItemHighlight {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 6%, var(--bg-surface-hover));
+}
+
+/* ── Closing quote (rendered after links, page-closer feel) ── */
+
+.closingQuote {
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem 0;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
 }

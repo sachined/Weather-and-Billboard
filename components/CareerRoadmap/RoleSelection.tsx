@@ -18,7 +18,6 @@ export default function RoleSelection({
 }: RoleSelectionProps) {
   const theme = useTheme();
   const isMinimalist = theme === 'light';
-  const isSpring = theme === 'spring';
 
   return (
     <div className={styles.container}>
@@ -39,11 +38,7 @@ export default function RoleSelection({
           >
             <div className={styles.header}>
               <h3 className={styles.title}>{role.title}</h3>
-              <span className={`
-                ${styles.badge} 
-                ${isSelected ? styles.badgeSelected : ''} 
-                ${isSpring ? styles.badgeSpring : ''}
-              `}>
+              <span className={`${styles.badge} ${isSelected ? styles.badgeSelected : ''}`}>
                 {role.badge}
               </span>
             </div>

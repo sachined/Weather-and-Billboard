@@ -1,7 +1,8 @@
 ---
 title: 'FinSurf: The Evolution of an AI-Powered Stock Analyst'
-date: '2026-03-09'
+date: '2026-03-08'
 excerpt: 'Building FinSurf taught me that real-world AI applications require more than just LLM calls—they require robust state management and precise logic.'
+tags: ['FinSurf', 'AI', 'Engineering']
 ---
 
 Building [FinSurf](https://finsurf.net) has been one of my most rewarding technical challenges. What started as a simple idea—using AI to analyze stocks—quickly evolved into a complex orchestration of autonomous agents, Python-driven logic, and a modern frontend.

@@ -30,41 +30,18 @@ export default function FinSurf() {
             rel="noopener noreferrer"
             className={styles.heroCta}
           >
-            Visit Live Site →
+            Try FinSurf →
           </a>
         </section>
 
-        {/* What it does */}
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>What it does</h2>
-          <div className={styles.featuresGrid}>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🤖</div>
-              <h3 className={styles.featureTitle}>Multi-Agent Analysis</h3>
-              <p className={styles.featureDesc}>
-                Autonomous AI agents coordinate to research a stock end-to-end —
-                covering fundamentals, dividends, capital gains, and analyst sentiment.
-              </p>
-            </div>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🧮</div>
-              <h3 className={styles.featureTitle}>Deterministic Math</h3>
-              <p className={styles.featureDesc}>
-                All financial calculations — holding periods, capital gains, dividend
-                projections — run through native Python logic. AI explains the numbers;
-                it never guesses them.
-              </p>
-            </div>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>📄</div>
-              <h3 className={styles.featureTitle}>PDF Export</h3>
-              <p className={styles.featureDesc}>
-                Download full research reports as themed PDFs. Built with a custom
-                color-resolution utility to support modern CSS (Tailwind 4 / oklch).
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Credibility bar */}
+        <div className={styles.metricsBar}>
+          <span className={styles.metricItem}>5 agents</span>
+          <span className={styles.metricDot}>·</span>
+          <span className={styles.metricItem}>27 commits</span>
+          <span className={styles.metricDot}>·</span>
+          <span className={styles.metricItem}>Live since Mar 2026</span>
+        </div>
 
         {/* How it works */}
         <section className={styles.section}>
@@ -85,7 +62,7 @@ export default function FinSurf() {
             <li className={styles.step}>
               <span className={styles.stepNum}>2</span>
               <div className={styles.stepBody}>
-                <p className={styles.stepTitle}>"Validate with Python, Explain with AI"</p>
+                <p className={styles.stepTitle}>&ldquo;Validate with Python, Explain with AI&rdquo;</p>
                 <p className={styles.stepDesc}>
                   Financial arithmetic is handled entirely in Python. The LLM receives
                   verified numbers and is responsible only for interpretation and
@@ -106,71 +83,51 @@ export default function FinSurf() {
               </div>
             </li>
           </ol>
-        </section>
 
-        {/* Tech stack */}
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Tech stack</h2>
+          {/* Tech chips — inline, no heading */}
           <ul className={styles.techList}>
             {[
               'LangGraph',
               'Python',
               'React 19',
-              'Tailwind CSS 4',
               'SQLite (WAL)',
-              'Gemini',
-              'Groq',
-              'Perplexity',
-              'Ollama',
-              'html2canvas',
+              'Docker + Caddy',
             ].map((t) => (
               <li key={t} className={styles.techChip}>{t}</li>
             ))}
           </ul>
         </section>
 
-        {/* Roadmap */}
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>What's next</h2>
-          <ul className={styles.roadmapList}>
-            <li className={styles.roadmapItem}>
-              <span>
-                <span className={styles.roadmapLabel}>Historical Profit Analyzer</span>
-                {' '}— deterministic P&L and cost-basis analysis across positions.
-              </span>
-            </li>
-            <li className={styles.roadmapItem}>
-              <span>
-                <span className={styles.roadmapLabel}>Multi-Ticker Batching</span>
-                {' '}— upload a CSV, run sequential analysis across a full portfolio.
-              </span>
-            </li>
-            <li className={styles.roadmapItem}>
-              <span>
-                <span className={styles.roadmapLabel}>AI Chat Layer</span>
-                {' '}— ask follow-up questions directly against an existing report.
-              </span>
-            </li>
-          </ul>
-        </section>
-
         {/* Footer CTA */}
         <div className={styles.footerCta}>
+          <div className={styles.footerCtaButtons}>
+            <a
+              href="https://finsurf.net"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.linkPrimary}
+            >
+              Open FinSurf →
+            </a>
+            <Link href="/blog" className={styles.linkSecondary}>
+              Read the build logs
+            </Link>
+          </div>
           <p className={styles.footerCtaText}>
-            Live and actively evolving.
+            Live and actively evolving — historical P&amp;L analysis, multi-ticker
+            batching, and an AI chat layer are in progress.
           </p>
-          <a
-            href="https://finsurf.net"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.linkPrimary}
-          >
-            Open FinSurf →
-          </a>
-          <Link href="/blog" className={styles.linkSecondary}>
-            Read the build logs
-          </Link>
         </div>
+
+        {/* Epigraph — page closer */}
+        <figure className={styles.epigraph}>
+          <blockquote className={styles.epigraphText}>
+            &ldquo;The audience is always a little ahead of you.&rdquo;
+          </blockquote>
+          <figcaption className={styles.epigraphAttribution}>
+            — Humphrey Bogart, quoted in <em>Bogart</em> by A.M. Sperber &amp; Eric Lax
+          </figcaption>
+        </figure>
       </div>
     </Layout>
   );

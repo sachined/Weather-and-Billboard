@@ -13,8 +13,16 @@
 }
 
 .successIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-success);
+  color: white;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
 }
 
 .successTitle {
@@ -44,26 +52,30 @@
 
 .label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  color: var(--text-main);
-  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
 }
 
 .input {
   width: 100%;
-  padding: 1rem;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
   border-radius: 12px;
-  border: 1px solid var(--border-main);
-  font-size: 1rem;
-  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.95rem;
+  background-color: var(--bg-surface-hover);
   color: var(--text-main);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input:focus {
   border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 15%, transparent);
 }
 
 .textarea {

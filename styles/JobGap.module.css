@@ -3,25 +3,45 @@
   margin: 0 auto;
 }
 
+/* Page header */
 .header {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
-.pageTitle {
-  color: var(--text-main);
-  margin: 0;
-  font-size: 1.8rem;
+.pageEyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin: 0 0 0.75rem;
 }
 
-.pageSubtitle {
+.heroStatement {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 800;
+  color: var(--text-heading);
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+}
+
+.heroAccent {
+  color: var(--accent-primary);
+}
+
+.heroSupport {
+  font-size: 0.95rem;
   color: var(--text-muted);
-  margin: 0.2rem 0 0 0;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 560px;
 }
 
+/* Tabs */
 .tabList {
   display: flex;
   border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   overflow-x: auto;
   gap: 1rem;
 }
@@ -45,6 +65,15 @@
   font-weight: 700;
 }
 
+/* Orientation hint */
+.gridHint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  opacity: 0.65;
+  margin: 0 0 1rem;
+}
+
+/* Role grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));

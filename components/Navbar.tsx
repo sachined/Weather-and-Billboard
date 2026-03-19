@@ -9,7 +9,6 @@ const navLinks = [
   { href: '/finsurf', label: 'FinSurf' },
   { href: '/job-gap', label: 'Journey' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/weather-seek', label: 'Weather' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ];

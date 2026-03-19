@@ -9,74 +9,92 @@
 .title {
   color: var(--accent-primary);
   margin-top: 0;
-}
-
-.skillsMatchContainer {
-  margin-bottom: 1.5rem;
-}
-
-.skillsMatchTitle {
-  color: var(--text-main);
   margin-bottom: 0.5rem;
 }
 
-.skillsList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.skillTag {
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: help;
-}
-
-.skillTag:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  filter: brightness(1.05);
-}
-.insight {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: var(--bg-surface-hover);
-  border-radius: 12px;
-  border: 1px solid var(--border-subtle);
-}
-
-.takeawaysTitle {
-  margin: 0 0 0.5rem 0;
+.fit {
   font-size: 0.9rem;
-  color: var(--text-main);
-}
-
-.takeawaysList {
-  margin: 0;
-  padding-left: 1.2rem;
   color: var(--text-muted);
-  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
 }
 
-.takeawaysItem {
+.sectionTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skillCard {
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+
+.skillHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
   margin-bottom: 0.4rem;
 }
 
-.legendGrid {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+.skillName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-heading);
 }
 
-.legendItem {
-  font-size: 0.75rem;
+.proficiency {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.familiar {
+  background: var(--border-subtle);
   color: var(--text-muted);
 }
 
-.legendLabel {
-  color: var(--text-heading);
+.working {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--accent-secondary);
+}
+
+.advanced {
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--accent-primary);
+}
+
+.expert {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--color-success);
+}
+
+.skillProof {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
 }

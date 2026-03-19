@@ -60,12 +60,6 @@
   color: #fff;
 }
 
-.badgeSpring {
-  background-color: var(--pastel-yellow);
-  color: #333333;
-  border: none;
-}
-
 .description {
   margin: 0;
   font-size: 0.9rem;

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { LucideIcon } from 'lucide-react';
 import styles from './FeatureCard.module.css';
 
-export type CardCategory = 'ai' | 'cli' | 'finance' | 'writing' | 'connect';
+export type CardCategory = 'ai' | 'cli' | 'finance' | 'writing' | 'connect' | 'career';
 
 const categoryLabels: Record<CardCategory, string> = {
   ai:      'AI Agent',
@@ -10,6 +10,7 @@ const categoryLabels: Record<CardCategory, string> = {
   finance: 'Investment',
   writing: 'Writing',
   connect: 'Connect',
+  career:  'Career',
 };
 
 interface FeatureCardProps {

@@ -53,6 +53,7 @@
 .icon_finance { background: color-mix(in srgb, var(--color-success) 12%, transparent); color: var(--color-success); }
 .icon_writing { background: color-mix(in srgb, var(--color-warning) 14%, transparent); color: var(--color-warning); }
 .icon_connect { background: color-mix(in srgb, var(--accent-secondary) 12%, transparent); color: var(--accent-secondary); }
+.icon_career  { background: color-mix(in srgb, var(--color-career) 12%, transparent);  color: var(--color-career); }
 
 .content {
   display: flex;
@@ -128,6 +129,7 @@
 .chip_finance { background: color-mix(in srgb, var(--color-success) 12%, transparent);     color: var(--color-success); }
 .chip_writing { background: color-mix(in srgb, var(--color-warning) 14%, transparent);     color: var(--color-warning); }
 .chip_connect { background: color-mix(in srgb, var(--accent-secondary) 12%, transparent);  color: var(--accent-secondary); }
+.chip_career  { background: color-mix(in srgb, var(--color-career) 12%, transparent);      color: var(--color-career); }
 
 /* ── Featured card (FinSurf) ── */
 .featured {

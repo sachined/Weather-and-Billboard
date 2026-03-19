@@ -3,6 +3,7 @@
 export interface Skill {
   name: string;
   description: string;
+  proficiency: 'Familiar' | 'Working' | 'Advanced' | 'Expert';
 }
 
 export interface RoleInfo {
@@ -10,14 +11,6 @@ export interface RoleInfo {
   fit: string;
   skills: Skill[];
   badge: string;
-  scores: number[];
-  chartDescription: string;
-  legendDetails: {
-    technical: string;
-    stakeholder: string;
-    analytical: string;
-    operational: string;
-  };
 }
 
 export interface RolesData {
@@ -27,105 +20,147 @@ export interface RolesData {
 export const ROLES_DATA: RolesData = {
   TAM: {
     title: 'Technical Account Manager (TAM)',
-    fit: 'Natural progression from your Account Manager & Implementation Engineer roles. You handle client relationships while leveraging technical knowledge.',
+    fit: 'Natural progression from my Account Manager & Implementation Engineer roles. I handle client relationships while leveraging technical knowledge.',
+    badge: '3.5 yrs direct experience',
     skills: [
-        { name: 'Stakeholder Management', description: 'Managing client expectations and relationships.' },
-        { name: 'Root Cause Analysis', description: 'Identifying and resolving complex issues.' },
-        { name: 'Custom Reporting / SQL', description: 'Creating custom reports and using SQL for data analysis.' },
-        { name: 'API Knowledge', description: 'Understanding and utilizing APIs for integration and automation.' }
-      ],
-    badge: 'High Fit',
-    scores: [8, 9, 7, 7], // Tech, Stakeholder, Analytical, Operational
-    chartDescription: 'Highlights the high balance between stakeholder strategy and technical proficiency needed to manage complex client accounts.',
-    legendDetails: {
-      technical: 'Implementation and onboarding for AI-powered Knowledge Management (KM) platforms.',
-      stakeholder: 'Served as the primary technical bridge between Clients, Internal Engineering, and Sales',
-      analytical: 'Monitored account health to maintain zero client escalations. Identified efficiency improvements',
-      operational: 'Managed five concurrent enterprise accounts throughout the full deployment lifecycle.'
-    }
+      {
+        name: 'Stakeholder Management',
+        proficiency: 'Advanced',
+        description: 'Primary technical bridge across 5 concurrent Fortune 500 accounts — zero escalations across the full engagement lifecycle.',
+      },
+      {
+        name: 'Root Cause Analysis',
+        proficiency: 'Advanced',
+        description: 'Diagnosed and resolved complex integration failures for clients including Worldpay and Fidelity Investments.',
+      },
+      {
+        name: 'SQL / Custom Reporting',
+        proficiency: 'Working',
+        description: 'Built AI-generated reporting scripts that cut a recurring 60-min weekly process to 15 min — a 75% reduction.',
+      },
+      {
+        name: 'REST APIs',
+        proficiency: 'Working',
+        description: 'Hands-on API configuration, troubleshooting, and documentation during KM platform onboarding and deployment.',
+      },
+    ],
   },
   CSE: {
     title: 'Customer Success Engineer (CSE)',
-    fit: 'Focused on post-sale outcomes. Your experience developing custom reporting tools to prove ROI matches this perfectly.',
+    fit: 'Focused on post-sale outcomes. My experience developing custom reporting tools to prove ROI matches this perfectly.',
+    badge: '3.5 yrs direct experience',
     skills: [
-        { name: 'AI-driven Insights', description: 'Provided insights to clients on how to improve their business operations.' },
-        { name: 'Trend Identification', description: 'Identifying trends in client usage patterns to inform product development.' },
-        { name: 'Client Training', description: 'Provided targeted training to client teams.' },
-        { name: 'Retention Strategy', description: 'Developed and implemented retention strategies to increase client satisfaction and loyalty.' }
-      ],
-    badge: 'High Fit',
-    scores: [7, 9, 8, 6],
-    chartDescription: 'Emphasizes analytical impact and stakeholder strategy, focusing on driving retention through data-driven technical insights.',
-    legendDetails: {
-      technical: 'Production deployment of AI-powered KM platform.',
-      stakeholder: 'Providing consultative demonstrations to recover dormant accounts.',
-      analytical: 'Evaluating client usage patterns to drive ongoing optimization of platforms.',
-      operational: 'Reducing recurring reporting tasks by 75% using AI-generated scripts.'
-    }
+      {
+        name: 'Usage Analytics',
+        proficiency: 'Advanced',
+        description: 'Tracked client usage patterns across enterprise accounts to surface churn risk and inform product roadmap decisions.',
+      },
+      {
+        name: 'Client Enablement',
+        proficiency: 'Advanced',
+        description: 'Delivered targeted training to enterprise end-user teams on AI-powered KM platform features and workflows.',
+      },
+      {
+        name: 'AI-Driven Insights',
+        proficiency: 'Advanced',
+        description: 'Ran consultative demonstrations using live usage data to recover dormant accounts and drive renewal conversations.',
+      },
+      {
+        name: 'Automation / Scripting',
+        proficiency: 'Working',
+        description: '75% reduction in recurring reporting overhead using AI-generated Python scripts — presented to VP-level stakeholders.',
+      },
+    ],
   },
   SE: {
     title: 'Sales Engineer / Solutions Consultant',
-    fit: 'You understand client needs and can architect solutions. SEs support sales with technical demos and tailored solutions.',
+    fit: 'I understand client needs and can architect solutions. SEs support sales with technical demos and tailored solutions.',
+    badge: 'Built demo environments',
     skills: [
-        { name: 'Cross-functional Coordination', description: '' },
-        { name: 'User Training', description: 'Provided targeted training to client teams' },
-        { name: 'Technical Demos', description: 'Provided demos to potential clients and a plan to address issues.' },
-        { name: 'Solution Architecture', description: 'Architecting and demonstrating custom solutions for clients.' }
-      ],
-    badge: 'Med-High Fit',
-    scores: [8, 8, 5, 9],
-    chartDescription: 'Peaked in operational excellence and technical proficiency, reflecting the ability to architect and demonstrate custom solutions.',
-    legendDetails: {
-      technical: 'Rapid protortyping of full-stack AI tools using React 19m TypeScript, and Python. Architecting multi-LLM provider abstractions (Gemini, Groq, Perplexity)',
-      stakeholder: 'Acted as a technical subject matter expert during sales-to-implementation handoff.',
-      analytical: 'Engineered web-grounded research agents to provide real-time market intelligence.',
-      operational: 'Built containerized demo envs with Docker Compose and Caddy for local and production deployment.'
-    }
+      {
+        name: 'Technical Demos',
+        proficiency: 'Advanced',
+        description: 'Full-cycle solution demonstrations from discovery through architecture, tailored to enterprise prospect requirements.',
+      },
+      {
+        name: 'Solution Architecture',
+        proficiency: 'Advanced',
+        description: 'Containerized demo environments built with Docker Compose and Caddy — deployable locally and to production.',
+      },
+      {
+        name: 'LLM Integration',
+        proficiency: 'Advanced',
+        description: 'Multi-provider LLM abstractions across Gemini, Groq, and Perplexity using direct HTTP — no vendor SDK lock-in.',
+      },
+      {
+        name: 'Cross-functional Coordination',
+        proficiency: 'Working',
+        description: 'Acted as technical SME during sales-to-implementation handoffs, translating requirements across Sales, Engineering, and CS.',
+      },
+    ],
   },
   DataAnalyst: {
     title: 'Data Analyst (SaaS/Tech)',
-    fit: 'Your Python/SQL background makes this a strong play. Domain experience in retention gives you an edge over general analysts.',
+    fit: 'My Python/SQL background makes this a strong play. Domain experience in retention gives me an edge over general analysts.',
+    badge: 'Python + SQL depth',
     skills: [
-      { name: 'Data Interpretation', description: 'Data handling and advanced Excel functions' },
-      { name: 'Custom Reporting', description: 'Creating custom reports for stakeholders' },
-      { name: 'AI/Automation', description: 'Automating repetitive tasks and data processing workflows' },
-      { name: 'Pandas/NumPy', description: 'Data manipulation and analysis using Pandas and NumPy libraries' }
+      {
+        name: 'Python / Pandas',
+        proficiency: 'Advanced',
+        description: 'Data normalization pipelines and investment sentiment analysis applying Graham/Lynch frameworks to equity datasets.',
+      },
+      {
+        name: 'SQL',
+        proficiency: 'Advanced',
+        description: 'V-Lookups, Pivot Tables, and KPI dashboards built for executive stakeholder reporting in SaaS environments.',
+      },
+      {
+        name: 'AI / Automation',
+        proficiency: 'Advanced',
+        description: '75% reduction in reporting tasks; implemented daily token caps and budget management for production AI pipelines.',
+      },
+      {
+        name: 'Data Visualization',
+        proficiency: 'Working',
+        description: 'Generated professional PDF reports with adaptive pagination and structured layouts for executive review.',
+      },
     ],
-    badge: 'Technical Fit',
-    scores: [9, 5, 10, 4],
-    chartDescription: 'Maximized for analytical impact and technical proficiency, focusing on deep data interpretation and automation workflows.',
-    legendDetails: {
-      technical: 'Dataset normalization and utilizing functions including V-Lookups, Pivot Tables, and KPI Dashboards.',
-      stakeholder: 'Generated professional PDF reports with adaptive pagination for executive review',
-      analytical: 'Applying foundational investment analysis (Graham/Lynch) to develop stock sentiment and dividend analysis nodes.',
-      operational: 'Developing daily budget ceilings and token caps to manage data processing costs.'
-    }
   },
   AISolutionsEngineer: {
     title: 'AI Solutions Engineer (Enterprise)',
-    fit: 'Perfect match for your recent work on Finsurf.net and your 3+ years of experience in conversational AI and knowledge management.',
+    fit: 'Perfect match for my recent work on Finsurf.net and my 3+ years of experience in conversational AI and knowledge management.',
+    badge: 'Target Role',
     skills: [
-        { name: 'Conversational AI', description: 'Designing and deploying LLM-based agents and chatbots.' },
-        { name: 'Enterprise Implementation', description: 'Managing the integration of AI tools into existing corporate workflows' },
-        { name: 'API Integration', description: 'Building zero-SDK direct HTTP integrations with leading LLM providers.' },
-        { name: 'Knowledge Management', description: 'Knowledge Engineering and Prompt Engineering to eliminate hallucinations in enterprise conversational AI.' },
-        { name: 'Python', description: 'Architected a Research Agent that was instrumental in later projects involving prompt engineering and knowledge management.' }
-      ],
-    badge: 'Best Fit',
-    scores: [10, 8, 9, 9],
-    chartDescription: 'Reflects deep technical proficiency in AI and high operational excellence in enterprise deployments.',
-    legendDetails: {
-      technical: 'Architected LangGraph state-machines w/ conditional routing & parallel fan-out (Send API).',
-      stakeholder: 'Continous improvement of prompt engineering and knowledge management practices.',
-      analytical: 'Optimizing token spend and reducing wall-clock time through intelligent agent orchestration.',
-      operational: "Securing AI platforms with bearer-token auth, Let's Encrypt TLS, and /health endpoint monitoring."
-    }
-  }
+      {
+        name: 'Python / LangGraph',
+        proficiency: 'Expert',
+        description: 'Architected production LangGraph state-machines with conditional routing, parallel fan-out, and the Send API.',
+      },
+      {
+        name: 'LLM Integration',
+        proficiency: 'Expert',
+        description: 'Zero-SDK direct HTTP integrations with Gemini, Groq, Perplexity, and OpenAI — built for latency and cost control.',
+      },
+      {
+        name: 'Conversational AI',
+        proficiency: 'Expert',
+        description: '3+ years designing and deploying LLM-based agents and chatbots for Fortune 500 enterprise environments.',
+      },
+      {
+        name: 'Enterprise Deployment',
+        proficiency: 'Advanced',
+        description: 'Production-hardened AI platforms with bearer-token auth, Let\'s Encrypt TLS, and /health endpoint monitoring.',
+      },
+      {
+        name: 'Knowledge Management',
+        proficiency: 'Advanced',
+        description: 'Prompt engineering and knowledge engineering to eliminate hallucinations in high-stakes enterprise conversational AI.',
+      },
+    ],
+  },
 };
 
 export const ROLE_ORDER = ['AISolutionsEngineer', 'TAM', 'CSE', 'SE', 'DataAnalyst'];
-
-export const CHART_LABELS = [['Technical', 'Proficiency'], ['Stakeholder', 'Strategy'], ['Analytical', 'Impact'], ['Operational', 'Excellence']];
 
 export const CHECKLIST_ITEMS = [
   {
@@ -138,7 +173,7 @@ export const CHECKLIST_ITEMS = [
     id: 2,
     title: 'Update LinkedIn "About"',
     description:
-      'Refine to highlight the "Last Mile" of AI, your pedigree at Apple/eGain, and your hands-on work with Finsurf.net.',
+      'Refine to highlight the "Last Mile" of AI, my pedigree at Apple/eGain, and my hands-on work with Finsurf.net.',
   },
   {
     id: 3,

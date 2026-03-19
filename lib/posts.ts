@@ -11,6 +11,8 @@ export interface PostData {
   date: string;
   title: string;
   excerpt: string;
+  tags: string[];
+  readingTime: number;
   contentHtml?: string;
 }
 
@@ -28,10 +30,14 @@ export function getSortedPostsData(): PostData[] {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
 
+    const wordCount = matterResult.content.trim().split(/\s+/).length;
+    const readingTime = Math.ceil(wordCount / 200);
+
     // Combine the data with the id
     return {
       id,
-      ...(matterResult.data as { date: string; title: string; excerpt: string }),
+      readingTime,
+      ...(matterResult.data as { date: string; title: string; excerpt: string; tags: string[] }),
     };
   });
   // Sort posts by date

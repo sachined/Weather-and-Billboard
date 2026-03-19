@@ -40,7 +40,7 @@ export default function ContactForm() {
   if (status === 'SUCCESS') {
     return (
       <div className={styles.successContainer}>
-        <div className={styles.successIcon} role="img" aria-label="Success checkmark">✅</div>
+        <div className={styles.successIcon} aria-hidden="true">✓</div>
         <h2 className={styles.successTitle}>Message Sent!</h2>
         <p className={styles.successMessage}>Thank you for reaching out. I'll get back to you as soon as possible.</p>
         <button

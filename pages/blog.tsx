@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState, useMemo } from 'react';
 import Layout from '@/components/layout';
 import { SITE_NAME } from '@/lib/constants';
 import { getSortedPostsData, PostData } from '@/lib/posts';
-import utilStyles from '@/styles/utils.module.css';
 import styles from '@/styles/Blog.module.css';
 import { GetStaticProps } from 'next';
 
@@ -17,41 +17,125 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    allPostsData.forEach(({ tags }) => tags?.forEach((t) => tagSet.add(t)));
+    return Array.from(tagSet).sort();
+  }, [allPostsData]);
+
+  const filtered = activeTag
+    ? allPostsData.filter(({ tags }) => tags?.includes(activeTag))
+    : allPostsData;
+
+  const featured = !activeTag && filtered.length > 0 ? filtered[0] : null;
+  const rest = !activeTag ? filtered.slice(1) : filtered;
+
   return (
     <Layout>
       <Head>
         <title>{`Insights & Articles - ${SITE_NAME}`}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <h1 className={utilStyles.headingXl}>Insights & Articles</h1>
-        <p className={styles.headerSubtitle}>
-          Read my latest thoughts on AI Solutions, Technical Strategy, and the evolution of Enterprise Software.
-        </p>
-      </section>
-      <section className={utilStyles.padding1px}>
-        <div className={styles.blogGrid}>
-          {allPostsData.map(({ id, date, title, excerpt }) => (
-            <div className={styles.blogCard} key={id}>
-              <small className={utilStyles.lightText}>
-                {new Date(date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </small>
-              <h2 className={styles.postTitle}>
-                <Link href={`/posts/${id}`} className={styles.postLink}>
-                  {title}
-                </Link>
+
+      <header className={styles.header}>
+        <p className={styles.pageEyebrow}>Insights &amp; Articles</p>
+        <h1 className={styles.heroStatement}>Notes on AI, engineering,<br />and the markets.</h1>
+      </header>
+
+      <div className={styles.filterBar}>
+        <button
+          className={`${styles.filterPill} ${activeTag === null ? styles.filterPillActive : ''}`}
+          onClick={() => setActiveTag(null)}
+        >
+          All
+        </button>
+        {allTags.map((tag) => (
+          <button
+            key={tag}
+            className={`${styles.filterPill} ${activeTag === tag ? styles.filterPillActive : ''}`}
+            onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+
+      {filtered.length === 0 ? (
+        <p className={styles.emptyState}>No posts found.</p>
+      ) : (
+        <>
+          {featured && (
+            <article className={styles.featuredCard}>
+              <div className={styles.featuredMeta}>
+                <span className={styles.featuredEyebrow}>Latest</span>
+                <span className={styles.readingTime}>{featured.readingTime} min read</span>
+              </div>
+              <h2 className={styles.featuredTitle}>
+                <Link href={`/posts/${featured.id}`}>{featured.title}</Link>
               </h2>
-              <p className={styles.postExcerpt}>{excerpt}</p>
-              <Link href={`/posts/${id}`} className={styles.readMore}>
-                Read Article →
-              </Link>
+              <p className={styles.featuredExcerpt}>{featured.excerpt}</p>
+              <div className={styles.featuredFooter}>
+                <div className={styles.tagList}>
+                  {featured.tags?.map((tag) => (
+                    <button
+                      key={tag}
+                      className={`${styles.tagBadge} ${activeTag === tag ? styles.tagBadgeActive : ''}`}
+                      onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+                <Link href={`/posts/${featured.id}`} className={styles.featuredCta}>
+                  Read Article →
+                </Link>
+              </div>
+            </article>
+          )}
+
+          {rest.length > 0 && (
+            <div className={styles.blogGrid}>
+              {rest.map(({ id, date, title, excerpt, tags, readingTime }) => (
+                <article className={styles.blogCard} key={id}>
+                  <div className={styles.cardMeta}>
+                    <small className={styles.cardDate}>
+                      {new Date(date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </small>
+                    <small className={styles.readingTime}>{readingTime} min read</small>
+                  </div>
+                  <h2 className={styles.postTitle}>
+                    <Link href={`/posts/${id}`} className={styles.postLink}>
+                      {title}
+                    </Link>
+                  </h2>
+                  <p className={styles.postExcerpt}>{excerpt}</p>
+                  {tags?.length > 0 && (
+                    <div className={styles.tagList}>
+                      {tags.map((tag) => (
+                        <button
+                          key={tag}
+                          className={`${styles.tagBadge} ${activeTag === tag ? styles.tagBadgeActive : ''}`}
+                          onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  <Link href={`/posts/${id}`} className={styles.readMore}>
+                    Read →
+                  </Link>
+                </article>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          )}
+        </>
+      )}
     </Layout>
   );
 }

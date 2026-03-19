@@ -1,4 +1,96 @@
 /* styles/Portfolio.module.css */
+
+/* ── Page header ── */
+.header {
+  margin: -1.5rem -1.5rem 2rem;
+  padding: 2rem 1.5rem 1.75rem;
+  background: radial-gradient(ellipse at 0% 110%, color-mix(in srgb, var(--accent-primary) 12%, transparent) 0%, transparent 60%);
+  border-radius: 24px 24px 0 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.pageEyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin: 0 0 0.75rem;
+}
+
+.heroStatement {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 800;
+  color: var(--text-heading);
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+}
+
+.heroSupport {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 560px;
+}
+
+.heroStats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.heroStatItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.heroStatLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.heroStatValue {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-success);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.heroStatReturn {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.heroStatPercent {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.heroStatPositive { color: var(--color-success); }
+.heroStatNegative { color: var(--color-error); }
+
+/* ── Admin login section ── */
+.adminLoginSection {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
 .container {
   padding: 1.5rem;
   background: var(--bg-surface);
@@ -18,29 +110,6 @@
   flex-wrap: wrap;
 }
 
-.portfolioStats {
-  display: flex;
-  gap: 2rem;
-  margin-left: auto;
-}
-
-.statGroup {
-  display: flex;
-  flex-direction: column;
-}
-
-.appreciationValue {
-  font-size: 1.5rem;
-  font-weight: 700;
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.appreciationPercent {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
 
 /* Dividend income card */
 .dividendCard {
@@ -138,17 +207,20 @@
 }
 
 @media (max-width: 768px) {
-  .portfolioStats {
-    margin-left: 0;
-    width: 100%;
-    border-top: 1px solid var(--border-subtle);
-    padding-top: 1rem;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
   .searchSection {
     gap: 1.5rem;
+  }
+
+  .heroStats {
+    gap: 2rem;
+  }
+
+  .heroStatValue {
+    font-size: 2rem;
+  }
+
+  .heroStatReturn {
+    font-size: 1.3rem;
   }
 }
 
@@ -184,6 +256,19 @@
   opacity: 0.85;
 }
 
+/* ── Layer color-coding ── */
+.columnAnchor    { border-top: 3px solid var(--accent-primary); }
+.columnGrowth    { border-top: 3px solid #7C3AED; }
+.columnIncome    { border-top: 3px solid var(--color-success); }
+.columnAsymmetric { border-top: 3px solid #F59E0B; }
+.columnResearch  { border-top: 3px solid var(--text-muted); }
+
+.columnAnchor h2     { color: var(--accent-primary); opacity: 1; }
+.columnGrowth h2     { color: #7C3AED; opacity: 1; }
+.columnIncome h2     { color: var(--color-success); opacity: 1; }
+.columnAsymmetric h2 { color: #F59E0B; opacity: 1; }
+.columnResearch h2   { color: var(--text-muted); opacity: 1; }
+
 .addButton {
   background: var(--accent-primary);
   color: #ffffff;
@@ -200,17 +285,6 @@
   opacity: 0.9;
 }
 
-.positive {
-  color: var(--color-success);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.negative {
-  color: var(--color-error);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
 
 .name {
   color: var(--text-muted);
@@ -245,7 +319,7 @@
 
 .topBar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
@@ -272,22 +346,6 @@
   margin-bottom: 0.5rem;
 }
 
-.techTooltip {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-.viewSource {
-  color: var(--accent-primary);
-  text-decoration: none;
-}
-
-.viewSource:hover {
-  text-decoration: underline;
-}
 
 .clearButton {
   background: none;
@@ -331,6 +389,7 @@
   padding: 1.2rem;
   margin-bottom: 2rem;
   border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-primary);
 }
 
 .summaryHeaderCompact {
@@ -752,5 +811,28 @@
 .infoButton:hover {
   background: rgba(96, 165, 250, 0.1);
   border-color: #60a5fa;
+}
+
+/* ── Page closer (Psalm 73:20) ── */
+
+.pageCloser {
+  margin: 3rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.pageCloserText {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.pageCloserAttribution {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.7;
 }
 

@@ -1,7 +1,8 @@
 ---
 title: 'WikiSurf: The Foundation of My Autonomous Research Agent'
-date: '2026-03-09'
+date: '2026-03-07'
 excerpt: 'Before FinSurf, there was WikiSurf—a project that taught me the intricacies of tool orchestration and structured LLM outputs.'
+tags: ['AI', 'Engineering']
 ---
 
 Every complex project has its predecessor, a "proof of concept" that lays the groundwork for future innovation. For my recent work on [FinSurf](https://finsurf.net), that foundation was **WikiSurf**. 

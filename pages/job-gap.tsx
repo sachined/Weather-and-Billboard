@@ -39,18 +39,25 @@ export default function JobGap() {
 
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1 className={styles.pageTitle}>Technical Roadmap & Growth</h1>
-          <p className={styles.pageSubtitle}>{SITE_NAME} | Technical Strategy</p>
+          <p className={styles.pageEyebrow}>Technical Roadmap &amp; Growth</p>
+          <h1 className={styles.heroStatement}>
+            This page makes one argument:{' '}
+            <span className={styles.heroAccent}>AI Solutions Engineer.</span>
+          </h1>
+          <p className={styles.heroSupport}>
+            3.5 years deploying enterprise AI at Fortune 500 scale.
+            FinSurf is what I built when I stepped back to think.
+          </p>
         </header>
 
         {/* Tab Navigation */}
-        <div 
+        <div
           role="tablist"
           aria-label="Technical Roadmap Sections"
           className={styles.tabList}
         >
           {[
-            { id: 'roles', label: 'Core Expertise' },
+            { id: 'roles', label: 'Role Fit' },
             { id: 'analysis', label: 'Technical Journey' },
             ...(isLocal ? [
               { id: 'checklist', label: 'Action Checklist' }
@@ -77,6 +84,8 @@ export default function JobGap() {
           hidden={activeTab !== 'roles'}
         >
           {activeTab === 'roles' && (
+            <>
+            <p className={styles.gridHint}>Select a role to see the fit →</p>
             <div className={styles.grid}>
               <RoleSelection 
                 roles={ROLES_DATA}
@@ -90,10 +99,11 @@ export default function JobGap() {
                 />
               </div>
             </div>
+            </>
           )}
         </div>
 
-        <div 
+        <div
           id="panel-analysis"
           role="tabpanel"
           aria-labelledby="tab-analysis"

@@ -8,7 +8,7 @@
   background-color: var(--bg-surface);
   border-radius: 24px;
   padding: 3rem 2.5rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  box-shadow: var(--card-shadow);
   border: 1px solid var(--border-subtle);
 }
 
@@ -39,16 +39,10 @@
   font-weight: 700;
 }
 
-.linksContainer {
+.links {
   display: flex;
   gap: 1rem;
-  align-items: center;
   flex-wrap: wrap;
-}
-
-.linksInner {
-  display: flex;
-  gap: 1rem;
 }
 
 .emailLink {
