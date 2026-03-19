@@ -23,6 +23,7 @@ interface StockData {
 export default function PortfolioPage() {
   const [query, setQuery] = useState('');
   const [quantity, setQuantity] = useState<number>(0);
+  const [costBasisInput, setCostBasisInput] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
@@ -37,9 +38,12 @@ export default function PortfolioPage() {
     historyData,
     appreciation,
     totalValue,
+    estimatedAnnualIncome,
     loading,
     error,
     showResearch,
+    chartEnabled,
+    enableChart,
     updatePosition,
     clearPortfolio,
     toggleResearch,
@@ -52,9 +56,11 @@ export default function PortfolioPage() {
   const addOrUpdatePosition: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (!query) return;
-    updatePosition(query, Number(quantity));
+    const cb = costBasisInput !== '' ? Number(costBasisInput) : undefined;
+    updatePosition(query, Number(quantity), cb);
     setQuery('');
     setQuantity(0);
+    setCostBasisInput('');
   };
 
   const handleClear = () => {
@@ -69,9 +75,16 @@ export default function PortfolioPage() {
     setShowLogin(false);
   };
 
+  // Real portfolio value: Anchor + Growth + Income + Asymmetric (excludes Research simulation)
   const coreValue = stockData
-      .filter(s => getTickerLayer(s.symbol) !== 'Research')
-      .reduce((acc, curr) => acc + (curr.regularMarketPrice * curr.shares), 0);
+    .filter(s => getTickerLayer(s.symbol) !== 'Research')
+    .reduce((acc, curr) => acc + (curr.regularMarketPrice * curr.shares), 0);
+
+  // Research = simulation layer only (user-added watchlist tickers)
+  const hasResearchPositions = myPositions.some(p => getTickerLayer(p.symbol) === 'Research');
+  const researchValue = stockData
+    .filter(s => getTickerLayer(s.symbol) === 'Research')
+    .reduce((acc, s) => acc + (s.regularMarketPrice * s.shares), 0);
 
   const renderLayer = (layer: PortfolioLayer) => {
 
@@ -80,7 +93,8 @@ export default function PortfolioPage() {
 
     // Calculate Actual Ratio
     const layerValue = layerStocks.reduce((acc, s) => acc + (s.regularMarketPrice * s.shares), 0);
-    const denominator = (layer === 'Research') ? totalValue : coreValue;
+    // Research is simulation: show % of simulated total (real + research). All other layers use real portfolio value.
+    const denominator = (layer === 'Research') ? (coreValue + researchValue) : coreValue;
     const actualRatio = denominator > 0 ? (layerValue / denominator) * 100 : 0;
 
     const targetStr = LAYER_TARGETS[layer];
@@ -92,25 +106,41 @@ export default function PortfolioPage() {
 
     if (layerStocks.length === 0 && layer !== 'Research') return null;
 
+    const researchRatio = (coreValue + researchValue) > 0
+      ? ((layerValue / (coreValue + researchValue)) * 100).toFixed(1)
+      : '0.0';
+
     return (
       <div className={styles.column} key={layer}>
         <div className={styles.columnHeader}>
           <h2>{layer}</h2>
-          <div className={styles.ratioGroup}>
-          <span className={styles.targetBadge}>Target: {targetStr}</span>
+          <div className={styles.ratioBadges}>
+            <span className={styles.targetBadge}>Target: {targetStr}</span>
             <span className={`${styles.actualBadge} ${isOverTarget ? styles.actualBadgeWarning : styles.actualBadgeSuccess}`}>
               Actual: {actualRatio.toFixed(1)}%
             </span>
           </div>
         </div>
+        {layer !== 'Research' && hasResearchPositions && researchValue > 0 && layerValue > 0 && (
+          <div className={styles.researchBadgeRow}>
+            <span
+              className={styles.researchBadge}
+              title={`${layer} ($${layerValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}) is ${researchRatio}% of your full portfolio including Research ($${(coreValue + researchValue).toLocaleString(undefined, { maximumFractionDigits: 0 })} total). The Actual % above excludes Research.`}
+            >
+              {layer}: {researchRatio}% of total (incl. Research)
+            </span>
+          </div>
+        )}
         {layerStocks.map(s => (
-          <StockRow 
+          <StockRow
             key={s.symbol}
             symbol={s.symbol}
             price={s.regularMarketPrice}
             name={s.shortName}
             change={s.regularMarketChangePercent}
             shares={s.shares}
+            costBasis={s.costBasis}
+            totalPortfolioValue={totalValue}
           />
         )
         )}
@@ -133,13 +163,13 @@ export default function PortfolioPage() {
             ℹ️ System Architecture
           </button>
           <div className={styles.topBarRight}>
-            {myPositions.some(p => getTickerLayer(p.symbol) === 'Research') && (
+            {hasResearchPositions && (
               <button
                 onClick={toggleResearch}
                 className={styles.toggleButton}
                 style={!showResearch ? { opacity: 0.6 } : {}}
               >
-                {showResearch ? 'Exclude Research' : 'Include Research'}
+                {showResearch ? 'Hide Simulation' : 'Show Simulation'}
               </button>
             )}
             <div className={styles.techTooltip}>
@@ -184,20 +214,30 @@ export default function PortfolioPage() {
         <div className={styles.searchSection}>
           {isAdmin && (
             <form onSubmit={addOrUpdatePosition} className={styles.searchForm}>
-              <input 
-                className={styles.glassInput} 
-                value={query} 
-                onChange={e => setQuery(e.target.value)} 
-                placeholder="Ticker (e.g. MSFT)" 
+              <input
+                className={styles.glassInput}
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Ticker (e.g. MSFT)"
                 aria-label="Stock Ticker"
               />
-              <input 
-                className={styles.glassInputShort} 
-                type="number" 
-                value={quantity || ''} 
-                onChange={e => setQuantity(Number(e.target.value))} 
-                placeholder="Shares" 
+              <input
+                className={styles.glassInputShort}
+                type="number"
+                value={quantity || ''}
+                onChange={e => setQuantity(Number(e.target.value))}
+                placeholder="Shares"
                 aria-label="Quantity"
+              />
+              <input
+                className={styles.glassInputShort}
+                type="number"
+                step="0.01"
+                value={costBasisInput}
+                onChange={e => setCostBasisInput(e.target.value)}
+                placeholder="Avg cost"
+                aria-label="Average cost per share (optional)"
+                title="Average cost per share — used to calculate unrealized P&L"
               />
               <button type="submit" className={styles.addButton}>Update Portfolio</button>
             </form>
@@ -211,7 +251,7 @@ export default function PortfolioPage() {
             </div>
             {appreciation.value !== 0 && (
               <div className={styles.statGroup}>
-                <span className={styles.totalValueLabel}>Annual Appreciation</span>
+                <span className={styles.totalValueLabel}>{timeRange === 'all' ? 'Overall Appreciation' : 'Annual Appreciation'}</span>
                 <span className={`${styles.appreciationValue} ${appreciation.value >= 0 ? styles.positive : styles.negative}`}>
                   {appreciation.value >= 0 ? '+' : ''}${Math.abs(appreciation.value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   <span className={styles.appreciationPercent}>
@@ -223,30 +263,98 @@ export default function PortfolioPage() {
           </div>
         </div>
 
-        {(historyData.totalData || historyData.data) && historyData.labels.length > 0 && (
-          <div className={styles.chartSection}>
-            <div className={styles.chartHeader}>
-              <h3>Portfolio Performance</h3>
-              <button onClick={toggleTimeRange} className={styles.toggleButton}>
-                {timeRange === 'all' ? 'View Last Year' : 'View All Time'}
-              </button>
-              <button onClick={toggleAccumulation} className={styles.toggleButton}>
-                {showAccumulation ? 'View as Fixed Holdings' : 'View Real Growth'}
-              </button>
+        {estimatedAnnualIncome > 0 && (
+          <div className={styles.dividendCard}>
+            <div className={styles.dividendMain}>
+              <span className={styles.dividendLabel}>Estimated Annual Dividend Income</span>
+              <span className={styles.dividendAmount}>
+                ${estimatedAnnualIncome.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </span>
             </div>
-            <PortfolioHistoryChart 
-              labels={historyData.labels} 
-              baseData={historyData.baseData}
-              totalData={historyData.totalData}
-              data={historyData.data} 
-            />
+            <p className={styles.dividendNote}>
+              Based on trailing 12-month dividend rates × current share counts. Does not include reinvestment or special dividends.
+            </p>
           </div>
         )}
+
+        {!chartEnabled ? (
+          <div className={styles.chartPlaceholder}>
+            <button onClick={enableChart} className={styles.toggleButton}>
+              Show Performance Chart
+            </button>
+            <p>5-year portfolio history — loaded on demand.</p>
+          </div>
+        ) : historyData.labels.length > 0 ? (
+          <div className={styles.chartSection}>
+            <div className={styles.chartHeader}>
+              <div>
+                <h3>Portfolio Performance</h3>
+                <p className={styles.chartSubtitle}>
+                  {showAccumulation
+                    ? 'Real Growth — each position is counted only from the date it was actually added.'
+                    : 'Fixed Holdings — all positions treated as if held since Jan 2021 (shows pure price appreciation).'}
+                  {' '}
+                  {timeRange === '1y' ? 'Showing last 12 months.' : 'Showing all time.'}
+                </p>
+              </div>
+              <div className={styles.chartControls}>
+                <button onClick={toggleTimeRange} className={styles.toggleButton}>
+                  {timeRange === 'all' ? 'Last Year' : 'All Time'}
+                </button>
+                <button onClick={toggleAccumulation} className={styles.toggleButton}>
+                  {showAccumulation ? 'Fixed Holdings' : 'Real Growth'}
+                </button>
+              </div>
+            </div>
+            <PortfolioHistoryChart
+              labels={historyData.labels}
+              baseData={historyData.baseData}
+              totalData={historyData.totalData}
+              data={historyData.data}
+            />
+          </div>
+        ) : (
+          <div className={styles.chartPlaceholder}>
+            <p>Loading chart…</p>
+          </div>
+        )}
+
+        <details className={styles.legendBox}>
+          <summary className={styles.legendSummary}>How this works — layers & badges</summary>
+          <div className={styles.legendBody}>
+            <div className={styles.legendSection}>
+              <h4>Portfolio Layers</h4>
+              <ul>
+                <li><strong>Anchor</strong> — Core long-term holdings. High conviction, broad exposure. Target allocation is shown in the column header badge.</li>
+                <li><strong>Growth</strong> — Higher-upside positions with more volatility tolerance.</li>
+                <li><strong>Income</strong> — Dividend-generating holdings tracked for yield.</li>
+                <li><strong>Asymmetric</strong> — High-conviction speculative bets held as real positions. Counted in portfolio value, history, and allocation math. Higher risk, longer time horizon.</li>
+                <li><strong>Research</strong> — Simulated watchlist. These tickers are <em>not</em> counted in your real portfolio value or performance chart. Toggle &ldquo;Show Simulation&rdquo; to see what your portfolio would look like if they were real.</li>
+              </ul>
+            </div>
+            <div className={styles.legendSection}>
+              <h4>Column Header Badges</h4>
+              <ul>
+                <li><strong>Target</strong> — Desired allocation range for that layer (set in strategy config).</li>
+                <li><strong>Actual</strong> — Current allocation. Green = within target, amber = over target.</li>
+                <li><strong>[Layer]: X% of total (incl. Research)</strong> — Appears when you have a Research simulation active. Shows what share of your <em>simulated</em> total (real + Research) that layer represents. Hover for exact dollar amounts. The Actual % above always uses only your real portfolio.</li>
+              </ul>
+            </div>
+            <div className={styles.legendSection}>
+              <h4>Per-Stock Badges</h4>
+              <ul>
+                <li><strong>Weight %</strong> — Small pill next to share count. Each position&rsquo;s market value as a percentage of the total visible portfolio.</li>
+                <li><strong>Unrealized P&amp;L</strong> — Shown below the stock row when an average cost basis is recorded. Positive = green, negative = red. Formula: (current price − avg cost) × shares.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
 
         <main className={styles.grid}>
           {renderLayer('Anchor')}
           {renderLayer('Growth')}
           {renderLayer('Income')}
+          {renderLayer('Asymmetric')}
           {renderLayer('Research')}
         </main>
         <ArchitectureModal isOpen={isModalOpen} onClose={() =>

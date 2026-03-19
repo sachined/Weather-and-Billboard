@@ -20,7 +20,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         regularMarketPrice: quote.regularMarketPrice,
         regularMarketChangePercent: quote.regularMarketChangePercent,
         shortName: quote.shortName || quote.longName || quote.symbol,
+        trailingAnnualDividendRate: (quote as any).trailingAnnualDividendRate ?? 0,
+        trailingAnnualDividendYield: (quote as any).trailingAnnualDividendYield ?? 0,
       }));
+      res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=1800');
       return res.status(200).json(results);
     }
 
@@ -29,11 +32,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(404).json({ error: `No data found for ${ticker}` });
     }
     
+    res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=1800');
     res.status(200).json({
       symbol: quote.symbol,
       regularMarketPrice: quote.regularMarketPrice,
       regularMarketChangePercent: quote.regularMarketChangePercent,
       shortName: quote.shortName || quote.longName || quote.symbol,
+      trailingAnnualDividendRate: (quote as any).trailingAnnualDividendRate ?? 0,
+      trailingAnnualDividendYield: (quote as any).trailingAnnualDividendYield ?? 0,
     });
   } catch (error) {
     console.error('Yahoo Finance API Error:', error);

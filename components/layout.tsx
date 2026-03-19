@@ -23,7 +23,7 @@ export default function Layout({ children, home }: LayoutProps) {
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content={`Weather and career growth tools by ${name}`}
+          content={`Software engineer building AI tools and products. Explore FinSurf, investment strategy, and more.`}
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />

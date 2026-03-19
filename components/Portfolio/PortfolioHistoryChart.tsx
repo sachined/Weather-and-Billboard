@@ -27,28 +27,24 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
     if (!ctx) return;
 
     const isDark = theme === 'dark';
-    const isSpring = theme === 'spring';
 
-    const accentColor = isDark ? '#38bdf8' : 
-                        isSpring ? '#98D8A3' : '#2563EB';
+    const accentColor = isDark ? '#38bdf8' : '#2563EB';
 
     const rootStyle = getComputedStyle(document.documentElement);
-    const textColor = rootStyle.getPropertyValue('--chart-label').trim() || '#000000';
+    const textColor = rootStyle.getPropertyValue('--chart-label').trim() || '#4A5568';
     const gridColor = rootStyle.getPropertyValue('--chart-grid').trim() || 'rgba(0, 0, 0, 0.1)';
-    const baseColor = isDark ? 'rgba(255, 255, 255, 0.55)' :
-                      isSpring ? 'rgba(152, 216, 163, 0.4)' : 'rgba(215,221,232,0.55)';
+    const baseColor = isDark ? 'rgba(255, 255, 255, 0.45)' : 'rgba(148, 163, 184, 0.6)';
 
     const mainData = totalData || data || [];
     const secondaryData = baseData || [];
 
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, isDark ? 'rgba(56, 189, 248, 0.4)' :
-                             isSpring ? 'rgba(152, 216, 163, 0.4)' : 'rgba(2,132,199,0.4)');
+    gradient.addColorStop(0, isDark ? 'rgba(56, 189, 248, 0.35)' : 'rgba(37, 99, 235, 0.25)');
     gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
     const datasets = [
       {
-        label: 'Total Portfolio ($)',
+        label: 'Portfolio Value (with new adds)',
         data: mainData,
         fill: true,
         backgroundColor: gradient,
@@ -66,12 +62,13 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
     ];
 
     // Only add base dataset if it's different from the main data
-    const showBase = secondaryData.length > 0 && 
+    const showBase = secondaryData.length > 0 &&
+                    secondaryData.some(v => v > 0) &&
                     secondaryData.some((v, i) => v !== mainData[i]);
 
     if (showBase) {
       datasets.unshift({
-        label: 'Base Portfolio ($)',
+        label: 'Original Positions Only',
         data: secondaryData,
         fill: false,
         backgroundColor: 'transparent',
@@ -122,14 +119,10 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
             }
           },
           tooltip: {
-            backgroundColor: isDark ? 'rgba(30, 41, 59, 0.9)' :
-                             isSpring ? '#FFFFFF' : 'rgba(255, 255, 255, 0.95)',
-            titleColor: isDark ? '#fff' : 
-                        isSpring ? '#55705E' : '#0f132a',
-            bodyColor: isDark ? '#fff' : 
-                       isSpring ? '#333333' : '#0f132a',
-            borderColor: isDark ? 'transparent' : 
-                         isSpring ? '#98D8A3' : '#e2e8f0',
+            backgroundColor: isDark ? 'rgba(30, 41, 59, 0.9)' : 'rgba(255, 255, 255, 0.97)',
+            titleColor: isDark ? '#f1f5f9' : '#0f172a',
+            bodyColor: isDark ? '#94a3b8' : '#4A5568',
+            borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0',
             borderWidth: 1,
             titleFont: { size: 14, weight: 'bold' },
             bodyFont: { size: 13 },

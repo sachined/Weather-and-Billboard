@@ -1,122 +1,137 @@
 /* styles/globals.css */
 
-/* ?? Main: Spring Theme (Deep Forest) */
+/* ✨ Default: Modern Minimalist (Light) — WCAG AA compliant */
 :root {
   /* Surface / Backgrounds */
-  --bg-page: #F9F9F9; /* Soft, warm white */
+  --bg-page: #FAFAFA;
   --bg-surface: #FFFFFF;
-  --bg-surface-hover: #F1F5F2; /* Very light sage tint */
-  --bg-glass: rgba(249, 249, 249, 0.85);
-
-  /* Borders */
-  --border-subtle: #E8EEE9;
-  --border-main: #C8E6D1;
-
-  /* Text */
-  --text-main: #333333; /* Dark, legible gray */
-  --text-muted: #5A6A5E; /* Muted sage-gray */
-  --text-heading: #e4b336; /* Deeper sage green */
-
-  /* Accents */
-  --accent-primary: #98D8A3; /* Calming pastel green */
-  --accent-secondary: #55705E; /* Deeper sage green */
-  --brand-gradient: linear-gradient(135deg, #F9F9F9 0%, #E8F5E9 100%);
-
-  /* Indicators */
-  --color-success: #98D8A3;
-  --color-error: #E57373;
-  --color-warning: #F6E05E;
-
-  /* Layout Defaults */
-  --nav-bg: rgba(255, 255, 255, 0.8);
-
-  /* Pastels for Skills/Badges */
-  --pastel-pink: #FFD1DC;
-  --pastel-yellow: #FFF9C4;
-  --chart-grid: rgba(100, 250, 200, 0.15);
-  --chart-axis: rgba(90, 8, 232, 0.49);
-  --chart-fill: rgba(79, 8, 198, 0.48);
-  --chart-label: #28d863;
-
-  --tag-bg-1: #FFD1DC;
-  --tag-bg-2: #FFF9C4;
-}
-
-/* ?? Alternative: Midnight Slate Theme */
-[data-theme='dark'] {
-  /* Surface / Backgrounds */
-  --bg-page: #0f172a; /* Deep Slate 900 */
-  --bg-surface: #1e293b; /* Slate 800 */
-  --bg-surface-hover: #334155; /* Slate 700 */
-  --bg-glass: rgba(15, 23, 42, 0.7);
-  
-  /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-main: rgba(255, 255, 255, 0.2);
-
-  /* Text */
-  --text-main: #ffffff; /* Pure White */
-  --text-muted: rgba(255, 255, 255, 0.85); /* Slightly muted white */
-  --text-heading: #ffffff;
-
-  /* Accents */
-  --accent-primary: #38bdf8; /* Sky 400 */
-  --accent-secondary: #818cf8; /* Indigo 400 */
-  --brand-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  
-  /* Indicators */
-  --color-success: #4ade80; /* Green 400 */
-  --color-error: #f87171; /* Red 400 */
-  --color-warning: #fbbf24;
-  
-  /* Layout Defaults */
-  --nav-bg: rgba(30, 41, 59, 0.8);
-  --chart-grid: rgba(255, 255, 255, 0.15);
-  --chart-axis: rgba(255, 255, 255, 0.3);
-  --chart-fill: rgba(56, 189, 248, 0.25);
-  --chart-label: #ffffff;
-
-  --tag-bg-1: rgba(251, 113, 133, 0.15); /* Translucent Rose */
-  --tag-bg-2: rgba(250, 204, 21, 0.15);  /* Translucent Gold */
-
-}
-
-/* ? Alternative: Modern Minimalist Theme */
-[data-theme='light'] {
-  /* Surface / Backgrounds */
-  --bg-page: #FAFAFA; /* Deep Slate 900 */
-  --bg-surface: #FFFFFF; /* Keep it uniform for the Deep Slate look */
-  --bg-surface-hover: #F8FAFC; /* Slate 800 */
+  --bg-surface-hover: #F8FAFC;
   --bg-glass: rgba(250, 250, 250, 0.8);
-  
+
   /* Borders & Shadows */
-  --border-subtle: #E2E8F0; /* Thin, light gray */
+  --border-subtle: #E2E8F0;
   --border-main: #CBD5E1;
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
 
-  /* Text */
-  --text-main: #1A202C; /* Soft charcoal black */
-  --text-muted: #4A5568;
-  --text-heading: #0264ff;
+  /* Text — all pass WCAG AA on #FAFAFA */
+  --text-main: #1A202C;     /* 16.1:1 */
+  --text-muted: #4A5568;    /* 7.4:1 */
+  --text-heading: #0F172A;  /* 18.5:1 */
 
-  /* Accents */
-  --accent-primary: #2563EB; /* Vibrant Blue */
+  /* Accents — #2563EB on white = 5.9:1, passes AA */
+  --accent-primary: #2563EB;
   --accent-secondary: #3B82F6;
   --brand-gradient: linear-gradient(135deg, #FAFAFA 0%, #F1F5F9 100%);
 
   /* Indicators */
-  --color-success: #10B981;
-  --color-error: #EF4444;
-  --color-warning: #F59E0B;
+  --color-success: #059669;  /* distinct from accent */
+  --color-error: #DC2626;
+  --color-warning: #D97706;
 
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --chart-grid: rgba(245, 154, 35, 0.15);
-  --chart-axis: rgba(243, 144, 9, 0.42);
-  --chart-fill: rgba(232, 136, 26, 0.57);
-  --chart-label: rgba(224, 167, 24, 0.75);
+  /* Layout */
+  --nav-bg: rgba(255, 255, 255, 0.92);
 
-  --tag-bg-1: #FFF1F2; /* Soft Rose */
-  --tag-bg-2: #FFFBEB; /* Soft Amber */
+  /* Charts — coherent blue palette */
+  --chart-grid: rgba(37, 99, 235, 0.1);
+  --chart-axis: rgba(37, 99, 235, 0.3);
+  --chart-fill: rgba(37, 99, 235, 0.15);
+  --chart-label: #4A5568;
+
+  /* Tags */
+  --tag-bg-1: #FFF1F2;
+  --tag-bg-2: #FFFBEB;
+}
+
+/* System dark mode preference — applied before localStorage hydrates */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg-page: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-surface-hover: #334155;
+    --bg-glass: rgba(15, 23, 42, 0.7);
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-main: rgba(255, 255, 255, 0.2);
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-heading: #f8fafc;
+    --accent-primary: #38bdf8;
+    --accent-secondary: #818cf8;
+    --brand-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --color-success: #4ade80;
+    --color-error: #f87171;
+    --color-warning: #fbbf24;
+    --nav-bg: rgba(30, 41, 59, 0.92);
+    --chart-grid: rgba(56, 189, 248, 0.12);
+    --chart-axis: rgba(56, 189, 248, 0.3);
+    --chart-fill: rgba(56, 189, 248, 0.18);
+    --chart-label: #94a3b8;
+    --tag-bg-1: rgba(251, 113, 133, 0.15);
+    --tag-bg-2: rgba(250, 204, 21, 0.15);
+  }
+}
+
+/* 🌌 Midnight Slate (Dark) */
+[data-theme='dark'] {
+  --bg-page: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-surface-hover: #334155;
+  --bg-glass: rgba(15, 23, 42, 0.7);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-main: rgba(255, 255, 255, 0.2);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-heading: #f8fafc;
+  --accent-primary: #38bdf8;
+  --accent-secondary: #818cf8;
+  --brand-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --color-success: #4ade80;
+  --color-error: #f87171;
+  --color-warning: #fbbf24;
+  --nav-bg: rgba(30, 41, 59, 0.92);
+  --chart-grid: rgba(56, 189, 248, 0.12);
+  --chart-axis: rgba(56, 189, 248, 0.3);
+  --chart-fill: rgba(56, 189, 248, 0.18);
+  --chart-label: #94a3b8;
+  --tag-bg-1: rgba(251, 113, 133, 0.15);
+  --tag-bg-2: rgba(250, 204, 21, 0.15);
+}
+
+/* ✨ Modern Minimalist (Light) — explicit override */
+[data-theme='light'] {
+  --bg-page: #FAFAFA;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #F8FAFC;
+  --bg-glass: rgba(250, 250, 250, 0.8);
+  --border-subtle: #E2E8F0;
+  --border-main: #CBD5E1;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --text-main: #1A202C;
+  --text-muted: #4A5568;
+  --text-heading: #0F172A;
+  --accent-primary: #2563EB;
+  --accent-secondary: #3B82F6;
+  --brand-gradient: linear-gradient(135deg, #FAFAFA 0%, #F1F5F9 100%);
+  --color-success: #059669;
+  --color-error: #DC2626;
+  --color-warning: #D97706;
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --chart-grid: rgba(37, 99, 235, 0.1);
+  --chart-axis: rgba(37, 99, 235, 0.3);
+  --chart-fill: rgba(37, 99, 235, 0.15);
+  --chart-label: #4A5568;
+  --tag-bg-1: #FFF1F2;
+  --tag-bg-2: #FFFBEB;
+}
+
+/* Minimalist theme: refined heading weight */
+[data-theme='light'] h1,
+[data-theme='light'] h2,
+[data-theme='light'] h3,
+[data-theme='light'] h4 {
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 body {
@@ -137,6 +152,16 @@ img {
   display: block;
 }
 
+/* Page fade transition */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pageTransition {
+  animation: pageFadeIn 0.18s ease-out both;
+}
+
 /* Accessibility: Skip Link */
 .skip-link {
   position: absolute;
@@ -155,63 +180,59 @@ img {
   top: 0;
 }
 
-/* Accessibility: Improved Focus Visibility */
+/* Accessibility: Focus Visibility */
 :focus-visible {
   outline: 3px solid var(--accent-secondary);
   outline-offset: 2px;
 }
 
-/* Common Interactive Targets */
-button, a {
+/* Touch targets — buttons and role=button only, not all anchors */
+button,
+[role="button"] {
   min-height: 44px;
   min-width: 44px;
 }
 
-/* ?? Clear Weather Theme: Warm Amber & Gold */
+/* 🌤️ Clear Weather Theme: Warm Amber */
 [data-weather-theme='clear'] {
-  --bg-page: #fffbeb; /* Amber 50 */
+  --bg-page: #fffbeb;
   --bg-surface: #ffffff;
-  --bg-surface-hover: #fef3c7; /* Amber 100 */
+  --bg-surface-hover: #fef3c7;
   --bg-glass: rgba(255, 251, 235, 0.7);
-
   --border-subtle: rgba(146, 64, 14, 0.1);
   --border-main: rgba(146, 64, 14, 0.2);
-
-  --text-main: #92400e; /* Amber 800 */
-  --text-muted: #b45309; /* Amber 700 */
-
-  --accent-primary: #f59e0b; /* Amber 500 */
-  --accent-secondary: #fbbf24; /* Amber 400 */
+  --text-main: #92400e;
+  --text-muted: #78350f;
+  --text-heading: #78350f;
+  --accent-primary: #b45309;
+  --accent-secondary: #d97706;
   --brand-gradient: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-
   --nav-bg: rgba(255, 251, 235, 0.8);
+  --card-shadow: 0 4px 6px -1px rgba(146, 64, 14, 0.1);
+  --chart-grid: rgba(180, 83, 9, 0.12);
+  --chart-axis: rgba(180, 83, 9, 0.3);
+  --chart-fill: rgba(180, 83, 9, 0.15);
+  --chart-label: #78350f;
 }
 
-/* ??? Rain Weather Theme: Blue & Slate */
+/* 🌧️ Rain Weather Theme: Blue & Slate */
 [data-weather-theme='rain'] {
-  --bg-page: #f1f5f9; /* Slate 50 */
+  --bg-page: #f1f5f9;
   --bg-surface: #ffffff;
-  --bg-surface-hover: #e2e8f0; /* Slate 200 */
+  --bg-surface-hover: #e2e8f0;
   --bg-glass: rgba(241, 245, 249, 0.7);
-
   --border-subtle: rgba(30, 41, 59, 0.1);
   --border-main: rgba(30, 41, 59, 0.2);
-
-  --text-main: #1e293b; /* Slate 800 */
-  --text-muted: #475569; /* Slate 600 */
-
-  --accent-primary: #3b82f6; /* Blue 500 */
-  --accent-secondary: #60a5fa; /* Blue 400 */
+  --text-main: #1e293b;
+  --text-muted: #475569;
+  --text-heading: #0f172a;
+  --accent-primary: #2563eb;
+  --accent-secondary: #3b82f6;
   --brand-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-
   --nav-bg: rgba(241, 245, 249, 0.8);
-}
-
-/* Reduce heading weights for Minimalist theme */
-[data-theme='light'] h1,
-[data-theme='light'] h2,
-[data-theme='light'] h3,
-[data-theme='light'] h4 {
-  font-weight: 500; /* Refined, less heavy appearance */
-  letter-spacing: -0.01em;
+  --card-shadow: 0 4px 6px -1px rgba(30, 41, 59, 0.08);
+  --chart-grid: rgba(37, 99, 235, 0.1);
+  --chart-axis: rgba(37, 99, 235, 0.3);
+  --chart-fill: rgba(37, 99, 235, 0.15);
+  --chart-label: #475569;
 }

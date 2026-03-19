@@ -2,6 +2,16 @@ import Link from 'next/link';
 import { LucideIcon } from 'lucide-react';
 import styles from './FeatureCard.module.css';
 
+export type CardCategory = 'ai' | 'cli' | 'finance' | 'writing' | 'connect';
+
+const categoryLabels: Record<CardCategory, string> = {
+  ai:      'AI Agent',
+  cli:     'CLI Tool',
+  finance: 'Investment',
+  writing: 'Writing',
+  connect: 'Connect',
+};
+
 interface FeatureCardProps {
   href: string;
   external?: boolean;
@@ -9,28 +19,47 @@ interface FeatureCardProps {
   description: string;
   cta: string;
   Icon: LucideIcon;
-  emoji?: string;
-  emojiLabel?: string;
   isFeatured?: boolean;
+  category?: CardCategory;
+  lineageTag?: string;
 }
 
-export default function FeatureCard({ href, external, title, description, cta, Icon, isFeatured }: FeatureCardProps) {
+export default function FeatureCard({
+  href, external, title, description, cta, Icon,
+  isFeatured, category, lineageTag,
+}: FeatureCardProps) {
   const CardContent = (
-    <div className={`${styles.card} ${isFeatured ? styles.featured : ''}`}>
-      {isFeatured && <div className={styles.badge}>Trending</div>}
-      <div>
-        <div className={styles.iconWrapper}>
-            <Icon size={40} strokeWidth={1.5}  />
+    <div className={`${styles.card} ${isFeatured ? styles.featured : ''} ${category ? styles[`cat_${category}`] : ''}`}>
+      {isFeatured && <div className={styles.badge}>Featured Project</div>}
+
+      <div className={isFeatured ? styles.featuredInner : styles.inner}>
+        {/* Icon with tinted background */}
+        <div className={`${styles.iconWrapper} ${isFeatured ? styles.iconWrapperFeatured : ''} ${category ? styles[`icon_${category}`] : ''}`}>
+          <Icon size={isFeatured ? 52 : 36} strokeWidth={1.5} />
         </div>
-        <h2 className={styles.title}>
-          {title}
-        </h2>
-        <p className={styles.description}>
-          {description}
-        </p>
-      </div>
-      <div className={styles.cta}>
-        {cta} <span className={styles.arrow}>→</span>
+
+        <div className={styles.content}>
+          <h2 className={`${styles.title} ${isFeatured ? styles.titleFeatured : ''}`}>
+            {title}
+          </h2>
+
+          {lineageTag && (
+            <span className={styles.lineageTag}>{lineageTag}</span>
+          )}
+
+          <p className={styles.description}>{description}</p>
+
+          <div className={styles.footer}>
+            <div className={styles.cta}>
+              {cta} <span className={styles.arrow}>→</span>
+            </div>
+            {category && !isFeatured && (
+              <span className={`${styles.categoryChip} ${styles[`chip_${category}`]}`}>
+                {categoryLabels[category]}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

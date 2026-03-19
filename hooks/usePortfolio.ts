@@ -10,6 +10,7 @@ export function usePortfolio() {
   const [isLocal, setIsLocal] = useState(false);
   const [adminKey, setAdminKey] = useState<string | null>(null);
   const [showResearch, setShowResearch] = useState(false);
+  const [chartEnabled, setChartEnabled] = useState(false);
 
   const [myPositions, setMyPositions] = useState<UserPosition[]>([]);
   const [stockData, setStockData] = useState<any[]>([]);
@@ -21,6 +22,7 @@ export function usePortfolio() {
   }>({labels: [], data: []});
 
   const [totalValue, setTotalValue] = useState(0);
+  const [estimatedAnnualIncome, setEstimatedAnnualIncome] = useState(0);
   const [appreciation, setAppreciation] = useState<{ value: number, percent: number }>({value: 0, percent: 0});
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -123,12 +125,12 @@ export function usePortfolio() {
         if (Array.isArray(data)) {
           const merged = data.map(stock => {
             const pos = myPositions.find(p => p.symbol.toUpperCase() === stock.symbol.toUpperCase());
-            return { ...stock, shares: pos ? pos.shares : 0 };
+            return { ...stock, shares: pos ? pos.shares : 0, costBasis: pos?.costBasis };
           });
           setStockData(merged);
         } else if (data && !data.error) {
           const pos = myPositions.find(p => p.symbol.toUpperCase() === data.symbol.toUpperCase());
-          setStockData([{ ...data, shares: pos ? pos.shares : 0 }]);
+          setStockData([{ ...data, shares: pos ? pos.shares : 0, costBasis: pos?.costBasis }]);
         }
       } catch (e: any) {
         if (e.name === 'AbortError') return;
@@ -147,7 +149,7 @@ export function usePortfolio() {
     const { signal } = controller;
 
     const fetchHistory = async () => {
-      if (myPositions.length === 0) return;
+      if (!chartEnabled || myPositions.length === 0) return;
       try {
         const filteredPositions = showResearch
           ? myPositions
@@ -182,19 +184,23 @@ export function usePortfolio() {
     fetchHistory();
 
     return () => controller.abort();
-  }, [myPositions, showResearch, showAccumulation]);
+  }, [myPositions, showResearch, showAccumulation, chartEnabled]);
 
-  // 4. Calculate Total Value
+  // 4. Calculate Total Value + Estimated Annual Dividend Income
   useEffect(() => {
-    const total = stockData
-      .filter(s => showResearch || getTickerLayer(s.symbol) !== 'Research')
-      .reduce((acc, curr) => acc + (curr.regularMarketPrice * curr.shares), 0);
+    const visible = stockData.filter(s => showResearch || getTickerLayer(s.symbol) !== 'Research');
+    const total = visible.reduce((acc, curr) => acc + (curr.regularMarketPrice * curr.shares), 0);
     setTotalValue(total);
+    const income = visible.reduce((acc, curr) => {
+      const rate = curr.trailingAnnualDividendRate ?? 0;
+      return acc + rate * curr.shares;
+    }, 0);
+    setEstimatedAnnualIncome(income);
   }, [stockData, showResearch]);
 
   // --- ACTIONS (MongoDB Integrated) ---
 
-  const updatePosition = useCallback(async (symbol: string, shares: number) => {
+  const updatePosition = useCallback(async (symbol: string, shares: number, costBasis?: number) => {
     const ticker = symbol.toUpperCase().trim();
     const existing = myPositions.find(p => p.symbol === ticker);
     const addedAt = existing?.addedAt || new Date().toISOString().split('T')[0];
@@ -202,15 +208,15 @@ export function usePortfolio() {
     try {
       const res = await fetch('/api/portfolio', {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'admin-key': adminKey || ''
         },
-        body: JSON.stringify({ symbol: ticker, shares, addedAt })
+        body: JSON.stringify({ symbol: ticker, shares, addedAt, costBasis })
       });
 
       if (res.ok) {
-        const newPos: UserPosition = { symbol: ticker, shares, addedAt };
+        const newPos: UserPosition = { symbol: ticker, shares, addedAt, costBasis };
         setMyPositions(prev => {
           const filtered = prev.filter(p => p.symbol !== ticker);
           return [...filtered, newPos];
@@ -282,9 +288,12 @@ export function usePortfolio() {
     historyData: displayHistoryData,
     appreciation: displayAppreciation,
     totalValue,
+    estimatedAnnualIncome,
     loading,
     error,
     showResearch,
+    chartEnabled,
+    enableChart: () => setChartEnabled(true),
     updatePosition,
     removePosition,
     clearPortfolio,

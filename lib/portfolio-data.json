@@ -14,17 +14,17 @@
   ],
   "strategy": {
     "layers": {
-      "RKLB": { "layer": "Anchor", "thesis": "10-year conviction on space infrastructure." },
+      "RKLB": { "layer": "Asymmetric", "thesis": "High-conviction speculative bet on space infrastructure. Pre-profitability, high volatility — accumulate on deep retracements." },
       "GOOGL": { "layer": "Growth", "thesis": "AI infrastructure & Search dominance." },
       "AVGO": { "layer": "Growth", "thesis": "Semiconductor consolidation & AI networking." },
       "MSFT": { "layer": "Growth", "thesis": "Cloud & Enterprise AI leader." },
       "NFLX": { "layer": "Growth", "thesis": "Entertainment Leader with high-quality AI." },
       "MAIN": { "layer": "Income", "thesis": "Monthly dividend BDC." },
       "ARCC": { "layer": "Income", "thesis": "Leading BDC with high-quality loan portfolio." },
-      "KO": { "layer": "Income", "thesis": "Consumer staple stability." },
+      "KO": { "layer": "Anchor", "thesis": "Buffett's flagship hold — irreplaceable global brand, durable pricing power, and decades of dividend growth. Core forever position." },
       "ABBV": { "layer": "Income", "thesis": "Healthcare/Biotech cash flow." },
-      "IBM": { "layer": "Income", "thesis": "Quantum computing & Hybrid cloud." },
-      "VTI": { "layer": "Income", "thesis": "Broad market dividend growth." }
+      "IBM": { "layer": "Asymmetric", "thesis": "Speculative transformation play on hybrid cloud & quantum computing. Dividend is a floor, not the thesis — unproven upside warrants Long-term shots classification." },
+      "VTI": { "layer": "Anchor", "thesis": "Buffett's top recommendation for most investors — total US market exposure, low cost, held permanently. True portfolio anchor." }
     },
     "triggers": {
       "RKLB": {
@@ -38,6 +38,7 @@
     "Anchor": "38%",
     "Growth": "35-40%",
     "Income": "20-25%",
+    "Asymmetric": "N/A",
     "Research": "N/A"
   },
   "metrics": {

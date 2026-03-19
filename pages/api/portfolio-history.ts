@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
 
-    const startDate = new Date('2022-01-01');
+    const startDate = new Date('2021-01-01');
 
     const promises = positions.map(async (p) => {
       try {
@@ -93,11 +93,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     });
 
+    res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate=3600');
     res.status(200).json({
       labels: chartLabels,
       baseData: finalDates.map(d => baseTotals[d]),
       totalData: finalDates.map(d => totalAppreciation[d]),
-      data: finalDates.map(d => totalAppreciation[d]),
     });
   } catch (error) {
     console.error('Portfolio History Error:', error);

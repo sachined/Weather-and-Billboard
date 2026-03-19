@@ -1,42 +1,39 @@
 import { useEffect, useState } from 'react';
-import React from 'react';
+import { Sun, Moon } from 'lucide-react';
 import styles from './ThemeToggle.module.css';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState('spring');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-  // Check localStorage on load so the user's choice "sticks"
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'spring';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    if (saved === 'light' || saved === 'dark') {
+      setTheme(saved);
+      document.documentElement.setAttribute('data-theme', saved);
+    } else {
+      // Respect OS preference on first visit
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const resolved = prefersDark ? 'dark' : 'light';
+      setTheme(resolved);
+      document.documentElement.setAttribute('data-theme', resolved);
+    }
   }, []);
 
-  const toggleTheme = () => {
-    let newTheme;
-    if (theme === 'spring') newTheme = 'dark';
-    else if (theme === 'dark') newTheme = 'light';
-    else newTheme = 'spring';
-
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
-
-  const getThemeLabel = () => {
-    if (theme === 'spring') return '🌸 Spring';
-    if (theme === 'dark') return '🌌 Midnight';
-    return '✨ Minimalist';
+  const toggle = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
   };
 
   return (
-    <div className={styles.container}>
-      <button onClick={toggleTheme} className={styles.button} title="Click to toggle between Spring, Midnight, and Minimalist themes">
-        {getThemeLabel()}
-      </button>
-      <span className={styles.label}>
-        Easy Theme Toggle
-      </span>
-    </div>
+    <button
+      onClick={toggle}
+      className={styles.button}
+      aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+    >
+      {theme === 'light' ? <Moon size={18} strokeWidth={2} /> : <Sun size={18} strokeWidth={2} />}
+    </button>
   );
 }

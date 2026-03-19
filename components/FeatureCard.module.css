@@ -9,82 +9,180 @@
   border-radius: 16px;
   padding: 1.5rem 1.25rem;
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   position: relative;
   overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   background-color: var(--bg-surface-hover);
   border-color: var(--accent-primary);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 30px -8px rgba(0, 0, 0, 0.12);
 }
 
+/* Standard layout */
+.inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Icon container — tinted circle */
 .iconWrapper {
-  font-size: 2.5rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
   color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+/* Per-category icon tints */
+.icon_ai      { background: color-mix(in srgb, var(--accent-primary) 12%, transparent); color: var(--accent-primary); }
+.icon_cli     { background: color-mix(in srgb, var(--text-muted) 12%, transparent);    color: var(--text-muted); }
+.icon_finance { background: color-mix(in srgb, var(--color-success) 12%, transparent); color: var(--color-success); }
+.icon_writing { background: color-mix(in srgb, var(--color-warning) 14%, transparent); color: var(--color-warning); }
+.icon_connect { background: color-mix(in srgb, var(--accent-secondary) 12%, transparent); color: var(--accent-secondary); }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .title {
-  margin: 0 0 0.5rem 0;
-  color: var(--text-main);
-  font-size: 1.4rem;
+  margin: 0 0 0.35rem;
+  color: var(--text-heading);
+  font-size: 1.15rem;
   font-weight: 700;
+  line-height: 1.3;
 }
+
+.lineageTag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  opacity: 0.75;
+  margin-bottom: 0.6rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+}
+
+.lineageTag:hover { opacity: 1; }
 
 .description {
   color: var(--text-muted);
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.92rem;
   line-height: 1.6;
+  flex: 1;
 }
 
-.cta {
-  margin-top: 2rem;
-  color: var(--accent-primary);
-  font-weight: 700;
-  font-size: 1rem;
+/* Footer row — CTA + category chip */
+.footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
   gap: 0.5rem;
 }
 
-.arrow {
-  transition: transform 0.2s;
+.cta {
+  color: var(--accent-primary);
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.card:hover .arrow {
-  transform: translateX(4px);
+.arrow { transition: transform 0.2s; }
+.card:hover .arrow { transform: translateX(5px); }
+
+/* Category chips */
+.categoryChip {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
+.chip_ai      { background: color-mix(in srgb, var(--accent-primary) 12%, transparent);    color: var(--accent-primary); }
+.chip_cli     { background: color-mix(in srgb, var(--text-muted) 10%, transparent);        color: var(--text-muted); }
+.chip_finance { background: color-mix(in srgb, var(--color-success) 12%, transparent);     color: var(--color-success); }
+.chip_writing { background: color-mix(in srgb, var(--color-warning) 14%, transparent);     color: var(--color-warning); }
+.chip_connect { background: color-mix(in srgb, var(--accent-secondary) 12%, transparent);  color: var(--accent-secondary); }
+
+/* ── Featured card (FinSurf) ── */
 .featured {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 15px -5px var(--accent-primary), 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 1px var(--accent-primary), var(--card-shadow);
+  padding: 2rem;
 }
 
 .featured:hover {
-  box-shadow: 0 0 25px -5px var(--accent-primary), 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 2px var(--accent-primary), 0 20px 40px -8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.featuredInner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.iconWrapperFeatured {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  margin-bottom: 0;
+}
+
+.titleFeatured {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
 }
 
 .badge {
   position: absolute;
-  top: 1rem;
-  right: 1.25rem;
+  top: 1.25rem;
+  right: 1.5rem;
   background-color: var(--accent-primary);
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  z-index: 10;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 540px) {
+  .featuredInner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .iconWrapperFeatured { width: 60px; height: 60px; border-radius: 16px; }
+  .titleFeatured { font-size: 1.4rem; }
+  .featured { padding: 1.5rem; }
 }

@@ -39,7 +39,7 @@
 .postExcerpt {
   margin: 0.5rem 0;
   font-size: 0.95rem;
-  color: var(--text-main);
+  color: var(--text-muted);
   flex-grow: 1;
 }
 

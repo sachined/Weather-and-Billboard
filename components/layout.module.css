@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   max-width: 1000px;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   margin: 0 auto;
 }
 
@@ -14,8 +14,8 @@
 
 .themeToggleContainer {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0;
 }
 
 .headerImage {
@@ -30,11 +30,45 @@
 }
 
 .navbar {
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   width: 100%;
   border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 0.5rem;
+  position: relative;
 }
+
+/* Hamburger button — hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburgerLine {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text-muted);
+  border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* X state */
+.hamburgerLineTop  { transform: translateY(7px) rotate(45deg); }
+.hamburgerLineMid  { opacity: 0; }
+.hamburgerLineBot  { transform: translateY(-7px) rotate(-45deg); }
 
 .navList {
   list-style: none;
@@ -48,6 +82,34 @@
 
 .navItem {
   margin: 0;
+}
+
+/* Mobile nav */
+@media (max-width: 640px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navList {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    box-shadow: var(--card-shadow);
+  }
+
+  .navList.navOpen {
+    display: flex;
+  }
+
+  .navItem {
+    width: 100%;
+  }
 }
 
 .navLink {

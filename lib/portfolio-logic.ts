@@ -1,6 +1,6 @@
 import portfolioData from './portfolio-data.json';
 
-export type PortfolioLayer = 'Anchor' | 'Growth' | 'Income' | 'Research';
+export type PortfolioLayer = 'Anchor' | 'Growth' | 'Income' | 'Asymmetric' | 'Research';
 
 export interface StrategyAllocation {
   name: string;
@@ -29,7 +29,8 @@ export interface StockTrigger {
 export interface UserPosition {
   symbol: string;
   shares: number;
-  addedAt?: string; // ISO date string (YYYY-MM-DD)
+  addedAt?: string;    // ISO date string (YYYY-MM-DD)
+  costBasis?: number;  // average cost per share
 }
 
 export const CORE_POSITIONS = portfolioData.corePositions as UserPosition[];

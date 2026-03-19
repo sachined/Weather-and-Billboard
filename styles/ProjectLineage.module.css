@@ -1,0 +1,123 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin: 0 0 0.75rem;
+  text-align: center;
+}
+
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.25rem 2rem;
+  box-shadow: var(--card-shadow);
+}
+
+/* Individual project node */
+.node {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  min-width: 0;
+}
+
+.node:hover { opacity: 0.75; }
+
+.iconBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--text-muted) 10%, transparent);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.iconBoxFeatured {
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+}
+
+.nodeName {
+  margin: 0 0 0.15rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  white-space: nowrap;
+}
+
+.nodeDesc {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Arrow connector */
+.arrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  flex-shrink: 0;
+}
+
+.arrowLine {
+  height: 1px;
+  width: 24px;
+  background: var(--border-subtle);
+}
+
+.arrowLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+.arrowHead {
+  font-size: 1rem;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 540px) {
+  .flow {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .arrow {
+    padding: 0 0 0 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .arrowLine { width: 1px; height: 16px; }
+  .arrowHead { transform: rotate(90deg); }
+}
