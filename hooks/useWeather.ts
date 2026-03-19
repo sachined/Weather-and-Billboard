@@ -47,20 +47,18 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
       // Load history
       try {
         const res = await fetch('/api/weather/history');
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) {
-            setHistory(data);
-            return;
-          }
+        if (!res.ok) throw new Error('Fetch unsuccessful');
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setHistory(data);
+          return;
         }
-        throw new Error('Fetch unsuccessful');
       } catch (e) {
         console.warn("Using local weather history fallback:", e);
-        // Fallback to localStorage on error
-        const saved = localStorage.getItem('weatherSearchHistory');
-        if (saved) setHistory(JSON.parse(saved));
       }
+      // Fallback to localStorage when API returns empty or fails
+      const saved = localStorage.getItem('weatherSearchHistory');
+      if (saved) setHistory(JSON.parse(saved));
       setIsUnitLoaded(true);
     };
     initWeather();
