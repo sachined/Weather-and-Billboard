@@ -54,7 +54,7 @@ export function usePortfolio() {
     return { value: 0, percent: 0 };
   }, [displayHistoryData]);
 
-  // 1. Initial Load from MongoDB & Local UI Preferences
+  // 1. Initial Load & Local UI Preferences
   useEffect(() => {
     const initPortfolio = async () => {
       // Detection for UI features
@@ -79,7 +79,7 @@ export function usePortfolio() {
         const res = await fetch('/api/portfolio');
         const data = await res.json();
 
-        if (!res.ok) throw new Error(data.details || data.error ||'Failed to fetch from MongoDB');
+        if (!res.ok) throw new Error(data.details || data.error || 'Failed to fetch portfolio');
 
         // Use database positions if they exist, otherwise fallback to core defaults
         if (Array.isArray(data) && data.length > 0) {
@@ -88,9 +88,8 @@ export function usePortfolio() {
           setMyPositions(CORE_POSITIONS);
         }
       } catch (err) {
-        console.error("Detailed MongoDB Error:", err);
+        console.error("Portfolio fetch error:", err);
         setMyPositions(CORE_POSITIONS);
-        setError("Note: Using local fallback data. Check MongoDB connection.");
       } finally {
         setLoading(false);
       }
@@ -198,7 +197,7 @@ export function usePortfolio() {
     setEstimatedAnnualIncome(income);
   }, [stockData, showResearch]);
 
-  // --- ACTIONS (MongoDB Integrated) ---
+  // --- ACTIONS ---
 
   const updatePosition = useCallback(async (symbol: string, shares: number, costBasis?: number) => {
     const ticker = symbol.toUpperCase().trim();
@@ -222,7 +221,7 @@ export function usePortfolio() {
           return [...filtered, newPos];
         });
       } else {
-        setError("Failed to sync update with MongoDB.");
+        setError("Failed to update position.");
       }
     } catch (e) {
       console.error("Update Position Error:", e);
@@ -243,7 +242,7 @@ export function usePortfolio() {
       if (res.ok) {
         setMyPositions(prev => prev.filter(p => p.symbol !== ticker));
       } else {
-        setError("Failed to remove position from MongoDB.");
+        setError("Failed to remove position.");
       }
     } catch (e) {
       console.error("Remove Position Error:", e);
@@ -264,7 +263,7 @@ export function usePortfolio() {
         setStockData([]);
         setError(null);
       } else {
-        setError("Failed to clear portfolio from MongoDB.");
+        setError("Failed to clear portfolio.");
       }
     } catch (e) {
       console.error("Clear Portfolio Error:", e);
