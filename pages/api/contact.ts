@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getDb } from '@/lib/dbConnect';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -25,9 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const db = await getDb();
-    await db.collection('messages').insertOne({ name, email, message, submittedAt: new Date() });
-
     const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
       method: 'POST',
       body: JSON.stringify(req.body),
