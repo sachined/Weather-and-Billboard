@@ -56,7 +56,7 @@ export default function Layout({ children, home }: LayoutProps) {
                 height={96}
                 priority
               />
-            </>
+            </a>
             <h2 className={utilStyles.headingLg}>
               <Link href="/" className={utilStyles.colorInherit}>
                 {name}
