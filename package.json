@@ -1,6 +1,7 @@
 {
   "name": "personal-website-with-weather",
-  "version": "0.1.0",
+  "version": "1.0.0",
+
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -18,7 +19,15 @@
     "react-dom": "^19.0.0",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
+    "vercel": "^50.34.3",
     "yahoo-finance2": "^3.13.2"
+  },
+  "overrides": {
+    "tar": "^7.5.9",
+    "undici": "^6.21.1",
+    "minimatch": "^10.2.3",
+    "path-to-regexp": "^6.3.0",
+    "@tootallnate/once": "^3.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
