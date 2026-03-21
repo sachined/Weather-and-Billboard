@@ -5,13 +5,13 @@ import styles from './layout.module.css';
 import { useTheme } from '../hooks/useTheme';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/finsurf', label: 'FinSurf' },
-  { href: '/job-gap', label: 'Journey' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contact' },
-];
+   { href: 'https://finsurf.net/', label: 'Home', external: true },
+   { href: 'https://finsurf.net/finsurf', label: 'FinSurf', external: true },
+   { href: '/job-gap', label: 'Journey' },
+   { href: '/portfolio', label: 'Portfolio' },
+   { href: '/', label: 'Blog' },           // basePath makes this /blog
+   { href: 'https://finsurf.net/contact', label: 'Contact', external: true },
+ ];
 
 export default function Navbar() {
   const router = useRouter();

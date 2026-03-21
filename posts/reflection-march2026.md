@@ -33,6 +33,6 @@ I write because I believe mastery is communal. Whether I'm documenting an LLM's 
 
 Every post here is a reflection of a problem solved--often one that started with a "freaked out" Vercel build and ended with a more robust, production-ready solution. If you're a stakeholder looking for someone who can talk high-level strategy but isn't afraid to get their hands dirty in the `node_modules`, you're in the right place.
 
-<img src="public/images/img.png" >
+![img.png](blog/public/image/img.png)
 ---
-*Interested in seeing my work in action? Check out my latest technical deep-dives on [Finsurf.net](https://finsurf.net) or explore the [Technical Roadmap](/job-gap) here.*
+*Interested in seeing my work in action? Check out my latest technical deep-dives on [Finsurf.net](https://finsurf.net) or explore the [Technical Roadmap](/blog/job-gap) here.*

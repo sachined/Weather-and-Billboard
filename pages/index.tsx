@@ -1,96 +1,141 @@
 import Head from 'next/head';
-import { TrendingUp, Bot, Briefcase, PenTool } from 'lucide-react';
+import Link from 'next/link';
+import { useState, useMemo } from 'react';
 import Layout from '@/components/layout';
-import FeatureCard from '@/components/FeatureCard';
-import GlobalDashboard from '@/components/Dashboard/GlobalDashboard';
-import { SITE_NAME, SITE_TITLE } from '@/lib/constants';
-import styles from '@/styles/Home.module.css';
+import { SITE_NAME } from '@/lib/constants';
+import { getSortedPostsData, PostData } from '@/lib/posts';
+import styles from '@/styles/Blog.module.css';
+import { GetStaticProps } from 'next';
 
-export default function Home() {
+export const getStaticProps: GetStaticProps = async () => {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
+
+export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    allPostsData.forEach(({ tags }) => tags?.forEach((t) => tagSet.add(t)));
+    return Array.from(tagSet).sort();
+  }, [allPostsData]);
+
+  const filtered = activeTag
+    ? allPostsData.filter(({ tags }) => tags?.includes(activeTag))
+    : allPostsData;
+
+  const featured = !activeTag && filtered.length > 0 ? filtered[0] : null;
+  const rest = !activeTag ? filtered.slice(1) : filtered;
+
   return (
-    <Layout home>
+    <Layout>
       <Head>
-        <title>Sachin Nediyanchath — Software Engineer & AI Builder</title>
-        <meta name="description" content="Software engineer building AI-powered tools and products. Explore my projects, roadmap, and writing." />
-        <meta name="og:title" content="Sachin Nediyanchath — Software Engineer & AI Builder" />
-        <meta name="og:description" content="Software engineer building AI-powered tools and products." />
+        <title>{`Insights & Articles - ${SITE_NAME}`}</title>
       </Head>
 
-      <div className={styles.heroContainer}>
-        {/* Hero */}
-        <div className={styles.heroContent}>
-          <p className={styles.heroAccent}>Building at the edge of AI and enterprise software</p>
-          <p className={styles.heroDescription}>
-            From enterprise AI to production-grade personal tools —
-            I&apos;m a software engineer focused on turning complex systems into
-            useful products. Explore my work below.
-          </p>
-        </div>
+      <header className={styles.header}>
+        <p className={styles.pageEyebrow}>Insights &amp; Articles</p>
+        <h1 className={styles.heroStatement}>Notes on AI, engineering,<br />and the markets.</h1>
+      </header>
 
-        {/* Origin story */}
-        <section className={styles.originStory} aria-label="Origin story">
-          <p className={styles.originQuote}>&ldquo;A little rigorous research goes a long way.&rdquo;</p>
-        </section>
-
-        {/* Featured project — FinSurf */}
-        <div className={styles.featuredSection}>
-          <FeatureCard
-            href="/finsurf"
-            Icon={Bot}
-            title="FinSurf AI"
-            description="My flagship project: an AI assistant for financial research and market analysis. Live now."
-            cta="Learn More"
-            isFeatured
-            category="ai"
-            lineageTag="← Evolved from WikiSurf"
-          />
-        </div>
-
-        {/* Technical Growth — recruiter CTA */}
-        <div className={styles.recruiterSection}>
-          <p className={styles.recruiterEyebrow}>For recruiters &amp; hiring teams</p>
-          <FeatureCard
-            href="/job-gap"
-            Icon={TrendingUp}
-            title="Technical Growth"
-            description="My path from enterprise software to AI — skills, pivots, and what I'm focused on next."
-            cta="View Journey"
-            category="career"
-          />
-        </div>
-
-        {/* Section divider */}
-        <div className={styles.sectionDivider}>
-          <span className={styles.sectionLabel}>Explore more</span>
-        </div>
-
-        {/* Secondary cards */}
-        <div className={styles.cardsGrid}>
-          <FeatureCard
-            href="/portfolio"
-            Icon={Briefcase}
-            title="Growth Strategy"
-            description="A long-horizon investment framework I've built and track publicly — 10 years, one strategy."
-            cta="View Strategy"
-            category="finance"
-          />
-
-          <FeatureCard
-            href="/blog"
-            Icon={PenTool}
-            title="Insights & Articles"
-            description="Writing on AI, enterprise software, and where the two are colliding."
-            cta="Read Blog"
-            category="writing"
-          />
-        </div>
-
-        {/* Live dashboard — sits behind the cards above */}
-        <div className={styles.dashboardWrapper}>
-          <GlobalDashboard />
-        </div>
-
+      <div className={styles.filterBar}>
+        <button
+          className={`${styles.filterPill} ${activeTag === null ? styles.filterPillActive : ''}`}
+          onClick={() => setActiveTag(null)}
+        >
+          All
+        </button>
+        {allTags.map((tag) => (
+          <button
+            key={tag}
+            className={`${styles.filterPill} ${activeTag === tag ? styles.filterPillActive : ''}`}
+            onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+          >
+            {tag}
+          </button>
+        ))}
       </div>
+
+      {filtered.length === 0 ? (
+        <p className={styles.emptyState}>No posts found.</p>
+      ) : (
+        <>
+          {featured && (
+            <article className={styles.featuredCard}>
+              <div className={styles.featuredMeta}>
+                <span className={styles.featuredEyebrow}>Latest</span>
+                <span className={styles.readingTime}>{featured.readingTime} min read</span>
+              </div>
+              <h2 className={styles.featuredTitle}>
+                <Link href={`/posts/${featured.id}`}>{featured.title}</Link>
+              </h2>
+              <p className={styles.featuredExcerpt}>{featured.excerpt}</p>
+              <div className={styles.featuredFooter}>
+                <div className={styles.tagList}>
+                  {featured.tags?.map((tag) => (
+                    <button
+                      key={tag}
+                      className={`${styles.tagBadge} ${activeTag === tag ? styles.tagBadgeActive : ''}`}
+                      onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+                <Link href={`/posts/${featured.id}`} className={styles.featuredCta}>
+                  Read Article →
+                </Link>
+              </div>
+            </article>
+          )}
+
+          {rest.length > 0 && (
+            <div className={styles.blogGrid}>
+              {rest.map(({ id, date, title, excerpt, tags, readingTime }) => (
+                <article className={styles.blogCard} key={id}>
+                  <div className={styles.cardMeta}>
+                    <small className={styles.cardDate}>
+                      {new Date(date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </small>
+                    <small className={styles.readingTime}>{readingTime} min read</small>
+                  </div>
+                  <h2 className={styles.postTitle}>
+                    <Link href={`/posts/${id}`} className={styles.postLink}>
+                      {title}
+                    </Link>
+                  </h2>
+                  <p className={styles.postExcerpt}>{excerpt}</p>
+                  {tags?.length > 0 && (
+                    <div className={styles.tagList}>
+                      {tags.map((tag) => (
+                        <button
+                          key={tag}
+                          className={`${styles.tagBadge} ${activeTag === tag ? styles.tagBadgeActive : ''}`}
+                          onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  <Link href={`/posts/${id}`} className={styles.readMore}>
+                    Read →
+                  </Link>
+                </article>
+              ))}
+            </div>
+          )}
+        </>
+      )}
     </Layout>
   );
 }

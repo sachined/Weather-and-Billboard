@@ -47,7 +47,7 @@ export default function Layout({ children, home }: LayoutProps) {
           </>
         ) : (
           <>
-            <Link href="/">
+            <a href="https://finsurf.net/">
               <Image
                 src="/images/profile.jpg"
                 className={`${styles.headerImage} ${utilStyles.borderCircle}`}
@@ -56,7 +56,7 @@ export default function Layout({ children, home }: LayoutProps) {
                 height={96}
                 priority
               />
-            </Link>
+            </>
             <h2 className={utilStyles.headingLg}>
               <Link href="/" className={utilStyles.colorInherit}>
                 {name}
