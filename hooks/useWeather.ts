@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchWeather } from '@/lib/weather-api';
 import { kelvinToCelsius, getThemeFromIcon } from '@/lib/weather-utils';
+import { BASE_PATH } from '@/lib/constants';
 
 export interface ForecastItem {
   date: string;
@@ -46,7 +47,7 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
 
       // Load history
       try {
-        const res = await fetch('/api/weather/history');
+        const res = await fetch(`${BASE_PATH}/api/weather/history`);
         if (!res.ok) throw new Error('Fetch unsuccessful');
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
@@ -165,7 +166,7 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
 
       // 2. Update History in MongoDB
       const cityName = currData.name;
-      const res = await fetch('/api/weather/history', {
+      const res = await fetch(`${BASE_PATH}/api/weather/history`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ city: cityName }),
@@ -243,7 +244,7 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
   const removeHistoryItem = useCallback(async (city: string) => {
     try {
       // 1. Call the API to remove from MongoDB
-      const res = await fetch(`/api/weather/history?city=${encodeURIComponent(city)}`, {
+      const res = await fetch(`${BASE_PATH}/api/weather/history?city=${encodeURIComponent(city)}`, {
         method: 'DELETE'
       });
 

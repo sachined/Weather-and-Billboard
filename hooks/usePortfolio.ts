@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { UserPosition, CORE_POSITIONS, getTickerLayer } from '@/lib/portfolio-logic';
+import { BASE_PATH } from '@/lib/constants';
 
 export function usePortfolio() {
   const [timeRange, setTimeRange] = useState<'all' | '1y'>('all');
@@ -76,7 +77,7 @@ export function usePortfolio() {
       }
 
       try {
-        const res = await fetch('/api/portfolio');
+        const res = await fetch(`${BASE_PATH}/api/portfolio`);
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.details || data.error || 'Failed to fetch portfolio');
@@ -118,7 +119,7 @@ export function usePortfolio() {
       }
       try {
         const tickers = myPositions.map(p => p.symbol).join(',');
-        const res = await fetch(`/api/stock?ticker=${tickers}`, { signal });
+        const res = await fetch(`${BASE_PATH}/api/stock?ticker=${tickers}`, { signal });
         const data = await res.json();
 
         if (Array.isArray(data)) {
@@ -161,7 +162,7 @@ export function usePortfolio() {
         }
 
         const posParam = encodeURIComponent(JSON.stringify(filteredPositions));
-        const res = await fetch(`/api/portfolio-history?positions=${posParam}&ignoreDates=${!showAccumulation}`, { signal });
+        const res = await fetch(`${BASE_PATH}/api/portfolio-history?positions=${posParam}&ignoreDates=${!showAccumulation}`, { signal });
         const data = await res.json();
 
         if (data.labels && (data.totalData || data.data)) {
@@ -205,7 +206,7 @@ export function usePortfolio() {
     const addedAt = existing?.addedAt || new Date().toISOString().split('T')[0];
 
     try {
-      const res = await fetch('/api/portfolio', {
+      const res = await fetch(`${BASE_PATH}/api/portfolio`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -232,7 +233,7 @@ export function usePortfolio() {
   const removePosition = useCallback(async (symbol: string) => {
     const ticker = symbol.toUpperCase();
     try {
-      const res = await fetch(`/api/portfolio?symbol=${ticker}`, {
+      const res = await fetch(`${BASE_PATH}/api/portfolio?symbol=${ticker}`, {
         method: 'DELETE',
         headers: {
           'admin-key': adminKey || ''
@@ -252,7 +253,7 @@ export function usePortfolio() {
 
   const clearPortfolio = useCallback(async () => {
     try {
-      const res = await fetch('/api/portfolio', {
+      const res = await fetch(`${BASE_PATH}/api/portfolio`, {
         method: 'DELETE',
         headers: {
           'admin-key': adminKey || ''

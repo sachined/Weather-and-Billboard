@@ -43,7 +43,7 @@ export default function Post({ postData }: PostProps) {
       </Head>
       
       <div className={styles.backButton}>
-        <Link href="/blog">← Back to Blog</Link>
+        <Link href="/">← Back to Blog</Link>
       </div>
 
       <article className={styles.postContainer}>

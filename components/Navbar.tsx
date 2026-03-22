@@ -4,14 +4,19 @@ import { useRouter } from 'next/router';
 import styles from './layout.module.css';
 import { useTheme } from '../hooks/useTheme';
 
-const navLinks = [
-   { href: 'https://finsurf.net/', label: 'Home', external: true },
-   { href: 'https://finsurf.net/finsurf', label: 'FinSurf', external: true },
-   { href: '/job-gap', label: 'Journey' },
-   { href: '/portfolio', label: 'Portfolio' },
-   { href: '/', label: 'Blog' },           // basePath makes this /blog
-   { href: 'https://finsurf.net/contact', label: 'Contact', external: true },
- ];
+interface NavLink {
+  href: string;
+  label: string;
+  external?: boolean;
+}
+
+const navLinks: NavLink[] = [
+  { href: 'https://finsurf.net/', label: 'FinSurf', external: true },
+  { href: '/', label: 'Blog' },
+  { href: '/about', label: 'About' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/job-gap', label: 'Journey' },
+];
 
 export default function Navbar() {
   const router = useRouter();
@@ -41,6 +46,19 @@ export default function Navbar() {
 
       <ul className={`${styles.navList} ${isOpen ? styles.navOpen : ''}`}>
         {navLinks.map((link) => {
+          if (link.external) {
+            return (
+              <li key={link.href} className={styles.navItem}>
+                <a
+                  href={link.href}
+                  className={styles.navLink}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          }
           const isActive = router.pathname === link.href;
           return (
             <li key={link.href} className={styles.navItem}>

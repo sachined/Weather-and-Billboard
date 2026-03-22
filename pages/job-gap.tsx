@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/components/layout';
 import { ROLES_DATA, ROLE_ORDER, CHECKLIST_ITEMS } from '@/lib/roles';
@@ -11,6 +12,7 @@ import { useChecklist } from '@/hooks/useChecklist';
 import styles from '@/styles/JobGap.module.css';
 
 export default function JobGap() {
+  const router = useRouter();
   const [isLocal, setIsLocal] = useState(false);
   const [activeTab, setActiveTab] = useState('roles');
   const [selectedRole, setSelectedRole] = useState('AISolutionsEngineer');
@@ -23,6 +25,12 @@ export default function JobGap() {
       setIsLocal(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (router.query.tab && typeof router.query.tab === 'string') {
+      setActiveTab(router.query.tab);
+    }
+  }, [router.query.tab]);
 
   const handleRoleSelect = (key: string) => {
     setSelectedRole(key);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { SubmitEventHandler } from "react";
 import { Send } from 'lucide-react';
+import { BASE_PATH } from '@/lib/constants';
 import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
@@ -16,7 +17,7 @@ export default function ContactForm() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(`${BASE_PATH}/api/contact`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
