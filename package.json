@@ -13,21 +13,12 @@
     "chart.js": "^4.4.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.477.0",
-    "mongodb": "^7.1.0",
     "next": "^16.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "vercel": "^50.34.3",
     "yahoo-finance2": "^3.13.2"
-  },
-  "overrides": {
-    "tar": "^7.5.9",
-    "undici": "^6.21.1",
-    "minimatch": "^10.2.3",
-    "path-to-regexp": "^6.3.0",
-    "@tootallnate/once": "^3.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

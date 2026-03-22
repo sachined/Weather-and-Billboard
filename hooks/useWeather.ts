@@ -164,7 +164,6 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
       ]);
       updateWeatherData(currData, foreData);
 
-      // 2. Update History in MongoDB
       const cityName = currData.name;
       const res = await fetch(`${BASE_PATH}/api/weather/history`, {
         method: 'POST',
@@ -243,7 +242,6 @@ export function useWeather(options: { autoLocation?: boolean} = {autoLocation: t
 
   const removeHistoryItem = useCallback(async (city: string) => {
     try {
-      // 1. Call the API to remove from MongoDB
       const res = await fetch(`${BASE_PATH}/api/weather/history?city=${encodeURIComponent(city)}`, {
         method: 'DELETE'
       });

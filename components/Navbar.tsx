@@ -11,11 +11,12 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: 'https://finsurf.net/', label: 'FinSurf', external: true },
+  { href: 'https://finsurf.net/', label: 'FinSurf App', external: true },
   { href: '/', label: 'Blog' },
   { href: '/about', label: 'About' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/job-gap', label: 'Journey' },
+  { href: '/finsurf', label: 'FinSurf Product'}
 ];
 
 export default function Navbar() {

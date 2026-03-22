@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import styles from './Weather.module.css';
 import { ForecastItem } from '@/hooks/useWeather';
 
@@ -15,8 +14,8 @@ export default function Forecast({ forecast, unit }: ForecastProps) {
         <div key={index} className={styles.forecastItem}>
           <p className={styles.forecastDate}>{day.date}</p>
           <div className={styles.forecastIcon}>
-            <Image
-              src={`/icons/${day.iconId}.png`}
+            <img
+              src={`/blog/icons/${day.iconId}.png`}
               alt={day.description}
               width={32}
               height={32}

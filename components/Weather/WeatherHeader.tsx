@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import styles from './Weather.module.css';
 
 interface WeatherHeaderProps {
@@ -21,12 +20,11 @@ export default function WeatherHeader({
 }: WeatherHeaderProps) {
   return (
     <div className={styles.header} aria-live="polite">
-      <Image
-        src={`/icons/${iconId}.png`}
+      <img
+        src={`/blog/icons/${iconId}.png`}
         alt={description}
         width={80}
         height={80}
-        priority
       />
       <button onClick={toggleUnit} className={styles.headerButton}>
         {displayTemp}
