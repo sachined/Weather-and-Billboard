@@ -109,7 +109,7 @@ export default function FinSurf() {
             >
               Open FinSurf →
             </a>
-            <Link href="/blog" className={styles.linkSecondary}>
+            <Link href="/" className={styles.linkSecondary}>
               Read the build logs
             </Link>
           </div>
