@@ -54,4 +54,4 @@ That feels more interesting to me than a polished case study. The interesting pa
 RKLB is still there. I still think it wins. I just stopped pretending it's the same kind of bet as Coca-Cola.
 
 ---
-*The portfolio is live at [Portfolio (Chart currently out of order due to migration)](/blog/portfolio). The framework behind it is built on Buffett's concept of durable competitive advantage and Burry's approach to asymmetric positioning — two philosophies that are more complementary than they first appear.*
+*The portfolio is live at [Portfolio](/blog/portfolio). The framework behind it is built on Buffett's concept of durable competitive advantage and Burry's approach to asymmetric positioning — two philosophies that are more complementary than they first appear.*
