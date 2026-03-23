@@ -1,5 +1,5 @@
 ---
-title: 'The Loop That Wasn't Enough'
+title: "The Loop That Wasn't Enough"
 date: '2026-03-07'
 excerpt: 'Before FinSurf, there was WikiSurf—a project that taught me the intricacies of tool orchestration and structured LLM outputs.'
 tags: ['AI', 'Engineering']

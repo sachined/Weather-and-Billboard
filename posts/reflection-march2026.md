@@ -1,5 +1,5 @@
 ---
-title: 'You Can't Delegate the node_modules'
+title: "You Can't Delegate the node_modules"
 date: '2026-03-12'
 excerpt: 'A reflection on my professional background from Apple and eGain to building autonomous AI solutions, and why I find fulfillment in sharing technical knowledge.'
 tags: ['AI', 'Enterprise']
