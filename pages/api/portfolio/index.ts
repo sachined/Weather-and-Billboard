@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import portfolioData from '@/lib/portfolio-data.json';
+import { CORE_POSITIONS } from '@/lib/portfolio-logic';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
-      return res.status(200).json(portfolioData.corePositions);
+      return res.status(200).json(CORE_POSITIONS);
 
     case 'POST':
     case 'DELETE':

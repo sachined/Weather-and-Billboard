@@ -262,12 +262,14 @@
 .columnIncome    { border-top: 3px solid var(--color-success); }
 .columnAsymmetric { border-top: 3px solid #F59E0B; }
 .columnResearch  { border-top: 3px solid var(--text-muted); }
+.columnClosed    { border-top: 3px dashed var(--text-muted); opacity: 0.6; }
 
 .columnAnchor h2     { color: var(--accent-primary); opacity: 1; }
 .columnGrowth h2     { color: #7C3AED; opacity: 1; }
 .columnIncome h2     { color: var(--color-success); opacity: 1; }
 .columnAsymmetric h2 { color: #F59E0B; opacity: 1; }
 .columnResearch h2   { color: var(--text-muted); opacity: 1; }
+.columnClosed h2     { color: var(--text-muted); opacity: 1; }
 
 .addButton {
   background: var(--accent-primary);

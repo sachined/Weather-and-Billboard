@@ -23,6 +23,7 @@ interface StockData {
 export default function PortfolioPage() {
   const [query, setQuery] = useState('');
   const [quantity, setQuantity] = useState<number>(0);
+  const [lotDate, setLotDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [costBasisInput, setCostBasisInput] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -42,11 +43,13 @@ export default function PortfolioPage() {
     loading,
     error,
     showResearch,
+    showClosed,
     chartEnabled,
     enableChart,
     updatePosition,
     clearPortfolio,
     toggleResearch,
+    toggleClosed,
     showAccumulation,
     toggleAccumulation,
     timeRange,
@@ -57,9 +60,10 @@ export default function PortfolioPage() {
     e.preventDefault();
     if (!query) return;
     const cb = costBasisInput !== '' ? Number(costBasisInput) : undefined;
-    updatePosition(query, Number(quantity), cb);
+    updatePosition(query, Number(quantity), lotDate, cb);
     setQuery('');
     setQuantity(0);
+    setLotDate(new Date().toISOString().split('T')[0]);
     setCostBasisInput('');
   };
 
@@ -75,9 +79,9 @@ export default function PortfolioPage() {
     setShowLogin(false);
   };
 
-  // Real portfolio value: Anchor + Growth + Income + Asymmetric (excludes Research simulation)
+  // Real portfolio value: Anchor + Growth + Income + Asymmetric (excludes Research and Closed)
   const coreValue = stockData
-    .filter(s => getTickerLayer(s.symbol) !== 'Research')
+    .filter(s => !['Research', 'Closed'].includes(getTickerLayer(s.symbol)))
     .reduce((acc, curr) => acc + (curr.regularMarketPrice * curr.shares), 0);
 
   // Research = simulation layer only (user-added watchlist tickers)
@@ -86,23 +90,28 @@ export default function PortfolioPage() {
     .filter(s => getTickerLayer(s.symbol) === 'Research')
     .reduce((acc, s) => acc + (s.regularMarketPrice * s.shares), 0);
 
+  // Closed = historical exited positions (always 0 market value, shown as a record)
+  const hasClosedPositions = myPositions.some(p => getTickerLayer(p.symbol) === 'Closed');
+
   const LAYER_CLASS: Record<PortfolioLayer, string> = {
     Anchor:     styles.columnAnchor,
     Growth:     styles.columnGrowth,
     Income:     styles.columnIncome,
     Asymmetric: styles.columnAsymmetric,
     Research:   styles.columnResearch,
+    Closed:     styles.columnClosed,
   };
 
   const renderLayer = (layer: PortfolioLayer) => {
 
     if (layer === 'Research' && !showResearch) return null;
+    if (layer === 'Closed' && !showClosed) return null;
     const layerStocks = stockData.filter(s => getTickerLayer(s.symbol) === layer);
 
     // Calculate Actual Ratio
     const layerValue = layerStocks.reduce((acc, s) => acc + (s.regularMarketPrice * s.shares), 0);
     // Research is simulation: show % of simulated total (real + research). All other layers use real portfolio value.
-    const denominator = (layer === 'Research') ? (coreValue + researchValue) : coreValue;
+    const denominator = (layer === 'Research') ? (coreValue + researchValue) : (layer === 'Closed') ? 1 : coreValue;
     const actualRatio = denominator > 0 ? (layerValue / denominator) * 100 : 0;
 
     const targetStr = LAYER_TARGETS[layer];
@@ -112,7 +121,7 @@ export default function PortfolioPage() {
 
     const isOverTarget = actualRatio > targetMax;
 
-    if (layerStocks.length === 0 && layer !== 'Research') return null;
+    if (layerStocks.length === 0 && layer !== 'Research' && layer !== 'Closed') return null;
 
     const researchRatio = (coreValue + researchValue) > 0
       ? ((layerValue / (coreValue + researchValue)) * 100).toFixed(1)
@@ -129,7 +138,7 @@ export default function PortfolioPage() {
             </span>
           </div>
         </div>
-        {layer !== 'Research' && hasResearchPositions && researchValue > 0 && layerValue > 0 && (
+        {layer !== 'Research' && layer !== 'Closed' && hasResearchPositions && researchValue > 0 && layerValue > 0 && (
           <div className={styles.researchBadgeRow}>
             <span
               className={styles.researchBadge}
@@ -209,6 +218,15 @@ export default function PortfolioPage() {
                 {showResearch ? 'Hide Simulation' : 'Show Simulation'}
               </button>
             )}
+            {hasClosedPositions && (
+              <button
+                onClick={toggleClosed}
+                className={styles.toggleButton}
+                style={!showClosed ? { opacity: 0.6 } : {}}
+              >
+                {showClosed ? 'Hide History' : 'Show History'}
+              </button>
+            )}
 {isAdmin && (
               <button onClick={handleClear} className={styles.clearButton}>
                 Clear All
@@ -265,15 +283,23 @@ export default function PortfolioPage() {
               />
               <input
                 className={styles.glassInputShort}
+                type="date"
+                value={lotDate}
+                onChange={e => setLotDate(e.target.value)}
+                aria-label="Purchase date"
+                title="Date this lot was purchased"
+              />
+              <input
+                className={styles.glassInputShort}
                 type="number"
                 step="0.01"
                 value={costBasisInput}
                 onChange={e => setCostBasisInput(e.target.value)}
-                placeholder="Avg cost"
-                aria-label="Average cost per share (optional)"
-                title="Average cost per share — used to calculate unrealized P&L"
+                placeholder="Cost/share"
+                aria-label="Cost per share (optional)"
+                title="Price paid per share — used to calculate unrealized P&L"
               />
-              <button type="submit" className={styles.addButton}>Update Portfolio</button>
+              <button type="submit" className={styles.addButton}>Add Lot</button>
             </form>
           </div>
         )}
@@ -345,6 +371,7 @@ export default function PortfolioPage() {
                 <li><strong>Income</strong> — Dividend-generating holdings tracked for yield.</li>
                 <li><strong>Asymmetric</strong> — High-conviction speculative bets held as real positions. Counted in portfolio value, history, and allocation math. Higher risk, longer time horizon.</li>
                 <li><strong>Research</strong> — Simulated watchlist. These tickers are <em>not</em> counted in your real portfolio value or performance chart. Toggle &ldquo;Show Simulation&rdquo; to see what your portfolio would look like if they were real.</li>
+                <li><strong>Closed</strong> — Historical positions that have been fully exited. Zero shares, zero allocation impact. Toggle &ldquo;Show History&rdquo; to review your trading record and the thesis behind each exit.</li>
               </ul>
             </div>
             <div className={styles.legendSection}>
@@ -371,6 +398,7 @@ export default function PortfolioPage() {
           {renderLayer('Income')}
           {renderLayer('Asymmetric')}
           {renderLayer('Research')}
+          {renderLayer('Closed')}
         </main>
         <ArchitectureModal isOpen={isModalOpen} onClose={() =>
             setIsModalOpen(false)}

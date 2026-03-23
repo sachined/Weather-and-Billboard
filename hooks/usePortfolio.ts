@@ -2,7 +2,7 @@
 // noinspection ExceptionCaughtLocallyJS
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { UserPosition, CORE_POSITIONS, getTickerLayer } from '@/lib/portfolio-logic';
+import { UserPosition, Lot, CORE_POSITIONS, getTickerLayer, computePosition } from '@/lib/portfolio-logic';
 import { BASE_PATH } from '@/lib/constants';
 
 export function usePortfolio() {
@@ -11,6 +11,7 @@ export function usePortfolio() {
   const [isLocal, setIsLocal] = useState(false);
   const [adminKey, setAdminKey] = useState<string | null>(null);
   const [showResearch, setShowResearch] = useState(false);
+  const [showClosed, setShowClosed] = useState(false);
   const [chartEnabled, setChartEnabled] = useState(false);
 
   const [myPositions, setMyPositions] = useState<UserPosition[]>([]);
@@ -151,9 +152,12 @@ export function usePortfolio() {
     const fetchHistory = async () => {
       if (!chartEnabled || myPositions.length === 0) return;
       try {
-        const filteredPositions = showResearch
-          ? myPositions
-          : myPositions.filter(p => getTickerLayer(p.symbol) !== 'Research');
+        const filteredPositions = myPositions.filter(p => {
+          const layer = getTickerLayer(p.symbol);
+          if (layer === 'Closed') return false;
+          if (layer === 'Research' && !showResearch) return false;
+          return true;
+        });
 
         if (filteredPositions.length === 0) {
           setHistoryData({ labels: [], totalData: [], data: [], baseData: [] });
@@ -200,30 +204,35 @@ export function usePortfolio() {
 
   // --- ACTIONS ---
 
-  const updatePosition = useCallback(async (symbol: string, shares: number, costBasis?: number) => {
+  // Append a lot to an existing position, or create a new position with that lot.
+  const updatePosition = useCallback(async (
+    symbol: string,
+    shares: number,
+    date?: string,
+    costBasis?: number,
+  ) => {
     const ticker = symbol.toUpperCase().trim();
+    const today = new Date().toISOString().split('T')[0];
+    const newLot: Lot = { shares, date: date || today, ...(costBasis ? { costBasis } : {}) };
+
     const existing = myPositions.find(p => p.symbol === ticker);
-    const addedAt = existing?.addedAt || new Date().toISOString().split('T')[0];
+    const updatedLots = existing ? [...existing.lots, newLot] : [newLot];
+    const updatedPos = computePosition(ticker, updatedLots);
 
     try {
-      const res = await fetch(`${BASE_PATH}/api/portfolio`, {
+      await fetch(`${BASE_PATH}/api/portfolio`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'admin-key': adminKey || ''
         },
-        body: JSON.stringify({ symbol: ticker, shares, addedAt, costBasis })
+        body: JSON.stringify(updatedPos)
       });
 
-      if (res.ok) {
-        const newPos: UserPosition = { symbol: ticker, shares, addedAt, costBasis };
-        setMyPositions(prev => {
-          const filtered = prev.filter(p => p.symbol !== ticker);
-          return [...filtered, newPos];
-        });
-      } else {
-        setError("Failed to update position.");
-      }
+      setMyPositions(prev => {
+        const filtered = prev.filter(p => p.symbol !== ticker);
+        return [...filtered, updatedPos];
+      });
     } catch (e) {
       console.error("Update Position Error:", e);
       setError("Network error updating position.");
@@ -278,6 +287,10 @@ export function usePortfolio() {
     localStorage.setItem('portfolio-show-research', String(newVal));
   }, [showResearch]);
 
+  const toggleClosed = useCallback(() => {
+    setShowClosed(prev => !prev);
+  }, []);
+
   return {
     isLocal,
     adminKey,
@@ -292,12 +305,14 @@ export function usePortfolio() {
     loading,
     error,
     showResearch,
+    showClosed,
     chartEnabled,
     enableChart: () => setChartEnabled(true),
     updatePosition,
     removePosition,
     clearPortfolio,
     toggleResearch,
+    toggleClosed,
     showAccumulation,
     toggleAccumulation: () => setShowAccumulation(!showAccumulation),
     timeRange,

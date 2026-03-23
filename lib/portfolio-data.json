@@ -1,16 +1,156 @@
 {
   "corePositions": [
-    { "symbol": "RKLB", "shares": 115, "addedAt":"2022-08-12"  },
-    { "symbol": "GOOGL", "shares": 10, "addedAt": "2022-04-11" },
-    { "symbol": "AVGO", "shares": 6, "addedAt": "2024-01-01"  },
-    { "symbol": "MSFT", "shares": 2, "addedAt": "2026-03-03" },
-    { "symbol": "NFLX", "shares": 5, "addedAt": "2025-11-13" },
-    { "symbol": "KO", "shares": 10, "addedAt": "2022-01-01" },
-    { "symbol": "ABBV", "shares": 3, "addedAt": "2022-03-01" },
-    { "symbol": "IBM", "shares": 3, "addedAt": "2022-01-01" },
-    { "symbol": "MAIN", "shares": 12, "addedAt": "2026-01-01" },
-    { "symbol": "VTI", "shares": 2, "addedAt": "2022-01-01" },
-    { "symbol": "ARCC", "shares": 12, "addedAt": "2026-01-01" }
+    {
+      "symbol": "T",
+      "lots": [{ "shares":  2, "date":  "2021-08-19"},
+        { "shares":  4, "date":  "2021-12-03"},
+        { "shares":  4, "date":  "2021-12-13"},
+        { "shares":  1, "date":  "2022-02-04"},
+        { "shares":  1, "date":  "2022-02-15"},
+        { "shares":  1, "date":  "2022-03-01"},
+        { "shares":  1, "date":  "2022-03-15"},
+        { "shares":  3, "date":  "2022-03-28"},
+        { "shares":  3, "date":  "2022-03-29"},
+        { "shares":  2, "date":  "2022-03-30"},
+        { "shares":  1, "date":  "2022-08-02"},
+        { "shares":  -2, "date":  "2023-01-19"},
+        { "shares":  1, "date":  "2023-05-02"},
+        { "shares":  1, "date":  "2024-01-03"},
+        { "shares":  1, "date":  "2024-02-02"},
+        { "shares":  1, "date":  "2024-05-02"},
+        { "shares":  1, "date":  "2025-02-04"},
+        { "shares":  1, "date":  "2024-08-04"},
+        { "shares":  3, "date": "2025-12-16"},
+        { "shares":  -29, "date":  "2026-02-28"}
+      ]
+    },
+    {
+      "symbol": "TSM",
+      "lots": [{ "shares":  1, "date":  "2021-12-16"},
+        { "shares":  1, "date":  "2023-10-13"},
+        { "shares":  -2, "date":  "2026-03-09"}
+      ]
+    },
+    {
+      "symbol": "VMW",
+      "lots": [{ "shares":  1, "date":  "2022-01-03"},
+        { "shares":  -1, "date":  "2023-11-24"}
+        ]
+    },
+    {
+      "symbol": "DIS",
+      "lots": [
+        { "shares": 1, "date": "2021-11-11" },
+        { "shares": 1, "date": "2024-02-02" },
+        { "shares":  -1, "date":  "2025-10-23"},
+        { "shares":  -1, "date":  "2026-02-28"}
+      ]
+    },
+    {
+      "symbol": "JNJ",
+      "lots": [{ "shares":  1, "date":  "2021-11-04"},
+        { "shares":  1, "date":  "2022-03-15"},
+        { "shares":  -2, "date":  "2026-03-09"}
+      ]
+    },
+    {
+      "symbol": "SHEL",
+      "lots": [{ "shares":  1, "date":  "2021-11-08"},
+        { "shares":  2, "date":  "2021-12-16"},
+      { "shares":  -1, "date":  "2023-01-19"},
+      { "shares":  -1, "date":  "2023-08-22"},
+      { "shares":  -1, "date":  "2025-10-23"}
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "lots": [{ "shares":  1, "date": "2021-11-11"},
+        { "shares": 1, "date": "2021-10-19" },
+        {"shares": -2, "date": "2025-10-23"}]
+    },
+    {
+      "symbol": "RKLB",
+      "lots": [{ "shares": 100, "date": "2022-08-02" },
+        { "shares": 700, "date": "2022-08-16" },
+      { "shares": 200, "date": "2022-08-16" },
+      { "shares": 5, "date": "2023-04-21" },
+      { "shares": -700, "date": "2025-10-13" },
+      { "shares": -100, "date": "2025-10-14" },
+      { "shares":  -1, "date":  "2025-10-28"},
+        { "shares":  -54, "date":  "2025-12-19"},
+      { "shares":  -35, "date":  "2026-02-11"}]
+    },
+    {
+      "symbol": "GOOGL",
+      "lots": [{ "shares": 20, "date": "2022-06-22" },
+        { "shares": 1, "date": "2022-7-26" },
+        { "shares": -1, "date": "2023-8-18" },
+        { "shares": -1, "date": "2023-10-13" },
+        { "shares": -14.99, "date": "2023-10-13" },
+        { "shares":  5, "date":  "2026-03-02"},
+        { "shares":  1, "date":  "2026-03-09"}
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "lots": [{ "shares": 1, "date": "2023-11-24" },
+      { "shares":  2, "date":  "2026-03-02"},
+      { "shares":  3, "date":  "2026-03-03"}]
+    },
+    {
+      "symbol": "MSFT",
+      "lots": [{ "shares": 2, "date": "2026-03-03" }]
+    },
+    {
+      "symbol": "NFLX",
+      "lots": [{ "shares": 5, "date": "2025-11-13" }]
+    },
+    {
+      "symbol": "KO",
+      "lots": [{ "shares": 1, "date": "2021-08-19" },
+        { "shares": 1, "date": "2021-11-16"},
+        { "shares": 2, "date": "2022-03-17"},
+        { "shares": 1, "date": "2025-10-29"},
+        { "shares": 5, "date": "2026-03-02" }]
+    },
+    {
+      "symbol": "ABBV",
+      "lots": [{ "shares": 1, "date": "2022-01-03" },
+
+      { "shares": 1, "date": "2025-10-29" },
+      { "shares":  1, "date":  "2026-03-09"}]
+    },
+    {
+      "symbol": "IBM",
+      "lots": [{"shares": 1 , "date": "2022-10-22"},
+        { "shares": 1, "date": "2022-01-01" },
+        { "shares":  1, "date":  "2026-03-09"}]
+    },
+    {
+      "symbol": "MAIN",
+      "lots": [{ "shares": 1, "date": "2025-11-12" },
+      { "shares":  9, "date":  "2026-03-02"},
+      { "shares":  2, "date":  "2026-03-09"}]
+    },
+    {
+      "symbol": "VTI",
+      "lots": [{ "shares": 1, "date": "2021-10-19"},
+        { "shares": 1, "date": "2022-03-24" },
+        { "shares": 1, "date": "2022-06-16" },
+        { "shares": -1, "date": "2022-07-12" }
+
+      ]
+    },
+    {
+      "symbol": "ARCC",
+      "lots": [{ "shares": 2, "date": "2025-11-12" },
+      { "shares":  8, "date":  "2026-03-02"},
+      { "shares":  2, "date":  "2026-03-09"}]
+    },
+    {
+      "symbol": "O",
+      "lots": [{ "shares": 1, "date": "2026-03-23" }]
+    }
   ],
   "strategy": {
     "layers": {
@@ -24,7 +164,15 @@
       "KO": { "layer": "Anchor", "thesis": "Buffett's flagship hold — irreplaceable global brand, durable pricing power, and decades of dividend growth. Core forever position." },
       "ABBV": { "layer": "Income", "thesis": "Healthcare/Biotech cash flow." },
       "IBM": { "layer": "Asymmetric", "thesis": "Speculative transformation play on hybrid cloud & quantum computing. Dividend is a floor, not the thesis — unproven upside warrants Long-term shots classification." },
-      "VTI": { "layer": "Anchor", "thesis": "Buffett's top recommendation for most investors — total US market exposure, low cost, held permanently. True portfolio anchor." }
+      "VTI": { "layer": "Anchor", "thesis": "Buffett's top recommendation for most investors — total US market exposure, low cost, held permanently. True portfolio anchor." },
+      "O": { "layer": "Income", "thesis": "Realty Income — monthly dividend REIT with 30+ years of consecutive dividend growth. Diversifies income layer away from BDC concentration; real-estate-backed yield is structurally uncorrelated to MAIN/ARCC in credit downturns." },
+      "T":    { "layer": "Closed", "thesis": "AT&T — income play that became a dividend trap post-WarnerMedia spin-off. Accumulated aggressively in 2021–2022, trimmed and exited by Feb 2026. Valuable lesson: yield alone is not a thesis." },
+      "TSM":  { "layer": "Closed", "thesis": "Taiwan Semiconductor — world's premier foundry, held 2021–2026. Geopolitical risk (Taiwan Strait) ultimately weighed on conviction despite strong fundamentals. Exited March 2026." },
+      "VMW":  { "layer": "Closed", "thesis": "VMware — held briefly before Broadcom acquisition completed Nov 2023. Position closed at acquisition price." },
+      "DIS":  { "layer": "Closed", "thesis": "Disney — bought the narrative, not the fundamentals. Streaming losses + management uncertainty. Added in Feb 2024, fully exited by Feb 2026." },
+      "JNJ":  { "layer": "Closed", "thesis": "Johnson & Johnson — blue chip income, held 2021–2026. Exited after Kenvue spin-off muddied the thesis and better capital deployment opportunities emerged." },
+      "SHEL": { "layer": "Closed", "thesis": "Shell — energy income play, 2021–2025. Rotated out as energy exposure became less core to the strategy. Fully exited Oct 2025." },
+      "AAPL": { "layer": "Closed", "thesis": "Apple — held 2021–2025. Trimmed into strength; valuation vs. growth rate no longer compelling at exit. Fully closed Oct 2025." }
     },
     "triggers": {
       "RKLB": {
@@ -38,16 +186,18 @@
     "Anchor": "38%",
     "Growth": "35-40%",
     "Income": "20-25%",
-    "Asymmetric": "N/A",
-    "Research": "N/A"
+    "Asymmetric": "10%",
+    "Research": "N/A",
+    "Closed": "N/A"
   },
   "metrics": {
-    "philosophy": "Growth + Income Consolidation",
+    "philosophy": "Core-Satellite: Compounding + Asymmetric Upside",
     "objective": "10-Year capital appreciation with dividend-funded opportunistic buys.",
     "allocations": [
-      { "name": "Anchor", "target": "38%", "focus": "Core Conviction" },
+      { "name": "Anchor", "target": "38%", "focus": "Permanent Core" },
       { "name": "Growth", "target": "35-40%", "focus": "Capital Appreciation" },
-      { "name": "Income", "target": "20-25%", "focus": "Yield & Stability" }
+      { "name": "Income", "target": "20-25%", "focus": "Yield & Reinvestment" },
+      { "name": "Asymmetric", "target": "≤10%", "focus": "High-Risk / High-Reward" }
     ],
     "rules": [
       "Trim non-RKLB positions if they exceed 15% weight.",
