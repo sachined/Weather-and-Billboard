@@ -1,37 +1,27 @@
 ---
-title: 'Bridging the "Last Mile": My Journey Through Enterprise AI'
+title: 'You Can't Delegate the node_modules'
 date: '2026-03-12'
 excerpt: 'A reflection on my professional background from Apple and eGain to building autonomous AI solutions, and why I find fulfillment in sharing technical knowledge.'
 tags: ['AI', 'Enterprise']
 ---
 
-### The Humility of the "Build"
+A few weeks ago I was moving fast. Pushing code changes late at night, skipping the dev server tests, hitting deploy with a bit too much confidence.
 
-A few weeks ago, I found myself in a classic late-night tunnel. I was pushing code changes to a project, moving fast, skipping the dev server tests, and hitting "deploy" with a bit too much confidence.
+Vercel exploded.
 
-The result? Vercel exploded.
+A wall of TypeScript errors stared back at me because I’d buried my `node_modules` in the wrong directory. The fix was straightforward once I found it. But for a few minutes I sat there looking at a build failure that had nothing to do with architecture or strategy or LLM orchestration. Just a misplaced folder.
 
-A wall of TypeScript errors and build failures stared back at me because I’d managed to bury my `node_modules` in the wrong directory. It was a humbling reminder that in the world of AI and software, there is no "strategic vision" that can save you from a misplaced folder.
+That’s the part of this work that humbles you. And it’s also the part, I’ve come to believe, that matters most.
 
-I’ve spent 3+ years managing high-stakes deployments for Fortune 500 clients like Worldpay and Fidelity Investments. But those late-night debugging sessions are where the real learning happens. They’ve taught me that to lead a strategy, you have to understand the friction of the execution.
+I spent three years as an Implementation Engineer and TAM managing enterprise AI deployments for clients like Worldpay and Fidelity Investments — five concurrent accounts, zero escalations. From the outside that probably looks like stakeholder management and integration planning. And it was. But the reason the record held was simpler: I sat with the actual end users and watched where they got stuck. A chatbot that required agents to switch between five windows. A reporting tool that produced correct outputs in a format nobody had time to parse. An AI assistant that was technically faster but added 90 seconds to every session through a broken login flow.
 
-### Solving the "Last Mile"
+None of those were model failures. They were last-mile failures. The AI did its job. Everything around it didn’t. And you can’t fix that from a strategy deck — I learned that the hard way, and then I left to go build things myself instead of configuring them for other people.
 
-In my time as an Implementation Engineer and TAM, I managed five concurrent enterprise accounts with zero escalations. That record wasn't built on luck; it was built on bridging what I call the "Last Mile." The Last Mile is the gap between a brilliant technical concept and a corporate workflow where people actually get things done. I realized that to bridge that gap effectively, I needed to be more than a translator—I needed to be a builder.
-Recent projects like **Finsurf.net** (market intelligence) and **weather-and-career** (career mapping) serve as live demonstrations of this integrated approach—combining real-time data processing with a user-centric design.
+FinSurf is the clearest expression of that shift. LangGraph state machines with conditional routing. Parallel fan-out so market sentiment and dividend analysis run simultaneously. A deterministic Python math layer so the numbers are always right even when the narrative isn’t. Zero-SDK integrations with Gemini and OpenAI because bloat is what kills enterprise performance, and I’ve watched it happen enough times to be disciplined about it. At eGain, I built AI-generated reporting scripts that cut a weekly workflow from 60 minutes to 15. That 75% reduction was what got the contract renewed. The underlying technology was interesting. The time saved was what mattered.
 
-### My Current Workbench
+The posts on this site are the same thing — problems worked through in public, not polished case studies. The interesting part is rarely the conclusion. It’s the night where a broken build made you realize you’d been overconfident, and what you did about it.
 
-Today, my "hands-on" focus is centered on making AI agentic and scalable:
-*   **Agentic Intelligence:** I architect **LangGraph** state-machines using conditional routing. It’s about building agents that can actually reason—like my **FinSurf** project, which uses parallel fan-out to analyze market sentiment and dividends simultaneously.
-*   **Production Rigor:** My stack is built on **TypeScript (React 19)** and **Python**. I’ve moved toward "zero SDK" integrations with Gemini and OpenAI to keep architectures lean and avoid the "bloat" that often kills enterprise performance.
-*   **Operational Efficiency:** I don't just build for "coolness"; I build for ROI. At eGain, I used AI-generated scripts to cut reporting workflows from an hour down to 15 minutes—a 75% efficiency gain.
-
-### The Builder's Philosophy
-
-I write because I believe mastery is communal. Whether I'm documenting an LLM's token management or explaining why a multi-tenant cloud architecture needs a specific security handshake, I'm doing it to sharpen my own understanding.
-
-Every post here is a reflection of a problem solved--often one that started with a "freaked out" Vercel build and ended with a more robust, production-ready solution. If you're a stakeholder looking for someone who can talk high-level strategy but isn't afraid to get their hands dirty in the `node_modules`, you're in the right place.
+If you’re looking for someone who can talk architecture but isn’t afraid of the `node_modules`, you’re in the right place.
 
 ![img.png](/blog/images/img.png)
 ---

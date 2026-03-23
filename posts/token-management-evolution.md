@@ -1,42 +1,24 @@
 ---
-title: 'The "Arithmetic" of AI: Navigating the Evolution of Token Management'
+title: 'Even Anton Had a Supervisor'
 date: '2026-03-09'
 excerpt: 'Managing LLM tokens is more than just counting numbers—it is about visibility, cost control, and knowing when NOT to let the AI take the wheel.'
 tags: ['AI', 'Engineering', 'FinSurf']
 ---
 
-In the early days of building **FinSurf**, token management was an afterthought. We were focused on the "magic" of the agents—getting them to research stocks, analyze tax implications, and summarize sentiment. But as the project evolved from a prototype into a multi-agent system, the "magic" started to get expensive.
+For a while, I wasn’t watching the meter.
 
-We realized that without a robust way to track every single token, we were flying blind. This led to a significant evolution in how FinSurf handles telemetry, and more importantly, taught us a vital lesson about the limits of automated refactoring.
+In the early days of building FinSurf, token management was an afterthought. The focus was on getting the agents to work — research the stock, analyze the dividends, summarize the sentiment. Every time a response came back from Gemini or Groq, I’d manually glance at the usage fields. It was fine. It was fine until it wasn’t.
 
-## The Evolution: From Logging to Telemetry
+The moment it stopped being fine was when I realized I had no idea which agent was the expensive one. LangGraph was running parallel fan-out — multiple agents firing simultaneously along conditional paths — and I had no visibility into which calls were costing what. I was flying blind on a system where each run touched four different providers: Gemini, Groq, Ollama, Perplexity. Each with a different schema for reporting usage. Each billing differently. The number at the end of the month was a surprise, and surprises in cost infrastructure are bad.
 
-Our journey began with simple print statements. We’d see a response from Gemini or Groq and manually check the usage fields. But as we moved to a **LangGraph** orchestration, where multiple agents run in parallel and conditional paths skip entire nodes to save costs, manual checks became impossible.
+So I built a telemetry layer. Every API call now gets intercepted and recorded into a structured `TokenUsage` dataclass before it returns. That data gets aggregated per session — I can see exactly which agent talks the most — analyzed against a cost table to calculate the USD impact in real time, and persisted to SQLite using Write-Ahead Logging so concurrent runs don’t lock each other out.
 
-We transitioned to a centralized **Telemetry System**. Today, every call across four different providers (Gemini, Groq, Ollama, and Perplexity) is intercepted and recorded into a structured `TokenUsage` dataclass. This data is then:
-1.  **Aggregated per session**: We can see exactly which agent is the most "talkative."
-2.  **Analyzed for cost**: Using a real-time (but manually maintained) cost table, we calculate the USD impact of every query.
-3.  **Persisted to SQLite**: We use a high-performance Write-Ahead Logging (WAL) database to track performance over time without slowing down the user experience.
+It sounds straightforward. The part that wasn’t was the temptation to let an AI assistant handle the refactoring.
 
-## The AI Trap: Why We Don’t "Auto-Refactor" Tokens
+It seemed like a perfect task: "Standardize these four different API response formats into one schema." And an AI can do that. The problem is what it misses. Gemini uses `usageMetadata` with `promptTokenCount`. Groq uses `usage` with `prompt_tokens`. Perplexity handles citations in a way that can produce ghost tokens — usage that doesn’t get tracked — if you map the schema wrong. An AI refactor might get three of the four right and you’d never know about the fourth until the budget surprises came back.
 
-During this transition, there was a temptation to let an AI assistant handle the refactoring of our token management logic. It seems like a perfect task for an LLM: "Standardize these four different API responses into one format."
+There was also the execution context. My system uses a simple module-level list to accumulate usage per run — zero overhead, thread-safe by design, because each graph run gets a fresh process. An AI refactor would almost certainly suggest a more sophisticated shared-state manager or thread-safe queue. Cleaner on paper. Unnecessary complexity on a performance-critical path that didn’t need it. And before I changed how tokens were persisted at all, I measured the latency impact of SQLite writes first — which is how I caught that without WAL mode, concurrent runs would lock the database. An automated tool might have missed that entirely.
 
-However, we quickly learned that **completely relying on AI to manage token logic is a risky proposition.** Here is why:
+Anton 2.0 eventually made things better in Gilfoyle’s world too. But somebody still had to watch what it was doing.
 
-### 1. The "Schema Quirk" Problem
-Each provider has a different way of reporting usage. Gemini uses `usageMetadata` with fields like `promptTokenCount`, while OpenAI-compatible providers (like Groq) use `usage` with `prompt_tokens`. An AI might successfully map these once, but if it misses a subtle difference—like how Perplexity handles citations in the response—you end up with "ghost" tokens that aren't being tracked, leading to budget surprises.
-
-### 2. The Execution Context
-Our current system uses a simple module-level list to accumulate usages. We chose this because, in our deployment model, a fresh process is spawned for each graph run. It’s zero-overhead and thread-safe by design. An AI refactor might suggest a "more advanced" thread-safe queue or a shared-state manager. While "cleaner" on paper, it would add unnecessary complexity and potential locking issues to a performance-critical path.
-
-### 3. The Need for Measurement
-The most important lesson we’ve learned is to **take measured steps.** Before we changed how tokens were persisted, we measured the latency impact of SQLite writes. We found that without WAL mode, concurrent runs could lock the database. An automated tool might have implemented the "Save to DB" logic perfectly but missed the "Database is Locked" error that only appears under real-world conditions.
-
-## Conclusion: Measure Twice, Cut Once
-
-As we continue to scale FinSurf, our approach to token management remains deliberate. We treat our telemetry code with the same respect as our financial logic. We don't make major changes without first establishing a baseline, and we never let an AI "blindly" refactor the pipes that measure our costs.
-
-In the "Last Mile" of AI, knowing your numbers is just as important as knowing your code.
-
-*Interested in seeing how we manage these agents? Check out the [Career Roadmap](/blog/job-gap) to see how we’ve mapped out the technical journey of building FinSurf.*
+Measure twice. Prompt once.

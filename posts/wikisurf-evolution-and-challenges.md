@@ -1,41 +1,20 @@
 ---
-title: 'WikiSurf: The Foundation of My Autonomous Research Agent'
+title: 'The Loop That Wasn't Enough'
 date: '2026-03-07'
 excerpt: 'Before FinSurf, there was WikiSurf—a project that taught me the intricacies of tool orchestration and structured LLM outputs.'
 tags: ['AI', 'Engineering']
 ---
 
-Every complex project has its predecessor, a "proof of concept" that lays the groundwork for future innovation. For my recent work on [FinSurf](https://finsurf.net), that foundation was **WikiSurf**. 
+The goal seemed simple enough. Take a natural language topic, decide which tools to use, return a structured summary with cited sources. No database, no finance logic, no multi-agent orchestration — just a research assistant that could think for itself.
 
-WikiSurf was my first deep dive into the world of **autonomous agents**, and while it may look simpler than the multi-agent systems I build today, it presented a unique set of challenges that fundamentally changed how I approach AI engineering.
+I called it WikiSurf. Building it broke almost every assumption I had about how autonomous agents actually work.
 
-## The Objective
-The goal was straightforward: Build a research assistant that could take a natural language topic, decide which tools to use (Wikipedia or DuckDuckGo), and provide a structured summary with cited sources—all within a rich, interactive terminal UI.
+The first wall I hit was structured output. I wanted the LLM to return clean JSON I could parse. What I got was conversational filler, "helpful" explanations, and responses that looked right until they weren’t — Pydantic models blowing up on edge cases I hadn’t anticipated. The fix was a strict `<result>` tagging system enforced in the system prompt, plus a regex extractor in `main.py` to strip whatever preamble the model decided to add that day. It worked. But it made something clear: LLMs have opinions about how they want to respond, and those opinions are inconvenient when you need machine-readable output.
 
-## Engineering Challenges
+The second wall was the UI. Most LLM applications show a spinner and dump the answer. I wanted the user to feel the agent’s thought process — every tool call, every observation, rendered as it happened. I built a custom LangChain callback handler that hooked into the agent’s lifecycle and used the **Rich** library to color-code the terminal output in real time. It turned a black-box process into something you could actually watch think. That felt important.
 
-### 1. The "Structured Output" Struggle
-One of the biggest hurdles was getting the LLM (whether Claude or GPT) to consistently return data in a format that my code could reliably parse. I initially struggled with the LLM adding conversational filler or "helpful" explanations that broke my Pydantic models.
+The third wall was tool orchestration. The agent needed to know when Wikipedia was enough and when it needed to reach for DuckDuckGo. Hardcoding a sequence was the obvious solution, and it was wrong. What actually worked was the **ReAct** framework — giving the LLM clear tool descriptions in `tools.py` and letting it decide its own strategy. If Wikipedia returned a 404 or a disambiguation error, the agent pivoted to DuckDuckGo without intervention. That was the first time I felt like I’d built something genuinely autonomous.
 
-**The Solution:** I implemented a strict tagging system using `<result>` tags and reinforced the system prompt with precise JSON instructions. I also built a robust regex-based extractor in `main.py` to strip away any "pre-amble" or "post-amble" the LLM might generate.
+WikiSurf worked. But it was a linear agent — one loop, one goal, one path to the answer. As I pushed it further, I kept running into the edges of that design. It couldn’t handle financial arithmetic reliably. It had no concept of conditional routing. Every run looked the same regardless of what it found.
 
-### 2. Real-Time UI Synchronization
-I wanted the user to feel the agent's "thought process." Most LLM applications show a spinner and then dump the final answer. I wanted more.
-
-**The Solution:** I leveraged LangChain’s callback system to hook into the agent's lifecycle. By building a custom handler in `ui.py`, I was able to render every tool call and observation in real-time using the **Rich** library. This transformed a black-box process into a transparent, color-coded terminal experience.
-
-### 3. Tool Orchestration & Logic
-The agent needed to know when Wikipedia was enough and when it needed to "surf" the wider web via DuckDuckGo. 
-
-**The Solution:** Instead of hardcoding a search sequence, I used the **ReAct (Reasoning and Acting)** framework. By defining clear tool descriptions in `tools.py`, I allowed the LLM to autonomously decide its strategy. If Wikipedia yielded a 404 or a disambiguation error, the agent would "pivot" to DuckDuckGo without human intervention.
-
-## The Evolution to FinSurf
-WikiSurf was a success, but it was a "linear" agent. It operated in a single loop until it reached its goal. As I pushed the limits of what this agent could do, I realized it needed more specialized knowledge—specifically in the financial and mathematical domains.
-
-This realization led directly to the birth of **FinSurf**. I took the modular factory patterns and the rich UI logic from WikiSurf and evolved them into a more complex, multi-agent architecture. While WikiSurf focused on general research, FinSurf introduced deterministic calculations and multi-step orchestration.
-
-## Final Thoughts
-WikiSurf wasn't just a research tool; it was an engineering playground where I mastered **Pydantic validation**, **callback-based UI design**, and **agentic reasoning**. It remains a core part of my portfolio and a reminder that robust foundations are the key to building high-impact AI solutions.
-
----
-*Check out the live evolution of these concepts at [FinSurf.net](https://finsurf.net).*
+That ceiling became the blueprint for [FinSurf](https://finsurf.net). The modular tool design, the callback-based UI, the Pydantic validation patterns — all of it carried forward. But the linearity didn’t. FinSurf needed a state machine, not a loop. Building WikiSurf was how I learned to know the difference.

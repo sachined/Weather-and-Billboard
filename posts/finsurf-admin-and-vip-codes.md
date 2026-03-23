@@ -1,5 +1,5 @@
 ---
-title: 'Ship Day: Refactoring FinSurf, Battling Cloudflare, and Locking the Gate'
+title: 'From Monolith to Midnight'
 date: '2026-03-20'
 excerpt: 'A single day that spanned a 48-file backend overhaul, a Cloudflare Worker battle at 11 PM, and a feature lock at midnight. This is what shipping actually looks like.'
 tags: ['FinSurf', 'Engineering', 'DevOps']

@@ -1,40 +1,22 @@
 ---
-title: 'FinSurf: The Evolution of an AI-Powered Stock Analyst'
+title: 'Stochastic to Deterministic'
 date: '2026-03-08'
 excerpt: 'Building FinSurf taught me that real-world AI applications require more than just LLM calls—they require robust state management and precise logic.'
 tags: ['FinSurf', 'AI', 'Engineering']
 ---
 
-Building [FinSurf](https://finsurf.net) has been one of my most rewarding technical challenges. What started as a simple idea—using AI to analyze stocks—quickly evolved into a complex orchestration of autonomous agents, Python-driven logic, and a modern frontend.
+The first version of [FinSurf](https://finsurf.net)’s dividend calculator was wrong.
 
-In this post, I want to share the key challenges I faced during its development and how the project has evolved over time.
+Not obviously wrong — the outputs looked professional. Clean formatting, confident language, reasonable-sounding numbers. But when I checked the math by hand, the figures didn’t hold up. The LLM was estimating. It was reasoning about numbers the way it reasons about everything else: probabilistically, plausibly, without guarantee.
 
-## 1. The Arithmetic Challenge: Precision over "Guesses"
+That was the moment I stopped treating LLMs as calculation engines. The refactor that followed was the most important architectural decision I’ve made on this project: validate with Python, explain with AI. All the arithmetic — holding periods, capital gains, dividend projections — moved to native Python logic. The agents kept their job, which is interpreting those numbers and providing narrative context. But the numbers themselves became deterministic. If you run the same inputs twice, you get the same outputs. That’s not a small thing when people are making financial decisions based on what your tool tells them.
 
-In the early versions of FinSurf, I relied heavily on LLMs (Large Language Models) to handle everything, including dividend projections and tax calculations. While the outputs *looked* professional, they were frequently wrong. LLMs are great at explaining concepts, but they are notoriously unreliable when it comes to precise financial arithmetic.
+The second shift happened when the orchestration stopped keeping up with the logic. I’d started with CrewAI, which was excellent for getting a prototype moving quickly. But as the workflows got more conditional — the Dividend Specialist agent should only fire if the Research Agent confirms the stock actually pays dividends — CrewAI’s model started feeling like the wrong fit. I was bending the framework to do something it wasn’t designed for.
 
-**The Solution:** I refactored the pipeline to follow a "Validate with Python, Explain with AI" pattern. Now, all calculations—holding periods, capital gains, and dividend projections—are handled by native Python logic. The AI agents are only responsible for interpreting those numbers and providing the narrative context. This shift from "stochastic guesses" to "deterministic math" was the single most important step in making FinSurf a tool users could trust.
+Migrating to **LangGraph** was the right call. The directed graph structure let me build a proper state machine: conditional routing, parallel fan-out, nodes that only execute when their preconditions are met. The Dividend Specialist now sits dormant unless it’s needed. That change alone cut unnecessary API token usage significantly — not because I was optimizing for cost, but because the logic was finally honest about what each run actually required.
 
-## 2. Orchestration Shift: From CrewAI to LangGraph
+The last wall was the one I didn’t see coming. FinSurf uses React 19 with Tailwind CSS 4, and one of the most-requested features was downloadable PDF reports. When I implemented it, I hit an obscure compatibility gap: `html2canvas` and most PDF libraries don’t fully support the `oklch` color space or CSS custom properties that Tailwind 4 uses. The Midnight Slate theme translated to the printed page as something close to garbage.
 
-When I first started building the multi-agent system, I used CrewAI. It was fantastic for getting a prototype up and running quickly. However, as the logic became more complex—specifically with conditional workflows where one agent’s output determines if another should even run—I hit a wall.
+The fix was a custom color-resolution utility that converts design tokens to values the PDF renderer can handle before the export runs. It’s one of those solutions that sounds trivial until you’re two hours into it. The last mile is always an obscure compatibility issue you didn’t anticipate.
 
-**The Evolution:** I migrated the entire backend to **LangGraph**. LangGraph’s directed graph structure allowed me to build a sophisticated state machine. For example, the "Dividend Specialist" agent now only fires if the "Research Agent" confirms the stock actually pays dividends. This granular control not only improved the reliability of the reports but also significantly reduced unnecessary API token usage.
-
-## 3. The "Last Mile" of UX: Tailwind CSS 4 and PDFs
-
-One of the most requested features was the ability to download reports as PDFs. Since FinSurf uses a modern stack (React 19 + Tailwind CSS 4), I ran into an unexpected hurdle: `html2canvas` and many PDF libraries do not yet fully support the `oklch` color space or CSS custom properties used in Tailwind 4.
-
-**The Solution:** I had to build a custom color-resolution utility early in the process to ensure that the beautiful "Midnight Slate" and "Tropical" themes translated accurately to the printed page. This reinforced a lesson I've learned many times: the "Last Mile" of a project often involves solving the most obscure compatibility issues.
-
-## 4. Looking Ahead: The Roadmap
-
-FinSurf is far from finished. The evolution continues with several exciting phases on the horizon:
-
-*   **Historical Profit Analyzer:** Bringing more deterministic Python logic to P&L and cost-basis analysis.
-*   **Multi-Ticker Batching:** Allowing users to upload CSVs for sequential analysis.
-*   **AI Chat:** A "conversational layer" on top of existing reports, allowing users to ask follow-up questions about their specific analysis.
-
-FinSurf represents my commitment to the "Last Mile" of AI—not just making things work, but making them robust, accurate, and user-friendly.
-
-Stay tuned for more updates, and feel free to check out the project at [finsurf.net](https://finsurf.net).
+FinSurf keeps evolving — historical P&L analysis, multi-ticker batching, a conversational layer on top of existing reports. But the foundation is right now in a way it wasn’t at the start: deterministic math, honest orchestration, and a PDF export that actually works.
