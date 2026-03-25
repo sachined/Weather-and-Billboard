@@ -67,7 +67,7 @@ No polling, no extra endpoints. The timestamp travels with the data it describes
 
 ## PDF Export
 
-~~~~Generating PDFs~~ from a Tailwind CSS 4 app requires solving one non-obvious compatibility problem: `html2canvas` predates CSS custom properties and the `oklch` color space. Exporting directly produces broken output — colors resolve to nothing, or to garbage approximations.
+~~Generating PDFs from a Tailwind CSS 4 app requires solving one non-obvious compatibility problem: `html2canvas` predates CSS custom properties and the `oklch` color space. Exporting directly produces broken output — colors resolve to nothing, or to garbage approximations.
 The fix is a color-resolution utility that converts design tokens to explicit values before the export runs. It's a pre-processing step, not a rendering workaround. Without it, the PDF pipeline silently corrupts the output.~~
 
 I moved to window.print() — the browser's native print-to-PDF while back. No html2canvas, no color resolution hacks needed. The entire theming concern is handled in pdf.css via @media print rules. 
