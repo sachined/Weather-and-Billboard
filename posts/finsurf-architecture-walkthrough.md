@@ -67,8 +67,7 @@ No polling, no extra endpoints. The timestamp travels with the data it describes
 
 ## PDF Export
 
-~~Generating PDFs from a Tailwind CSS 4 app requires solving one non-obvious compatibility problem: `html2canvas` predates CSS custom properties and the `oklch` color space. Exporting directly produces broken output — colors resolve to nothing, or to garbage approximations.
-The fix is a color-resolution utility that converts design tokens to explicit values before the export runs. It's a pre-processing step, not a rendering workaround. Without it, the PDF pipeline silently corrupts the output.~~
+G̸e̸n̸e̸r̸a̸t̸i̸n̸g̸ ̸P̸D̸F̸s̸ ̸f̸r̸o̸m̸ ̸a̸ ̸T̸a̸i̸l̸w̸i̸n̸d̸ ̸C̸S̸S̸ ̸4̸ ̸a̸p̸p̸ ̸r̸e̸q̸u̸i̸r̸e̸s̸ ̸s̸o̸l̸v̸i̸n̸g̸ ̸o̸n̸e̸ ̸n̸o̸n̸-̸o̸b̸v̸i̸o̸u̸s̸ ̸c̸o̸m̸p̸a̸t̸i̸b̸i̸l̸i̸t̸y̸ ̸p̸r̸o̸b̸l̸e̸m̸:̸ ̸h̸t̸m̸l̸2̸c̸a̸n̸v̸a̸s̸ ̸p̸r̸e̸d̸a̸t̸e̸s̸ ̸C̸S̸S̸ ̸c̸u̸s̸t̸o̸m̸ ̸p̸r̸o̸p̸e̸r̸t̸i̸e̸s̸ ̸a̸n̸d̸ ̸t̸h̸e̸ ̸o̸k̸l̸c̸h̸ ̸c̸o̸l̸o̸r̸ ̸s̸p̸a̸c̸e̸.̸ ̸E̸x̸p̸o̸r̸t̸i̸n̸g̸ ̸d̸i̸r̸e̸c̸t̸l̸y̸ ̸p̸r̸o̸d̸u̸c̸e̸s̸ ̸b̸r̸o̸k̸e̸n̸ ̸o̸u̸t̸p̸u̸t̸ ̸—̸ ̸c̸o̸l̸o̸r̸s̸ ̸r̸e̸s̸o̸l̸v̸e̸ ̸t̸o̸ ̸n̸o̸t̸h̸i̸n̸g̸,̸ ̸o̸r̸ ̸t̸o̸ ̸g̸a̸r̸b̸a̸g̸e̸ ̸a̸p̸p̸r̸o̸x̸i̸m̸a̸t̸i̸o̸n̸s̸.̸ ̸T̸h̸e̸ ̸f̸i̸x̸ ̸i̸s̸ ̸a̸ ̸c̸o̸l̸o̸r̸-̸r̸e̸s̸o̸l̸u̸t̸i̸o̸n̸ ̸u̸t̸i̸l̸i̸t̸y̸ ̸t̸h̸a̸t̸ ̸c̸o̸n̸v̸e̸r̸t̸s̸ ̸d̸e̸s̸i̸g̸n̸ ̸t̸o̸k̸e̸n̸s̸ ̸t̸o̸ ̸e̸x̸p̸l̸i̸c̸i̸t̸ ̸v̸a̸l̸u̸e̸s̸ ̸b̸e̸f̸o̸r̸e̸ ̸t̸h̸e̸ ̸e̸x̸p̸o̸r̸t̸ ̸r̸u̸n̸s̸.̸ ̸I̸t̸'̸s̸ ̸a̸ ̸p̸r̸e̸-̸p̸r̸o̸c̸e̸s̸s̸i̸n̸g̸ ̸s̸t̸e̸p̸,̸ ̸n̸o̸t̸ ̸a̸ ̸r̸e̸n̸d̸e̸r̸i̸n̸g̸ ̸w̸o̸r̸k̸a̸r̸o̸u̸n̸d̸.̸ ̸W̸i̸t̸h̸o̸u̸t̸ ̸i̸t̸,̸ ̸t̸h̸e̸ ̸P̸D̸F̸ ̸p̸i̸p̸e̸l̸i̸n̸e̸ ̸s̸i̸l̸e̸n̸t̸l̸y̸ ̸c̸o̸r̸r̸u̸p̸t̸s̸ ̸t̸h̸e̸ ̸o̸u̸t̸p̸u̸t̸.̸
 
 I moved to window.print() — the browser's native print-to-PDF while back. No html2canvas, no color resolution hacks needed. The entire theming concern is handled in pdf.css via @media print rules. 
 
