@@ -13,7 +13,7 @@ Both follow the same principle: use the right tool for the job. Where LLMs are u
 
 The rest of this post walks through the full architecture using the diagram below as a map.
 
-![FinSurf Architecture Diagram](/blog/images/ArchDiagram.svg)
+![FinSurf Architecture Diagram](/blog/images/ArchDiagram.png)
 
 ---
 
