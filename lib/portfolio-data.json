@@ -435,7 +435,7 @@
           "date": "2026-03-23"
         }
       ]
-    },
+    }
   ],
   "strategy": {
     "layers": {
@@ -538,7 +538,7 @@
         "layer": "Closed",
         "status": "closed",
         "thesis": "Apple — held 2021–2025. Trimmed into strength; valuation vs. growth rate no longer compelling at exit. Fully closed Oct 2025."
-      },
+      }
     },
     "triggers": {
       "RKLB": {
