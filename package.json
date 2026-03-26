@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "trade": "tsx scripts/trade.ts"
   },
   "dependencies": {
     "chart.js": "^4.4.0",
@@ -26,6 +27,7 @@
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.1.6",
+    "tsx": "^4.21.0",
     "typescript": "^5.7.0"
   }
 }
