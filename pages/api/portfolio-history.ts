@@ -1,16 +1,26 @@
 // pages/api/portfolio-history.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import yahooFinance from '@/lib/yahoo-finance';
-import { CORE_POSITIONS, UserPosition } from '@/lib/portfolio-logic';
+import { UserPosition } from '@/lib/portfolio-logic';
+import { getPositions } from '@/lib/portfolio-writer';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  let positions: UserPosition[] = CORE_POSITIONS;
+  let positions: UserPosition[] = getPositions();
   const { positions: posQuery, ignoreDates } = req.query;
   const shouldIgnoreDates = ignoreDates === 'true';
 
   if (posQuery && typeof posQuery === 'string') {
     try {
-      positions = JSON.parse(posQuery);
+      const parsed = JSON.parse(posQuery);
+      if (!Array.isArray(parsed) || parsed.length > 30) {
+        return res.status(400).json({ error: 'positions must be an array of at most 30 items' });
+      }
+      for (const p of parsed) {
+        if (typeof p?.symbol !== 'string' || !/^[A-Z0-9.]{1,10}$/i.test(p.symbol)) {
+          return res.status(400).json({ error: 'Invalid symbol in positions' });
+        }
+      }
+      positions = parsed;
     } catch (e) {
       return res.status(400).json({ error: 'Invalid positions format' });
     }
