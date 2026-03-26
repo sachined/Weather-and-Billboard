@@ -21,7 +21,7 @@
         { "shares":  1, "date":  "2025-02-04"},
         { "shares":  1, "date":  "2024-08-04"},
         { "shares":  3, "date": "2025-12-16"},
-        { "shares":  -29, "date":  "2026-02-28"}
+        { "shares":  -30, "date":  "2026-02-28"}
       ]
     },
     {
@@ -63,6 +63,10 @@
       ]
     },
     {
+      "symbol": "NVDA",
+      "lots": [ { "shares": 1, "date": "2026-03-25" } ]
+    },
+    {
       "symbol": "AAPL",
       "lots": [{ "shares":  1, "date": "2021-11-11"},
         { "shares": 1, "date": "2021-10-19" },
@@ -82,12 +86,9 @@
     },
     {
       "symbol": "GOOGL",
-      "lots": [{ "shares": 20, "date": "2022-06-22" },
-        { "shares": 1, "date": "2022-7-26" },
-        { "shares": -1, "date": "2023-8-18" },
-        { "shares": -1, "date": "2023-10-13" },
-        { "shares": -14.99, "date": "2023-10-13" },
-        { "shares":  5, "date":  "2026-03-02"},
+      "lots": [{ "shares": 20, "date": "2022-06-22" }, { "shares": 1, "date": "2022-7-26" },
+        { "shares": -1, "date": "2023-8-18" }, { "shares": -1, "date": "2023-10-13" },
+        { "shares": -14.99, "date": "2023-10-13" }, { "shares":  5, "date":  "2026-03-02"},
         { "shares":  1, "date":  "2026-03-09"}
       ]
     },
@@ -157,6 +158,7 @@
       "RKLB": { "layer": "Asymmetric", "thesis": "High-conviction speculative bet on space infrastructure. Pre-profitability, high volatility — accumulate on deep retracements." },
       "GOOGL": { "layer": "Growth", "thesis": "AI infrastructure & Search dominance." },
       "AVGO": { "layer": "Growth", "thesis": "Semiconductor consolidation & AI networking." },
+      "NVDA": { "layer": "Growth" , "thesis":  "AI compute dominance — GPU monopoly for model training and inference workloads, with no credible near-term challenger at scale." },
       "MSFT": { "layer": "Growth", "thesis": "Cloud & Enterprise AI leader." },
       "NFLX": { "layer": "Growth", "thesis": "Entertainment Leader with high-quality AI." },
       "MAIN": { "layer": "Income", "thesis": "Monthly dividend BDC." },
