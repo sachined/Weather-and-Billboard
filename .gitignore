@@ -37,3 +37,4 @@ yarn-debug.log*
 # Private files
 private/
 .vercel
+SECURITY.md
