@@ -23,6 +23,7 @@ export interface StrategyMetrics {
 
 export interface TickerMetadata {
   layer: PortfolioLayer;
+  status: 'active' | 'closed';
   thesis?: string;
 }
 
@@ -75,8 +76,10 @@ export const CORE_POSITIONS: UserPosition[] = rawPositions.map(r =>
 );
 
 export const PORTFOLIO_STRATEGY = portfolioData.strategy;
-export const LAYER_TARGETS = portfolioData.layerTargets as Record<PortfolioLayer, string>;
 export const STRATEGY_METRICS = portfolioData.metrics as StrategyMetrics;
+export const LAYER_TARGETS: Record<PortfolioLayer, string> = Object.fromEntries(
+  STRATEGY_METRICS.allocations.map(a => [a.name, a.target])
+) as Record<PortfolioLayer, string>;
 
 export const getTickerLayer = (ticker: string): PortfolioLayer => {
   const meta = (PORTFOLIO_STRATEGY.layers as Record<string, TickerMetadata>)[ticker.toUpperCase()];

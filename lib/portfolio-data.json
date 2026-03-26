@@ -86,8 +86,8 @@
     },
     {
       "symbol": "GOOGL",
-      "lots": [{ "shares": 20, "date": "2022-06-22" }, { "shares": 1, "date": "2022-7-26" },
-        { "shares": -1, "date": "2023-8-18" }, { "shares": -1, "date": "2023-10-13" },
+      "lots": [{ "shares": 20, "date": "2022-06-22" }, { "shares": 1, "date": "2022-07-26" },
+        { "shares": -1, "date": "2023-08-18" }, { "shares": -1, "date": "2023-10-13" },
         { "shares": -14.99, "date": "2023-10-13" }, { "shares":  5, "date":  "2026-03-02"},
         { "shares":  1, "date":  "2026-03-09"}
       ]
@@ -155,26 +155,26 @@
   ],
   "strategy": {
     "layers": {
-      "RKLB": { "layer": "Asymmetric", "thesis": "High-conviction speculative bet on space infrastructure. Pre-profitability, high volatility — accumulate on deep retracements." },
-      "GOOGL": { "layer": "Growth", "thesis": "AI infrastructure & Search dominance." },
-      "AVGO": { "layer": "Growth", "thesis": "Semiconductor consolidation & AI networking." },
-      "NVDA": { "layer": "Growth" , "thesis":  "AI compute dominance — GPU monopoly for model training and inference workloads, with no credible near-term challenger at scale." },
-      "MSFT": { "layer": "Growth", "thesis": "Cloud & Enterprise AI leader." },
-      "NFLX": { "layer": "Growth", "thesis": "Entertainment Leader with high-quality AI." },
-      "MAIN": { "layer": "Income", "thesis": "Monthly dividend BDC." },
-      "ARCC": { "layer": "Income", "thesis": "Leading BDC with high-quality loan portfolio." },
-      "KO": { "layer": "Anchor", "thesis": "Buffett's flagship hold — irreplaceable global brand, durable pricing power, and decades of dividend growth. Core forever position." },
-      "ABBV": { "layer": "Income", "thesis": "Healthcare/Biotech cash flow." },
-      "IBM": { "layer": "Asymmetric", "thesis": "Speculative transformation play on hybrid cloud & quantum computing. Dividend is a floor, not the thesis — unproven upside warrants Long-term shots classification." },
-      "VTI": { "layer": "Anchor", "thesis": "Buffett's top recommendation for most investors — total US market exposure, low cost, held permanently. True portfolio anchor." },
-      "O": { "layer": "Income", "thesis": "Realty Income — monthly dividend REIT with 30+ years of consecutive dividend growth. Diversifies income layer away from BDC concentration; real-estate-backed yield is structurally uncorrelated to MAIN/ARCC in credit downturns." },
-      "T":    { "layer": "Closed", "thesis": "AT&T — income play that became a dividend trap post-WarnerMedia spin-off. Accumulated aggressively in 2021–2022, trimmed and exited by Feb 2026. Valuable lesson: yield alone is not a thesis." },
-      "TSM":  { "layer": "Closed", "thesis": "Taiwan Semiconductor — world's premier foundry, held 2021–2026. Geopolitical risk (Taiwan Strait) ultimately weighed on conviction despite strong fundamentals. Exited March 2026." },
-      "VMW":  { "layer": "Closed", "thesis": "VMware — held briefly before Broadcom acquisition completed Nov 2023. Position closed at acquisition price." },
-      "DIS":  { "layer": "Closed", "thesis": "Disney — bought the narrative, not the fundamentals. Streaming losses + management uncertainty. Added in Feb 2024, fully exited by Feb 2026." },
-      "JNJ":  { "layer": "Closed", "thesis": "Johnson & Johnson — blue chip income, held 2021–2026. Exited after Kenvue spin-off muddied the thesis and better capital deployment opportunities emerged." },
-      "SHEL": { "layer": "Closed", "thesis": "Shell — energy income play, 2021–2025. Rotated out as energy exposure became less core to the strategy. Fully exited Oct 2025." },
-      "AAPL": { "layer": "Closed", "thesis": "Apple — held 2021–2025. Trimmed into strength; valuation vs. growth rate no longer compelling at exit. Fully closed Oct 2025." }
+      "RKLB": { "layer": "Asymmetric", "status": "active", "thesis": "High-conviction speculative bet on space infrastructure. Pre-profitability, high volatility — accumulate on deep retracements." },
+      "GOOGL": { "layer": "Growth", "status": "active", "thesis": "AI infrastructure & Search dominance." },
+      "AVGO": { "layer": "Growth", "status": "active", "thesis": "Semiconductor consolidation & AI networking." },
+      "NVDA": { "layer": "Growth", "status": "active", "thesis": "AI compute dominance — GPU monopoly for model training and inference workloads, with no credible near-term challenger at scale." },
+      "MSFT": { "layer": "Growth", "status": "active", "thesis": "Cloud & Enterprise AI leader." },
+      "NFLX": { "layer": "Growth", "status": "active", "thesis": "Entertainment Leader with high-quality AI." },
+      "MAIN": { "layer": "Income", "status": "active", "thesis": "Monthly dividend BDC." },
+      "ARCC": { "layer": "Income", "status": "active", "thesis": "Leading BDC with high-quality loan portfolio." },
+      "KO": { "layer": "Anchor", "status": "active", "thesis": "Buffett's flagship hold — irreplaceable global brand, durable pricing power, and decades of dividend growth. Core forever position." },
+      "ABBV": { "layer": "Income", "status": "active", "thesis": "Healthcare/Biotech cash flow." },
+      "IBM": { "layer": "Asymmetric", "status": "active", "thesis": "Speculative transformation play on hybrid cloud & quantum computing. Dividend is a floor, not the thesis — unproven upside warrants Long-term shots classification." },
+      "VTI": { "layer": "Anchor", "status": "active", "thesis": "Buffett's top recommendation for most investors — total US market exposure, low cost, held permanently. True portfolio anchor." },
+      "O": { "layer": "Income", "status": "active", "thesis": "Realty Income — monthly dividend REIT with 30+ years of consecutive dividend growth. Diversifies income layer away from BDC concentration; real-estate-backed yield is structurally uncorrelated to MAIN/ARCC in credit downturns." },
+      "T":    { "layer": "Closed", "status": "closed", "thesis": "AT&T — income play that became a dividend trap post-WarnerMedia spin-off. Accumulated aggressively in 2021–2022, trimmed and exited by Feb 2026. Valuable lesson: yield alone is not a thesis." },
+      "TSM":  { "layer": "Closed", "status": "closed", "thesis": "Taiwan Semiconductor — world's premier foundry, held 2021–2026. Geopolitical risk (Taiwan Strait) ultimately weighed on conviction despite strong fundamentals. Exited March 2026." },
+      "VMW":  { "layer": "Closed", "status": "closed", "thesis": "VMware — held briefly before Broadcom acquisition completed Nov 2023. Position closed at acquisition price." },
+      "DIS":  { "layer": "Closed", "status": "closed", "thesis": "Disney — bought the narrative, not the fundamentals. Streaming losses + management uncertainty. Added in Feb 2024, fully exited by Feb 2026." },
+      "JNJ":  { "layer": "Closed", "status": "closed", "thesis": "Johnson & Johnson — blue chip income, held 2021–2026. Exited after Kenvue spin-off muddied the thesis and better capital deployment opportunities emerged." },
+      "SHEL": { "layer": "Closed", "status": "closed", "thesis": "Shell — energy income play, 2021–2025. Rotated out as energy exposure became less core to the strategy. Fully exited Oct 2025." },
+      "AAPL": { "layer": "Closed", "status": "closed", "thesis": "Apple — held 2021–2025. Trimmed into strength; valuation vs. growth rate no longer compelling at exit. Fully closed Oct 2025." }
     },
     "triggers": {
       "RKLB": {
@@ -183,14 +183,6 @@
         "message": "🔥 STRATEGIC ACCUMULATION TRIGGER"
       }
     }
-  },
-  "layerTargets": {
-    "Anchor": "38%",
-    "Growth": "35-40%",
-    "Income": "20-25%",
-    "Asymmetric": "10%",
-    "Research": "N/A",
-    "Closed": "N/A"
   },
   "metrics": {
     "philosophy": "Core-Satellite: Compounding + Asymmetric Upside",
