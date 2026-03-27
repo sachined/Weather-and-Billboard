@@ -3,7 +3,7 @@ import styles from './layout.module.css';
 import utilStyles from '@/styles/utils.module.css';
 import Link from 'next/link';
 import Footer from './Footer';
-import { SITE_NAME, SITE_TITLE } from '@/lib/constants';
+import { SITE_NAME, SITE_TITLE, PROFILE_VERSION } from '@/lib/constants';
 import ThemeToggle from './ThemeToggle';
 import Navbar from './Navbar';
 
@@ -35,7 +35,7 @@ export default function Layout({ children, home }: LayoutProps) {
         {home ? (
           <>
             <img
-              src="/blog/images/profile.jpg"
+              src={`/blog/images/profile.jpg?v=${PROFILE_VERSION}`}
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
               alt={name}
               width={128}
@@ -47,7 +47,7 @@ export default function Layout({ children, home }: LayoutProps) {
           <>
             <a href="https://finsurf.net/">
               <img
-                src="/blog/images/profile.jpg"
+                src={`/blog/images/profile.jpg?v=${PROFILE_VERSION}`}
                 className={`${styles.headerImage} ${utilStyles.borderCircle}`}
                 alt={name}
                 width={96}
