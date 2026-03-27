@@ -3,6 +3,8 @@ title: "You Can't Delegate the node_modules"
 date: '2026-03-12'
 excerpt: 'A reflection on my professional background from Apple and eGain to building autonomous AI solutions, and why I find fulfillment in sharing technical knowledge.'
 tags: ['AI', 'Enterprise']
+series: "Career Reflections"
+series_position: 2
 ---
 
 A few weeks ago I was moving fast. Pushing code changes late at night, skipping the dev server tests, hitting deploy with a bit too much confidence.
