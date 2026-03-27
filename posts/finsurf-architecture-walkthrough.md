@@ -4,6 +4,8 @@ date: '2026-03-25'
 highlight: true
 excerpt: 'A systems-level look at how FinSurf works — the multi-agent pipeline, the rules-based signal engine, and the small decisions that keep the stack honest.'
 tags: ['FinSurf', 'AI', 'Engineering']
+series: "FinSurf"
+series_position: 6
 ---
 
 Two decisions in FinSurf's design generate the most questions, and neither of them involves an LLM.

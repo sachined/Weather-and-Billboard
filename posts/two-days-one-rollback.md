@@ -3,6 +3,8 @@ title: 'Two Days, One Rollback, and a Cleaner Product'
 date: '2026-03-23'
 excerpt: 'A Finnhub endpoint that worked locally, a 502 in production, 224 lines deleted, and a Groq→Gemini relay I actually care about.'
 tags: ['FinSurf']
+series: "FinSurf"
+series_position: 5
 ---
 
 Yesterday I was on a roll. Wired up the TickerSummaryBar with analyst targets, earnings dates, dividend yield, live AI insights. Got the waitlist form actually posting to Formspree instead of just silently dumping to localStorage (yeah, that was embarrassing). Dropped a new endpoint to pull exchange market status and holidays from Finnhub — open/closed, next holiday, the whole thing. It looked great in local.

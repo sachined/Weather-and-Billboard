@@ -3,6 +3,8 @@ title: 'Stochastic to Deterministic'
 date: '2026-03-08'
 excerpt: 'WikiSurf taught me what a linear agent can and cannot do. FinSurf is what I built when I hit that ceiling — deterministic math, honest orchestration, and a PDF export that actually works.'
 tags: ['FinSurf', 'AI', 'Engineering']
+series: "FinSurf"
+series_position: 1
 ---
 
 The goal seemed simple enough. Take a natural language topic, decide which tools to use, return a structured summary with cited sources. No database, no finance logic, no multi-agent orchestration — just a research assistant that could think for itself.
