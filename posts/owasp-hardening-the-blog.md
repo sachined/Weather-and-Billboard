@@ -137,3 +137,8 @@ The FinSurf audit found problems I'd thought about and gotten wrong. The auth mo
 That's what "it's just a blog" actually means: I've pre-decided the threat model is negligible. The app's complexity doesn't determine its exposure. A blog with a client-side API key, unvalidated HTML injection, an open API endpoint, and no security headers has an attack surface — it just has a different shape than a payment system's.
 
 Simplicity is a description of what an app does. It's not a security posture.
+
+---
+
+**Keep Reading:**
+- [What Not to Log](./owasp-hardening-solo-project) — The first OWASP audit on the app, then this audit
