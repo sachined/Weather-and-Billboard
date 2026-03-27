@@ -16,6 +16,8 @@ export interface PostData {
   readingTime: number;
   highlight?: boolean;
   contentHtml?: string;
+  series?: string;
+  series_position?: number;
 }
 
 export function getSortedPostsData(): PostData[] {
@@ -39,7 +41,7 @@ export function getSortedPostsData(): PostData[] {
     return {
       id,
       readingTime,
-      ...(matterResult.data as { date: string; title: string; excerpt: string; tags: string[]; highlight?: boolean }),
+      ...(matterResult.data as { date: string; title: string; excerpt: string; tags: string[]; highlight?: boolean; series?: string; series_position?: number }),
     };
   });
   // Sort posts by date
@@ -92,6 +94,6 @@ export async function getPostData(id: string) {
     contentHtml,
     nextPost: nextPost ? { id: nextPost.id, title: nextPost.title } : null,
     prevPost: prevPost ? { id: prevPost.id, title: prevPost.title } : null,
-    ...(matterResult.data as { date: string; title: string; excerpt: string }),
+    ...(matterResult.data as { date: string; title: string; excerpt: string; series?: string; series_position?: number }),
   };
 }
