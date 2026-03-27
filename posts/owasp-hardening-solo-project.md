@@ -1,6 +1,7 @@
 ---
 title: 'What Not to Log'
 date: '2026-03-26'
+highlight: true
 excerpt: 'I shipped the VIP pass system and Stripe integration without a real security review. Then I sat down with the OWASP Top 10 and matched each item against the code. Here is what I found.'
 tags: ['FinSurf', 'Security', 'Engineering']
 ---

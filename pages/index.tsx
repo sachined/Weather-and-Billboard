@@ -20,9 +20,9 @@ export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
   const allTags = useMemo(() => {
-    const tagSet = new Set<string>();
-    allPostsData.forEach(({ tags }) => tags?.forEach((t) => tagSet.add(t)));
-    return Array.from(tagSet).sort();
+    const tagCount: Record<string, number> = {};
+    allPostsData.forEach(({ tags }) => tags?.forEach((t) => { tagCount[t] = (tagCount[t] ?? 0) + 1; }));
+    return Object.keys(tagCount).filter((t) => tagCount[t] > 1).sort();
   }, [allPostsData]);
 
   const filtered = activeTag
@@ -96,8 +96,8 @@ export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
 
           {rest.length > 0 && (
             <div className={styles.blogGrid}>
-              {rest.map(({ id, date, title, excerpt, tags, readingTime }) => (
-                <article className={styles.blogCard} key={id}>
+              {rest.map(({ id, date, title, excerpt, tags, readingTime, highlight }) => (
+                <article className={`${styles.blogCard} ${highlight ? styles.blogCardHighlight : ''}`} key={id}>
                   <div className={styles.cardMeta}>
                     <small className={styles.cardDate}>
                       {new Date(date).toLocaleDateString('en-US', {

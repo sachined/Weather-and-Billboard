@@ -14,6 +14,7 @@ export interface PostData {
   excerpt: string;
   tags: string[];
   readingTime: number;
+  highlight?: boolean;
   contentHtml?: string;
 }
 
@@ -38,7 +39,7 @@ export function getSortedPostsData(): PostData[] {
     return {
       id,
       readingTime,
-      ...(matterResult.data as { date: string; title: string; excerpt: string; tags: string[] }),
+      ...(matterResult.data as { date: string; title: string; excerpt: string; tags: string[]; highlight?: boolean }),
     };
   });
   // Sort posts by date

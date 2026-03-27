@@ -1,8 +1,9 @@
 ---
 title: 'From Monolith to Midnight'
 date: '2026-03-20'
+highlight: true
 excerpt: 'A single day that spanned a 48-file backend overhaul, a Cloudflare Worker battle at 11 PM, and a feature lock at midnight. This is what shipping actually looks like.'
-tags: ['FinSurf', 'Engineering', 'DevOps']
+tags: ['FinSurf', 'Engineering']
 ---
 
 March 20th was a ship day. Not the kind you plan on a roadmap with neat milestones — the kind where you start the morning decomposing a monolith and end the night committing a feature lock at midnight. Forty-eight files changed. 4,300+ lines touched. Backend architecture, security infrastructure, admin tooling — all in one push.

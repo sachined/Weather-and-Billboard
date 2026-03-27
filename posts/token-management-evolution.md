@@ -1,6 +1,7 @@
 ---
 title: 'Even Anton Had a Supervisor'
 date: '2026-03-09'
+highlight: true
 excerpt: 'Managing LLM tokens is more than just counting numbers—it is about visibility, cost control, and knowing when NOT to let the AI take the wheel.'
 tags: ['AI', 'Engineering', 'FinSurf']
 ---

@@ -154,6 +154,21 @@
   box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.18);
 }
 
+.blogCardHighlight {
+  border-top-color: var(--accent-secondary, #f59e0b);
+}
+
+.blogCardHighlight::before {
+  content: 'Recommended';
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-secondary, #f59e0b);
+  margin-bottom: 0.6rem;
+}
+
 .cardMeta {
   display: flex;
   justify-content: space-between;
