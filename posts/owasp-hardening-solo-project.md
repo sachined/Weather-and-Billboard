@@ -88,4 +88,4 @@ Those are the ones that cost you.
 ---
 
 **Keep Reading:**
-- [It's Just a Blog](./owasp-hardening-the-blog.md) — The companion OWASP audit, this time on the blog itself
+- [It's Just a Blog](./owasp-hardening-the-blog) — The companion OWASP audit, this time on the blog itself

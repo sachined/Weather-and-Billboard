@@ -32,7 +32,7 @@ The fix is a server-side proxy route. The client now calls `/api/weather/current
 ---
 
 **Keep Reading:**
-- [What Not to Log](./owasp-hardening-solo-project.md) — The companion OWASP audit, this time on FinSurf's auth infrastructure
+- [What Not to Log](./owasp-hardening-solo-project) — The companion OWASP audit, this time on FinSurf's auth infrastructure
 
 ```ts
 // pages/api/weather/current.ts

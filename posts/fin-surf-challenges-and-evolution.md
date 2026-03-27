@@ -40,6 +40,6 @@ FinSurf keeps evolving — historical P&L analysis, multi-ticker batching, a con
 ---
 
 **Keep Reading:**
-- [The Signal Is Not the Story](./finsurf-architecture-walkthrough.md) — The current state of the architecture this post traces the evolution toward
-- [Even Anton Had a Supervisor](./token-management-evolution.md) — How token management evolved within this deterministic system
-- [From Monolith to Midnight](./finsurf-admin-and-vip-codes.md) — A shipping day that proved the deterministic approach works at scale
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough) — The current state of the architecture this post traces the evolution toward
+- [Even Anton Had a Supervisor](./token-management-evolution) — How token management evolved within this deterministic system
+- [From Monolith to Midnight](./finsurf-admin-and-vip-codes) — A shipping day that proved the deterministic approach works at scale

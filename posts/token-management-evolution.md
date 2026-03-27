@@ -27,5 +27,5 @@ Measure twice. Prompt once.
 ---
 
 **Keep Reading:**
-- [The Signal Is Not the Story](./finsurf-architecture-walkthrough.md) — The full architecture walkthrough that this telemetry layer supports
-- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution.md) — How FinSurf's design evolved to require this kind of instrumentation
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough) — The full architecture walkthrough that this telemetry layer supports
+- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution) — How FinSurf's design evolved to require this kind of instrumentation

@@ -42,4 +42,4 @@ But that's what makes it interesting.
 ---
 
 **Keep Reading:**
-- [You Can't Delegate the node_modules](./reflection-march2026.md) — The companion to this essay, on moving from implementation to building
+- [You Can't Delegate the node_modules](./reflection-march2026) — The companion to this essay, on moving from implementation to building

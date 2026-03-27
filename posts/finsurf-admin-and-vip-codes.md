@@ -93,5 +93,5 @@ You built something real.
 ---
 
 **Keep Reading:**
-- [What Not to Log](./owasp-hardening-solo-project.md) — The security audit that covered the VIP code system I shipped in this session
-- [The Signal Is Not the Story](./finsurf-architecture-walkthrough.md) — The full product architecture this shipping day contributed to
+- [What Not to Log](./owasp-hardening-solo-project) — The security audit that covered the VIP code system I shipped in this session
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough) — The full product architecture this shipping day contributed to

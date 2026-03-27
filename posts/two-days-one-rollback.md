@@ -28,5 +28,5 @@ Two days of building, one rollback, and the product is tighter than when I start
 ---
 
 **Keep Reading:**
-- [The Signal Is Not the Story](./finsurf-architecture-walkthrough.md) — How the Groq→Gemini relay fits into the larger research pipeline
-- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution.md) — Why the decision to ship and immediately rollback matters to FinSurf's evolution
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough) — How the Groq→Gemini relay fits into the larger research pipeline
+- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution) — Why the decision to ship and immediately rollback matters to FinSurf's evolution
