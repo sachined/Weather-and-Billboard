@@ -17,7 +17,15 @@ I spent some time poking at it. Then I made the call: rip it out.
 
 Here's the thing — when a feature relies on an external API that's unreliable in production, you have two choices: build retry logic, fallback states, error handling, and shimming... or just remove it. For a solo indie project, the second option is usually the right call. The product is cleaner without it.
 
-While all that was happening, I also shipped something I'm genuinely proud of: a Groq→Gemini relay for the research agent. The problem was Groq would sometimes truncate mid-sentence under load — not fail, just stop. For a financial research tool, incomplete analysis is worse than no analysis. I needed reliability over cost savings. So I built a relay where Gemini picks up from the exact cutoff point and continues the analysis. If the combined output still has fewer than 5 sentences, a second corrective Gemini call fires to fill gaps. Two levels of self-correction, transparent to the user. It's more expensive than Groq alone, but truncated research advice is how you lose trust.
+While all that was happening, I also shipped something I'm genuinely proud of: a Groq→Gemini relay for the research agent. The problem was Groq would sometimes truncate mid-sentence under load — not fail, just stop. It wasn't a crash. It was a silent halt. The response would just... end, mid-thought, with no error code to signal that something had broken.
+
+For a financial research tool, that's catastrophic. Incomplete analysis isn't a degradation — it's worse than no analysis. A user gets a report that says "RKLB has strong fundamentals in..." and then nothing. That's not a performance issue. That's a trust issue.
+
+Early versions of FinSurf tried to optimize for cost — Groq is significantly cheaper than Gemini per token. But the truncation pattern was consistent enough that I realized the math was backwards. A few extra dollars per session to guarantee complete output is worth infinitely more than a penny saved on a truncated response that damaged credibility.
+
+So I built a relay. When Groq finishes its response, the system detects the exact cutoff point (measuring output length and token count), then sends the partial output to Gemini with context: "Here's what we have so far. Continue from where this left off and complete the analysis." If the combined output still has fewer than 5 sentences, a second corrective Gemini call fires to fill gaps — a final pass to ensure the reasoning is complete. Two levels of self-correction, totally transparent to the user.
+
+It's more expensive than Groq alone. But truncated research advice is how you lose trust, and trust is the only thing that actually matters for a financial tool.
 
 Also added sentiment color coding in the mini agent cards — Bullish is green, Bearish is red, Neutral is amber. Tiny thing, but it makes the output scannable in a way it wasn't before.
 
