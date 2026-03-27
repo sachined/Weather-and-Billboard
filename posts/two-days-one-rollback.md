@@ -17,10 +17,16 @@ I spent some time poking at it. Then I made the call: rip it out.
 
 Here's the thing — when a feature relies on an external API that's unreliable in production, you have two choices: build retry logic, fallback states, error handling, and shimming... or just remove it. For a solo indie project, the second option is usually the right call. The product is cleaner without it.
 
-While all that was happening, I also shipped something I'm genuinely proud of: a Groq→Gemini relay for the research agent. The problem was Groq would sometimes truncate mid-sentence under load — not fail, just stop. So I built a relay where Gemini picks up from the exact cutoff point and continues. If the combined output still has fewer than 5 sentences, a second corrective Gemini call fires. Two levels of self-correction, transparent to the user.
+While all that was happening, I also shipped something I'm genuinely proud of: a Groq→Gemini relay for the research agent. The problem was Groq would sometimes truncate mid-sentence under load — not fail, just stop. For a financial research tool, incomplete analysis is worse than no analysis. I needed reliability over cost savings. So I built a relay where Gemini picks up from the exact cutoff point and continues the analysis. If the combined output still has fewer than 5 sentences, a second corrective Gemini call fires to fill gaps. Two levels of self-correction, transparent to the user. It's more expensive than Groq alone, but truncated research advice is how you lose trust.
 
 Also added sentiment color coding in the mini agent cards — Bullish is green, Bearish is red, Neutral is amber. Tiny thing, but it makes the output scannable in a way it wasn't before.
 
 Ended the day with UI polish: uniform column layout in the summary bar, colored the Analyst Target card, tightened up the search bar and feature bar states. Plus Cloudflare Worker config and deployment scripts — the plumbing that nobody sees but matters.
 
 Two days of building, one rollback, and the product is tighter than when I started. I'll take it.
+
+---
+
+**Keep Reading:**
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough.md) — How the Groq→Gemini relay fits into the larger research pipeline
+- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution.md) — Why the decision to ship and immediately rollback matters to FinSurf's evolution

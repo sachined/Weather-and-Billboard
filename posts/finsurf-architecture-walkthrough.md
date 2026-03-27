@@ -77,3 +77,10 @@ I moved to window.print() — the browser's native print-to-PDF while back. No h
 ## Current State
 
 The five-agent pipeline is stable. Active development is on a conversational layer that operates on top of completed reports rather than triggering a fresh pipeline run.
+
+---
+
+**Keep Reading:**
+- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution.md) — The architectural decisions that led to this design
+- [Even Anton Had a Supervisor](./token-management-evolution.md) — How token telemetry fits into the observability layer this architecture requires
+- [Two Days, One Rollback](./two-days-one-rollback.md) — A real shipping cycle that stress-tested this architecture

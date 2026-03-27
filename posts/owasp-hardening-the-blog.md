@@ -7,7 +7,7 @@ series: "OWASP Top 10 Audit"
 series_position: 1
 ---
 
-The most dangerous security assumption isn't a technical one. It's a categorical one: *this type of app doesn't need that kind of scrutiny.*
+I shipped this without a security review. Then I matched it against the OWASP Top 10. Here's what I found. The most dangerous security assumption isn't a technical one. It's a categorical one: *this type of app doesn't need that kind of scrutiny.*
 
 I'd carried that assumption into this site from the start. No user accounts. No payments. No sensitive data in any obvious sense. A Next.js blog with a weather widget and a portfolio chart. What's the attack surface on something like that?
 
@@ -28,6 +28,11 @@ The original implementation called the OpenWeather API directly from the browser
 The name "environment variable" implies a level of secrecy that doesn't exist once the value is compiled into a bundle. *Static* refers to the rendering strategy, not the security model.
 
 The fix is a server-side proxy route. The client now calls `/api/weather/current`, a Next.js API route that holds the key in `process.env.OPENWEATHER_API_KEY` — a server-only variable that never ships to the browser:
+
+---
+
+**Keep Reading:**
+- [What Not to Log](./owasp-hardening-solo-project.md) — The companion OWASP audit, this time on FinSurf's auth infrastructure
 
 ```ts
 // pages/api/weather/current.ts

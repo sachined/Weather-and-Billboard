@@ -8,7 +8,7 @@ series: "OWASP Top 10 Audit"
 series_position: 2
 ---
 
-I shipped the VIP pass system and Stripe integration without thinking much about security beyond "it works." The pass codes were stored in plaintext. The admin panel had no lockout. There was a hardcoded default pass — `FINSURF_BETA_2026` — baked into the server as a fallback. None of that felt alarming at the time. It was a small app, one developer, one user at a time.
+I shipped this without a security review. Then I matched it against the OWASP Top 10. Here's what I found. I shipped the VIP pass system and Stripe integration without thinking much about security beyond "it works." The pass codes were stored in plaintext. The admin panel had no lockout. There was a hardcoded default pass — `FINSURF_BETA_2026` — baked into the server as a fallback. None of that felt alarming at the time. It was a small app, one developer, one user at a time.
 
 Then I sat down with the OWASP Top 10 and matched each item against the codebase.
 
@@ -84,3 +84,8 @@ The OWASP Top 10 is not a compliance checklist. It's a prompt. Each item is a qu
 The ones that didn't resolve quickly — pass storage, credential logging, admin lockout, startup validation — were all cases where the code worked, nothing was obviously broken, and the risk was invisible until I looked for it. That's the pattern worth watching for. Not the things that are wrong. The things that are wrong and working fine.
 
 Those are the ones that cost you.
+
+---
+
+**Keep Reading:**
+- [It's Just a Blog](./owasp-hardening-the-blog.md) — The companion OWASP audit, this time on the blog itself

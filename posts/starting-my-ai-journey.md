@@ -7,6 +7,8 @@ series: "Career Reflections"
 series_position: 1
 ---
 
+Enterprise AI deployments fail not because the models are weak, but because the surrounding workflow doesn't work. Here's where I learned that.
+
 There's a conversation I had repeatedly at eGain that I didn't fully appreciate at the time.
 
 A Fortune 500 client would come in excited about AI. They had the budget, the executive sponsorship, the vendor pitch deck. What they didn't have was a clear path from the demo to the desk. The model worked. The integration didn't. The UX confused the agents who were supposed to use it. Six months of procurement led to something that sat mostly unused because it didn't slot into how people actually worked.
@@ -38,4 +40,6 @@ The Last Mile problem doesn't go away when you're the one building the product. 
 But that's what makes it interesting.
 
 ---
-*The technical side of this — how I structured the multi-agent architecture in FinSurf — is covered in a separate post. The short version: LangGraph, parallel fan-out, and a deterministic Python math layer so the numbers are always right even when the narrative isn't.*
+
+**Keep Reading:**
+- [You Can't Delegate the node_modules](./reflection-march2026.md) — The companion to this essay, on moving from implementation to building

@@ -23,3 +23,9 @@ There was also the execution context. My system uses a simple module-level list 
 Anton 2.0 eventually made things better in Gilfoyle’s world too. But somebody still had to watch what it was doing.
 
 Measure twice. Prompt once.
+
+---
+
+**Keep Reading:**
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough.md) — The full architecture walkthrough that this telemetry layer supports
+- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution.md) — How FinSurf's design evolved to require this kind of instrumentation

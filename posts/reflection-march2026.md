@@ -27,4 +27,6 @@ If you’re looking for someone who can talk architecture but isn’t afraid of 
 
 ![img.png](/blog/images/img.png)
 ---
-*Interested in seeing my work in action? Check out my latest technical deep-dives on [Finsurf.net](https://finsurf.net) or explore the [Technical Roadmap](/blog/job-gap?tab=analysis) here.*
+
+**Keep Reading:**
+- [The Last Mile Is Always Harder Than the Model](./starting-my-ai-journey.md) — The first reflection in this series, on enterprise AI deployment failures

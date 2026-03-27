@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "trade": "tsx scripts/trade.ts"
+    "trade": "tsx scripts/trade.ts",
+    "check-devlog": "tsx scripts/check-devlog.ts",
+    "setup-hooks": "node scripts/setup-hooks.js"
   },
   "dependencies": {
     "chart.js": "^4.4.0",

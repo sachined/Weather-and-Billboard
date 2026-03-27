@@ -89,3 +89,9 @@ The day started with architecture and ended with closing the gate. A full arc �
 Ship days aren't glamorous. They're messy, iterative, and full of 11 PM redirect loops. But when you look back at the commit history and see the trajectory — monolith to modules, no auth to edge security, no admin to VIP code generation — that's when it hits you.
 
 You built something real.
+
+---
+
+**Keep Reading:**
+- [What Not to Log](./owasp-hardening-solo-project.md) — The security audit that covered the VIP code system I shipped in this session
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough.md) — The full product architecture this shipping day contributed to

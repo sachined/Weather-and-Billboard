@@ -55,3 +55,8 @@ RKLB is still there. I still think it wins. I just stopped pretending it's the s
 
 ---
 *The portfolio is live at [Portfolio](/blog/portfolio). The framework behind it is built on Buffett's concept of durable competitive advantage and Burry's approach to asymmetric positioning — two philosophies that are more complementary than they first appear.*
+
+---
+
+**Keep Reading:**
+- [The Last Mile Is Always Harder Than the Model](./starting-my-ai-journey.md) — On the gap between believing in something and building something that works in reality

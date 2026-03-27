@@ -36,3 +36,10 @@ The last wall was the one I didn't see coming. FinSurf uses React 19 with Tailwi
 The fix was a custom color-resolution utility that converts design tokens to values the PDF renderer can handle before the export runs. It's one of those solutions that sounds trivial until you're two hours into it. The last mile is always an obscure compatibility issue you didn't anticipate.
 
 FinSurf keeps evolving — historical P&L analysis, multi-ticker batching, a conversational layer on top of existing reports. But the foundation is right now in a way it wasn't at the start: deterministic math, honest orchestration, and a PDF export that actually works.
+
+---
+
+**Keep Reading:**
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough.md) — The current state of the architecture this post traces the evolution toward
+- [Even Anton Had a Supervisor](./token-management-evolution.md) — How token management evolved within this deterministic system
+- [From Monolith to Midnight](./finsurf-admin-and-vip-codes.md) — A shipping day that proved the deterministic approach works at scale

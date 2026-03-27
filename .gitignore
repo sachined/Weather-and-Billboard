@@ -38,3 +38,4 @@ yarn-debug.log*
 private/
 .vercel
 SECURITY.md
+CLAUDE.md
