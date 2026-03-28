@@ -54,6 +54,7 @@ export interface PostProps {
     id: string;
     title: string;
     date: string;
+    excerpt: string;
     contentHtml: string;
     prevPost?: { id: string; title: string } | null;
     nextPost?: { id: string; title: string } | null;
@@ -67,7 +68,21 @@ export default function Post({ postData }: PostProps) {
   return (
     <Layout>
       <Head>
-        <title>{postData.title} - {SITE_NAME}</title>
+        <title>{`${postData.title} - ${SITE_NAME}`}</title>
+        <meta property="og:title" content={postData.title} />
+        <meta property="og:description" content={postData.excerpt} />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:image"
+          content={`https://finsurf.net/blog/api/og?title=${encodeURIComponent(postData.title)}${postData.series ? `&series=${encodeURIComponent(postData.series)}` : ''}${postData.series_position ? `&position=${postData.series_position}` : ''}`}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={postData.title} />
+        <meta name="twitter:description" content={postData.excerpt} />
+        <meta
+          name="twitter:image"
+          content={`https://finsurf.net/blog/api/og?title=${encodeURIComponent(postData.title)}${postData.series ? `&series=${encodeURIComponent(postData.series)}` : ''}${postData.series_position ? `&position=${postData.series_position}` : ''}`}
+        />
       </Head>
       
       <div className={styles.backButton}>

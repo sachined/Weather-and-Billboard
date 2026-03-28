@@ -27,6 +27,9 @@ Early versions of FinSurf tried to optimize for cost — Groq is significantly c
 
 So I built a relay. When Groq finishes its response, the system detects the exact cutoff point (measuring output length and token count), then sends the partial output to Gemini with context: "Here's what we have so far. Continue from where this left off and complete the analysis." If the combined output still has fewer than 5 sentences, a second corrective Gemini call fires to fill gaps — a final pass to ensure the reasoning is complete. Two levels of self-correction, totally transparent to the user.
 
+![Complete RKLB light-theme report — the relay ensuring full output](/blog/images/finsurf-rklb-light-report-1.png)
+*A complete RKLB report delivered by the relay — the contrast to "RKLB has strong fundamentals in... [nothing]"*
+
 It's more expensive than Groq alone. But truncated research advice is how you lose trust, and trust is the only thing that actually matters for a financial tool.
 
 Also added sentiment color coding in the mini agent cards — Bullish is green, Bearish is red, Neutral is amber. Tiny thing, but it makes the output scannable in a way it wasn't before.

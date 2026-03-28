@@ -20,6 +20,7 @@ export default function Layout({ children, home }: LayoutProps) {
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="Sachin Nediyanchath" href="/blog/feed.xml" />
         <meta
           name="description"
           content={`Software engineer building AI tools and products. Explore FinSurf, investment strategy, and more.`}

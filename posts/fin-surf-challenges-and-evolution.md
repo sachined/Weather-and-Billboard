@@ -22,7 +22,10 @@ The third wall was tool orchestration. The agent needed to know when Wikipedia w
 
 WikiSurf worked. But it was a linear agent — one loop, one goal, one path to the answer. As I pushed it further, I kept running into the edges of that design. It couldn't handle financial arithmetic reliably. It had no concept of conditional routing. Every run looked the same regardless of what it found.
 
-That ceiling became the blueprint for [FinSurf](https://finsurf.net). The modular tool design, the callback-based UI, the Pydantic validation patterns — all of it carried forward. But the linearity didn't. FinSurf needed a state machine, not a loop. Building WikiSurf was how I learned to know the difference.
+That ceiling became the blueprint for [FinSurf](https://finsurf.net).
+
+![FinSurf early development state — February 21, landing page in progress](/blog/images/finsurf-dev-feb21.png)
+*Early FinSurf — before the architecture matured* The modular tool design, the callback-based UI, the Pydantic validation patterns — all of it carried forward. But the linearity didn't. FinSurf needed a state machine, not a loop. Building WikiSurf was how I learned to know the difference.
 
 ---
 
@@ -37,6 +40,9 @@ The second shift happened when the orchestration stopped keeping up with the log
 Migrating to **LangGraph** was the right call. The directed graph structure let me build a proper state machine: conditional routing, parallel fan-out, nodes that only execute when their preconditions are met. The Dividend Specialist now sits dormant unless it's needed. That change alone cut unnecessary API token usage significantly — not because I was optimizing for cost, but because the logic was finally honest about what each run actually required.
 
 The last wall was the one I didn't see coming. FinSurf uses React 19 with Tailwind CSS 4, and one of the most-requested features was downloadable PDF reports. When I implemented it, I hit an obscure compatibility gap: `html2canvas` and most PDF libraries don't fully support the `oklch` color space or CSS custom properties that Tailwind 4 uses. The Midnight Slate theme translated to the printed page as something close to garbage.
+
+![FinSurf PDF report with greyed-out sections — color resolution failure before the fix](/blog/images/finsurf-jnj-pdf-report-greyed.png)
+*What the Midnight Slate theme exported to before the color-resolution utility — colors resolve to nothing*
 
 The fix was a custom color-resolution utility that converts design tokens to values the PDF renderer can handle before the export runs. It's one of those solutions that sounds trivial until you're two hours into it. The last mile is always an obscure compatibility issue you didn't anticipate.
 

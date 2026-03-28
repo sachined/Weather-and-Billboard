@@ -48,6 +48,9 @@ Why disk?
 
 Why 15 minutes? Market data doesn't move in ways that matter intraday. Earnings don't change every 5 minutes. Analyst ratings don't update twice an hour. 15 minutes is fresh enough for investment decisions, cheap enough to be practical.
 
+![AAPL Research Analyst and Tax Strategist agent cards — the pipeline output the disk cache protects](/blog/images/finsurf-aapl-research-tax.png)
+*The Research and Tax agents — disk-cached API data feeds both of these within a single request*
+
 **Layer 2: In-Memory Cache (Pipeline speed)**
 
 Separate cache layer: completed analysis results. When a request finishes the full pipeline (research, tax, dividend, sentiment, summary), store the entire output in an LRU cache in the Express server memory.
@@ -81,6 +84,9 @@ Together:
 - First AAPL request: Disk miss → API hit → disk write → pipeline runs → memory cache write → user sees result (10s)
 - Second AAPL request (within 15 min, same server): Disk hit ✓ → pipeline runs (2s, faster because data is ready) → memory cache write → user sees result (2s)
 - Third AAPL request (within 15 min, potentially different server): Disk hit ✓ → memory hit ✓ → return cached result (microseconds)
+
+![Complete AAPL FinSurf report — the cached result served in microseconds on a cache hit](/blog/images/finsurf-aapl-report.png)
+*The full pipeline output — on a cache hit, this reaches the user in microseconds instead of ten seconds*
 
 ## The Implementation Complexity
 

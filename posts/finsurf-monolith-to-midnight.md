@@ -23,6 +23,9 @@ The refactor decomposed it into focused modules under `backend/data/`:
 - `edgar.py` — SEC filings
 - `social.py` — sentiment analysis
 
+![Early FinSurf UI with source links cut off — a symptom of the convoluted monolith](/blog/images/finsurf-source-links-cut-off.png)
+*A visible symptom of the monolith: source attribution truncated, the kind of bug that hides in tightly-coupled code*
+
 Each module got its own formatter and cache layer (`_formatters.py`, `_cache.py`). The separation wasn't just cosmetic — it meant each data source could fail, cache, and retry independently. A Finnhub rate limit no longer blocked EDGAR lookups.
 
 On the frontend side, I created `src/utils/apiFetch.ts` — a centralized fetch wrapper so every API call flows through one place for auth headers and error handling. Small utility, big payoff. And as part of production hardening, I cut the Reddit API dependency entirely. It wasn't pulling its weight relative to its cost.

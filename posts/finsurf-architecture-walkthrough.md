@@ -40,6 +40,9 @@ The Research Agent fires first and determines the shape of the rest of the run. 
 
 The Executive Summary agent runs last and only sees the outputs of agents that actually ran. It summarizes what exists, not what was skipped.
 
+![AVGO Executive Summary agent card — the final synthesis agent that only sees what actually ran](/blog/images/finsurf-avgo-executive-summary.png)
+*The Executive Summary agent — it summarizes what exists, not what was skipped*
+
 ---
 
 ## Python Handles the Numbers
@@ -57,6 +60,9 @@ The market signal is the most visible output on the results page. It's also the 
 The signal is derived deterministically from four inputs: P/E ratio, beta, analyst price targets, and revenue growth. A threshold ruleset maps those values to Bullish, Neutral, or Bearish. The output is consistent — identical inputs always produce the same signal — and auditable. If a stock is flagged Bearish, the reason is a specific set of threshold violations, not a model judgment call.
 
 The LLM's role: it receives the signal as a structured input and narrates it in context. It explains; it does not decide.
+
+![AVGO price card with signal indicator — Bullish/Neutral/Bearish produced by the rules engine](/blog/images/finsurf-avgo-price-card.png)
+*The signal displayed here was produced without a single LLM token — pure threshold logic*
 
 ---
 
