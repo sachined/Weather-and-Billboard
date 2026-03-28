@@ -66,6 +66,9 @@ Each agent card displays a timestamp badge showing how current the underlying da
 
 No polling, no extra endpoints. The timestamp travels with the data it describes, and the badge component handles the rest client-side.
 
+![AVGO results page showing all five agents with freshness badges, signal indicator, and price metrics](/blog/images/finsurf-avgo-results-page.png)
+*The full pipeline at work — Research, Tax, Dividends, Sentiment, and Executive Summary all visible with their freshness indicators*
+
 ---
 
 ## PDF Export

@@ -31,6 +31,9 @@ It's more expensive than Groq alone. But truncated research advice is how you lo
 
 Also added sentiment color coding in the mini agent cards — Bullish is green, Bearish is red, Neutral is amber. Tiny thing, but it makes the output scannable in a way it wasn't before.
 
+![TSMC report showing Tax, Dividend, and Sentiment agent cards with color-coded sentiment badge](/blog/images/finsurf-tsmc-sentiment-agents.png)
+*Sentiment color coding at work — the green dot signals Bullish at a glance*
+
 Ended the day with UI polish: uniform column layout in the summary bar, colored the Analyst Target card, tightened up the search bar and feature bar states. Plus Cloudflare Worker config and deployment scripts — the plumbing that nobody sees but matters.
 
 Two days of building, one rollback, and the product is tighter than when I started. I'll take it.

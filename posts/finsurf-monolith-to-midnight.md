@@ -43,6 +43,9 @@ The architecture: **User → Cloudflare Worker (auth + rate limit) → Caddy (re
 
 Simple on paper. Not simple in practice.
 
+![Cloudflare KV dashboard showing FINSURF_KV namespace with 8 reads and 5 writes](/blog/images/cloudflare-finsurf-kv-dashboard.png)
+*The KV store powers the rate limiter — every request gets checked against this state*
+
 **10:13 PM – 10:45 PM:** Three rapid-fire partial fixes to `wrangler.toml`. The Worker kept breaking in deployment — route config wrong, origin URL wrong, environment bindings missing. Each fix required a redeploy, a test, and another fix.
 
 **11:04 PM:** The origin redirect loop. The Worker was proxying requests back to itself. I had to fix the Caddyfile reverse proxy config alongside the Worker routes to break the cycle. Debugging redirect loops at 11 PM is a special kind of patience exercise.
@@ -77,6 +80,9 @@ RUN apk add --no-cache tzdata
 ```
 
 One line. But finding it meant tracing a silent failure through container logs, realizing the timestamps were wrong, and then remembering that Alpine's minimalism is both its strength and its trap.
+
+![RKLB stock report with timezone error in both Research Analyst and Tax Strategist cards](/blog/images/finsurf-rklb-timezone-error.png)
+*The Alpine tzdata failure manifested here — agents couldn't initialize because the timezone library was missing*
 
 ## Locking the Gate
 
