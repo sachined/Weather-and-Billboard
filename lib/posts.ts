@@ -46,8 +46,9 @@ export function getSortedPostsData(): PostData[] {
       ...(matterResult.data as { date: string; title: string; excerpt: string; tags: string[]; highlight?: boolean; series?: string; series_position?: number }),
     };
   });
-  // Sort posts by date
-  return allPostsData.sort((a, b) => {
+  const today = new Date().toISOString().slice(0, 10);
+  // Sort posts by date, excluding future-dated posts
+  return allPostsData.filter((post) => post.date <= today).sort((a, b) => {
     if (a.date < b.date) {
       return 1;
     } else {
@@ -57,14 +58,17 @@ export function getSortedPostsData(): PostData[] {
 }
 
 export function getAllPostIds() {
+  const today = new Date().toISOString().slice(0, 10);
   const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ''),
-      },
-    };
-  });
+  return fileNames
+    .filter((fileName) => {
+      const fullPath = path.join(postsDirectory, fileName);
+      const { data } = matter(fs.readFileSync(fullPath, 'utf8'));
+      return (data.date as string) <= today;
+    })
+    .map((fileName) => ({
+      params: { id: fileName.replace(/\.md$/, '') },
+    }));
 }
 
 export async function getPostData(id: string) {
