@@ -26,6 +26,7 @@ export default function Layout({ children, home }: LayoutProps) {
           content={`Software engineer building AI tools and products. Explore FinSurf, investment strategy, and more.`}
         />
         <meta name="og:title" content={siteTitle} />
+        <meta property="og:image" key="og-image" content="https://finsurf.net/blog/api/og" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <a href="#main-content" className="skip-link">Skip to main content</a>

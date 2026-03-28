@@ -68,7 +68,12 @@ export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
           {featured && (
             <article className={styles.featuredCard}>
               <div className={styles.featuredMeta}>
-                <span className={styles.featuredEyebrow}>Latest</span>
+                <div className={styles.featuredEyebrowGroup}>
+                  <span className={styles.featuredEyebrow}>Latest</span>
+                  {featured.series && (
+                    <span className={styles.cardSeries}>{featured.series}</span>
+                  )}
+                </div>
                 <span className={styles.readingTime}>{featured.readingTime} min read</span>
               </div>
               <h2 className={styles.featuredTitle}>
@@ -96,7 +101,7 @@ export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
 
           {rest.length > 0 && (
             <div className={styles.blogGrid}>
-              {rest.map(({ id, date, title, excerpt, tags, readingTime, highlight }) => (
+              {rest.map(({ id, date, title, excerpt, tags, readingTime, highlight, series }) => (
                 <article className={`${styles.blogCard} ${highlight ? styles.blogCardHighlight : ''}`} key={id}>
                   <div className={styles.cardMeta}>
                     <small className={styles.cardDate}>
@@ -108,6 +113,7 @@ export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
                     </small>
                     <small className={styles.readingTime}>{readingTime} min read</small>
                   </div>
+                  {series && <span className={styles.cardSeries}>{series}</span>}
                   <h2 className={styles.postTitle}>
                     <Link href={`/posts/${id}`} className={styles.postLink}>
                       {title}

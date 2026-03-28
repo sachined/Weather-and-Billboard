@@ -3,6 +3,8 @@ title: 'Conviction Is Not the Same as Durability'
 date: '2026-03-17'
 excerpt: 'A session that started with a UI bug and ended with me reclassifying half my portfolio. On building honestly, and the difference between believing in something and anchoring to it.'
 tags: ['Investing', 'Engineering']
+series: "Investing"
+series_position: 1
 ---
 
 It started, as most of my refactors do, with something embarrassingly small.

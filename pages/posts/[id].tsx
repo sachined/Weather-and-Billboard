@@ -72,8 +72,10 @@ export default function Post({ postData }: PostProps) {
         <meta property="og:title" content={postData.title} />
         <meta property="og:description" content={postData.excerpt} />
         <meta property="og:type" content="article" />
+        <link rel="canonical" href={`https://finsurf.net/blog/posts/${postData.id}`} />
         <meta
           property="og:image"
+          key="og-image"
           content={`https://finsurf.net/blog/api/og?title=${encodeURIComponent(postData.title)}${postData.series ? `&series=${encodeURIComponent(postData.series)}` : ''}${postData.series_position ? `&position=${postData.series_position}` : ''}`}
         />
         <meta name="twitter:card" content="summary_large_image" />
