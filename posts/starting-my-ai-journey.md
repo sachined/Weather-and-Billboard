@@ -7,7 +7,7 @@ series: "Career Reflections"
 series_position: 1
 ---
 
-Enterprise AI deployments fail not because the models are weak, but because the surrounding workflow doesn't work. Here's where I learned that.
+Enterprise AI deployments fail not because the models are weak, but because the surrounding workflow doesn't work.
 
 There's a conversation I had repeatedly at eGain that I didn't fully appreciate at the time.
 

@@ -5,14 +5,12 @@ highlight: true
 excerpt: 'I shipped the VIP pass system and Stripe integration without a real security review. Then I sat down with the OWASP Top 10 and matched each item against the code. Here is what I found.'
 tags: ['FinSurf', 'Security', 'Engineering']
 series: "OWASP Top 10 Audit"
-series_position: 2
+series_position: 1
 ---
 
 I shipped this without a security review. Then I matched it against the OWASP Top 10. Here's what I found. I shipped the VIP pass system and Stripe integration without thinking much about security beyond "it works." The pass codes were stored in plaintext. The admin panel had no lockout. There was a hardcoded default pass — `FINSURF_BETA_2026` — baked into the server as a fallback. None of that felt alarming at the time. It was a small app, one developer, one user at a time.
 
 Then I sat down with the OWASP Top 10 and matched each item against the codebase.
-
-What follows is not a tutorial. It's an honest account of what I found, what I changed, and what I learned — in order of impact.
 
 ## Hashing the Passes
 

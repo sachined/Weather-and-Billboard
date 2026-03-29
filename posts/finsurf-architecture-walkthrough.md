@@ -14,8 +14,6 @@ The first: the market signal — Bullish, Neutral, or Bearish — is produced en
 
 Both follow the same principle: use the right tool for the job. Where LLMs are unreliable or expensive, don't use them.
 
-The rest of this post walks through the full architecture using the diagram below as a map.
-
 ![FinSurf Architecture Diagram](/blog/images/ArchDiagram.png)
 
 ---

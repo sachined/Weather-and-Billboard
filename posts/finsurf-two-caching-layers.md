@@ -3,7 +3,7 @@ title: 'Two Caching Layers'
 date: '2026-03-18'
 excerpt: "When one cache isn't enough. Why FinSurf needs disk persistence and in-memory speed, and why they solve different problems."
 tags: ['FinSurf', 'Engineering']
-series: 'FinSurf'
+series: "FinSurf"
 series_position: 3
 ---
 
