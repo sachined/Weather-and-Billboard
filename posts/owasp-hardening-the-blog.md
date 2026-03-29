@@ -4,7 +4,7 @@ date: '2026-04-01'
 excerpt: 'A Next.js blog felt inherently safe — static generation, no user accounts, no payments. That assumption was the problem. Here is what the OWASP Top 10 found when I stopped treating simplicity as a substitute for scrutiny.'
 tags: ['Security', 'Engineering']
 series: "OWASP Top 10 Audit"
-series_position: 1
+series_position: 2
 ---
 
 I shipped this without a security review. Then I matched it against the OWASP Top 10. Here's what I found. The most dangerous security assumption isn't a technical one. It's a categorical one: *this type of app doesn't need that kind of scrutiny.*
@@ -14,8 +14,6 @@ I'd carried that assumption into this site from the start. No user accounts. No 
 I sat down with the OWASP Top 10 to find out.
 
 The FinSurf audit had found problems in auth infrastructure — credential storage, admin lockout, startup validation. Real problems, in a system I'd thought about carefully. What the blog audit found was different in kind: vulnerabilities that only exist because I hadn't thought carefully at all. The assumption of simplicity had replaced the habit of scrutiny.
-
-Here is what it found, and what the assumption behind each one actually was.
 
 ## "Static sites don't have secrets"
 
@@ -28,11 +26,6 @@ The original implementation called the OpenWeather API directly from the browser
 The name "environment variable" implies a level of secrecy that doesn't exist once the value is compiled into a bundle. *Static* refers to the rendering strategy, not the security model.
 
 The fix is a server-side proxy route. The client now calls `/api/weather/current`, a Next.js API route that holds the key in `process.env.OPENWEATHER_API_KEY` — a server-only variable that never ships to the browser:
-
----
-
-**Keep Reading:**
-- [What Not to Log](./owasp-hardening-solo-project) — The companion OWASP audit, this time on FinSurf's auth infrastructure
 
 ```ts
 // pages/api/weather/current.ts
