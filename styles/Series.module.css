@@ -75,6 +75,11 @@
   color: var(--accent-primary);
 }
 
+.postItem:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
 .postItemLeft {
   flex-shrink: 0;
   width: 2rem;
@@ -146,4 +151,30 @@
   font-size: 0.83rem;
   font-weight: 700;
   color: var(--accent-primary);
+}
+
+.readLink:hover {
+  text-decoration: underline;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .postItem {
+    gap: 1rem;
+    padding: 1.25rem 0;
+  }
+
+  .postItemLeft {
+    width: 1.75rem;
+  }
+
+  .postNumber {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.7rem;
+  }
+
+  .postItemTitle {
+    font-size: 0.95rem;
+  }
 }
