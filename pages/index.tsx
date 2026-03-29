@@ -3,20 +3,22 @@ import Link from 'next/link';
 import { useState, useMemo } from 'react';
 import Layout from '@/components/layout';
 import { SITE_NAME } from '@/lib/constants';
-import { getSortedPostsData, PostData } from '@/lib/posts';
+import { getSortedPostsData, PostData, getSeriesSummaries, SeriesSummary } from '@/lib/posts';
 import styles from '@/styles/Blog.module.css';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
+  const seriesSummaries = getSeriesSummaries();
   return {
     props: {
       allPostsData,
+      seriesSummaries,
     },
   };
 };
 
-export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
+export default function Blog({ allPostsData, seriesSummaries }: { allPostsData: PostData[]; seriesSummaries: SeriesSummary[] }) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
   const allTags = useMemo(() => {
@@ -97,6 +99,26 @@ export default function Blog({ allPostsData }: { allPostsData: PostData[] }) {
                 </Link>
               </div>
             </article>
+          )}
+
+          {seriesSummaries.length > 0 && (
+            <div className={styles.seriesTeaser}>
+              <p className={styles.seriesTeaserHeading}>Ongoing Series</p>
+              <div className={styles.seriesCards}>
+                {seriesSummaries.map((s) => (
+                  <Link key={s.slug} href={`/series/${s.slug}`} className={styles.seriesCard}>
+                    <span className={styles.seriesCardName}>{s.name}</span>
+                    <span className={styles.seriesCardDesc}>{s.description}</span>
+                    <div className={styles.seriesCardFooter}>
+                      <span className={styles.seriesCardCount}>
+                        {s.postCount} {s.postCount === 1 ? 'post' : 'posts'}
+                      </span>
+                      <span className={styles.seriesCardCta}>Explore →</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           )}
 
           {rest.length > 0 && (
