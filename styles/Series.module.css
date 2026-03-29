@@ -1,0 +1,149 @@
+/* ── Back button ── */
+.backButton {
+  margin-bottom: 1.5rem;
+}
+
+.backButton a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s;
+}
+
+.backButton a:hover {
+  color: var(--accent-primary);
+}
+
+/* ── Series header ── */
+.seriesHeader {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.seriesMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.seriesEyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.seriesPostCount {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.seriesTitle {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-heading);
+  margin: 0 0 0.75rem;
+  line-height: 1.25;
+}
+
+.seriesDescription {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 680px;
+}
+
+/* ── Post list ── */
+.postList {
+  display: flex;
+  flex-direction: column;
+}
+
+.postItem {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  text-decoration: none;
+}
+
+.postItem:hover .postItemTitle {
+  color: var(--accent-primary);
+}
+
+.postItemLeft {
+  flex-shrink: 0;
+  width: 2rem;
+  padding-top: 0.25rem;
+}
+
+.postNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.postItemContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.postItemMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.postItemDate,
+.postItemTime {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.startHere {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 4px;
+  padding: 0.1rem 0.45rem;
+}
+
+.postItemTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin: 0 0 0.4rem;
+  line-height: 1.35;
+  transition: color 0.15s;
+}
+
+.postItemExcerpt {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0 0 0.5rem;
+}
+
+.readLink {
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
