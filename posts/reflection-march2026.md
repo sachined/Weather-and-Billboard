@@ -27,4 +27,4 @@ If you’re looking for someone who can talk architecture but isn’t afraid of 
 ---
 
 **Keep Reading:**
-- [The Last Mile Is Always Harder Than the Model](./starting-my-ai-journey) — The first reflection in this series, on enterprise AI deployment failures
+- [The Model Was the Easy Part](./starting-my-ai-journey) — The first reflection in this series, on enterprise AI deployment failures

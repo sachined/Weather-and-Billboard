@@ -1,5 +1,5 @@
 ---
-title: 'Stochastic to Deterministic'
+title: 'Not Everything Should Be a Prompt'
 date: '2026-03-08'
 excerpt: 'WikiSurf taught me what a linear agent can and cannot do. FinSurf is what I built when I hit that ceiling — deterministic math, honest orchestration, and a PDF export that actually works.'
 tags: ['FinSurf', 'AI', 'Engineering']

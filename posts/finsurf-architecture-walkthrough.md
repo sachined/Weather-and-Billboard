@@ -90,6 +90,6 @@ The five-agent pipeline is stable. Active development is on a conversational lay
 ---
 
 **Keep Reading:**
-- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution) — The architectural decisions that led to this design
+- [Not Everything Should Be a Prompt](./fin-surf-challenges-and-evolution) — The architectural decisions that led to this design
 - [Even Anton Had a Supervisor](./token-management-evolution) — How token telemetry fits into the observability layer this architecture requires
-- [Two Days, One Rollback](./two-days-one-rollback) — A real shipping cycle that stress-tested this architecture
+- [The Rollback Was the Feature](./two-days-one-rollback) — A real shipping cycle that stress-tested this architecture

@@ -61,4 +61,4 @@ RKLB is still there. I still think it wins. I just stopped pretending it's the s
 ---
 
 **Keep Reading:**
-- [The Last Mile Is Always Harder Than the Model](./starting-my-ai-journey) — On the gap between believing in something and building something that works in reality
+- [The Model Was the Easy Part](./starting-my-ai-journey) — On the gap between believing in something and building something that works in reality

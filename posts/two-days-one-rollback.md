@@ -1,5 +1,5 @@
 ---
-title: 'Two Days, One Rollback, and a Cleaner Product'
+title: 'The Rollback Was the Feature'
 date: '2026-03-23'
 excerpt: 'A Finnhub endpoint that worked locally, a 502 in production, 224 lines deleted, and a Groq→Gemini relay I actually care about.'
 tags: ['FinSurf']
@@ -45,4 +45,4 @@ Two days of building, one rollback, and the product is tighter than when I start
 
 **Keep Reading:**
 - [The Signal Is Not the Story](./finsurf-architecture-walkthrough) — How the Groq→Gemini relay fits into the larger research pipeline
-- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution) — Why the decision to ship and immediately rollback matters to FinSurf's evolution
+- [Not Everything Should Be a Prompt](./fin-surf-challenges-and-evolution) — Why the decision to ship and immediately rollback matters to FinSurf's evolution

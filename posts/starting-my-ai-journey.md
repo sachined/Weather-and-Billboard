@@ -1,5 +1,5 @@
 ---
-title: 'The Last Mile Is Always Harder Than the Model'
+title: 'The Model Was the Easy Part'
 date: '2026-03-10'
 excerpt: "Deploying AI in enterprise environments requires more than good code. It requires understanding where the real friction lives — and it's rarely in the model."
 tags: ['AI', 'Enterprise']

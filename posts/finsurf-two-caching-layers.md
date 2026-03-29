@@ -1,5 +1,5 @@
 ---
-title: 'Two Caching Layers'
+title: 'Fast and Patient'
 date: '2026-03-18'
 excerpt: "When one cache isn't enough. Why FinSurf needs disk persistence and in-memory speed, and why they solve different problems."
 tags: ['FinSurf', 'Engineering']
@@ -108,4 +108,4 @@ The lesson: caching is a spectrum. It's not "cached or not." It's "where does th
 
 **Keep Reading:**
 - [The Signal Is Not the Story](./finsurf-architecture-walkthrough) — How the data layer (and its caches) fit into the full pipeline
-- [Stochastic to Deterministic](./fin-surf-challenges-and-evolution) — The architectural evolution that led to needing this kind of optimization
+- [Not Everything Should Be a Prompt](./fin-surf-challenges-and-evolution) — The architectural evolution that led to needing this kind of optimization

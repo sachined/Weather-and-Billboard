@@ -1,5 +1,5 @@
 ---
-title: 'It''s Just a Blog'
+title: 'The Comfortable Lie'
 date: '2026-04-01'
 excerpt: 'A Next.js blog felt inherently safe — static generation, no user accounts, no payments. That assumption was the problem. Here is what the OWASP Top 10 found when I stopped treating simplicity as a substitute for scrutiny.'
 tags: ['Security', 'Engineering']
