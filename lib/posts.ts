@@ -6,6 +6,7 @@ import remarkRehype from 'remark-rehype';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
 import DOMPurify from 'isomorphic-dompurify';
+import { SERIES } from './series';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
@@ -20,6 +21,21 @@ export interface PostData {
   contentHtml?: string;
   series?: string;
   series_position?: number;
+}
+
+export interface SeriesSummary {
+  slug: string;
+  name: string;
+  description: string;
+  postCount: number;
+  posts: Array<{
+    id: string;
+    title: string;
+    series_position?: number;
+    date: string;
+    excerpt: string;
+    readingTime: number;
+  }>;
 }
 
 export function getSortedPostsData(): PostData[] {
@@ -104,4 +120,31 @@ export async function getPostData(id: string) {
     prevPost: prevPost ? { id: prevPost.id, title: prevPost.title } : null,
     ...(matterResult.data as { date: string; title: string; excerpt: string; series?: string; series_position?: number }),
   };
+}
+
+export function getSeriesSummaries(): SeriesSummary[] {
+  const allPosts = getSortedPostsData();
+  return SERIES.map((config) => {
+    const posts = allPosts
+      .filter((p) => p.series === config.name)
+      .sort(
+        (a, b) =>
+          (a.series_position ?? Infinity) - (b.series_position ?? Infinity)
+      )
+      .map((p) => ({
+        id: p.id,
+        title: p.title,
+        series_position: p.series_position,
+        date: p.date,
+        excerpt: p.excerpt,
+        readingTime: p.readingTime,
+      }));
+    return {
+      slug: config.slug,
+      name: config.name,
+      description: config.description,
+      postCount: posts.length,
+      posts,
+    };
+  }).filter((s) => s.postCount > 0);
 }
