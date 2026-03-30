@@ -67,3 +67,4 @@ But it is harder to ignore a system you built yourself.
 
 **Keep Reading:**
 - [Conviction Is Not the Same as Durability](./portfolio-reclassification-march2026) — On why RKLB sits in the asymmetric layer and not the anchor, and what that distinction actually means for how I hold it
+- []()
