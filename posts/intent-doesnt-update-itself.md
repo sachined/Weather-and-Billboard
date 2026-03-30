@@ -74,7 +74,13 @@ If you're transitioning a personal project to a product, don't trust your IDE to
 
 ## The Takeaway
 
-[Takeaway - 100-150 words]
+When the intent of a project changes, the code doesn't change with it. Every user-facing surface is a potential leak of the old intent.
+
+The fixes are usually small—copy changes, prop removals, rephrasing CTAs. No architectural work. But finding them requires stepping outside the codebase and into the user's shoes.
+
+This is part of building in public. The old intent doesn't disappear when you shift purpose. It gets baked into the code. It persists in the domain you didn't own, the About page that tells your story instead of selling the product, the banner that undermines your own work.
+
+Recognizing it, and fixing it, is how you move from "I built this for myself" to "I'm shipping this for others."
 
 ---
 
