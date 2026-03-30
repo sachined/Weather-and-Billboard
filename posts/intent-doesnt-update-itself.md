@@ -60,7 +60,17 @@ I removed that framing. The fact that FinSurf is solo-built is interesting, but 
 
 ## How to Find Intent Leaks
 
-[Audit method - 150-200 words]
+The key: **navigating files by architecture doesn't surface intent leaks.**
+
+I didn't find these examples by opening `SearchForm.tsx` or `UpgradePage.tsx` in an IDE. I found them by treating the codebase like a user would—reading every surface a user can see, every call-to-action, every sentence of copy.
+
+File-by-file exploration would have missed this. Opening `AboutPage.tsx`, I'd see the component structure, the imports, the data flow. I wouldn't read the bio itself with fresh eyes. But visiting the About page as a user, reading the bio as prose instead of code, I'd immediately feel the misalignment.
+
+That's the difference. The audit had to be user-centric, not developer-centric.
+
+This is why the search had to be deliberate. Intent leaks are invisible to code navigation. They hide in copy that's been stale for months, in CTAs that reflected the old purpose, in framing that made sense at the time but doesn't anymore.
+
+If you're transitioning a personal project to a product, don't trust your IDE to find these. Step outside the code. Walk through the product as a user. Read every surface. Ask: "Does this still fit the new intent?"
 
 ## The Takeaway
 
