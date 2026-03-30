@@ -40,5 +40,5 @@ private/
 .vercel
 SECURITY.md
 CLAUDE.md
-source/
-docs/
+/source/
+/docs/
