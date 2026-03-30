@@ -86,4 +86,4 @@ Recognizing it, and fixing it, is how you move from "I built this for myself" to
 
 **Keep Reading:**
 
-[To be determined - will add cross-references]
+[AWAITING USER INPUT - User will specify which blog posts to link here]
