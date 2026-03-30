@@ -8,7 +8,7 @@ highlight: false
 
 ## The Problem With Intent
 
-[Hook section - 2-3 sentences]
+When you build something for yourself, the code reflects that. The banner announces what *you* do. The About page is your bio. The pricing is framed around your hourly rate. The copy is honest about your passion project. Then the intent changes—suddenly you're shipping a product, not maintaining a personal tool. The code is now *wrong*, even though nothing broke. Intent doesn't update itself.
 
 ## The Domain Story
 
