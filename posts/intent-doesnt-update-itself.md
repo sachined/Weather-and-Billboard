@@ -85,5 +85,6 @@ Recognizing it, and fixing it, is how you move from "I built this for myself" to
 ---
 
 **Keep Reading:**
-
-[AWAITING USER INPUT - User will specify which blog posts to link here]
+- [Not Everything Should Be a Prompt](./fin-surf-challenges-and-evolution) — How FinSurf evolved from WikiSurf, and why architecture had to shift as intent changed
+- [From Monolith to Midnight](./finsurf-monolith-to-midnight) — A shipping day that shows what changed when the product hardened (security, admin, VIP system)
+- [The Signal Is Not the Story](./finsurf-architecture-walkthrough) — The current architecture that emerged after all the intent shifts and decisions
