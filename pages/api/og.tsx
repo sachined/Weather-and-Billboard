@@ -3,10 +3,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
 
+// With this:
 function readFont(weight: 400 | 700): ArrayBuffer {
   const file = `inter-latin-${weight}-normal.woff`;
   const buf = fs.readFileSync(
-    path.join(process.cwd(), 'node_modules', '@fontsource', 'inter', 'files', file)
+    path.join(process.cwd(), 'public', 'fonts', file)
   );
   return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
 }

@@ -1,6 +1,6 @@
 export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '/blog';
 export const SITE_NAME = 'Sachin Nediyanchath';
-export const SITE_TITLE = 'Weather & Career';
+export const SITE_TITLE = 'Sachin Nediyanchath';
 export const CONTACT_EMAIL = 'sachin.nediyanchath@gmail.com';
 export const PROFILE_VERSION = 2;
 export const SOCIAL_LINKS = {
