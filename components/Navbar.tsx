@@ -15,7 +15,7 @@ const navLinks: NavLink[] = [
   { href: '/', label: 'Blog' },
   { href: '/about', label: 'About' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/job-gap', label: 'Journey' },
+  { href: '/journey', label: 'Journey' },
   { href: '/finsurf', label: 'FinSurf Product'}
 ];
 

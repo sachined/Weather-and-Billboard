@@ -50,7 +50,7 @@ export default function About() {
         <div className={styles.recruiterSection}>
           <p className={styles.recruiterEyebrow}>For recruiters &amp; hiring teams</p>
           <FeatureCard
-            href="/job-gap"
+            href="/journey"
             Icon={TrendingUp}
             title="Technical Growth"
             description="My path from enterprise software to AI — skills, pivots, and what I'm focused on next."
