@@ -43,7 +43,7 @@ export default function SEO({
       <meta name="twitter:image" content={imageUrl} />
       {article && (
         <>
-          <meta property="article:published_time" content={article.publishedTime} />
+          <meta property="article:published_time" content={`${article.publishedTime}T00:00:00Z`} />
           {article.tags.map((tag) => (
             <meta property="article:tag" content={tag} key={`tag-${tag}`} />
           ))}

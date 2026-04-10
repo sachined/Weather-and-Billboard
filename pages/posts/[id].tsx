@@ -83,7 +83,7 @@ export default function Post({ postData }: PostProps) {
           '@type': 'BlogPosting',
           headline: postData.title,
           description: postData.excerpt,
-          datePublished: postData.date,
+          datePublished: `${postData.date}T00:00:00Z`,
           author: { '@type': 'Person', name: SITE_NAME, url: `${SITE_URL}${BASE_PATH}/about` },
           url: `${SITE_URL}${BASE_PATH}/posts/${postData.id}`,
           image: `${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent(postData.title)}`,
