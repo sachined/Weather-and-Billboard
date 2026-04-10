@@ -10,7 +10,9 @@ import { getTickerLayer, PortfolioLayer, LAYER_TARGETS } from '@/lib/portfolio-l
 import { SITE_NAME } from '@/lib/constants';
 import PortfolioHistoryChart from '@/components/Portfolio/PortfolioHistoryChart';
 import ArchitectureModal from '@/components/Portfolio/ArchitectureModal';
+import { OptionsPanel } from '@/components/Portfolio/OptionsPanel';
 import { usePortfolio } from '@/hooks/usePortfolio';
+import { PORTFOLIO_OPTIONS } from '@/lib/portfolio-logic';
 
 interface StockData {
   symbol: string;
@@ -317,6 +319,8 @@ export default function PortfolioPage() {
             </p>
           </div>
         )}
+
+        <OptionsPanel options={PORTFOLIO_OPTIONS} positions={myPositions} />
 
         {!chartEnabled ? (
           <div className={styles.chartPlaceholder}>

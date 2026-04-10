@@ -41,6 +41,19 @@ export interface UserPosition {
   lots: Lot[];        // source of truth — individual purchases
 }
 
+export interface PortfolioOption {
+  underlying: string;
+  strategy: string;
+  type: 'put' | 'call';
+  direction: 'short' | 'long';
+  strike: number;
+  expiry: string;          // YYYY-MM-DD
+  contracts: number;
+  premiumReceived: number; // per share (× 100 for total credit per contract)
+  openDate: string;        // YYYY-MM-DD
+  status: 'open' | 'closed' | 'expired' | 'assigned';
+}
+
 interface RawPosition {
   symbol: string;
   lots: Lot[];
@@ -74,6 +87,9 @@ const rawPositions = portfolioData.corePositions as unknown as RawPosition[];
 export const CORE_POSITIONS: UserPosition[] = rawPositions.map(r =>
   computePosition(r.symbol, r.lots)
 );
+
+export const PORTFOLIO_OPTIONS: PortfolioOption[] =
+  (portfolioData as unknown as { options?: PortfolioOption[] }).options ?? [];
 
 export const PORTFOLIO_STRATEGY = portfolioData.strategy;
 export const STRATEGY_METRICS = portfolioData.metrics as StrategyMetrics;

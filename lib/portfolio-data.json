@@ -451,6 +451,15 @@
           "date": "2026-03-30"
         }
       ]
+    },
+    {
+      "symbol": "DOCN",
+      "lots": [
+        {
+          "shares": 1,
+          "date": "2026-04-07"
+        }
+      ]
     }
   ],
   "strategy": {
@@ -485,16 +494,6 @@
         "status": "active",
         "thesis": "Entertainment Leader with high-quality AI."
       },
-      "MAIN": {
-        "layer": "Income",
-        "status": "active",
-        "thesis": "Monthly dividend BDC."
-      },
-      "ARCC": {
-        "layer": "Income",
-        "status": "active",
-        "thesis": "Leading BDC with high-quality loan portfolio."
-      },
       "KO": {
         "layer": "Anchor",
         "status": "active",
@@ -520,10 +519,25 @@
         "status": "active",
         "thesis": "Realty Income — monthly dividend REIT with 30+ years of consecutive dividend growth. Diversifies income layer away from BDC concentration; real-estate-backed yield is structurally uncorrelated to MAIN/ARCC in credit downturns."
       },
+      "DOCN": {
+        "layer": "Asymmetric",
+        "status": "active",
+        "thesis": "DigitalOcean - Provides cloud infrastructure through droplets and other cloud server. This is med-cap company with explosive growth."
+      },
       "T": {
         "layer": "Closed",
         "status": "closed",
         "thesis": "AT&T — income play that became a dividend trap post-WarnerMedia spin-off. Accumulated aggressively in 2021–2022, trimmed and exited by Feb 2026. Valuable lesson: yield alone is not a thesis."
+      },
+      "MAIN": {
+        "layer": "Closed",
+        "status": "closed",
+        "thesis": "Main Street Capital - Monthly dividend BDC. Private Equity Credit Crisis made me reconsider this investment and pushed the proceeds into O"
+      },
+      "ARCC": {
+        "layer": "Income",
+        "status": "closed",
+        "thesis": "Ares Capital - Leading BDC with high-quality loan portfolio. Private Equity Credit Crisis made me reconsider this investment into O"
       },
       "TSM": {
         "layer": "Closed",
@@ -564,6 +578,44 @@
       }
     }
   },
+  "options": [
+    {
+      "underlying": "RKLB",
+      "strategy": "Short Put",
+      "type": "put",
+      "direction": "short",
+      "strike": 50,
+      "expiry": "2026-05-01",
+      "contracts": 1,
+      "premiumReceived": 0.90,
+      "openDate": "2026-04-07",
+      "status": "open"
+    },
+    {
+      "underlying": "RKLB",
+      "strategy": "Covered Call",
+      "type": "call",
+      "direction": "short",
+      "strike": 65,
+      "expiry": "2026-06-18",
+      "contracts": 1,
+      "premiumReceived": 6.90,
+      "openDate": "2026-03-30",
+      "status": "open"
+    },
+    {
+      "underlying": "DOCN",
+      "strategy": "Short Put",
+      "type": "put",
+      "direction": "short",
+      "strike": 70,
+      "expiry": "2026-05-01",
+      "contracts": 1,
+      "premiumReceived": 2.00,
+      "openDate": "2026-04-07",
+      "status": "open"
+    }
+  ],
   "metrics": {
     "philosophy": "Core-Satellite: Compounding + Asymmetric Upside",
     "objective": "10-Year capital appreciation with dividend-funded opportunistic buys.",
