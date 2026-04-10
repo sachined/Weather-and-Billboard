@@ -1,11 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { remark } from 'remark';
-import remarkRehype from 'remark-rehype';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeStringify from 'rehype-stringify';
-import DOMPurify from 'isomorphic-dompurify';
 import { SERIES } from './series';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
@@ -88,6 +83,11 @@ export function getAllPostIds() {
 }
 
 export async function getPostData(id: string) {
+  const { remark } = await import('remark');
+  const remarkRehype = (await import('remark-rehype')).default;
+  const rehypeHighlight = (await import('rehype-highlight')).default;
+  const rehypeStringify = (await import('rehype-stringify')).default;
+  const DOMPurify = (await import('isomorphic-dompurify')).default;
 
   const allPosts = getSortedPostsData();
   const currentPost = allPosts.findIndex(post => post.id === id);
