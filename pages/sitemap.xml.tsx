@@ -26,37 +26,36 @@ function generateSitemap(
   posts: ReturnType<typeof getSortedPostsData>,
   series: ReturnType<typeof getSeriesSummaries>,
 ): string {
-  const staticUrls = STATIC_PAGES.map(
-    ({ path, priority }) => `  <url>
+  const allUrls: string[] = [];
+
+  // Add static pages
+  STATIC_PAGES.forEach(({ path, priority }) => {
+    allUrls.push(`  <url>
     <loc>${escapeXml(`${BLOG_URL}${path}`)}</loc>
     <priority>${priority}</priority>
-  </url>`,
-  ).join('\n');
+  </url>`);
+  });
 
-  const postUrls = posts
-    .map(
-      (post) => `  <url>
+  // Add blog posts
+  posts.forEach((post) => {
+    allUrls.push(`  <url>
     <loc>${escapeXml(`${BLOG_URL}/posts/${post.id}`)}</loc>
     <lastmod>${post.date}</lastmod>
     <priority>0.7</priority>
-  </url>`,
-    )
-    .join('\n');
+  </url>`);
+  });
 
-  const seriesUrls = series
-    .map(
-      (s) => `  <url>
+  // Add series
+  series.forEach((s) => {
+    allUrls.push(`  <url>
     <loc>${escapeXml(`${BLOG_URL}/series/${s.slug}`)}</loc>
     <priority>0.6</priority>
-  </url>`,
-    )
-    .join('\n');
+  </url>`);
+  });
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticUrls}
-${postUrls}
-${seriesUrls}
+${allUrls.join('\n')}
 </urlset>`;
 }
 
