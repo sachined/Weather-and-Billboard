@@ -1,18 +1,18 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '@/components/layout';
+import SEO from '@/components/SEO';
+import { SITE_URL, BASE_PATH } from '@/lib/constants';
 import styles from '@/styles/Finsurf.module.css';
 
 export default function FinSurf() {
   return (
     <Layout>
-      <Head>
-        <title>FinSurf — AI-Powered Financial Research</title>
-        <meta
-          name="description"
-          content="FinSurf is an AI assistant for financial research and market analysis. Multi-agent LangGraph architecture, deterministic Python math, and PDF export."
-        />
-      </Head>
+      <SEO
+        title="FinSurf — AI-Powered Financial Research"
+        description="FinSurf is an AI assistant for financial research and market analysis. Multi-agent LangGraph architecture, deterministic Python math, and PDF export."
+        path="/finsurf"
+        ogImage={`${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent('FinSurf — AI-Powered Financial Research')}`}
+      />
 
       <div className={styles.page}>
         {/* Hero */}

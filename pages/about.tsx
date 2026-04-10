@@ -1,20 +1,28 @@
-import Head from 'next/head';
 import { TrendingUp, Bot, Briefcase, PenTool } from 'lucide-react';
 import Layout from '@/components/layout';
+import SEO from '@/components/SEO';
 import FeatureCard from '@/components/FeatureCard';
 import GlobalDashboard from '@/components/Dashboard/GlobalDashboard';
-import { SITE_NAME, SITE_TITLE } from '@/lib/constants';
+import { SITE_NAME, SITE_URL, BASE_PATH, SOCIAL_LINKS } from '@/lib/constants';
 import styles from '@/styles/Home.module.css';
 
 export default function About() {
   return (
     <Layout>
-      <Head>
-        <title>About - Sachin Nediyanchath</title>
-        <meta name="description" content="Software engineer building AI-powered tools and products. Explore my projects, roadmap, and writing." />
-        <meta name="og:title" content="Sachin Nediyanchath — Software Engineer & AI Builder" />
-        <meta name="og:description" content="Software engineer building AI-powered tools and products." />
-      </Head>
+      <SEO
+        title="About"
+        description="Software engineer building AI-powered tools and products. Explore my projects, roadmap, and writing."
+        path="/about"
+        ogImage={`${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent('Sachin Nediyanchath — Software Engineer & AI Builder')}`}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: SITE_NAME,
+          url: `${SITE_URL}${BASE_PATH}/about`,
+          jobTitle: 'Software Engineer',
+          sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
+        }}
+      />
 
       <div className={styles.heroContainer}>
         {/* Hero */}

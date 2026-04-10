@@ -1,11 +1,11 @@
-import Head from 'next/head';
 import Layout from '@/components/layout';
+import SEO from '@/components/SEO';
 import { getAllPostIds, getPostData } from '@/lib/posts';
 import utilStyles from '@/styles/utils.module.css';
 import styles from '@/styles/Post.module.css';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
-import { SITE_NAME } from '@/lib/constants';
+import { SITE_NAME, SITE_URL, BASE_PATH } from '@/lib/constants';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();
@@ -55,6 +55,7 @@ export interface PostProps {
     title: string;
     date: string;
     excerpt: string;
+    tags?: string[];
     contentHtml: string;
     prevPost?: { id: string; title: string } | null;
     nextPost?: { id: string; title: string } | null;
@@ -67,25 +68,28 @@ export interface PostProps {
 export default function Post({ postData }: PostProps) {
   return (
     <Layout>
-      <Head>
-        <title>{`${postData.title} - ${SITE_NAME}`}</title>
-        <meta property="og:title" content={postData.title} />
-        <meta property="og:description" content={postData.excerpt} />
-        <meta property="og:type" content="article" />
-        <link rel="canonical" href={`https://finsurf.net/blog/posts/${postData.id}`} />
-        <meta
-          property="og:image"
-          key="og-image"
-          content={`https://finsurf.net/blog/api/og?title=${encodeURIComponent(postData.title)}${postData.series ? `&series=${encodeURIComponent(postData.series)}` : ''}${postData.series_position ? `&position=${postData.series_position}` : ''}`}
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={postData.title} />
-        <meta name="twitter:description" content={postData.excerpt} />
-        <meta
-          name="twitter:image"
-          content={`https://finsurf.net/blog/api/og?title=${encodeURIComponent(postData.title)}${postData.series ? `&series=${encodeURIComponent(postData.series)}` : ''}${postData.series_position ? `&position=${postData.series_position}` : ''}`}
-        />
-      </Head>
+      <SEO
+        title={postData.title}
+        description={postData.excerpt}
+        path={`/posts/${postData.id}`}
+        ogType="article"
+        ogImage={`${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent(postData.title)}${postData.series ? `&series=${encodeURIComponent(postData.series)}` : ''}${postData.series_position ? `&position=${postData.series_position}` : ''}`}
+        article={{
+          publishedTime: postData.date,
+          tags: postData.tags || [],
+        }}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: postData.title,
+          description: postData.excerpt,
+          datePublished: postData.date,
+          author: { '@type': 'Person', name: SITE_NAME, url: `${SITE_URL}${BASE_PATH}/about` },
+          url: `${SITE_URL}${BASE_PATH}/posts/${postData.id}`,
+          image: `${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent(postData.title)}`,
+          publisher: { '@type': 'Person', name: SITE_NAME },
+        }}
+      />
       
       <div className={styles.backButton}>
         <Link href="/">← Back to Blog</Link>

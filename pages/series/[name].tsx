@@ -1,9 +1,9 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '@/components/layout';
+import SEO from '@/components/SEO';
 import { getSeriesSummaries, SeriesSummary } from '@/lib/posts';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { SITE_NAME } from '@/lib/constants';
+import { SITE_URL, BASE_PATH } from '@/lib/constants';
 import styles from '@/styles/Series.module.css';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -24,16 +24,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export default function SeriesPage({ seriesData }: { seriesData: SeriesSummary }) {
   return (
     <Layout>
-      <Head>
-        <title>{`${seriesData.name} — ${SITE_NAME}`}</title>
-        <meta property="og:title" content={seriesData.name} />
-        <meta property="og:description" content={seriesData.description} />
-        <meta property="og:type" content="website" />
-        <link
-          rel="canonical"
-          href={`https://finsurf.net/blog/series/${seriesData.slug}`}
-        />
-      </Head>
+      <SEO
+        title={seriesData.name}
+        description={seriesData.description}
+        path={`/series/${seriesData.slug}`}
+        ogImage={`${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent(seriesData.name)}&series=${encodeURIComponent(seriesData.name)}`}
+      />
 
       <div className={styles.backButton}>
         <Link href="/">← Back to Blog</Link>

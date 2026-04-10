@@ -3,7 +3,7 @@ import styles from './layout.module.css';
 import utilStyles from '@/styles/utils.module.css';
 import Link from 'next/link';
 import Footer from './Footer';
-import { SITE_NAME, SITE_TITLE, PROFILE_VERSION } from '@/lib/constants';
+import { SITE_NAME, SITE_TITLE, SITE_URL, BASE_PATH, PROFILE_VERSION } from '@/lib/constants';
 import ThemeToggle from './ThemeToggle';
 import Navbar from './Navbar';
 
@@ -25,9 +25,20 @@ export default function Layout({ children, home }: LayoutProps) {
           name="description"
           content={`Software engineer building AI tools and products. Explore FinSurf, investment strategy, and more.`}
         />
-        <meta name="og:title" content={siteTitle} />
-        <meta property="og:image" key="og-image" content="https://finsurf.net/blog/api/og" />
+        <meta property="og:title" content={siteTitle} />
+        <meta property="og:image" key="og-image" content={`${SITE_URL}${BASE_PATH}/api/og`} />
         <meta name="twitter:card" content="summary_large_image" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: SITE_NAME,
+              url: `${SITE_URL}${BASE_PATH}/`,
+            }),
+          }}
+        />
       </Head>
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <header className={styles.header}>

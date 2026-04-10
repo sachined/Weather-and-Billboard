@@ -1,8 +1,8 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useMemo } from 'react';
 import Layout from '@/components/layout';
-import { SITE_NAME } from '@/lib/constants';
+import SEO from '@/components/SEO';
+import { SITE_NAME, SITE_URL, BASE_PATH } from '@/lib/constants';
 import { getSortedPostsData, PostData, getSeriesSummaries, SeriesSummary } from '@/lib/posts';
 import styles from '@/styles/Blog.module.css';
 import { GetStaticProps } from 'next';
@@ -36,9 +36,19 @@ export default function Blog({ allPostsData, seriesSummaries }: { allPostsData: 
 
   return (
     <Layout>
-      <Head>
-        <title>{`Insights & Articles - ${SITE_NAME}`}</title>
-      </Head>
+      <SEO
+        title="Insights & Articles"
+        description="Notes on AI, engineering, and the markets. Technical writing on FinSurf, security, and building in public."
+        path="/"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          name: SITE_NAME,
+          description: 'Notes on AI, engineering, and the markets.',
+          url: `${SITE_URL}${BASE_PATH}/`,
+          author: { '@type': 'Person', name: SITE_NAME },
+        }}
+      />
 
       <header className={styles.header}>
         <p className={styles.pageEyebrow}>Insights &amp; Articles</p>

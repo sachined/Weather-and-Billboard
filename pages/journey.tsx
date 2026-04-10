@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/components/layout';
+import SEO from '@/components/SEO';
 import { ROLES_DATA, ROLE_ORDER, CHECKLIST_ITEMS } from '@/lib/roles';
 import { SITE_NAME } from '@/lib/constants';
 import RoleSelection from '@/components/CareerRoadmap/RoleSelection';
@@ -41,9 +42,11 @@ export default function JobGap() {
 
   return (
     <Layout>
-      <Head>
-        <title>{`Technical Roadmap & Growth - ${SITE_NAME}`}</title>
-      </Head>
+      <SEO
+        title="Technical Roadmap & Growth"
+        description="From enterprise software to AI — skills, pivots, role competency analysis, and what I'm focused on next."
+        path="/journey"
+      />
 
       <div className={styles.container}>
         <header className={styles.header}>

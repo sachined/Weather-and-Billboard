@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import Layout from '@/components/layout';
+import SEO from '@/components/SEO';
 import ContactForm from '@/components/Contact/ContactForm';
 import { CONTACT_EMAIL, SITE_NAME, SOCIAL_LINKS } from '@/lib/constants';
 import styles from '@/styles/Contact.module.css';
@@ -9,9 +9,11 @@ export default function Contact() {
 
   return (
     <Layout>
-      <Head>
-        <title>{`Contact - ${SITE_NAME}`}</title>
-      </Head>
+      <SEO
+        title="Contact"
+        description="Get in touch — open to AI Solutions Engineer roles and conversations about FinSurf, AI deployment, and financial literacy."
+        path="/contact"
+      />
 
       <div className={styles.wrapper}>
         <div className={styles.container}>

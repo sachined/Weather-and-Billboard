@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { getSortedPostsData } from '@/lib/posts';
+import { SITE_URL, BASE_PATH } from '@/lib/constants';
 
-const SITE_URL = 'https://finsurf.net';
-const BLOG_URL = `${SITE_URL}/blog`;
+const BLOG_URL = `${SITE_URL}${BASE_PATH}`;
 const FEED_URL = `${BLOG_URL}/feed.xml`;
 
 function escapeXml(str: string): string {

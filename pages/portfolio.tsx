@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { SubmitEventHandler } from 'react';
 import Head from 'next/head';
 import Layout from '@/components/layout';
+import SEO from '@/components/SEO';
 import styles from '@/styles/Portfolio.module.css';
 import { StrategySummary } from '@/components/Portfolio/StrategySummary';
 import { StockRow } from '@/components/Portfolio/StockRow';
@@ -170,9 +171,11 @@ export default function PortfolioPage() {
 
   return (
     <Layout>
-      <Head>
-        <title>{`Portfolio Strategy - ${SITE_NAME}`}</title>
-      </Head>
+      <SEO
+        title="Portfolio Strategy"
+        description="A long-horizon, conviction-driven investment framework tracked publicly. Layer-based allocation across growth, income, and asymmetric positions."
+        path="/portfolio"
+      />
       <div className={styles.container}>
         <header className={styles.header}>
           <p className={styles.pageEyebrow}>Growth Strategy</p>
