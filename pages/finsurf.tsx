@@ -98,6 +98,26 @@ export default function FinSurf() {
           </ul>
         </section>
 
+        {/* Portfolio Tracker */}
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Portfolio Tracker</h2>
+          <p className={styles.stepDesc}>
+            A live investment dashboard built alongside FinSurf — real positions,
+            layer-based allocations (Anchor, Growth, Asymmetric, Income), and
+            5-year portfolio history. React hooks manage state, Chart.js renders
+            the history chart, and Yahoo Finance provides live prices via a
+            server-side proxy with 15-minute caching.
+          </p>
+          <ul className={styles.techList}>
+            {['Next.js API Routes', 'Chart.js', 'Yahoo Finance', 'CSS Modules', 'React Hooks'].map((t) => (
+              <li key={t} className={styles.techChip}>{t}</li>
+            ))}
+          </ul>
+          <Link href="/portfolio" className={styles.linkSecondary} style={{ display: 'inline-block', marginTop: '1rem' }}>
+            View live portfolio →
+          </Link>
+        </section>
+
         {/* Footer CTA */}
         <div className={styles.footerCta}>
           <div className={styles.footerCtaButtons}>

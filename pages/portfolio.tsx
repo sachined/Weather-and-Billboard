@@ -10,7 +10,6 @@ import { StockRow } from '@/components/Portfolio/StockRow';
 import { getTickerLayer, PortfolioLayer, LAYER_TARGETS } from '@/lib/portfolio-logic';
 import { SITE_NAME } from '@/lib/constants';
 import PortfolioHistoryChart from '@/components/Portfolio/PortfolioHistoryChart';
-import ArchitectureModal from '@/components/Portfolio/ArchitectureModal';
 import { OptionsPanel } from '@/components/Portfolio/OptionsPanel';
 import { usePortfolio } from '@/hooks/usePortfolio';
 import { PORTFOLIO_OPTIONS } from '@/lib/portfolio-logic';
@@ -28,7 +27,6 @@ export default function PortfolioPage() {
   const [quantity, setQuantity] = useState<number>(0);
   const [lotDate, setLotDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [costBasisInput, setCostBasisInput] = useState<string>('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
 
@@ -207,12 +205,6 @@ export default function PortfolioPage() {
         </header>
 
         <div className={styles.topBar}>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className={styles.infoButton}
-          >
-            How it&apos;s built
-          </button>
           <div className={styles.topBarRight}>
             {hasResearchPositions && (
               <button
@@ -407,9 +399,6 @@ export default function PortfolioPage() {
           {renderLayer('Research')}
           {renderLayer('Closed')}
         </main>
-        <ArchitectureModal isOpen={isModalOpen} onClose={() =>
-            setIsModalOpen(false)}
-        />
         {!loading && stockData.length === 0 && (
           <div className={styles.emptyState}>
             <p>No tickers added yet. Start by adding a ticker above.</p>

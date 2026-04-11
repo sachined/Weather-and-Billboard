@@ -15,11 +15,40 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
   const theme = useTheme();
+  const prevThemeRef = useRef(theme);
 
   useEffect(() => {
     if (!chartRef.current) return;
 
-    if (chartInstance.current) {
+    const themeChanged = prevThemeRef.current !== theme;
+    prevThemeRef.current = theme;
+
+    const mainData = totalData || data || [];
+    const secondaryData = baseData || [];
+    const showBase = secondaryData.length > 0 &&
+      secondaryData.some(v => v > 0) &&
+      secondaryData.some((v, i) => v !== mainData[i]);
+
+    // If chart exists and only data changed (not theme or dataset count), update in place
+    if (chartInstance.current && !themeChanged) {
+      const chart = chartInstance.current;
+      const currentDatasetCount = chart.data.datasets.length;
+      const newDatasetCount = showBase ? 2 : 1;
+
+      if (currentDatasetCount === newDatasetCount) {
+        chart.data.labels = labels;
+        if (showBase) {
+          chart.data.datasets[0].data = secondaryData;
+          chart.data.datasets[1].data = mainData;
+        } else {
+          chart.data.datasets[0].data = mainData;
+        }
+        chart.update('none');
+        return;
+      }
+      // Dataset count changed — fall through to full recreate
+      chartInstance.current.destroy();
+    } else if (chartInstance.current) {
       chartInstance.current.destroy();
     }
 
@@ -34,9 +63,6 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
     const textColor = rootStyle.getPropertyValue('--chart-label').trim() || '#4A5568';
     const gridColor = rootStyle.getPropertyValue('--chart-grid').trim() || 'rgba(0, 0, 0, 0.1)';
     const baseColor = isDark ? 'rgba(255, 255, 255, 0.45)' : 'rgba(148, 163, 184, 0.6)';
-
-    const mainData = totalData || data || [];
-    const secondaryData = baseData || [];
 
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, isDark ? 'rgba(56, 189, 248, 0.35)' : 'rgba(37, 99, 235, 0.25)');
@@ -60,11 +86,6 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
         zIndex: 2,
       }
     ];
-
-    // Only add base dataset if it's different from the main data
-    const showBase = secondaryData.length > 0 &&
-                    secondaryData.some(v => v > 0) &&
-                    secondaryData.some((v, i) => v !== mainData[i]);
 
     if (showBase) {
       datasets.unshift({

@@ -1,7 +1,7 @@
 // hooks/usePortfolio.ts
 // noinspection ExceptionCaughtLocallyJS
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { UserPosition, Lot, CORE_POSITIONS, getTickerLayer, computePosition } from '@/lib/portfolio-logic';
 import { BASE_PATH } from '@/lib/constants';
 
@@ -28,6 +28,9 @@ export function usePortfolio() {
   const [appreciation, setAppreciation] = useState<{ value: number, percent: number }>({value: 0, percent: 0});
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Cache history responses by mode key to avoid redundant fetches on toggle
+  const historyCache = useRef<Record<string, typeof historyData>>({});
 
   const isAdmin = isLocal || !!adminKey;
 
@@ -165,11 +168,18 @@ export function usePortfolio() {
           return;
         }
 
+        const cacheKey = `${showAccumulation}-${showResearch}-${filteredPositions.map(p => p.symbol).join(',')}`;
+        if (historyCache.current[cacheKey]) {
+          setHistoryData(historyCache.current[cacheKey]);
+          return;
+        }
+
         const posParam = encodeURIComponent(JSON.stringify(filteredPositions));
         const res = await fetch(`${BASE_PATH}/api/portfolio-history?positions=${posParam}&ignoreDates=${!showAccumulation}`, { signal });
         const data = await res.json();
 
         if (data.labels && (data.totalData || data.data)) {
+          historyCache.current[cacheKey] = data;
           setHistoryData(data);
           const performanceData = data.totalData || data.data;
           if (performanceData && performanceData.length >= 2) {

@@ -4,7 +4,7 @@ date: '2026-03-28'
 excerpt: "I built a Black-Scholes backtester before I understood why my own trades kept failing. On gamma, greed, and what covered calls on a 10x conviction hold actually mean."
 tags: ['Investing', 'Engineering']
 series: "Investing"
-series_position: 2
+series_position: 1
 ---
 
 Today I finished building a covered calls playbook. Entry signals. Exit criteria. A P&L simulator with real-time Greeks. A Black-Scholes backtester with an optimization sweep.
