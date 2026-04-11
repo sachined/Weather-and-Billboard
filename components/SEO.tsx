@@ -11,7 +11,7 @@ interface SEOProps {
     publishedTime: string;
     tags: string[];
   };
-  jsonLd?: Record<string, unknown>;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 export default function SEO({

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /blog/api/
 
 Sitemap: https://finsurf.net/blog/sitemap.xml

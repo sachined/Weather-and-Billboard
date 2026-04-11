@@ -29,6 +29,14 @@ export default function SeriesPage({ seriesData }: { seriesData: SeriesSummary }
         description={seriesData.description}
         path={`/series/${seriesData.slug}`}
         ogImage={`${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent(seriesData.name)}&series=${encodeURIComponent(seriesData.name)}`}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Blog', item: `${SITE_URL}${BASE_PATH}/` },
+            { '@type': 'ListItem', position: 2, name: seriesData.name, item: `${SITE_URL}${BASE_PATH}/series/${seriesData.slug}` },
+          ],
+        }}
       />
 
       <div className={styles.backButton}>

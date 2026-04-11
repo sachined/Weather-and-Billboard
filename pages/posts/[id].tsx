@@ -78,17 +78,27 @@ export default function Post({ postData }: PostProps) {
           publishedTime: postData.date,
           tags: postData.tags || [],
         }}
-        jsonLd={{
-          '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
-          headline: postData.title,
-          description: postData.excerpt,
-          datePublished: `${postData.date}T00:00:00Z`,
-          author: { '@type': 'Person', name: SITE_NAME, url: `${SITE_URL}${BASE_PATH}/about` },
-          url: `${SITE_URL}${BASE_PATH}/posts/${postData.id}`,
-          image: `${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent(postData.title)}`,
-          publisher: { '@type': 'Person', name: SITE_NAME },
-        }}
+        jsonLd={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: postData.title,
+            description: postData.excerpt,
+            datePublished: `${postData.date}T00:00:00Z`,
+            author: { '@type': 'Person', name: SITE_NAME, url: `${SITE_URL}${BASE_PATH}/about` },
+            url: `${SITE_URL}${BASE_PATH}/posts/${postData.id}`,
+            image: `${SITE_URL}${BASE_PATH}/api/og?title=${encodeURIComponent(postData.title)}`,
+            publisher: { '@type': 'Person', name: SITE_NAME },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Blog', item: `${SITE_URL}${BASE_PATH}/` },
+              { '@type': 'ListItem', position: 2, name: postData.title, item: `${SITE_URL}${BASE_PATH}/posts/${postData.id}` },
+            ],
+          },
+        ]}
       />
       
       <div className={styles.backButton}>

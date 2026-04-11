@@ -1,14 +1,16 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '@/styles/utils.module.css';
 import Link from 'next/link';
 import Footer from './Footer';
-import { SITE_NAME, SITE_TITLE, SITE_URL, BASE_PATH, PROFILE_VERSION } from '@/lib/constants';
+import { SITE_NAME, SITE_TITLE, SITE_URL, BASE_PATH, SOCIAL_LINKS } from '@/lib/constants';
 import ThemeToggle from './ThemeToggle';
 import Navbar from './Navbar';
 
 const name = SITE_NAME;
 export const siteTitle = SITE_TITLE;
+const PROFILE_SRC = '/blog/images/profile.jpg';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,6 +23,8 @@ export default function Layout({ children, home }: LayoutProps) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="alternate" type="application/rss+xml" title="Sachin Nediyanchath" href="/blog/feed.xml" />
+        <link rel="preconnect" href="https://api.openweathermap.org" />
+        <link rel="preconnect" href="https://query1.finance.yahoo.com" />
         <meta
           name="description"
           content={`Software engineer building AI tools and products. Explore FinSurf, investment strategy, and more.`}
@@ -39,6 +43,19 @@ export default function Layout({ children, home }: LayoutProps) {
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: SITE_NAME,
+              url: `${SITE_URL}${BASE_PATH}/about`,
+              jobTitle: 'Software Engineer',
+              sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
+            }),
+          }}
+        />
       </Head>
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <header className={styles.header}>
@@ -47,24 +64,26 @@ export default function Layout({ children, home }: LayoutProps) {
         </div>
         {home ? (
           <>
-            <img
-              src={`/blog/images/profile.jpg?v=${PROFILE_VERSION}`}
+            <Image
+              src={PROFILE_SRC}
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
               alt={name}
               width={128}
               height={128}
+              priority
             />
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
           </>
         ) : (
           <>
             <a href="https://finsurf.net/">
-              <img
-                src={`/blog/images/profile.jpg?v=${PROFILE_VERSION}`}
+              <Image
+                src={PROFILE_SRC}
                 className={`${styles.headerImage} ${utilStyles.borderCircle}`}
                 alt={name}
                 width={96}
                 height={96}
+                priority
               />
             </a>
             <h2 className={utilStyles.headingLg}>
