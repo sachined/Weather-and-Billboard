@@ -198,6 +198,7 @@ export default function PortfolioHistoryChart({ labels, data, baseData, totalDat
     return () => {
       if (chartInstance.current) {
         chartInstance.current.destroy();
+        chartInstance.current = null;
       }
     };
   }, [labels, data, baseData, totalData, theme]);
