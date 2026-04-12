@@ -34,7 +34,6 @@ export default function WeatherCard({ weather, error, loading, toggleUnit, getDi
           />
           
           <WeatherDetails
-            feelsLike={weather.feelsLike}
             humidity={weather.humidity}
             windSpeed={weather.windSpeed}
             sunrise={weather.sunrise}
