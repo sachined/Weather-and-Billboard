@@ -9,6 +9,10 @@ interface WeatherDetailsProps {
   unit: 'celsius' | 'fahrenheit';
 }
 
+function fmt(ts: number): string {
+  return new Date(ts * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
 export default function WeatherDetails({
   humidity,
   windSpeed,
@@ -19,9 +23,6 @@ export default function WeatherDetails({
   const windDisplay = unit === 'celsius'
     ? `${windSpeed.toFixed(1)} m/s`
     : `${(windSpeed * 2.237).toFixed(1)} mph`;
-
-  const fmt = (ts: number) =>
-    new Date(ts * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   return (
     <div className={styles.detailsStrip}>
