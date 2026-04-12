@@ -29,6 +29,8 @@ export default function WeatherCard({ weather, error, loading, toggleUnit, getDi
             country={weather.country}
             toggleUnit={toggleUnit}
             displayTemp={getDisplayTemp()}
+            feelsLike={weather.feelsLike}
+            unit={weather.unit}
           />
           
           <WeatherDetails

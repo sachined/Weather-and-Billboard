@@ -4,7 +4,7 @@
   padding: 2.5rem 2rem;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-subtle);
-  max-width: 400px;
+  max-width: 480px;
   width: 100%;
   margin: 0 auto;
 }
@@ -20,36 +20,68 @@
 }
 
 .header {
-  text-align: center;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 0;
+}
+
+.headerLocation {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin: 0 0 0.75rem 0;
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerFeelsLike {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0 0;
+}
+
+.headerIcon {
+  flex-shrink: 0;
 }
 
 .headerButton {
   background: none;
   border: none;
-  margin: 1rem 0; 
-  font-size: 3rem; 
-  font-weight: 800; 
+  padding: 0;
+  font-size: 3rem;
+  font-weight: 800;
   cursor: pointer;
   font-family: inherit;
   color: var(--text-main);
-  display: block;
-  width: 100%;
+  text-align: left;
+  line-height: 1;
   transition: transform 0.2s;
 }
 
+.headerButton:hover {
+  transform: scale(1.03);
+}
+
 .description {
-  margin: 0.5rem 0; 
-  font-size: 1.2rem; 
-  color: var(--text-main); 
+  margin: 0.4rem 0 0 0;
+  font-size: 1rem;
+  color: var(--text-main);
   font-weight: 600;
   text-transform: capitalize;
 }
 
-.location {
-  margin: 0.5rem 0; 
-  font-size: 1rem; 
-  color: var(--text-muted);
-}
 
 .detailsGrid {
   display: grid;
