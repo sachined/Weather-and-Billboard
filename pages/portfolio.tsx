@@ -84,6 +84,26 @@ export default function PortfolioPage() {
     .filter(o => o.status === 'open')
     .reduce((sum, o) => sum + netCredit(o) * o.contracts * 100, 0);
 
+  const MONTH_MAP: Record<string, string> = {
+    Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+    Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12',
+  };
+  const parseChartLabel = (label: string): string => {
+    const [mon, year] = label.split(' ');
+    return `${year}-${MONTH_MAP[mon] ?? '01'}`;
+  };
+
+  const closedOptions = PORTFOLIO_OPTIONS.filter(o =>
+    ['closed', 'expired', 'assigned'].includes(o.status)
+  );
+  const adjustedTotalData = historyData.totalData?.map((val, i) => {
+    const ym = parseChartLabel(historyData.labels[i]);
+    const cumulativePnl = closedOptions
+      .filter(o => (o.closeDate || o.expiry).slice(0, 7) <= ym)
+      .reduce((sum, o) => sum + netCredit(o) * o.contracts * 100, 0);
+    return val + cumulativePnl;
+  });
+
   // Real portfolio value: Anchor + Growth + Income + Asymmetric (excludes Research and Closed)
   const coreValue = stockData
     .filter(s => !['Research', 'Closed'].includes(getTickerLayer(s.symbol)))
@@ -361,7 +381,7 @@ export default function PortfolioPage() {
             <PortfolioHistoryChart
               labels={historyData.labels}
               baseData={historyData.baseData}
-              totalData={historyData.totalData}
+              totalData={adjustedTotalData ?? historyData.totalData}
               data={historyData.data}
             />
           </div>
