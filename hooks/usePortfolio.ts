@@ -122,7 +122,7 @@ export function usePortfolio() {
         return;
       }
       try {
-        const tickers = myPositions.map(p => p.symbol).join(',');
+        const tickers = myPositions.filter(p => p.shares > 0).map(p => p.symbol).join(',');
         const res = await fetch(`${BASE_PATH}/api/stock?ticker=${tickers}`, { signal });
         const data = await res.json();
 
