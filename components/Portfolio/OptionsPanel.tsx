@@ -8,8 +8,8 @@ interface OptionsPanelProps {
   positions?: UserPosition[];
 }
 
-function displayStrike(opt: PortfolioOption): string {
-  if (isSpread(opt)) {
+function displayStrike(opt: PortfolioOption, spread: boolean): string {
+  if (spread) {
     return `$${opt.shortStrike!.toFixed(2)} / $${opt.longStrike!.toFixed(2)}`;
   }
   return `$${opt.strike!.toFixed(2)}`;
@@ -70,6 +70,7 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
           const dte = getDTE(opt.expiry);
           const credit = opt.premiumReceived * opt.contracts * 100;
           const isCall = opt.type === 'call';
+          const spread = isSpread(opt);
           const equityShares = positions.find(
             p => p.symbol.toUpperCase() === opt.underlying.toUpperCase()
           )?.shares ?? 0;
@@ -86,7 +87,7 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
 
               <div className={styles.optionDetails}>
                 <span className={styles.optionChip}>
-                  {displayStrike(opt)} {isSpread(opt) ? 'spread' : opt.type}
+                  {displayStrike(opt, spread)} {spread ? 'spread' : opt.type}
                 </span>
                 <span className={styles.optionChip}>{formatExpiry(opt.expiry)}</span>
                 <span className={`${styles.optionChip} ${dte <= 21 ? styles.dteWarning : ''}`}>
