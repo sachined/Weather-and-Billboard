@@ -82,7 +82,7 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
           const equityShares = positions.find(
             p => p.symbol.toUpperCase() === opt.underlying.toUpperCase()
           )?.shares ?? 0;
-          const annotation = equityShares > 0 ? getAnnotation(opt, equityShares) : '';
+          const annotation = (spread || equityShares > 0) ? getAnnotation(opt, equityShares) : '';
 
           return (
             <div key={i} className={styles.optionRow}>
