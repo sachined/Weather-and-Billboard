@@ -79,6 +79,8 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
           const credit = netCredit(opt) * opt.contracts * 100;
           const isCall = opt.type === 'call';
           const spread = isSpread(opt);
+          const ml = maxLoss(opt);
+          const be = breakeven(opt);
           const equityShares = positions.find(
             p => p.symbol.toUpperCase() === opt.underlying.toUpperCase()
           )?.shares ?? 0;
@@ -101,14 +103,14 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
                 <span className={`${styles.optionChip} ${dte <= 21 ? styles.dteWarning : ''}`}>
                   {dte} DTE
                 </span>
-                {spread && maxLoss(opt) !== null && (
+                {spread && ml !== null && (
                   <span className={styles.optionChip}>
-                    Max loss: ${maxLoss(opt)!.toFixed(0)}
+                    Max loss: ${ml.toFixed(0)}
                   </span>
                 )}
-                {spread && breakeven(opt) !== null && (
+                {spread && be !== null && (
                   <span className={styles.optionChip}>
-                    BE: ${breakeven(opt)!.toFixed(2)}
+                    BE: ${be.toFixed(2)}
                   </span>
                 )}
                 <span className={styles.optionChip}>
