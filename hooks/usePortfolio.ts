@@ -2,7 +2,7 @@
 // noinspection ExceptionCaughtLocallyJS
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { UserPosition, Lot, CORE_POSITIONS, getTickerLayer, computePosition } from '@/lib/portfolio-logic';
+import { UserPosition, Lot, CORE_POSITIONS, getTickerLayer, computePosition, DIVIDEND_RATES } from '@/lib/portfolio-logic';
 import { BASE_PATH } from '@/lib/constants';
 
 export function usePortfolio() {
@@ -126,15 +126,21 @@ export function usePortfolio() {
         const res = await fetch(`${BASE_PATH}/api/stock?ticker=${tickers}`, { signal });
         const data = await res.json();
 
+        const mergeStock = (stock: any) => {
+          const sym = stock.symbol.toUpperCase();
+          const pos = myPositions.find(p => p.symbol.toUpperCase() === sym);
+          return {
+            ...stock,
+            shares: pos ? pos.shares : 0,
+            costBasis: pos?.costBasis,
+            trailingAnnualDividendRate: DIVIDEND_RATES[sym] ?? 0,
+          };
+        };
+
         if (Array.isArray(data)) {
-          const merged = data.map(stock => {
-            const pos = myPositions.find(p => p.symbol.toUpperCase() === stock.symbol.toUpperCase());
-            return { ...stock, shares: pos ? pos.shares : 0, costBasis: pos?.costBasis };
-          });
-          setStockData(merged);
+          setStockData(data.map(mergeStock));
         } else if (data && !data.error) {
-          const pos = myPositions.find(p => p.symbol.toUpperCase() === data.symbol.toUpperCase());
-          setStockData([{ ...data, shares: pos ? pos.shares : 0, costBasis: pos?.costBasis }]);
+          setStockData([mergeStock(data)]);
         }
       } catch (e: any) {
         if (e.name === 'AbortError') return;

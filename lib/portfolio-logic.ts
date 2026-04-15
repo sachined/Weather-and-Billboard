@@ -95,6 +95,9 @@ export const CORE_POSITIONS: UserPosition[] = rawPositions.map(r =>
 export const PORTFOLIO_OPTIONS: PortfolioOption[] =
   (portfolioData as unknown as { options?: PortfolioOption[] }).options ?? [];
 
+export const DIVIDEND_RATES: Record<string, number> =
+  (portfolioData as unknown as { dividends?: Record<string, number> }).dividends ?? {};
+
 export const PORTFOLIO_STRATEGY = portfolioData.strategy;
 export const STRATEGY_METRICS = portfolioData.metrics as StrategyMetrics;
 export const LAYER_TARGETS: Record<PortfolioLayer, string> = {

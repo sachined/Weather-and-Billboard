@@ -646,6 +646,20 @@
       "status": "open"
     }
   ],
+  "dividends": {
+    "KO":   1.94,
+    "ABBV": 6.20,
+    "MSFT": 3.32,
+    "IBM":  6.68,
+    "O":    3.192,
+    "VTI":  3.50,
+    "AVGO": 21.00,
+    "NVDA": 0.04,
+    "RKLB": 0,
+    "GOOGL": 0,
+    "NFLX": 0,
+    "DOCN": 0
+  },
   "metrics": {
     "philosophy": "Core-Satellite: Compounding + Asymmetric Upside",
     "objective": "10-Year capital appreciation with dividend-funded opportunistic buys.",
