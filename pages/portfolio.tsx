@@ -7,7 +7,7 @@ import SEO from '@/components/SEO';
 import styles from '@/styles/Portfolio.module.css';
 import { StrategySummary } from '@/components/Portfolio/StrategySummary';
 import { StockRow } from '@/components/Portfolio/StockRow';
-import { getTickerLayer, PortfolioLayer, LAYER_TARGETS } from '@/lib/portfolio-logic';
+import { getTickerLayer, PortfolioLayer, LAYER_TARGETS, netCredit } from '@/lib/portfolio-logic';
 import { SITE_NAME } from '@/lib/constants';
 import PortfolioHistoryChart from '@/components/Portfolio/PortfolioHistoryChart';
 import { OptionsPanel } from '@/components/Portfolio/OptionsPanel';
@@ -79,6 +79,10 @@ export default function PortfolioPage() {
     setAdminKey(passwordInput);
     setShowLogin(false);
   };
+
+  const totalOptionsCredit = PORTFOLIO_OPTIONS
+    .filter(o => o.status === 'open')
+    .reduce((sum, o) => sum + netCredit(o) * o.contracts * 100, 0);
 
   // Real portfolio value: Anchor + Growth + Income + Asymmetric (excludes Research and Closed)
   const coreValue = stockData
@@ -189,6 +193,14 @@ export default function PortfolioPage() {
                   ${totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </div>
+              {totalOptionsCredit !== 0 && (
+                <div className={styles.heroStatItem}>
+                  <span className={styles.heroStatLabel}>Options Income</span>
+                  <span className={`${styles.heroStatValue} ${totalOptionsCredit >= 0 ? styles.heroStatPositive : styles.heroStatNegative}`}>
+                    {totalOptionsCredit >= 0 ? '+' : ''}${Math.abs(totalOptionsCredit).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </span>
+                </div>
+              )}
               {appreciation.value !== 0 && (
                 <div className={styles.heroStatItem}>
                   <span className={styles.heroStatLabel}>{timeRange === 'all' ? 'Overall' : 'Annual'} Return</span>
