@@ -46,11 +46,15 @@ export interface PortfolioOption {
   strategy: string;
   type: 'put' | 'call';
   direction: 'short' | 'long';
-  strike: number;
+  strike?: number;
+  shortStrike?: number;
+  longStrike?: number;
   expiry: string;          // YYYY-MM-DD
   contracts: number;
   premiumReceived: number; // per share (× 100 for total credit per contract)
+  premiumPaid?: number;
   openDate: string;        // YYYY-MM-DD
+  closeDate?: string;      //
   status: 'open' | 'closed' | 'expired' | 'assigned';
 }
 
@@ -115,3 +119,29 @@ export const getTickerTrigger = (ticker: string, currentPrice: number): string |
   const drop = (currentPrice - trigger.referencePrice) / trigger.referencePrice;
   return drop <= -trigger.dipTrigger ? trigger.message : null;
 };
+
+// Spread-aware helper functions
+export function isSpread(opt: PortfolioOption): boolean {
+  return opt.shortStrike !== undefined && opt.longStrike !== undefined;
+}
+
+export function netCredit(opt: PortfolioOption): number {
+  return opt.premiumReceived - (opt.premiumPaid ?? 0);
+}
+
+export function maxLoss(opt: PortfolioOption): number | null {
+  if (!isSpread(opt)) return null;
+  const width = Math.abs(opt.shortStrike! - opt.longStrike!);
+  return (width - netCredit(opt)) * 100 * opt.contracts;
+}
+
+export function maxProfit(opt: PortfolioOption): number {
+  return netCredit(opt) * 100 * opt.contracts;
+}
+
+export function breakeven(opt: PortfolioOption): number | null {
+  const s = opt.strike ?? opt.shortStrike;
+  if (s === undefined) return null;
+  const nc = netCredit(opt);
+  return opt.type === 'call' ? s + nc : s - nc;
+}

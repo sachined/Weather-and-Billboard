@@ -589,7 +589,9 @@
       "contracts": 1,
       "premiumReceived": 0.90,
       "openDate": "2026-04-07",
-      "status": "open"
+      "closeDate": "2026-04-13",
+      "premiumPaid": 0.30,
+      "status": "closed"
     },
     {
       "underlying": "RKLB",
@@ -613,6 +615,34 @@
       "contracts": 1,
       "premiumReceived": 2.00,
       "openDate": "2026-04-07",
+      "status": "open"
+    },
+    {
+      "underlying": "EGAN",
+      "strategy": "Call Credit Spread",
+      "type": "call",
+      "direction": "short",
+      "shortStrike": 7.50,
+      "longStrike": 10,
+      "expiry": "2026-05-15",
+      "contracts": 1,
+      "premiumReceived": 0.68,
+      "premiumPaid": 0.23,
+      "openDate": "2026-04-13",
+      "status": "open"
+    },
+    {
+      "underlying": "RDW",
+      "strategy": "Put Credit Spread",
+      "type": "put",
+      "direction": "short",
+      "shortStrike": 9.5,
+      "longStrike": 8.5,
+      "expiry": "2026-05-08",
+      "contracts": 1,
+      "premiumReceived": 0.93,
+      "premiumPaid": 0.51,
+      "openDate": "2026-04-14",
       "status": "open"
     }
   ],
