@@ -18,6 +18,14 @@ function displayStrike(opt: PortfolioOption, spread: boolean): string {
 function getAnnotation(opt: PortfolioOption, shares: number): string {
   const contractShares = opt.contracts * 100;
 
+  if (isSpread(opt)) {
+    const be = breakeven(opt);
+    if (be === null) return '';
+    return opt.type === 'call'
+      ? `profitable if ${opt.underlying} stays below $${be.toFixed(2)} at expiry`
+      : `profitable if ${opt.underlying} stays above $${be.toFixed(2)} at expiry`;
+  }
+
   if (opt.type === 'call' && opt.direction === 'short') {
     const uncapped = shares - contractShares;
     if (uncapped > 0) {
@@ -54,7 +62,7 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
   if (openOptions.length === 0) return null;
 
   const totalCredit = openOptions.reduce(
-    (sum, o) => sum + o.premiumReceived * o.contracts * 100,
+    (sum, o) => sum + netCredit(o) * o.contracts * 100,
     0
   );
 
@@ -111,7 +119,7 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
       </div>
 
       <div className={styles.optionsFooter}>
-        <span className={styles.optionsFooterLabel}>Total Credit Received</span>
+        <span className={styles.optionsFooterLabel}>Total Net Credit</span>
         <span className={styles.optionsFooterValue}>+${totalCredit.toFixed(2)}</span>
       </div>
     </div>
