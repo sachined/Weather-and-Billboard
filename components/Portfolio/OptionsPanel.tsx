@@ -1,10 +1,18 @@
 // components/Portfolio/OptionsPanel.tsx
 import styles from '@/styles/Portfolio.module.css';
 import type { PortfolioOption, UserPosition } from '@/lib/portfolio-logic';
+import { isSpread, netCredit, maxLoss, breakeven } from '@/lib/portfolio-logic';
 
 interface OptionsPanelProps {
   options: PortfolioOption[];
   positions?: UserPosition[];
+}
+
+function displayStrike(opt: PortfolioOption): string {
+  if (isSpread(opt)) {
+    return `$${opt.shortStrike!.toFixed(2)} / $${opt.longStrike!.toFixed(2)}`;
+  }
+  return `$${opt.strike!.toFixed(2)}`;
 }
 
 function getAnnotation(opt: PortfolioOption, shares: number): string {
@@ -78,7 +86,7 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
 
               <div className={styles.optionDetails}>
                 <span className={styles.optionChip}>
-                  ${opt.strike.toFixed(2)} {opt.type}
+                  {displayStrike(opt)} {isSpread(opt) ? 'spread' : opt.type}
                 </span>
                 <span className={styles.optionChip}>{formatExpiry(opt.expiry)}</span>
                 <span className={`${styles.optionChip} ${dte <= 21 ? styles.dteWarning : ''}`}>
