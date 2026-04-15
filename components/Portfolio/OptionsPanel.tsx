@@ -76,7 +76,7 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
       <div className={styles.optionsList}>
         {openOptions.map((opt, i) => {
           const dte = getDTE(opt.expiry);
-          const credit = opt.premiumReceived * opt.contracts * 100;
+          const credit = netCredit(opt) * opt.contracts * 100;
           const isCall = opt.type === 'call';
           const spread = isSpread(opt);
           const equityShares = positions.find(
@@ -101,6 +101,16 @@ export const OptionsPanel = ({ options, positions = [] }: OptionsPanelProps) => 
                 <span className={`${styles.optionChip} ${dte <= 21 ? styles.dteWarning : ''}`}>
                   {dte} DTE
                 </span>
+                {spread && maxLoss(opt) !== null && (
+                  <span className={styles.optionChip}>
+                    Max loss: ${maxLoss(opt)!.toFixed(0)}
+                  </span>
+                )}
+                {spread && breakeven(opt) !== null && (
+                  <span className={styles.optionChip}>
+                    BE: ${breakeven(opt)!.toFixed(2)}
+                  </span>
+                )}
                 <span className={styles.optionChip}>
                   {opt.contracts} {opt.contracts === 1 ? 'contract' : 'contracts'}
                 </span>
