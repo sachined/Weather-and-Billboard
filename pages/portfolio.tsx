@@ -96,6 +96,8 @@ export default function PortfolioPage() {
   const closedOptions = PORTFOLIO_OPTIONS.filter(o =>
     ['closed', 'expired', 'assigned'].includes(o.status)
   );
+  const totalRealizedOptionsCredit = closedOptions
+    .reduce((sum, o) => sum + netCredit(o) * o.contracts * 100, 0);
   const adjustedTotalData = historyData.totalData?.map((val, i) => {
     const ym = parseChartLabel(historyData.labels[i]);
     const cumulativePnl = closedOptions
@@ -218,6 +220,14 @@ export default function PortfolioPage() {
                   <span className={styles.heroStatLabel}>Options Income</span>
                   <span className={`${styles.heroStatValue} ${totalOptionsCredit >= 0 ? styles.heroStatPositive : styles.heroStatNegative}`}>
                     {totalOptionsCredit >= 0 ? '+' : ''}${Math.abs(totalOptionsCredit).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </span>
+                </div>
+              )}
+              {totalRealizedOptionsCredit !== 0 && (
+                <div className={styles.heroStatItem}>
+                  <span className={styles.heroStatLabel}>Realized Options P&L</span>
+                  <span className={`${styles.heroStatValue} ${totalRealizedOptionsCredit >= 0 ? styles.heroStatPositive : styles.heroStatNegative}`}>
+                    {totalRealizedOptionsCredit >= 0 ? '+' : ''}${Math.abs(totalRealizedOptionsCredit).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </span>
                 </div>
               )}
