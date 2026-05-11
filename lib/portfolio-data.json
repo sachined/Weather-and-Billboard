@@ -614,8 +614,10 @@
       "expiry": "2026-05-01",
       "contracts": 1,
       "premiumReceived": 2.00,
+      "premiumPaid": 1.00,
       "openDate": "2026-04-07",
-      "status": "open"
+      "closeDate": "2026-04-16",
+      "status": "closed"
     },
     {
       "underlying": "EGAN",
@@ -626,10 +628,11 @@
       "longStrike": 10,
       "expiry": "2026-05-15",
       "contracts": 1,
-      "premiumReceived": 0.68,
-      "premiumPaid": 0.23,
+      "premiumReceived": 0.45,
+      "premiumPaid": 0.60,
       "openDate": "2026-04-13",
-      "status": "open"
+      "closeDate": "2026-04-30",
+      "status": "closed"
     },
     {
       "underlying": "RDW",
@@ -640,10 +643,25 @@
       "longStrike": 8.5,
       "expiry": "2026-05-08",
       "contracts": 1,
-      "premiumReceived": 0.93,
-      "premiumPaid": 0.51,
+      "premiumReceived": 0.42,
+      "premiumPaid": 0.20,
       "openDate": "2026-04-14",
-      "status": "open"
+      "closeDate": "2026-04-22",
+      "status": "closed"
+    },
+    {
+      "underlying": "RKLB",
+      "strategy": "Short Put",
+      "type": "put",
+      "direction": "short",
+      "strike": 70,
+      "expiry": "2026-06-18",
+      "contracts": 1,
+      "premiumReceived": 4.80,
+      "openDate": "2026-04-17",
+      "closeDate": "2026-05-08",
+      "premiumPaid": 2.10,
+      "status": "closed"
     }
   ],
   "dividends": {
