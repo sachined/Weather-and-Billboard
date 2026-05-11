@@ -20,9 +20,9 @@ export default function FinSurf() {
           <p className={styles.eyebrow}>Featured Project</p>
           <h1 className={styles.heroTitle}>FinSurf AI</h1>
           <p className={styles.heroTagline}>
-            An AI-powered financial research tool that combines multi-agent analysis
-            with deterministic Python math — so the numbers are always right, and the
-            narrative always makes sense.
+            An AI-powered financial tool — multi-agent equity research, options strategy
+            analysis, and deterministic Python math. The numbers are always right.
+            The narrative always makes sense.
           </p>
           <a
             href="https://finsurf.net"
@@ -38,7 +38,7 @@ export default function FinSurf() {
         <div className={styles.metricsBar}>
           <span className={styles.metricItem}>5 agents</span>
           <span className={styles.metricDot}>·</span>
-          <span className={styles.metricItem}>27 commits</span>
+          <span className={styles.metricItem}>236 commits</span>
           <span className={styles.metricDot}>·</span>
           <span className={styles.metricItem}>Live since Mar 2026</span>
         </div>
@@ -104,12 +104,14 @@ export default function FinSurf() {
           <p className={styles.stepDesc}>
             A live investment dashboard built alongside FinSurf — real positions,
             layer-based allocations (Anchor, Growth, Asymmetric, Income), and
-            5-year portfolio history. React hooks manage state, Chart.js renders
-            the history chart, and Yahoo Finance provides live prices via a
-            server-side proxy with 15-minute caching.
+            5-year portfolio history with options P&amp;L baked in. Open options
+            positions are tracked with strategy type, DTE, strikes, and net credit.
+            Realized P&amp;L from closed, expired, and assigned contracts surfaces
+            separately from equity value — so the two signals stay readable independently.
+            Yahoo Finance provides live prices via a server-side proxy with 15-minute caching.
           </p>
           <ul className={styles.techList}>
-            {['Next.js API Routes', 'Chart.js', 'Yahoo Finance', 'CSS Modules', 'React Hooks'].map((t) => (
+            {['Next.js API Routes', 'Chart.js', 'Yahoo Finance', 'CSS Modules', 'React Hooks', 'Options Tracking'].map((t) => (
               <li key={t} className={styles.techChip}>{t}</li>
             ))}
           </ul>
@@ -133,10 +135,6 @@ export default function FinSurf() {
               Read the build logs
             </Link>
           </div>
-          <p className={styles.footerCtaText}>
-            Live and actively evolving — historical P&amp;L analysis, multi-ticker
-            batching, and an AI chat layer are in progress.
-          </p>
         </div>
 
         {/* Epigraph — page closer */}

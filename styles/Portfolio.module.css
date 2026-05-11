@@ -204,6 +204,7 @@
   gap: 0.5rem;
   flex-shrink: 0;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
@@ -224,6 +225,20 @@
   }
 }
 
+@media (max-width: 480px) {
+  .heroStats {
+    gap: 1.25rem;
+  }
+
+  .heroStatValue {
+    font-size: 1.6rem;
+  }
+
+  .glassInputShort {
+    width: 80px;
+  }
+}
+
 .glassInput {
   background: var(--bg-surface);
   backdrop-filter: blur(10px);
@@ -232,6 +247,7 @@
   padding: 0.6rem 1.2rem;
   color: var(--text-main);
   width: 220px;
+  max-width: 100%;
 }
 
 .grid {
