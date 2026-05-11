@@ -225,7 +225,7 @@ export default function PortfolioPage() {
               )}
               {totalRealizedOptionsCredit !== 0 && (
                 <div className={styles.heroStatItem}>
-                  <span className={styles.heroStatLabel}>Realized Options P&L</span>
+                  <span className={styles.heroStatLabel}>Realized Options P&amp;L</span>
                   <span className={`${styles.heroStatValue} ${totalRealizedOptionsCredit >= 0 ? styles.heroStatPositive : styles.heroStatNegative}`}>
                     {totalRealizedOptionsCredit >= 0 ? '+' : ''}${Math.abs(totalRealizedOptionsCredit).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </span>
